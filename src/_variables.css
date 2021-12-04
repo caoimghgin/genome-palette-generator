@@ -1,0 +1,104 @@
+/**
+ * Do not edit directly
+ * Generated on Sun, 21 Nov 2021 15:38:24 GMT
+ */
+
+:root {
+  --color-palette-primary-100: #bc6def;
+  --color-palette-primary-200: #b863ee;
+  --color-palette-primary-300: #aa40eb;
+  --color-palette-primary-400: #9c1deb;
+  --color-palette-primary-500: #8314c7;
+  --color-palette-primary-600: #7112a9;
+  --color-palette-primary-700: #5c0f86;
+  --color-palette-primary-800: #4a0b68;
+  --color-palette-primary-900: #38084a;
+  --color-palette-primary-015: #fcf9fe;
+  --color-palette-primary-025: #f6effd;
+  --color-palette-primary-050: #e5d1fa;
+  --color-palette-primary-075: #dab8f7;
+  --color-palette-secondary-100: #539c9c;
+  --color-palette-secondary-200: #369696;
+  --color-palette-secondary-300: #218383;
+  --color-palette-secondary-400: #007c7c;
+  --color-palette-secondary-500: #006868;
+  --color-palette-secondary-600: #005454;
+  --color-palette-secondary-700: #004545;
+  --color-palette-secondary-800: #003636;
+  --color-palette-secondary-900: #002727;
+  --color-palette-secondary-015: #f8fafa;
+  --color-palette-secondary-025: #e8f2f2;
+  --color-palette-secondary-050: #b5e0e0;
+  --color-palette-secondary-075: #97d1d1;
+  --color-palette-success-100: #50a268;
+  --color-palette-success-200: #3a9a5a;
+  --color-palette-success-300: #228542;
+  --color-palette-success-400: #118236;
+  --color-palette-success-500: #0d6e2e;
+  --color-palette-success-600: #0a5a26;
+  --color-palette-success-700: #084b20;
+  --color-palette-success-800: #063718;
+  --color-palette-success-900: #042812;
+  --color-palette-success-015: #f5fbf7;
+  --color-palette-success-025: #e6f4e9;
+  --color-palette-success-050: #b8e1c4;
+  --color-palette-success-075: #99d3ac;
+  --color-palette-info-100: #4794ec;
+  --color-palette-info-200: #388bec;
+  --color-palette-info-300: #1874e4;
+  --color-palette-info-400: #1369d0;
+  --color-palette-info-500: #1259a8;
+  --color-palette-info-600: #0f4b8a;
+  --color-palette-info-700: #0c3d71;
+  --color-palette-info-800: #092d53;
+  --color-palette-info-900: #07223f;
+  --color-palette-info-015: #f5fafe;
+  --color-palette-info-025: #e7f2fc;
+  --color-palette-info-050: #bfdcf8;
+  --color-palette-info-075: #a1caf5;
+  --color-palette-warning-100: #ffde8e;
+  --color-palette-warning-200: #ffd466;
+  --color-palette-warning-300: #ffcd43;
+  --color-palette-warning-400: #ffc107;
+  --color-palette-warning-500: #d9a100;
+  --color-palette-warning-600: #b68500;
+  --color-palette-warning-700: #936900;
+  --color-palette-warning-800: #704d00;
+  --color-palette-warning-900: #4d3400;
+  --color-palette-warning-015: #fff8e8;
+  --color-palette-warning-025: #fff2d4;
+  --color-palette-warning-050: #ffeec5;
+  --color-palette-warning-075: #ffe5a7;
+  --color-palette-danger-100: #fc5858;
+  --color-palette-danger-200: #fc3f3f;
+  --color-palette-danger-300: #ef0b0b;
+  --color-palette-danger-400: #d90303;
+  --color-palette-danger-500: #b60303;
+  --color-palette-danger-600: #9d0303;
+  --color-palette-danger-700: #7f0303;
+  --color-palette-danger-800: #610303;
+  --color-palette-danger-900: #480303;
+  --color-palette-danger-015: #fef8f8;
+  --color-palette-danger-025: #fdeeee;
+  --color-palette-danger-050: #fccbcb;
+  --color-palette-danger-075: #fcb7b7;
+  --color-palette-neutral-100: #929292;
+  --color-palette-neutral-200: #8c8c8c;
+  --color-palette-neutral-300: #747474;
+  --color-palette-neutral-400: #6e6e6e;
+  --color-palette-neutral-500: #565656;
+  --color-palette-neutral-600: #444444;
+  --color-palette-neutral-700: #323232;
+  --color-palette-neutral-800: #262626;
+  --color-palette-neutral-900: #1a1a1a;
+  --color-palette-neutral-950: #000000;
+  --color-palette-neutral-000: #ffffff;
+  --color-palette-neutral-015: #f8f8f8;
+  --color-palette-neutral-025: #f2f2f2;
+  --color-palette-neutral-050: #d7d7d7;
+  --color-palette-neutral-075: #c5c5c5;
+  --size-font-small: 0.75rem; /* the small size of the font */
+  --size-font-medium: 1rem; /* the medium size of the font */
+  --size-font-large: 2rem; /* the large size of the font */
+  --size-font-base: 1rem; /* the base size of the font */
+}

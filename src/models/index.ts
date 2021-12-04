@@ -3,12 +3,23 @@ export class SwatchModel {
     name!: string
     hex!: string
     weight!: string
+    semantic!: string
     LAB!: LAB
     LCH!: LCH
     HSV!: HSV
     WCAG2!: number
+    colorChecker!: ColorCheckerModel
     constructor(hex: string) {
         this.hex = hex
+    }
+}
+
+export class ColorCheckerModel {
+    name!: string
+    dE!: number
+    constructor(name: string, dE: number) {
+        this.name = name
+        this.dE = dE
     }
 }
 
@@ -43,4 +54,15 @@ export class HSV {
         this.S = HSV[1]
         this.V = HSV[2]
     }
+}
+
+export interface ISwatchBase {
+    hex: string;
+    semantic: string;
+    colorChecker?: ISwatchColorChecker
+}
+
+export class ISwatchColorChecker {
+    name?: String;
+    dE?: number;
 }

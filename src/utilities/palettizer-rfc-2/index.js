@@ -455,12 +455,26 @@ class Palettizer {
                     let desaturationTargets = [75, 60, 55, 42, 28, 8, 3]
                     
                     // need to SATURATE here.
-                    // if (getSaturationValue(color) > 90) {
-                    //     let desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
-                    // }
+                    if (getSaturationValue(color) > 90) {
+                        let desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
+                    }
                     
                     
                     desaturateTints(desaturationTargets, lightenTargets)
+                } 
+                else {
+                    // DOES NOT PASS WCAG
+                    if (getSaturationValue(color) > 95) {
+                        let desaturationTargets = [75, 75, 75, 80, 80, 20, 50]
+                        desaturateTints(desaturationTargets, lightenTargets)
+                    } else if (getSaturationValue(color) > 90) {
+                        let desaturationTargets = [80, 80, 80, 80, 55, 40, 20]
+                        desaturateTints(desaturationTargets, lightenTargets)
+                    } else if (getSaturationValue(color) > 80) {
+                        let desaturationTargets = [75, 75, 75, 60, 50, 20, 15]
+                        desaturateTints(desaturationTargets, lightenTargets)
+                    }
+
                 }
                 break;
 
@@ -477,8 +491,8 @@ class Palettizer {
                 case "VERDUN-GREEN":
                     createShadesAndTints(color, darkenTargets, lightenTargets)
                     if (isPassWCAGTextNormal(color)) {
-                        desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
-                        // desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
+                        // desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
+                        desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
     
                         desaturateTints(desaturationTargets, lightenTargets)
                     }

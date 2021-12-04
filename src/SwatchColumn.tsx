@@ -1,33 +1,15 @@
 import React, { useState } from 'react';
-
-import Spectro from "./utilities/palettizer-rfc-2/spectro"
-import Palettizer from "./utilities/palettizer-rfc-2"
-import { weights } from './constants'
-import { SwatchModel, LAB, HSV, LCH } from './SwatchModel'
+import { SwatchModel, ISwatchBase} from './models'
 import { Swatch }  from "./Swatch";
+import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
 
-
-export interface ISwatchBase {
-    hex: string;
-    semantic: string;
-    colorChecker?: ISwatchColorChecker
-}
-
-class ISwatchColorChecker {
-    name?: String;
-    dE?: number;
-}
-
-interface ISwatchColumnProps {
+interface ISwatchColumn {
     model: ISwatchBase;
 }
 
-export const SwatchColumn: React.FC<ISwatchColumnProps> = ({ model }: ISwatchColumnProps) => {
+export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
     const [base, setBase] = useState<ISwatchBase>(model);
-
-    const spectro = new Spectro();
-    const palettizer = new Palettizer(97, 0.30)
 
     const wrapper = { display: 'inline-block' };
 
@@ -38,41 +20,16 @@ export const SwatchColumn: React.FC<ISwatchColumnProps> = ({ model }: ISwatchCol
         }
     }
 
-    function swatchContructor(hex: string) {
-
-        let result = []
-
-        let rootColorName = spectro.getClosestColorCheckerName(hex)
-        let swatchColumnModel = palettizer.createSwatchRow(hex)
-
-        var hexValues = Object.values(swatchColumnModel);
-
-        for (let i in hexValues) {
-            let swatch = new SwatchModel(hexValues[i])
-            swatch.key =  base.semantic + "-" + weights[i]
-            swatch.LAB = new LAB(spectro.getLabValue(swatch.hex))
-            swatch.LCH = new LCH(spectro.getLchValue(swatch.hex))
-            swatch.HSV = new HSV(spectro.getHsvValue(swatch.hex))
-            swatch.name = base.semantic + "-" + weights[i]
-            swatch.weight = weights[i]
-            result.push(swatch)
-        }
-
-        return result
-
-    }
-
-    var swatches = swatchContructor(base.hex)
-    var keyValue = (Math.random() + 1).toString(36).substring(7);
+    var swatches = SwatchesModelFactory(base)
 
     return (
-        <div key={keyValue} style={wrapper}>
+        <div style={wrapper as React.CSSProperties}>
 
             <input
                 type="text"
                 defaultValue={model.hex}
                 placeholder="Enter a message"
-                onChange={e => inputHandeler(e)}
+                onChange={(e) => inputHandeler(e)}
             />
 
             {swatches.map(swatch => (
