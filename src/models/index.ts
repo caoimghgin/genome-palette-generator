@@ -8,6 +8,7 @@ export class SwatchModel {
     LCH!: LCH
     HSV!: HSV
     WCAG2!: number
+    WCAG3!: number
     colorChecker!: ColorCheckerModel
     constructor(hex: string) {
         this.hex = hex

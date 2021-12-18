@@ -19,7 +19,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     function isOK() {
         if (model.weight === "400" && model.LAB.L > 47) {
-            console.log("EHHIHDFHIDHF")
             console.table(model)
 
         }

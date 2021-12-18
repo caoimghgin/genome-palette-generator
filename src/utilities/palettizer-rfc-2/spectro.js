@@ -1,11 +1,25 @@
 import convert from 'color-convert'
 import deltaE from "delta-e"
-import tinycolor from 'tinycolor2'
-// import chroma from "chroma-js";
+import tinycolor, { readability }  from 'tinycolor2'
+import { sRGBtoY, APCAcontrast } from  './apca'
 
 import { colorNames, hueValues, neutralTolerance, colorCheckerValuesLab } from '../../constants'
 
 class Spectro {
+
+    getWCAG(color) {
+        let result = readability(color, '#FFFFFF');
+        return Math.round((result + Number.EPSILON) * 100) / 100
+    }
+
+    getAPCA(color) {
+        let txt = sRGBtoY("FFFFFF")
+        let bkg = sRGBtoY(color)
+        // console.log("WORKING: (" + txt + " -> " + bkg + ")")
+        // let r = APCAcontrast(b, a) // 81
+        let r = APCAcontrast(txt, bkg) // 86
+        return Math.abs(r)
+    }
 
     getColorSpecs(color) {
         let result = undefined

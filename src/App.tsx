@@ -25,25 +25,37 @@ import { NavBar } from "./NavBar"
 import { SwatchColumnLegend } from "./SwatchColumnLegend"
 import { SwatchColumn }  from "./SwatchColumn";
 
+import { Modal } from "./modal"
+import { SwatchModel } from './models'
+
 function App() {
+
+// Lc 45 is "sort of" like 3:1
+// Lc 60 is "sort of" like 4.5:1
+// Lc 75 is "sort of" like 7:1
 
     // localStorage.clear();
     // https://developer.microsoft.com/en-us/fluentui#/styles/web/colors/products
 
+
+    let sModal = new SwatchModel("000000")
+
     return (
         <div className="App">
             <NavBar/>
+            <Modal {...sModal as SwatchModel} />
+
             <SwatchColumnLegend/>
+
 
             {/* IBM */}
             <SwatchColumn model={{hex:"#082B9F", semantic: "primary"}} />
             <SwatchColumn model={{hex:"#1057F7", semantic: "secondary"}}/>
             <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
-            <SwatchColumn model={{hex:"#8a3ffc", semantic: "info"}}/>
+            <SwatchColumn model={{hex:"#FA6304", semantic: "info"}}/>
             <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>
             <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/>
             <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/>
-
 
             {/* // GREENS */}
             {/* <SwatchColumn model={{hex:"#179937", semantic: "primary"}} />

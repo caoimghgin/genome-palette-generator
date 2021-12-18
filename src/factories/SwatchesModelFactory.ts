@@ -8,15 +8,17 @@ const spectro = new Spectro();
 const palettizer = new Palettizer(97, 0.30)
 
 export function SwatchesModelFactory(model: ISwatchBase): SwatchModel[] {
+    console.log("SWATCH MODEL FACTORY CALLED")
 
     let result = []
     let swatchColumnModel = palettizer.createSwatchRow(model.hex)
     var hexValues = Object.values(swatchColumnModel);
 
-    let x = spectro.getClosestColorCheckerName(model.hex)
+    let colorChecker = spectro.getClosestColorCheckerName(model.hex)
 
     for (let i in hexValues) {
-        let swatch = new SwatchModel(hexValues[i])
+        let hex = hexValues[i]
+        let swatch = new SwatchModel(hex)
         swatch.key =  model.semantic + "-" + weights[i]
         swatch.semantic = model.semantic 
         swatch.LAB = new LAB(spectro.getLabValue(swatch.hex))
@@ -24,8 +26,9 @@ export function SwatchesModelFactory(model: ISwatchBase): SwatchModel[] {
         swatch.HSV = new HSV(spectro.getHsvValue(swatch.hex))
         swatch.name = model.semantic + "-" + weights[i]
         swatch.weight = weights[i]
-        swatch.colorChecker = new ColorCheckerModel(x.name, x.dE)
-
+        swatch.colorChecker = new ColorCheckerModel(colorChecker.name, colorChecker.dE)
+        swatch.WCAG2 = spectro.getWCAG(hex)
+        swatch.WCAG3 = spectro.getAPCA(hex)
         result.push(swatch)
     }
 

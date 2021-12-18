@@ -29,6 +29,10 @@ interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
+    window.onmessage = (event) => {
+        console.log(`Received message: ${event.data}`);
+    };
+    
     const downloadJSON = () => {
 
         let dict = {} as any

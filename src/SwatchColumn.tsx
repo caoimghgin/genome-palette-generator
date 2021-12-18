@@ -9,13 +9,20 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
+    // window.postMessage(JSON.stringify({
+    //     message: "HI",
+    //     time: new Date()
+    // }), 'http://receiver.com');
+
     const [base, setBase] = useState<ISwatchBase>(model);
+    // const [swatches, setSwatches] = useState<SwatchModel[]>(model);
 
     const wrapper = { display: 'inline-block' };
 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         let value = e.currentTarget.value;
         if (value.length === 7) {
+            console.log(value)
             setBase({ hex: value, semantic: base.semantic })
         }
     }
