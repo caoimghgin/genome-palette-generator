@@ -20,6 +20,8 @@
 
 // https://coderwall.com/p/ewxn9g/storing-and-retrieving-objects-with-localstorage-html5
 
+// https://blog.bitsrc.io/build-a-simple-modal-component-with-react-16decdc111a6
+
 import './App.css';
 import { NavBar } from "./NavBar"
 import { SwatchColumnLegend } from "./SwatchColumnLegend"
@@ -47,12 +49,11 @@ function App() {
 
             <SwatchColumnLegend/>
 
-
             {/* IBM */}
             <SwatchColumn model={{hex:"#082B9F", semantic: "primary"}} />
             <SwatchColumn model={{hex:"#1057F7", semantic: "secondary"}}/>
             <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
-            <SwatchColumn model={{hex:"#FA6304", semantic: "info"}}/>
+            <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
             <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>
             <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/>
             <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/>

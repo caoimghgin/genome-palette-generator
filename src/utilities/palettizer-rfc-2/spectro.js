@@ -126,18 +126,6 @@ class Spectro {
 
     }
 
-    // getClosestColorCheckerNameX(color) {
-    //     let dict = {}
-    //     console.log("THE COLOR: " + color)
-    //     for (const [key, value] of Object.entries(colorCheckerValuesHex)) {
-    //       let dE = chroma.deltaE(String(color), value);
-    //       dict[key] = dE;
-    //     }
-    
-    //     let result = this.lowestValueAndKey(dict);
-    //     return { ["name"]: result.key, ["dE"]: result.value }
-    //   }
-
     getLightnessValue(hexString) {
         return convert.hex.lab(hexString)[0]
     }
