@@ -195,7 +195,6 @@ class Palettizer {
             case "NEUTRAL-50":
             case "NEUTRAL-35":
             case "BLACK":
-
                 if (colorSpecs.L <= 50) {
                     darkenTargets = [9, 15, 21, 29, 37]
                     lightenTargets = [(colorSpecs.L + 3), 58, 60, 80, 86, 95, 98]
@@ -569,7 +568,7 @@ class Palettizer {
 
                 if (colorSpecs.L <= 50) {
                     darkenTargets = [9, 15, 21, 29, 37]
-                    lightenTargets = [(colorSpecs.L + 3), 58, 60, 80, 86, 95, 98]
+                    lightenTargets = [(colorSpecs.L + 3), 57, 60, 80, 86, 95, 98]
                 }
                 createShadesAndTints(color, darkenTargets, lightenTargets)
 
