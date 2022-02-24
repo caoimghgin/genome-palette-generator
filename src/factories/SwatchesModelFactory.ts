@@ -8,7 +8,6 @@ const spectro = new Spectro();
 const palettizer = new Palettizer(97, 0.30)
 
 export function SwatchesModelFactory(model: ISwatchBase): SwatchModel[] {
-    console.log("SWATCH MODEL FACTORY CALLED")
 
     let result = []
     let swatchColumnModel = palettizer.createSwatchRow(model.hex)

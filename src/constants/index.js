@@ -198,6 +198,7 @@ export const colorCheckerValuesHex = {
     "ORANGISH-RED": 'ed4b2b',
     "PINK": 'fd759f',
     "VERDUN-GREEN": '00704a',
+    "CADMIUM-GREEN" : '036635',
     "X-GREEN": '00720d',
 }
 
@@ -229,7 +230,9 @@ export const colorCheckerValuesLab = {
     "CYANISH-GREEN": { L: 57, A: -35, B: -6 },
     "ORANGISH-RED": { L: 56, A: 62, B: 54 },
     "PINK": { L: 67, A: 56, B: 4 },
-    "VERDUN-GREEN": { L: 40, A: -25, B: 46 }
+    "VERDUN-GREEN": { L: 40, A: -25, B: 46 },
+    "CADMIUM-GREEN": { L: 41, A: -36, B: 13 },
+
 }
 
 export const swatchExportDictionary = {

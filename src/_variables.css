@@ -3,7 +3,35 @@
  * Generated on Sun, 21 Nov 2021 15:38:24 GMT
  */
 
+
 :root {
+
+  --color-text-brand: #4778B3; 		             /* Branded text treatment. */
+  --color-border-brand: #4778B3;		             /* Branded border treatment. */
+  --color-border-row-selected-hover: #4778B3;   /* Border for hover state on selected rows. */
+  --color-border-selection-hover: #4778B3;      /* Border for a builder component that is being hovered over. */
+
+  --color-text-destructive: #CE3426;            /* Text color for destructive actions */
+  --color-text-error: #CE3426;                  /* Error text for inputs and error misc */
+  --color-text-required: #CE3426;               /* Color of required field marker. */
+  --color-border-destructive: #CE3426;          /* Border color for destructive action UI elements. */
+  --color-border-error:  #CE3426;               /* Border color for error related UI elements. */
+
+  --color-text-icon-default: #767676;           /* Default icon color */
+  --color-text-placeholder: #767676;            /* Input placeholder text */
+  --color-background-toast: #767676;            /* Background for toast messaging. */
+  --color-background-info: #767676;             /* Background for UI elements providing neutral information */
+  --color-border-info: #767676;                 /* Border for elements providing neutral information */
+
+
+
+
+
+
+
+
+
+
   --color-palette-primary-100: #bc6def;
   --color-palette-primary-200: #b863ee;
   --color-palette-primary-300: #aa40eb;
