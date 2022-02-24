@@ -118,15 +118,15 @@ class Palettizer {
                 }
                 break;
 
-                case "VERDUN-GREEN":
-                    createShadesAndTints(color, darkenTargets, lightenTargets)
-                    if (isPassWCAGTextNormal(color)) {
-                        desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
-                        // desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
-    
-                        desaturateTints(desaturationTargets, lightenTargets)
-                    }
-                    break;      
+                case "CADM-GREEN":
+                        createShadesAndTints(color, darkenTargets, lightenTargets)
+                        if (isPassWCAGTextNormal(color)) {
+                            desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
+                            // desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
+        
+                            desaturateTints(desaturationTargets, lightenTargets)
+                        }
+                        break;                       
 
             case "YELLOW-GREEN":
             case "BLUISH-GREEN":
@@ -487,15 +487,27 @@ class Palettizer {
                 }
                 break;
 
+           
                 case "VERDUN-GREEN":
                     createShadesAndTints(color, darkenTargets, lightenTargets)
                     if (isPassWCAGTextNormal(color)) {
-                        // desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
-                        desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
+                        desaturationTargets = [75, 70, 65, 55, 55, 15, 5]
+                        // desaturationTargets = [80, 70, 62, 42, 30, 8, 3]
     
                         desaturateTints(desaturationTargets, lightenTargets)
                     }
                     break;     
+
+                case "CADMIUM-GREEN":
+                    createShadesAndTints(color, darkenTargets, lightenTargets)
+                    if (isPassWCAGTextNormal(color)) {
+                        desaturationTargets = [75, 70, 65, 55, 55, 15, 5]
+                        // desaturationTargets = [80, 70, 62, 42, 30, 8, 3]
+    
+                        desaturateTints(desaturationTargets, lightenTargets)
+                    }
+                    break;
+                        
                                
 
             case "YELLOW-GREEN":
@@ -568,7 +580,7 @@ class Palettizer {
 
                 if (colorSpecs.L <= 50) {
                     darkenTargets = [9, 15, 21, 29, 37]
-                    lightenTargets = [(colorSpecs.L + 3), 57, 60, 80, 86, 95, 98]
+                    lightenTargets = [(colorSpecs.L + 3), 56, 61, 80, 86, 95, 98]
                 }
                 createShadesAndTints(color, darkenTargets, lightenTargets)
 
