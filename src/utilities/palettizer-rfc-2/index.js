@@ -24,6 +24,8 @@ class Palettizer {
         let swatch100 = "#000000"
         let swatch075 = "#000000"
         let swatch050 = "#000000"
+        let swatch035 = "#000000"
+
         let swatch025 = "#000000"
         let swatch015 = "#000000"
         let swatch000 = "#FFFFFF"
@@ -45,25 +47,30 @@ class Palettizer {
             tintTargets.L_200, 
             tintTargets.L_100, 
             tintTargets.L_075, 
-            tintTargets.L_050, 
+            tintTargets.L_050,
+            90,
             tintTargets.L_025, 
             tintTargets.L_015]
 
-        let desaturationTargets = [75, 60, 50, 45, 18, 8, 3]
+        let desaturationTargets = [75, 60, 50, 45, 18, 12, 8, 3]
 
         switch (colorSpecs.name) {
 
             case "YELLOW":
             case "ORANGE-YELLOW":
+                console.log("I am really yellow or orange-yellow")
                 let yooyTintTargets = this.createTintTargetsYOOY(color)
                 let yooylightenTargets = [
                     yooyTintTargets.L_300, 
                     yooyTintTargets.L_200, 
                     yooyTintTargets.L_100, 
                     yooyTintTargets.L_075, 
-                    yooyTintTargets.L_050, 
+                    yooyTintTargets.L_050,
+                    yooyTintTargets.L_035,
                     yooyTintTargets.L_025, 
                     yooyTintTargets.L_015]
+
+                    console.log(yooylightenTargets)
                 createShadesAndTints(color, darkenTargets, yooylightenTargets)
                 break;
 
@@ -93,32 +100,38 @@ class Palettizer {
                 createShadesAndTints(color, darkenTargets, pklightenTargets)
             break;             
 
-            case "GREEN":
-                createShadesAndTints(color, darkenTargets, lightenTargets)
-                if (isPassWCAGTextNormal(color)) {
-                    let desaturationTargets = [75, 60, 55, 42, 28, 8, 3]
+            // case "GREEN":
+            //     // HERE
+            //     console.log("I AM GRREEEEEN")
+            //     createShadesAndTints(color, darkenTargets, lightenTargets)
+
+            //     if (isPassWCAGTextNormal(color)) {
+            //         // let desaturationTargets = [75, 60, 55, 42, 28, 8, 3]
+            //         desaturationTargets = [88, 88, 70, 62, 40, 30, 8, 3]
+
+            //         // need to SATURATE here.
+            //         // if (getSaturationValue(color) > 90) {
+            //         //     let desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
+            //         // }
                     
-                    // need to SATURATE here.
-                    // if (getSaturationValue(color) > 90) {
-                    //     let desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
-                    // }
                     
-                    
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
-                break;
+            //         desaturateTints(desaturationTargets, lightenTargets)
+            //     }
+            //     break;
 
             case "FOLIAGE-GREEN":
+
                 createShadesAndTints(color, darkenTargets, lightenTargets)
                 if (isPassWCAGTextNormal(color)) {
-                    desaturationTargets = [75, 60, 53, 50, 50, 10, 3]
+                    // desaturationTargets = [75, 60, 53, 50, 50, 10, 3]
                     //  desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
+                    desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
 
                     desaturateTints(desaturationTargets, lightenTargets)
                 }
                 break;
 
-                case "CADM-GREEN":
+                case "CADMIUM-GREEN":
                         createShadesAndTints(color, darkenTargets, lightenTargets)
                         if (isPassWCAGTextNormal(color)) {
                             desaturationTargets = [75, 70, 65, 55, 50, 15, 5]
@@ -132,7 +145,7 @@ class Palettizer {
             case "BLUISH-GREEN":
                 createShadesAndTints(color, darkenTargets, lightenTargets)
                 if (isPassWCAGTextNormal(color)) {
-                    desaturationTargets = [80, 70, 62, 42, 15, 8, 3]
+                    desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
                     desaturateTints(desaturationTargets, lightenTargets)
                 }
                 break;
@@ -155,7 +168,7 @@ class Palettizer {
 
             case "RED":
                 createShadesAndTints(color, darkenTargets, lightenTargets)
-                desaturationTargets = ((isPassWCAGTextNormal(color) ? [100, 100, 65, 58, 30, 20, 15] : [98, 85, 70, 58, 30, 20, 15]))
+                // desaturationTargets = ((isPassWCAGTextNormal(color) ? [100, 100, 65, 58, 30, 20, 15] : [98, 85, 70, 58, 30, 20, 15]))
                 desaturationTargets = [90, 75, 72, 58, 30, 20, 15]
                 desaturateTints(desaturationTargets, lightenTargets)
                 break;
@@ -166,47 +179,50 @@ class Palettizer {
                 desaturateTints(desaturationTargets, lightenTargets)
                 break;
 
-            case "MAGENTA":
-                createShadesAndTints(color, darkenTargets, lightenTargets)
-                if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets =  [88, 88, 70, 62, 40, 8, 3]
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
-                break;
+            // case "MAGENTA":
+            //     createShadesAndTints(color, darkenTargets, lightenTargets)
+            //     if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
+            //         desaturationTargets =  [88, 88, 70, 62, 40, 8, 3]
+            //         desaturateTints(desaturationTargets, lightenTargets)
+            //     }
+            //     break;
 
-            case "BLUE-SKY":
-                createShadesAndTints(color, darkenTargets, lightenTargets) 
-                if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets = [90, 85, 80, 40, 30, 8, 3]
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
-                break;
+            // case "BLUE-SKY":
+            //     createShadesAndTints(color, darkenTargets, lightenTargets) 
+            //     if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
+            //         // desaturationTargets = [90, 85, 80, 40, 30, 8, 3]
+            //         desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
 
-            case "CYAN":
-                createShadesAndTints(color, darkenTargets, lightenTargets)
-                if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets = [88, 80, 70, 62, 38, 10, 3 ]
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
-                break;
+            //         desaturateTints(desaturationTargets, lightenTargets)
+            //     }
+            //     break;
+
+            // case "CYAN":
+            //     createShadesAndTints(color, darkenTargets, lightenTargets)
+            //     if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
+            //         desaturationTargets = [88, 80, 70, 62, 100, 100, 3 ]
+            //         desaturateTints(desaturationTargets, lightenTargets)
+            //     }
+            //     break;
             case "WHITE":
             case "NEUTRAL-80":
             case "NEUTRAL-65":
             case "NEUTRAL-50":
             case "NEUTRAL-35":
-            case "BLACK":
-                if (colorSpecs.L <= 50) {
-                    darkenTargets = [9, 15, 21, 29, 37]
-                    lightenTargets = [(colorSpecs.L + 3), 58, 60, 80, 86, 95, 98]
-                }
-                createShadesAndTints(color, darkenTargets, lightenTargets)
+            // case "BLACK":
+            //     console.log("I AM NEUTRAL")
+            //     if (colorSpecs.L <= 50) {
+            //         darkenTargets = [9, 15, 21, 29, 37]
+            //         lightenTargets = [(colorSpecs.L + 3), 58, 60, 80, 86, 95, 98]
+            //     }
+            //     createShadesAndTints(color, darkenTargets, lightenTargets)
 
-                break;
-            default:
-            desaturationTargets = [90, 90, 90, 60, 35, 15, 10]
-            createShadesAndTints(color, darkenTargets, lightenTargets)
-            desaturateTints(desaturationTargets, lightenTargets)
-            break;
+            //     break;
+            // default:
+            // desaturationTargets = [90, 90, 90, 60, 35, 15, 10]
+            // createShadesAndTints(color, darkenTargets, lightenTargets)
+            // desaturateTints(desaturationTargets, lightenTargets)
+            // break;
 
         }
         return swatchResults()
@@ -278,8 +294,12 @@ class Palettizer {
             swatch100 = lightenToTarget(color.clone(), tints[2])
             swatch075 = lightenToTarget(color.clone(), tints[3])
             swatch050 = lightenToTarget(color.clone(), tints[4])
-            swatch025 = lightenToTarget(color.clone(), tints[5])
-            swatch015 = lightenToTarget(color.clone(), tints[6])
+
+            swatch035 = lightenToTarget(color.clone(), tints[5])
+
+
+            swatch025 = lightenToTarget(color.clone(), tints[6])
+            swatch015 = lightenToTarget(color.clone(), tints[7])
         }
 
         function darkenToTarget(color, targetValue) {
@@ -325,18 +345,27 @@ class Palettizer {
         function desaturateTints(desaturationTargets, lightenTargets) {
             swatch300 = desaturateToTarget(swatch300.clone(), desaturationTargets[0])
             swatch300 = lightenToTarget(swatch300.clone(), lightenTargets[0])
+            
             swatch200 = desaturateToTarget(swatch200.clone(), desaturationTargets[1])
             swatch200 = lightenToTarget(swatch200.clone(), lightenTargets[1])
+            
             swatch100 = desaturateToTarget(swatch100.clone(), desaturationTargets[2])
             swatch100 = lightenToTarget(swatch100.clone(), lightenTargets[2])
+            
             swatch075 = desaturateToTarget(swatch075.clone(), desaturationTargets[3])
             swatch075 = lightenToTarget(swatch075.clone(), lightenTargets[3])
+            
             swatch050 = desaturateToTarget(swatch050.clone(), desaturationTargets[4])
             swatch050 = lightenToTarget(swatch050.clone(), lightenTargets[4])
-            swatch025 = desaturateToTarget(swatch025.clone(), desaturationTargets[5])
-            swatch025 = lightenToTarget(swatch025.clone(), lightenTargets[5])
-            swatch015 = desaturateToTarget(swatch015.clone(), desaturationTargets[6])
-            swatch015 = lightenToTarget(swatch015.clone(), lightenTargets[6])
+            
+            swatch035 = desaturateToTarget(swatch035.clone(), desaturationTargets[5])
+            swatch035 = lightenToTarget(swatch035.clone(), lightenTargets[5])
+
+            swatch025 = desaturateToTarget(swatch025.clone(), desaturationTargets[6])
+            swatch025 = lightenToTarget(swatch025.clone(), lightenTargets[6])
+            
+            swatch015 = desaturateToTarget(swatch015.clone(), desaturationTargets[7])
+            swatch015 = lightenToTarget(swatch015.clone(), lightenTargets[7])
         }
 
         function swatchResults() {
@@ -345,6 +374,9 @@ class Palettizer {
                 swatch000: swatch000,
                 swatch015: swatch015.toHexString(),
                 swatch025: swatch025.toHexString(),
+                swatch035: swatch035.toHexString(),
+                // swatch035: "#000000",
+
                 swatch050: swatch050.toHexString(),
                 swatch075: swatch075.toHexString(),
                 swatch075: swatch075.toHexString(),
@@ -377,6 +409,7 @@ class Palettizer {
         let swatch100 =  "#000000"
         let swatch075 =  "#000000"
         let swatch050 =  "#000000"
+        let swatch035 =  "#000000"
         let swatch025 =  "#000000"
         let swatch015 =  "#000000"
         let swatch000 = "#FFFFFF"
@@ -401,6 +434,7 @@ class Palettizer {
             tintTargets.L_100, 
             tintTargets.L_075, 
             tintTargets.L_050, 
+            90,
             tintTargets.L_025, 
             tintTargets.L_015]
 
@@ -410,6 +444,7 @@ class Palettizer {
 
             case "YELLOW":
             case "ORANGE-YELLOW":
+                console.log("really, really yellow or organ-yellow")
                 let yooyTintTargets = this.createTintTargetsYOOY(color)
                 let yooylightenTargets = [
                     yooyTintTargets.L_300, 
@@ -417,6 +452,8 @@ class Palettizer {
                     yooyTintTargets.L_100, 
                     yooyTintTargets.L_075, 
                     yooyTintTargets.L_050, 
+                    yooyTintTargets.L_035, 
+
                     yooyTintTargets.L_025, 
                     yooyTintTargets.L_015]
                 createShadesAndTints(color, darkenTargets, yooylightenTargets)
@@ -449,16 +486,13 @@ class Palettizer {
             break;             
 
             case "GREEN":
+                // HERE HERE
                 createShadesAndTints(color, darkenTargets, lightenTargets)
                 if (isPassWCAGTextNormal(color)) {
-                    let desaturationTargets = [75, 60, 55, 42, 28, 8, 3]
-                    
-                    // need to SATURATE here.
-                    if (getSaturationValue(color) > 90) {
-                        let desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
-                    }
-                    
-                    
+                    let desaturationTargets = [75, 60, 55, 30, 18, 12, 8, 5]
+                    // if (getSaturationValue(color) > 85) {
+                    //     desaturationTargets = [75, 60, 55, 30, 15, 8, 5, 5]
+                    // }
                     desaturateTints(desaturationTargets, lightenTargets)
                 } 
                 else {
@@ -480,7 +514,7 @@ class Palettizer {
             case "FOLIAGE-GREEN":
                 createShadesAndTints(color, darkenTargets, lightenTargets)
                 if (isPassWCAGTextNormal(color)) {
-                    desaturationTargets = [75, 60, 53, 50, 50, 10, 3]
+                    desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
                     //  desaturationTargets = [75, 60, 50, 45, 30, 8, 3]
 
                     desaturateTints(desaturationTargets, lightenTargets)
@@ -491,9 +525,7 @@ class Palettizer {
                 case "VERDUN-GREEN":
                     createShadesAndTints(color, darkenTargets, lightenTargets)
                     if (isPassWCAGTextNormal(color)) {
-                        desaturationTargets = [75, 70, 65, 55, 55, 15, 5]
-                        // desaturationTargets = [80, 70, 62, 42, 30, 8, 3]
-    
+                        desaturationTargets = [75, 60, 50, 50, 100, 100, 100, 100]
                         desaturateTints(desaturationTargets, lightenTargets)
                     }
                     break;     
@@ -501,7 +533,7 @@ class Palettizer {
                 case "CADMIUM-GREEN":
                     createShadesAndTints(color, darkenTargets, lightenTargets)
                     if (isPassWCAGTextNormal(color)) {
-                        desaturationTargets = [75, 70, 65, 55, 55, 15, 5]
+                        desaturationTargets = [75, 60, 50, 50, 100, 100, 100, 100]
                         // desaturationTargets = [80, 70, 62, 42, 30, 8, 3]
     
                         desaturateTints(desaturationTargets, lightenTargets)
@@ -537,7 +569,7 @@ class Palettizer {
 
             case "RED":
                 createShadesAndTints(color, darkenTargets, lightenTargets)
-                desaturationTargets = ((isPassWCAGTextNormal(color) ? [100, 100, 65, 58, 30, 20, 15] : [98, 85, 70, 58, 30, 20, 15]))
+                // desaturationTargets = ((isPassWCAGTextNormal(color) ? [100, 100, 65, 58, 30, 20, 15] : [98, 85, 70, 58, 30, 20, 15]))
                 desaturationTargets = [90, 75, 72, 58, 30, 20, 15]
                 desaturateTints(desaturationTargets, lightenTargets)
                 break;
@@ -548,28 +580,42 @@ class Palettizer {
                 desaturateTints(desaturationTargets, lightenTargets)
                 break;
 
-            case "MAGENTA":
-                createShadesAndTints(color, darkenTargets, lightenTargets)
-                if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets =  [88, 88, 70, 62, 40, 8, 3]
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
-                break;
+                // case "MAGENTA":
+                //     createShadesAndTints(color, darkenTargets, lightenTargets)
+                //     if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
+                //         desaturationTargets = [88, 80, 70, 62, 38, 10, 3 ]
+                //         desaturateTints(desaturationTargets, lightenTargets)
+                //     }
+                //     break;
 
             case "BLUE-SKY":
                 createShadesAndTints(color, darkenTargets, lightenTargets) 
                 if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets = [90, 85, 80, 40, 30, 8, 3]
+                    // desaturationTargets = [90, 85, 80, 40, 30, 8, 5]
+                    desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
+                    desaturateTints(desaturationTargets, lightenTargets)
+                } else {
+                    desaturationTargets = [75, 60, 55, 50, 50, 50, 40, 5]
                     desaturateTints(desaturationTargets, lightenTargets)
                 }
                 break;
 
+
+                // if (isPassWCAGTextNormal(color)) {
+                //     let desaturationTargets = [75, 60, 55, 30, 18, 12, 8, 5]
+                //     // if (getSaturationValue(color) > 85) {
+                //     //     desaturationTargets = [75, 60, 55, 30, 15, 8, 5, 5]
+                //     // }
+                //     desaturateTints(desaturationTargets, lightenTargets)
+
+
             case "CYAN":
                 createShadesAndTints(color, darkenTargets, lightenTargets)
-                if ((colorSpecs.s > 90) && (colorSpecs.L < 60)) {
-                    desaturationTargets = [88, 80, 70, 62, 38, 10, 3 ]
-                    desaturateTints(desaturationTargets, lightenTargets)
-                }
+                 desaturationTargets = [75, 60, 55, 30, 20, 15, 10, 5]
+                // if (getSaturationValue(color) > 85) {
+                //      desaturationTargets = [75, 60, 55, 50, 40, 20, 10, 5]
+                // }
+                desaturateTints(desaturationTargets, lightenTargets)
                 break;
             case "WHITE":
             case "NEUTRAL-80":
@@ -577,10 +623,9 @@ class Palettizer {
             case "NEUTRAL-50":
             case "NEUTRAL-35":
             case "BLACK":
-
                 if (colorSpecs.L <= 50) {
                     darkenTargets = [9, 15, 21, 29, 37]
-                    lightenTargets = [(colorSpecs.L + 3), 56, 61, 80, 86, 95, 98]
+                    lightenTargets = [(colorSpecs.L + 3), 56, 61, 80, 86, 90, 95, 98]
                 }
                 createShadesAndTints(color, darkenTargets, lightenTargets)
 
@@ -628,8 +673,6 @@ class Palettizer {
         function desaturateToTarget(color, targetValue) {
             let value = color.clone()
 
-            getSaturationValue(value)
-
             while (getSaturationValue(value) > targetValue) {
                 value = desaturate(value)
             }
@@ -642,7 +685,14 @@ class Palettizer {
             return color
         }
 
+        function getChromaValue(color) {
+
+        }
+
         function getSaturationValue(color) {
+
+
+
             let result = color.toHsv()
             let saturationValue = result.s
             return saturationValue * 100
@@ -661,8 +711,9 @@ class Palettizer {
             swatch100 = lightenToTarget(color.clone(), tints[2])
             swatch075 = lightenToTarget(color.clone(), tints[3])
             swatch050 = lightenToTarget(color.clone(), tints[4])
-            swatch025 = lightenToTarget(color.clone(), tints[5])
-            swatch015 = lightenToTarget(color.clone(), tints[6])
+            swatch035 = lightenToTarget(color.clone(), tints[5])
+            swatch025 = lightenToTarget(color.clone(), tints[6])
+            swatch015 = lightenToTarget(color.clone(), tints[7])
         }
 
         function darkenToTarget(color, targetValue) {
@@ -706,20 +757,58 @@ class Palettizer {
         }
 
         function desaturateTints(desaturationTargets, lightenTargets) {
+            let dsat = [75, 60, 55, 30, 15, 8, 5, 5]
+            let ltrg = [49, 57, 60, 80, 
+                86, 90, 95, 98]
+
             swatch300 = desaturateToTarget(swatch300.clone(), desaturationTargets[0])
-            swatch300 = lightenToTarget(swatch300.clone(), lightenTargets[0])
             swatch200 = desaturateToTarget(swatch200.clone(), desaturationTargets[1])
-            swatch200 = lightenToTarget(swatch200.clone(), lightenTargets[1])
             swatch100 = desaturateToTarget(swatch100.clone(), desaturationTargets[2])
-            swatch100 = lightenToTarget(swatch100.clone(), lightenTargets[2])
             swatch075 = desaturateToTarget(swatch075.clone(), desaturationTargets[3])
+            swatch050 = desaturateToTarget(swatch050.clone(), 45)
+            swatch035 = desaturateToTarget(swatch035.clone(), 35)
+            swatch025 = desaturateToTarget(swatch025.clone(), 30)
+            swatch015 = desaturateToTarget(swatch015.clone(), 10)
+
+            swatch300 = lightenToTarget(swatch300.clone(), lightenTargets[0])
+            swatch200 = lightenToTarget(swatch200.clone(), lightenTargets[1])
+            swatch100 = lightenToTarget(swatch100.clone(), lightenTargets[2])
             swatch075 = lightenToTarget(swatch075.clone(), lightenTargets[3])
+            swatch050 = lightenToTarget(swatch050.clone(), 80)
+            swatch035 = lightenToTarget(swatch035.clone(), 80)
+            swatch025 = lightenToTarget(swatch025.clone(), 90)
+            swatch015 = lightenToTarget(swatch015.clone(), 90)
+
             swatch050 = desaturateToTarget(swatch050.clone(), desaturationTargets[4])
+            swatch035 = desaturateToTarget(swatch035.clone(), desaturationTargets[5])
+            swatch025 = desaturateToTarget(swatch025.clone(), desaturationTargets[6])
+            swatch015 = desaturateToTarget(swatch015.clone(), desaturationTargets[7])
+
             swatch050 = lightenToTarget(swatch050.clone(), lightenTargets[4])
-            swatch025 = desaturateToTarget(swatch025.clone(), desaturationTargets[5])
-            swatch025 = lightenToTarget(swatch025.clone(), lightenTargets[5])
-            swatch015 = desaturateToTarget(swatch015.clone(), desaturationTargets[6])
-            swatch015 = lightenToTarget(swatch015.clone(), lightenTargets[6])
+            swatch035 = lightenToTarget(swatch035.clone(), lightenTargets[5])
+            swatch025 = lightenToTarget(swatch025.clone(), lightenTargets[6])
+            swatch015 = lightenToTarget(swatch015.clone(), lightenTargets[7])
+
+            /*
+            swatch300 = desaturateToTarget(swatch300.clone(), desaturationTargets[0])
+            swatch200 = desaturateToTarget(swatch200.clone(), desaturationTargets[1])
+            swatch100 = desaturateToTarget(swatch100.clone(), desaturationTargets[2])
+            swatch075 = desaturateToTarget(swatch075.clone(), desaturationTargets[3])
+            swatch050 = desaturateToTarget(swatch050.clone(), desaturationTargets[4])
+            swatch035 = desaturateToTarget(swatch035.clone(), desaturationTargets[5])
+            swatch025 = desaturateToTarget(swatch025.clone(), desaturationTargets[6])
+            swatch015 = desaturateToTarget(swatch015.clone(), desaturationTargets[7])
+            
+            swatch300 = lightenToTarget(swatch300.clone(), lightenTargets[0])
+            swatch200 = lightenToTarget(swatch200.clone(), lightenTargets[1])
+            swatch100 = lightenToTarget(swatch100.clone(), lightenTargets[2])
+            swatch075 = lightenToTarget(swatch075.clone(), lightenTargets[3])
+            swatch050 = lightenToTarget(swatch050.clone(), lightenTargets[4])
+            swatch035 = lightenToTarget(swatch035.clone(), lightenTargets[5])
+            swatch025 = lightenToTarget(swatch025.clone(), lightenTargets[6])
+            swatch015 = lightenToTarget(swatch015.clone(), lightenTargets[7])
+            */
+
         }
 
         function swatchResults() {
@@ -728,6 +817,7 @@ class Palettizer {
                 swatch000: swatch000,
                 swatch015: swatch015.toHexString(),
                 swatch025: swatch025.toHexString(),
+                swatch035: swatch035.toHexString(),
                 swatch050: swatch050.toHexString(),
                 swatch075: swatch075.toHexString(),
                 swatch075: swatch075.toHexString(),
@@ -782,31 +872,31 @@ class Palettizer {
 
         switch (midtone) {
             case "DEEP":
-                return { L_300: 48, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                return { L_300: 48, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "DARK-DEEP":
-                return { L_300: 48, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                return { L_300: 48, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "DARK":
-                return { L_300: 50, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                return { L_300: 50, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "MEDIUM-DARK":
-                return { L_300: 50, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                return { L_300: 50, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "MEDIUM":
-                return { L_300: 49, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                return { L_300: 49, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "MEDIUM-LIGHT":
-                result = { L_300: 53, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                result = { L_300: 53, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "LIGHT":
-                result = { L_300: 54, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+                result = { L_300: 54, L_200: 57, L_100: 60, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
                 break;
             case "BRIGHT":
                 result = this.createTintTargetsSansWCAG(base)
                 break;
             case "INVALID":
-                result = { L_300: 50, L_200: 50, L_100: 50, L_075: 50, L_050: 50, L_025: 50, L_015: 50 }
+                result = { L_300: 50, L_200: 50, L_100: 50, L_075: 50, L_050: 50, L_035: 50, L_025: 50, L_015: 50 }
                 break;
         }
 
@@ -816,7 +906,7 @@ class Palettizer {
 
     createTintTargetsWCAGtesting(base) {
 
-        let result = { L_300: 50, L_200: 55, L_100: 61, L_075: 80, L_050: 86, L_025: 95, L_015: 98 }
+        let result = { L_300: 50, L_200: 55, L_100: 61, L_075: 80, L_050: 86, L_035: 90, L_025: 95, L_015: 98 }
 
         return result
     }
@@ -875,22 +965,22 @@ class Palettizer {
     createTintTargetsYOOY(base) {
         let L_400 = this.getLightnessValue(base)
 
-        let stepValue = (this.paperWhite - L_400) / 6
+        let stepValue = (this.paperWhite - L_400) / 7
 
         let L_300 = L_400 + (stepValue * 1)
         let L_200 = L_400 + (stepValue * 2)
         let L_100 = L_400 + (stepValue * 3)
         let L_075 = L_400 + (stepValue * 4)
         let L_050 = L_400 + (stepValue * 5)
+        let L_035 = L_400 + (stepValue * 6)
 
-        // Want a tint between 050 and 015
-        let L_025 = ((L_050 - this.paperWhite) / 2) + this.paperWhite
+        // Want a tint between 035 and 015
+        let L_025 = ((L_035 - this.paperWhite) / 2) + this.paperWhite
         // if *L value not equal to paperWhite, make slightly lighter
         if ((L_025) + 2 >= this.paperWhite) {
             L_025 = L_025;
         } else {
             L_025 = L_025 + 1;
-
         }
 
         let result = {
@@ -899,6 +989,7 @@ class Palettizer {
             L_100: L_100,
             L_075: L_075,
             L_050: L_050,
+            L_035: L_035,
             L_025: L_025,
             L_015: 98,
         }

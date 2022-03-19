@@ -15,7 +15,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     // Do not write 000 or 950 weights if semantic name != 'neutral'
     if (!(model.semantic != 'neutral' && (model.weight == '000' || model.weight == '950'))) {
         localStorage.setItem(model.name, model.hex)
-        label = model.hex
+        label = model.LCH.L.toString()
     }
 
     function onClickHandler() {
