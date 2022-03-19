@@ -6,29 +6,30 @@
 
 :root {
 
-  --color-text-brand: #4778B3; 		             /* Branded text treatment. */
-  --color-border-brand: #4778B3;		             /* Branded border treatment. */
-  --color-border-row-selected-hover: #4778B3;   /* Border for hover state on selected rows. */
-  --color-border-selection-hover: #4778B3;      /* Border for a builder component that is being hovered over. */
+  /* Semantic naming */
 
-  --color-text-destructive: #CE3426;            /* Text color for destructive actions */
-  --color-text-error: #CE3426;                  /* Error text for inputs and error misc */
-  --color-text-required: #CE3426;               /* Color of required field marker. */
-  --color-border-destructive: #CE3426;          /* Border color for destructive action UI elements. */
-  --color-border-error:  #CE3426;               /* Border color for error related UI elements. */
+  --color-palette-primary-400: #4778B3;
+  --color-palette-danger-400: #CE3426;
+  --color-palette-neutral-400: #767676;
 
-  --color-text-icon-default: #767676;           /* Default icon color */
-  --color-text-placeholder: #767676;            /* Input placeholder text */
-  --color-background-toast: #767676;            /* Background for toast messaging. */
-  --color-background-info: #767676;             /* Background for UI elements providing neutral information */
-  --color-border-info: #767676;                 /* Border for elements providing neutral information */
+  /* Contextual naming */
 
+  --color-text-brand: var(--color-palette-primary-400); 		                                    /* Branded text treatment. */
+  --color-border-brand: var(--color-palette-primary-400); 	                                    /* Branded border treatment. */
+  --color-border-row-selected-hover:  var(--color-palette-primary-400);                         /* Border for hover state on selected rows. */
+  --color-border-selection-hover: var(--color-palette-primary-400);                                                   /* Border for a builder component that is being hovered over. */
 
+  --color-text-destructive: var(--color-palette-danger-400);                                                           /* Text color for destructive actions */
+  --color-text-error: var(--color-palette-danger-400);                                                                        /* Error text for inputs and error misc */
+  --color-text-required: var(--color-palette-danger-400);                                                                /* Color of required field marker. */
+  --color-border-destructive: var(--color-palette-danger-400);                                                             /* Border color for destructive action UI elements. */
+  --color-border-error:  var(--color-palette-danger-400);                                                                   /* Border color for error related UI elements. */
 
-
-
-
-
+  --color-text-icon-default: var(--color-palette-neutral-400);                                                          /* Default icon color */
+  --color-text-placeholder: var(--color-palette-neutral-400);                                                               /* Input placeholder text */
+  --color-background-toast: var(--color-palette-neutral-400);                                                              /* Background for toast messaging. */
+  --color-background-info: var(--color-palette-neutral-400);                                                             /* Background for UI elements providing neutral information */
+  --color-border-info: var(--color-palette-neutral-400);                                                                /* Border for elements providing neutral information */
 
 
 

@@ -1,0 +1,133 @@
+/**
+ * Do not edit directly
+ * Generated on Thu, 03 Mar 2022 13:55:25 GMT
+ */
+
+ /* https://www.style-dictionary-play.dev/#project=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 */
+
+ :root {
+    --color-palette-primary-100: #6e90d3; /* bright */
+    --color-palette-primary-200: #6287d0; /* light */
+    --color-palette-primary-300: #4672c9;
+    --color-palette-primary-400: #426fc8; /* base */
+    --color-palette-primary-500: #345fb3;
+    --color-palette-primary-600: #2c4f93; /* dark */
+    --color-palette-primary-700: #243f73;
+    --color-palette-primary-800: #1d3157; /* 900, primary-deep */
+    --color-palette-primary-900: #16233b; /* 900 */
+    --color-palette-primary-075: #b6c6e5;
+    --color-palette-primary-050: #ced8eb;
+    --color-palette-primary-035: #dee4f1;
+    --color-palette-primary-025: #eef0f8;
+    --color-palette-primary-015: #f9f9fc;
+
+    --color-palette-secondary-100: #6e90d3;
+    --color-palette-secondary-200: #6287d0;
+    --color-palette-secondary-300: #4672c9;
+    --color-palette-secondary-400: #426fc8; /* Base color */
+    --color-palette-secondary-500: #345fb3;
+    --color-palette-secondary-600: #2c4f93;
+    --color-palette-secondary-700: #243f73;
+    --color-palette-secondary-800: #1d3157;
+    --color-palette-secondary-900: #16233b;
+    --color-palette-secondary-075: #b6c6e5;
+    --color-palette-secondary-050: #ced8eb;
+    --color-palette-secondary-035: #dee4f1;
+    --color-palette-secondary-025: #eef0f8;
+    --color-palette-secondary-015: #f9f9fc;
+
+    --color-palette-success-100: #4ea065;
+    --color-palette-success-200: #3b9a58;
+    --color-palette-success-300: #228640;
+    --color-palette-success-400: #198038;
+    --color-palette-success-500: #146c2e;
+    --color-palette-success-600: #0f5824;
+    --color-palette-success-700: #0b481c;
+    --color-palette-success-800: #073714;
+    --color-palette-success-900: #04280e;
+    --color-palette-success-075: #a5d0b6;
+    --color-palette-success-050: #c0ddcb;
+    --color-palette-success-035: #d3e8db;
+    --color-palette-success-025: #e7f5ea;
+    --color-palette-success-015: #f2fbf4;
+
+    --color-palette-info-100: #4794ec;
+    --color-palette-info-200: #388bec;
+    --color-palette-info-300: #1874e4;
+    --color-palette-info-400: #1369d0;
+    --color-palette-info-500: #1259a8;
+    --color-palette-info-600: #0f4b8a;
+    --color-palette-info-700: #0c3d71;
+    --color-palette-info-800: #092d53;
+    --color-palette-info-900: #07223f;
+    --color-palette-info-075: #a1caf5;
+    --color-palette-info-050: #bfdcf8;
+    --color-palette-info-035: #d2e4f6;
+    --color-palette-info-025: #e7f2fc;
+    --color-palette-info-015: #f5fafe;
+
+    --color-palette-warning-100: #ffd05f;
+    --color-palette-warning-200: #ffc53c;
+    --color-palette-warning-300: #ffba19;
+    --color-palette-warning-400: #ffb000;
+    --color-palette-warning-500: #d79200;
+    --color-palette-warning-600: #af7800;
+    --color-palette-warning-700: #8c6000;
+    --color-palette-warning-800: #694700;
+    --color-palette-warning-900: #4b3300;
+    --color-palette-warning-075: #ffdc87;
+    --color-palette-warning-050: #ffe6aa;
+    --color-palette-warning-035: #ffefc8;
+    --color-palette-warning-025: #fff2d2;
+    --color-palette-warning-015: #fff8e6;
+
+    --color-palette-danger-100: #ee6264;
+    --color-palette-danger-200: #eb5358;
+    --color-palette-danger-300: #e12630;
+    --color-palette-danger-400: #da1e28;
+    --color-palette-danger-500: #b81721;
+    --color-palette-danger-600: #9a111b;
+    --color-palette-danger-700: #810e16;
+    --color-palette-danger-800: #630b10;
+    --color-palette-danger-900: #4a080b;
+    --color-palette-danger-075: #f7b7b7;
+    --color-palette-danger-050: #f9cbcb;
+    --color-palette-danger-035: #fbdada;
+    --color-palette-danger-025: #fdeeee;
+    --color-palette-danger-015: #fef8f8;
+
+    --color-palette-neutral-015: #f9f9f9; /* $neutral-015, $bkg-neutral-paper_1 */
+    --color-palette-neutral-025: #f0f0f0; /* $neutral-025, $bkg-neutral-paper_2 */
+    --color-palette-neutral-050: #d8d8d8; /* $neutral-050, $separator-dark */
+    --color-palette-neutral-035: #e1e1e1; /* $neutral-035, $separator, $bkg-neutral-paper_3 */
+    --color-palette-neutral-075: #c6c6c6; /* $neutral-075, $separator-deep, $neutral-disabled */
+    --color-palette-neutral-100: #939393; 
+    --color-palette-neutral-200: #878787; /* $neutral-200, $text-light, $icon-light */
+    --color-palette-neutral-300: #787878; 
+    --color-palette-neutral-400: #6f6f6f; /* $neutral-400, $text-normal, $icon-dark */
+    --color-palette-neutral-500: #575757;
+    --color-palette-neutral-600: #454545; /* $neutral-400, $text-normal, $icon-dark */
+    --color-palette-neutral-700: #333333;
+    --color-palette-neutral-800: #242424; /* $neutral-800, $text-deep */
+    --color-palette-neutral-900: #181818;
+
+    --color-palette-monochrome-000: #ffffff; /* monochrome-000, white, $bkg-neutral-paper_0 */
+    --color-palette-monochrome-950: #000000; /* monochrome-950, black */
+
+
+    --color-bkg-neutral-0 : var(--color-palette-monochrome-000);
+    --color-bkg-neutral-1 : var(--color-palette-neutral-015);
+    --color-bkg-neutral-2 : var(--color-palette-neutral-025);
+    --color-bkg-neutral-3 : var(--color-palette-neutral-035);
+
+    --color-separator-default : var(--color-palette-neutral-050);
+    --color-separator-dark : var(--color-palette-neutral-035);
+    --color-separator-deep : var(--color-palette-neutral-075);
+    --color-bkg-neutral-disabled : var(--color-palette-neutral-075);
+
+/*     <span class="bg-red-700 text-white rounded-md text-sm p-1 h-6 mx-2"
+ */
+  }
+
+
+  
