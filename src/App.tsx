@@ -39,7 +39,6 @@ function App() {
     // localStorage.clear();
     // https://developer.microsoft.com/en-us/fluentui#/styles/web/colors/products
 
-
     let sModal = new SwatchModel("000000")
 
     return (
@@ -49,13 +48,58 @@ function App() {
 
             <SwatchColumnLegend/>
 
-            <SwatchColumn model={{hex:"#426fc8", semantic: "primary"}} />
+            {/* <SwatchColumn model={{hex:"#082B9F", semantic: "primary"}} />
+            <SwatchColumn model={{hex:"#1057F7", semantic: "secondary"}}/>
+            <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
+            <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>
+            <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/>
+            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/> */}
+
+
+            <SwatchColumn model={{hex:"#00704A", semantic: "primary"}} />
+            <SwatchColumn model={{hex:"#008020", semantic: "secondary"}}/>
+            <SwatchColumn model={{hex:"#118236", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#00810d", semantic: "info"}}/>
+            <SwatchColumn model={{hex:"#FFC107", semantic: "warning"}}/>
+            <SwatchColumn model={{hex:"#D90303", semantic: "danger"}}/>
+            <SwatchColumn model={{hex:"#6E6E6E", semantic: "neutral"}}/>                
+
+
+            {/* <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#4b6c68", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#5fbfac", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#9fbe41", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#43944a", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#00704a", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#036635", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
+            <SwatchColumn model={{hex:"#02918a", semantic: "Columbia"}}/> */}
+
+
+            
+
+
+
+
+            {/* <SwatchColumn model={{hex:"#426fc8", semantic: "primary"}}/>            
+            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/>
+            <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>   
+            <SwatchColumn model={{hex:"#e17d30", semantic: "orange"}}/>  
+            <SwatchColumn model={{hex:"#fd759f", semantic: "pink"}}/>
+            <SwatchColumn model={{hex:"#ed4b2b", semantic: "orangish-red"}}/>
+            <SwatchColumn model={{hex:"#b33139", semantic: "red"}}/>
+            <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/> 
+            <SwatchColumn model={{hex:"#0088aa", semantic: "moderate red"}}/> */}
+            
+
+            {/* <SwatchColumn model={{hex:"#426fc8", semantic: "primary"}} />
             <SwatchColumn model={{hex:"#426fc8", semantic: "secondary"}}/>
             <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
             <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
             <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>
             <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/>
-            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/>
+            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/> */}
 
 
             {/* <SwatchColumn model={{hex:"#082B9F", semantic: "primary"}} />

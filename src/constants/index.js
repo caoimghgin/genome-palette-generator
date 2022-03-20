@@ -98,6 +98,7 @@ export const weights = [
     '035',
     '050',
     '075',
+    '085',
     '100',
     '200',
     '300',
@@ -169,6 +170,7 @@ export const dataRow = {
     "colorChecker": { "name": undefined, "deltaE": undefined },
     "WCAG2": undefined
 }
+
 
 export const colorCheckerValuesHex = {
     "DARK-SKIN": '745144',

@@ -43,16 +43,17 @@ class Spectro {
         if (this.isNeutral(color)) { colorType = colorNames[colorNames.length - 1] }
 
         let hexValue = color.toHexString()
-        result = { 
+        result = {
+            color: color,
             name: colorChecker.name, 
             type: colorType,             
             hex: color.toHexString(), 
-            h: Math.round(hue), 
-            s: Math.round(saturation), 
-            v: Math.round(colorValue), 
+            hue: Math.round(hue), 
+            saturation: Math.round(saturation), 
+            value: Math.round(colorValue), 
             // C: Math.round(chroma(hexValue).lch()[1]),
             // H: Math.round(chroma(hexValue).lch()[2]),
-            L: lightness, 
+            lightness: lightness, 
             ccDE: colorChecker.dE }
         return result
     }
