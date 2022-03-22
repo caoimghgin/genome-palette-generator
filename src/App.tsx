@@ -30,6 +30,9 @@ import { SwatchColumn }  from "./SwatchColumn";
 import { Modal } from "./modal"
 import { SwatchModel } from './models'
 
+import Spectro from "./utilities/palettizer-rfc-2/spectro"
+
+
 function App() {
 
 // Lc 45 is "sort of" like 3:1
@@ -40,6 +43,8 @@ function App() {
     // https://developer.microsoft.com/en-us/fluentui#/styles/web/colors/products
 
     let sModal = new SwatchModel("000000")
+    const spectro = new Spectro();
+
 
     return (
         <div className="App">
@@ -48,22 +53,146 @@ function App() {
 
             <SwatchColumnLegend/>
 
+                {/* TROUBLE TROUBLE...
+
+                VERDON-GREEN-DARK
+                #637304
+
+                VERDON-GREEN
+                #385d02
+
+            <SwatchColumn model={{hex:"#385d02", semantic: "Random"}} />          
+
+                MALACHITE-GREEN
+                #13bc04
+                #02ab61 (dark)
+
+                MALACHITE-GREEN-LIGHT
+                #16b101
+
+                ???
+                #cb894f
+                #a96620
+
+                CADMIUM-GREEN
+                #065528
+                            <SwatchColumn model={{hex:"#065528", semantic: "Random"}} />  
+                            
+                            
+
+                            ???
+                            #053603
+
+
+                            YELLOW-GREEN
+                            #a5a908
+
+                            VERDON-GREEN
+                            #2f6c03
+
+                            VERDON-GREEN-DARK
+                            #617201
+
+                            GREEN
+                            #43944A
+                            #31830b
+                            #4d920d
+                            #4d8610
+
+                */}
+
+
+            {/* <SwatchColumn model={{hex:"#16b101", semantic: "neutral"}}/>   
+            <SwatchColumn model={{hex:"#31830b", semantic: "neutral"}}/>   
+            <SwatchColumn model={{hex:"#2f6c03", semantic: "neutral"}}/>   
+            <SwatchColumn model={{hex:"#a5a908", semantic: "neutral"}}/>    */}
+
+
+{/* <SwatchColumn model={{hex:"#43944A", semantic: "neutral"}}/> 
+<SwatchColumn model={{hex:"#4d920d", semantic: "neutral"}}/> 
+<SwatchColumn model={{hex:"#31830b", semantic: "neutral"}}/>  */}
+
+
+{/* <SwatchColumn model={{hex:"#0c15dc", semantic: "0c15dc"}} />
+
+<SwatchColumn model={{hex:"#74d00f", semantic: "74d00f"}} />
+
+<SwatchColumn model={{hex:"#436800", semantic: "VERDON"}} />
+<SwatchColumn model={{hex:"#4d920d", semantic: "neutral"}}/> 
+<SwatchColumn model={{hex:"#31830b", semantic: "Random"}} />           */}
+
+{/* <SwatchColumn model={{hex:"#436800", semantic: "VERDON"}} />
+<SwatchColumn model={{hex:"#4d920d", semantic: "neutral"}}/> 
+<SwatchColumn model={{hex:"#31830b", semantic: "Random"}} /> 
+            <SwatchColumn model={{hex:"#4aca0f", semantic: "Random"}} /> */}
+
+ {/* // 965b20 DARK-TAN*/}
+ {/* 21b870 MALACHITE GREEN */}
+ {/* 56ac1d,13bd0b MALACHITE GREEN LIGHT */}
+ {/* 48cbc9 BLUISH GREEN */}
+ 
+
+
+ {/* b1eb35 LIMe-GREEN*/}
+
+            <SwatchColumn model={{hex:"#426FC8", semantic: "primary"}}/> 
+            <SwatchColumn model={{hex:"#426FC8", semantic: "secondary"}}/> 
+            <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
+            <SwatchColumn model={{hex:"#DA1E28", semantic: "danger"}}/> 
+
+            <SwatchColumn model={{hex:"#198038", semantic: "success"}}/> 
+
+            <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/> 
+            <SwatchColumn model={{hex:"#6F6F6F", semantic: "neutral"}}/> 
+
+            {/* <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
+
+            <SwatchColumn model={{hex:"#48cbc9", semantic: "BLUISH GREEN"}}/> 
+            <SwatchColumn model={{hex:"#56ac1d", semantic: "MALACHITE GREEN LIGHT"}}/> 
+            <SwatchColumn model={{hex:"#13bd0b", semantic: "MALACHITE GREEN LIGHT"}}/> 
+            <SwatchColumn model={{hex:"#21b870", semantic: "neutral"}}/> 
+            <SwatchColumn model={{hex:"#198038", semantic: "GREEN"}}/>
+            <SwatchColumn model={{hex:"#2cc900", semantic: "neutral"}}/> 
+            <SwatchColumn model={{hex:"#98bd1d", semantic: "neutral"}}/> 
+            <SwatchColumn model={{hex:"#965b20", semantic: "neutral"}}/>  */}
+
+
+{/* <SwatchColumn model={{hex:"#6E6E6E", semantic: "neutral"}}/>   
+
+
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />          
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />
+            <SwatchColumn model={{hex:spectro.generateRandomColor(), semantic: "Random"}} />
+            <SwatchColumn model={{hex:"#6E6E6E", semantic: "neutral"}}/>    */}
+
+
             {/* <SwatchColumn model={{hex:"#082B9F", semantic: "primary"}} />
             <SwatchColumn model={{hex:"#1057F7", semantic: "secondary"}}/>
             <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>
             <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
             <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/>
             <SwatchColumn model={{hex:"#da1e28", semantic: "danger"}}/>
-            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/> */}
+            <SwatchColumn model={{hex:"#6f6f6f", semantic: "neutral"}}/> */}   
+
+            {/* <SwatchColumn model={{hex:"#13bc04", semantic: "MAL-GREEN"}}/>
+            <SwatchColumn model={{hex:"#02ab61", semantic: "MAL-GREEN-DARK"}}/>            
+
+            <SwatchColumn model={{hex:"#a96620", semantic: "DARK-TAN"}}/>
+            <SwatchColumn model={{hex:"#cb894f", semantic: "LIGHT-TAN"}}/>
+
+            <SwatchColumn model={{hex:"#13bc04", semantic: "MALACHITE-GREEN"}}/>
+            <SwatchColumn model={{hex:"#637304", semantic: "VERDON-GREEN-DARK"}}/> */}
 
 
-            <SwatchColumn model={{hex:"#00704A", semantic: "primary"}} />
-            <SwatchColumn model={{hex:"#008020", semantic: "secondary"}}/>
-            <SwatchColumn model={{hex:"#118236", semantic: "success"}}/>
-            <SwatchColumn model={{hex:"#00810d", semantic: "info"}}/>
-            <SwatchColumn model={{hex:"#FFC107", semantic: "warning"}}/>
-            <SwatchColumn model={{hex:"#D90303", semantic: "danger"}}/>
-            <SwatchColumn model={{hex:"#6E6E6E", semantic: "neutral"}}/>                
+          
 
 
             {/* <SwatchColumn model={{hex:"#198038", semantic: "success"}}/>

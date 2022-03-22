@@ -4,8 +4,48 @@ import tinycolor, { readability }  from 'tinycolor2'
 import { sRGBtoY, APCAcontrast } from  './apca'
 
 import { colorNames, hueValues, neutralTolerance, colorCheckerValuesLab } from '../../constants'
+import { createNull } from 'typescript'
 
 class Spectro {
+
+    generateRandomColor(x) {
+        var color = null
+
+        if (x === null) {
+            color = tinycolor.random();
+            console.log(this.getClosestColorCheckerName(color.toHexString()))
+            return color.toHexString()
+        } else {
+            console.log("ELSE")
+            let ccName = null;
+
+            do {
+                color = tinycolor.random();
+                let j = this.getClosestColorCheckerName(color.toHexString());
+                ccName = j.name
+                console.log(ccName)
+
+              } while (x != ccName);
+
+              return color
+        }
+    }
+
+    generateRandomColorForCCName(x) {
+        var color = null
+        var ccName
+
+            do {
+                color = tinycolor.random();
+                let j = this.getClosestColorCheckerName(color.toHexString());
+                ccName = j.name
+                console.log(ccName)
+
+              } while (x != ccName);
+
+              return color
+        
+    }
 
     getWCAG(color) {
         let result = readability(color, '#FFFFFF');
@@ -39,6 +79,7 @@ class Spectro {
         let lightness = this.getLightnessValue(color)
         let colorValue = this.getColorValue(color)
         let colorChecker = this.getClosestColorCheckerName(color)
+        let chroma = this.getLchValue(color)[1]
 
         if (this.isNeutral(color)) { colorType = colorNames[colorNames.length - 1] }
 
@@ -54,7 +95,8 @@ class Spectro {
             // C: Math.round(chroma(hexValue).lch()[1]),
             // H: Math.round(chroma(hexValue).lch()[2]),
             lightness: lightness, 
-            ccDE: colorChecker.dE }
+            ccDE: colorChecker.dE,
+            chroma: chroma}
         return result
     }
 

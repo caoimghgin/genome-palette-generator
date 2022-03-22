@@ -170,11 +170,14 @@ export const dataRow = {
     "colorChecker": { "name": undefined, "deltaE": undefined },
     "WCAG2": undefined
 }
-
+// #cb894f
+// #a96620
 
 export const colorCheckerValuesHex = {
     "DARK-SKIN": '745144',
     "LIGHT-SKIN": 'c79481',
+    "DARK-TAN": 'A96620',
+    "LIGHT-TAN": 'CB894F',
     "BLUE-SKY": '5a7b9c',
     "FOLIAGE-GREEN": '4b6c68',
     "BLUE-FLOWER": '8280af',
@@ -198,16 +201,24 @@ export const colorCheckerValuesHex = {
     "NEUTRAL-35": '525254',
     "BLACK-15": '303032',
     "CYANISH-GREEN": '199992',
+    "LIME-GREEN": '11e617',
     "ORANGISH-RED": 'ed4b2b',
     "PINK": 'fd759f',
     "VERDUN-GREEN": '00704a',
+    "VERDON-GREEN-DARK": '637304',
     "CADMIUM-GREEN" : '036635',
     "X-GREEN": '00720d',
+    "MALACHITE-GREEN" : "07b745",
+    "MALACHITE-GREEN-DARK" : "02ab61", 
+    "DEEP-BRONZE": "474806",
+    "OLIVE-GREEN": "5f835e",
 }
 
 export const colorCheckerValuesLab = {
     "DARK-SKIN": { L: 38, A: 14, B: 14 },
     "LIGHT-SKIN": { L: 66, A: 18, B: 18 },
+    "DARK-TAN": { L: 50, A: 24, B: 49 },
+    "LGHT-TAN": { L: 63, A: 22, B: 41 },
     "BLUE-SKY": { L: 50, A: -5, B: -22 },
     "FOLIAGE-GREEN": { L: 43, A: -13, B: -2 },
     "BLUE-FLOWER": { L: 55, A: 9, B: -25 },
@@ -220,6 +231,7 @@ export const colorCheckerValuesLab = {
     "ORANGE-YELLOW": { L: 72, A: 19, B: 68 },
     "BLUE": { L: 29, A: 14, B: -50 },
     "GREEN": { L: 55, A: -38, B: 31 },
+    "LIME-GREEN": { L: 80, A: -72, B: 73 },
     "RED": { L: 42, A: 53, B: 28 },
     "YELLOW": { L: 82, A: 4, B: 80 },
     "MAGENTA": { L: 52, A: 50, B: -15 },
@@ -234,9 +246,32 @@ export const colorCheckerValuesLab = {
     "ORANGISH-RED": { L: 56, A: 62, B: 54 },
     "PINK": { L: 67, A: 56, B: 4 },
     "VERDUN-GREEN": { L: 40, A: -25, B: 46 },
+    "VERDUN-GREEN-DARK": { L: 46, A: -16, B: 49 },
     "CADMIUM-GREEN": { L: 41, A: -36, B: 13 },
-
+    "MALACHITE-GREEN" : { L: 62, A: -52, B: 27 },
+    "MALACHITE-GREEN-LIGHT" : { L: 65, A: -58, B: 45 },
+    "DEEP-BRONZE" : { L: 30, A: -7, B: 35 },
+    "OLIVE-GREEN": { L: 51, A: -19, B: 16 },
 }
+
+export const X = {
+    "FOLIAGE-GREEN": { L: 43, A: -13, B: -2 },
+    "BLUISH-GREEN": { L: 71, A: -33, B: 0 },
+    "YELLOW-GREEN": { L: 73, A: -24, B: 57 },
+    "GREEN": { L: 55, A: -38, B: 31 },
+    "LIME-GREEN": { L: 80, A: -72, B: 73 },
+    "CYANISH-GREEN": { L: 57, A: -35, B: -6 },
+    "VERDUN-GREEN": { L: 40, A: -25, B: 46 },
+    "VERDUN-GREEN-DARK": { L: 46, A: -16, B: 49 },
+    "CADMIUM-GREEN": { L: 41, A: -36, B: 13 },
+    "MALACHITE-GREEN" : { L: 62, A: -52, B: 27 },
+    "MALACHITE-GREEN-LIGHT" : { L: 65, A: -58, B: 45 },
+}
+
+
+
+
+
 
 export const swatchExportDictionary = {
     "primary-015": "",
