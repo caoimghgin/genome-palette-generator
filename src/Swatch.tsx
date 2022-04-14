@@ -12,14 +12,24 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
 
     let label = "n/a"
-    // Do not write 000 or 950 weights if semantic name != 'neutral'
-    if (!(model.semantic != 'neutral' && (model.weight == '000' || model.weight == '950'))) {
-        localStorage.setItem(model.name, model.hex)
-        label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
-        // label = "-"
-        // label = model.LCH.L.toString()
+    localStorage.setItem(model.name, model.hex)
+    label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
+
+    let hexString = model.hex.toString()
+
+    if (hexString != "#000000") {
+        label = model.hex.toString()
 
     }
+    
+    // Do not write 000 or 950 weights if semantic name != 'neutral'
+    // if (!(model.semantic != 'neutral' && (model.weight == '000' || model.weight == '950'))) {
+    //     localStorage.setItem(model.name, model.hex)
+    //     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
+    //     // label = "-"
+    //     // label = model.LCH.L.toString()
+
+    // }
 
     function onClickHandler() {
         console.table(model)
@@ -48,7 +58,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         justifyContent: 'center',
         width: '100%',
         background: model.hex,
-        height: '48px',
+        height: '40px',
         color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
     };
 

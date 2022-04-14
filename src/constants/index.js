@@ -91,6 +91,31 @@ export function getKeyValues() {
 
 }
 
+export const l_targets = [
+    100, 
+    97.5, 
+    95, 
+    90, 
+    85, 
+    80, 
+    75, 
+    70, 
+    65, 
+    60, 
+    55, 
+    50, 
+    45, 
+    40, 
+    35, 
+    30, 
+    25, 
+    20, 
+    15, 
+    10,
+    5, 
+    0
+]
+
 export const weights = [
     '000',
     '015',
@@ -98,7 +123,9 @@ export const weights = [
     '035',
     '050',
     '075',
+    '080',
     '085',
+    '090',
     '100',
     '200',
     '300',
@@ -106,9 +133,12 @@ export const weights = [
     '500',
     '600',
     '700',
+    '750',
     '800',
     '900',
-    '950'
+    '950',
+    '975',
+    '1000'
 ];
 
 export function targetDensities() {

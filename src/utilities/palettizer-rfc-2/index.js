@@ -2,6 +2,7 @@ import tinycolor from 'tinycolor2'
 import convert from 'color-convert'
 import Spectro from "./spectro"
 import chroma from "chroma-js"
+import { l_targets } from '../../constants'
 
 class Palettizer {
 
@@ -13,23 +14,31 @@ class Palettizer {
 
     createSwatchRow(hexString) {
 
-        let swatch950 = "#000000"
-        let swatch900 = "#000000"
-        let swatch800 = "#000000"
-        let swatch700 = "#000000"
-        let swatch600 = "#000000"
-        let swatch500 = "#000000"
-        let swatch400 = "#000000"
-        let swatch300 = "#000000"
-        let swatch200 = "#000000"
-        let swatch100 = "#000000"
-        let swatch085 = "#000000"
-        let swatch075 = "#000000"
-        let swatch050 = "#000000"
-        let swatch035 = "#000000"
-        let swatch025 = "#000000"
-        let swatch015 = "#000000"
+
+
         let swatch000 = "#FFFFFF"
+        let swatch015 = "#CCCCCC"
+        let swatch025 = "#CCCCCC"
+        let swatch035 = "#CCCCCC"
+        let swatch050 = "#CCCCCC"
+        let swatch075 = "#CCCCCC"
+        let swatch080 = "#CCCCCC"
+        let swatch085 = "#CCCCCC"
+        let swatch090 = "#CCCCCC"
+        let swatch100 = "#CCCCCC"
+        let swatch200 = "#CCCCCC"
+        let swatch300 = "#CCCCCC"
+        let swatch400 = "#CCCCCC"
+        let swatch500 = "#CCCCCC"
+        let swatch600 = "#CCCCCC"
+        let swatch700 = "#CCCCCC"
+        let swatch750 = "#CCCCCC"
+        let swatch800 = "#CCCCCC"
+        let swatch900 = "#CCCCCC"
+        let swatch950 = "#CCCCCC"
+        let swatch975 = "#CCCCCC"
+        let swatch1000 = "#000000"
+
 
         let color = this.spectro.getColorType(tinycolor(hexString))
 
@@ -42,195 +51,21 @@ class Palettizer {
             case "LIGHT-TAN":
             case "CYANISH-GREEN":
             case "FOLIAGE-GREEN":
-                generateShadesAndTints2(color)
-                desaturateTints2(
-                    [color.chroma,
-                    color.chroma,
-                    color.chroma,
-                    color.chroma * 0.95,
-                    color.chroma * 0.8,
-                    color.chroma * 0.7,
-                    18,
-                    10,
-                    7,
-                    3]
-                )
-                break;
-
-                case "PURPLISH-BLUE":
-                case "BLUE-SKY":
-                    generateShadesAndTints2(color)
-                    desaturateTints2(
-                        [color.chroma,
-                        color.chroma,
-                        color.chroma,
-                        color.chroma * 0.95,
-                        color.chroma * 0.9,
-                        16,
-                        7,
-                        4,
-                        2]
-                    )
-                    break;
-                    case "RED":
-                        generateShadesAndTints2(color)
-                        desaturateTints2(
-                            [color.chroma,
-                            color.chroma,
-                            color.chroma,
-                            color.chroma * 0.95,
-                            color.chroma * 0.9,
-                            18,
-                            10,
-                            7,
-                            3]
-                        )
-                        break;                       
-                    
-
-                    // case "PURPLISH-BLUE":
-                    //     generateShadesAndTints2(color)
-                    //     desaturateTints2(
-                    //         [color.chroma,
-                    //         color.chroma,
-                    //         color.chroma,
-                    //         color.chroma * 0.95,
-                    //         color.chroma * 0.9,
-                    //         color.chroma * 0.8,
-                    //         color.chroma * 0.4,
-                    //         color.chroma * 0.1,
-                    //         color.chroma * 0.05]
-                    //     )
-                    //     break;                      
+            case "PURPLISH-BLUE":
+            case "BLUE-SKY":
+            case "RED":
             case "VERDUN-GREEN-DARK":
-                generateShadesAndTints2(color)
-                desaturateTints2(
-                    [color.chroma,
-                    color.chroma,
-                    color.chroma,
-                    color.chroma * 0.95,
-                    color.chroma * 0.9,
-                    color.chroma * 0.8,
-                    color.chroma * 0.4,
-                    color.chroma * 0.25,
-                    color.chroma * 0.22]
-                )
-                break;
-
             case "LIME-GREEN":
-                generateShadesAndTints2(color)
-                desaturateTints2(
-                    [color.chroma,
-                    color.chroma,
-                    color.chroma,
-                    color.chroma * 0.95,
-                    color.chroma * 0.9,
-                    color.chroma * 0.8,
-                    color.chroma * 0.8,
-                    color.chroma * 0.44,
-                    color.chroma * 0.2]
-                )
-                break;
-
             case "YELLOW-GREEN":
-                generateShadesAndTints2(color)
-                desaturateTints2(
-                    [color.chroma,
-                    color.chroma,
-                    color.chroma,
-                    color.chroma * 0.95,
-                    color.chroma * 0.9,
-                    color.chroma * 0.8,
-                    color.chroma * 0.75,
-                    color.chroma * 0.7,
-                    color.chroma * 0.4]
-                )
-                break;
-
             case "VERDUN-GREEN":
-                generateShadesAndTints2(color)
-                desaturateTints2(
-                    [color.chroma,
-                    color.chroma,
-                    color.chroma,
-                    color.chroma * 0.95,
-                    color.chroma * 0.9,
-                    color.chroma * 0.8,
-                    color.chroma * 0.45,
-                    color.chroma * 0.25,
-                    color.chroma * 0.15]
-                )
-
+            case "OLIVE-GREEN":
+            case "MALACHITE-GREEN":
+            case "MALACHITE-GREEN-LIGHT":
+            case "DARK-TAN":
+                generateShadesAndTints4(color)
                 break;
-
-                case "OLIVE-GREEN":
-                    generateShadesAndTints2(color)
-                    desaturateTints2(
-                        [color.chroma,
-                        color.chroma,
-                        color.chroma,
-                        color.chroma * 1,
-                        color.chroma * 0.9,
-                        color.chroma * 0.8,
-                        color.chroma * 0.45,
-                        color.chroma * 0.25,
-                        color.chroma * 0.15]
-                    )
-    
-                    break;                
-
-                case "MALACHITE-GREEN":
-                    generateShadesAndTints2(color)
-                    desaturateTints2(
-                        [color.chroma,
-                        color.chroma,
-                        color.chroma,
-                        color.chroma * 0.95,
-                        color.chroma * 0.9,
-                        color.chroma * 0.8,
-                        color.chroma * 0.6,
-                        color.chroma * 0.25,
-                        color.chroma * 0.15]
-                    )
-    
-                    break;
-
-                    case "MALACHITE-GREEN-LIGHT":
-                        generateShadesAndTints2(color)
-                        desaturateTints2(
-                            [color.chroma,
-                            color.chroma,
-                            color.chroma,
-                            color.chroma * 0.95,
-                            color.chroma * 0.9,
-                            color.chroma * 0.8,
-                            color.chroma * 0.65,
-                            color.chroma * 0.35,
-                            color.chroma * 0.15]
-                        )
-        
-                        break;                    
-
-                case "DARK-TAN":
-                    generateShadesAndTints2(color)
-                    desaturateTints2(
-                        [color.chroma,
-                        color.chroma,
-                        color.chroma,
-                        color.chroma * 0.95,
-                        color.chroma * 0.8,
-                        color.chroma * 0.6,
-                        color.chroma * 0.5,
-                        color.chroma * 0.3,
-                        color.chroma * 0.15]
-                    )                
-                    break;
-
             default:
-
-                generateShadesAndTints(color)
-                
-
+                generateShadesAndTints4(color)
                 break;
 
         }
@@ -431,8 +266,6 @@ class Palettizer {
 
         function generateShadesAndTints2(color) {
 
-            console.log("Generating Shades and Tints")
-
             let fTargets = []
 
             // IDEAL LIGHTNESS VALUE FOR BASE COLOR
@@ -533,6 +366,529 @@ class Palettizer {
             swatch015 = lightenToTarget2(color.color.clone(), 98)
         }
 
+        function generateShadesAndTints3(color) {
+
+
+
+
+            const weights = ["000", "015", "025", "035", "050", "075", "085", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
+            const l_star = [100, 97.5, 95, 90, 85, 80, 70, 60, 55, 50, 45, 40, 35, 30, 20, 15, 0]
+            var closest = l_star.reduce(function (prev, curr) {
+                return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
+            });
+            let index = l_star.indexOf(closest)
+            let thingIwant = weights[index]
+            console.log("chosen color is " + color.hex + " weight:" + thingIwant)
+
+
+
+
+
+            let fTargets = []
+
+            // IDEAL LIGHTNESS VALUE FOR BASE COLOR
+            if ((color.lightness >= 42) && (color.lightness <= 52)) {
+                // GIVE NEUTRALS SLIGHLY DARKER 3/4 TONES
+                if (color.name.startsWith("NEUTRAL")) {
+                    fTargets = [98, 95, 90, 85, 80, 70, 60, 55, 49, 45, 40, 35, 25, 15, 8]
+                } else {
+                    fTargets = [98, 95, 90, 85, 80, 70, 60, 55, 49, 45, 40, 35, 28, 22, 12]
+                }
+            }
+            // LIGHTER THAN IDEAL VALUE FOR BASE COLOR
+            else if (color.lightness >= 42) {
+                let tintStepValue = (95 - color.lightness) / 8
+                let shadeStepValue = (1 - color.lightness) / 8
+                fTargets = [
+                    98,
+                    96,
+                    color.lightness + (tintStepValue * 7),
+                    color.lightness + (tintStepValue * 6),
+                    color.lightness + (tintStepValue * 5),
+                    color.lightness + (tintStepValue * 4),
+                    color.lightness + (tintStepValue * 3),
+                    color.lightness + (tintStepValue * 2),
+                    color.lightness + (tintStepValue * 1),
+                    45,
+                    color.lightness + (shadeStepValue * 1),
+                    color.lightness + (shadeStepValue * 2),
+                    color.lightness + (shadeStepValue * 3.25),
+                    color.lightness + (shadeStepValue * 4.25),
+                    color.lightness + (shadeStepValue * 5.5)
+                ]
+
+            }
+            // DARKER THAN IDEAL VALUE FOR BASE COLOR
+
+            else if ((color.lightness >= 35) && (color.lightness <= 52)) {
+
+                let shadeStepValue = (15 - color.lightness) / 5
+
+                fTargets = [
+                    98,
+                    95,
+                    90,
+                    85,
+                    80,
+                    70,
+                    60,
+                    55,
+                    49,
+                    45,
+                    color.lightness + (shadeStepValue * 1),
+                    color.lightness + (shadeStepValue * 2),
+                    color.lightness + (shadeStepValue * 3),
+                    color.lightness + (shadeStepValue * 4),
+                    color.lightness + (shadeStepValue * 5)]
+
+            }
+
+            else if (color.lightness <= 35) {
+
+                let shadeStepValue = (5 - color.lightness) / 5
+
+                fTargets = [
+                    98,
+                    95,
+                    90,
+                    85,
+                    80,
+                    70,
+                    60,
+                    55,
+                    49,
+                    45,
+                    color.lightness + (shadeStepValue * 1),
+                    color.lightness + (shadeStepValue * 2),
+                    color.lightness + (shadeStepValue * 3),
+                    color.lightness + (shadeStepValue * 4),
+                    color.lightness + (shadeStepValue * 5)]
+            }
+
+            swatch900 = darkenToTarget(color.color.clone(), fTargets[14])
+            swatch800 = darkenToTarget(color.color.clone(), fTargets[13])
+            swatch700 = darkenToTarget(color.color.clone(), fTargets[12])
+            swatch600 = darkenToTarget(color.color.clone(), fTargets[11])
+            swatch500 = darkenToTarget(color.color.clone(), fTargets[10])
+            swatch400 = color.color
+
+            let colorModel = 'lch'
+            let c = color.color.clone().toHexString()
+            let a = chroma.scale([c, '#FFFFFF']).mode(colorModel).colors(12)
+            let b = chroma.scale([a[10], '#FFFFFF']).mode(colorModel).colors(3)
+
+
+            let testing = [100, 98, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
+
+            swatch300 = tinycolor(a[1])
+            swatch200 = tinycolor(a[2])
+            swatch100 = tinycolor(a[3])
+            swatch085 = tinycolor(a[5])
+            swatch075 = tinycolor(a[7])
+            swatch050 = tinycolor(a[8])
+            swatch035 = tinycolor(a[9])
+            swatch025 = tinycolor(a[10])
+            swatch015 = tinycolor(b[1])
+
+            // given 'color', I should be able to map it to correct
+            // weight immediatly. If closest L* is 45, then it is 400
+            // and all works as normal.
+            //
+            // Likewise, if the L* match is 60
+        }
+
+        function populateGrid(color) {
+            const hex = ["FFFFFF", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000"]
+            console.log("Lenght is =" + l_targets.length)
+            var closest = l_targets.reduce(function (prev, curr) {
+                return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
+            });
+            let index = l_targets.indexOf(closest)
+            hex[index] = color.hex
+            //
+            // Place chosen color in correct weight row
+            //
+            swatch000 = tinycolor(hex[0])
+            swatch015 = tinycolor(hex[1])
+            swatch025 = tinycolor(hex[2])
+            swatch035 = tinycolor(hex[3])
+            swatch050 = tinycolor(hex[4])
+            swatch075 = tinycolor(hex[5])
+            swatch080 = tinycolor(hex[6])
+            swatch085 = tinycolor(hex[7])
+            swatch090 = tinycolor(hex[8])
+            swatch100 = tinycolor(hex[9])
+            swatch200 = tinycolor(hex[10])
+            swatch300 = tinycolor(hex[11])
+            swatch400 = tinycolor(hex[12])
+            swatch500 = tinycolor(hex[13])
+            swatch600 = tinycolor(hex[14])
+            swatch700 = tinycolor(hex[15])
+            swatch750 = tinycolor(hex[16])
+            swatch800 = tinycolor(hex[17])
+            swatch900 = tinycolor(hex[19])
+            swatch950 = tinycolor(hex[20])
+            swatch975 = tinycolor(hex[21])
+
+             return index
+        }
+
+
+
+        function generateShadesAndTints4(color) {
+
+            let index = populateGrid(color)
+            return
+
+            // if (flag == true) {
+            //     return
+            // } else {
+            //     flag = true
+            // }
+            
+
+            // // const weights = ["000", "015", "025", "035", "050", "075", "085", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
+            // const l_star = [100, 97.5, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0] // move to constants, name l_targets.
+            // const hex = ["FFFFFF", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000", "000000"]
+            // var closest = l_star.reduce(function (prev, curr) {
+            //     return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
+            // });
+            // let index = l_star.indexOf(closest)
+            // hex[index] = color.hex
+            let colorModel = 'lch'
+
+
+            //
+            // Place chosen color in correct weight row
+            //
+            // swatch015 = tinycolor(hex[1])
+            // swatch025 = tinycolor(hex[2])
+            // swatch035 = tinycolor(hex[3])
+            // swatch050 = tinycolor(hex[4])
+            // swatch075 = tinycolor(hex[5])
+            // swatch080 = tinycolor(hex[6])
+            // swatch085 = tinycolor(hex[7])
+            // swatch090 = tinycolor(hex[8])
+            // swatch100 = tinycolor(hex[9])
+            // swatch200 = tinycolor(hex[10])
+            // swatch300 = tinycolor(hex[11])
+            // swatch400 = tinycolor(hex[12])
+            // swatch500 = tinycolor(hex[13])
+            // swatch600 = tinycolor(hex[14])
+            // swatch700 = tinycolor(hex[15])
+            // swatch750 = tinycolor(hex[16])
+            // swatch800 = tinycolor(hex[17])
+            // swatch900 = tinycolor(hex[19])
+            // swatch950 = tinycolor(hex[20])
+            // swatch975 = tinycolor(hex[21])
+
+            // var c = color.color.clone().toHexString()
+            // var a = chroma.scale([c, '#FFFFFF']).mode(colorModel).colors(12)
+            // var b = chroma.scale([a[10], '#FFFFFF']).mode(colorModel).colors(3)
+
+
+            if (index <= 12) {
+
+                var c = color.color.clone().toHexString()
+                var a = chroma.scale([c, '#FFFFFF']).mode(colorModel).colors(index)
+                var b = chroma.scale([a[index - 2], '#FFFFFF']).mode(colorModel).colors(3)
+                var j = chroma.scale([c, '#000000']).mode(colorModel).colors(index-2)
+
+                // return
+            }
+
+
+            if (index == 12) {
+
+
+                console.log(j)
+                //
+                // If 400 weight, generate tints
+                //
+                var j = chroma.scale([c, '#000000']).mode(colorModel).colors(10)
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[10])
+                swatch035 = tinycolor(a[9])
+                swatch050 = tinycolor(a[8])
+                swatch075 = tinycolor(a[7])
+                swatch080 = tinycolor(a[6])
+                swatch085 = tinycolor(a[5])
+                swatch090 = tinycolor(a[4])
+                swatch100 = tinycolor(a[3])
+                swatch200 = tinycolor(a[2])
+                swatch300 = tinycolor(a[1])
+
+                swatch500 = tinycolor(j[1])
+                swatch600 = tinycolor(j[2])
+                swatch700 = tinycolor(j[3])
+                swatch750 = tinycolor(j[4])
+                swatch800 = tinycolor(j[5])
+                swatch900 = tinycolor(j[6])
+                swatch950 = tinycolor(j[7])
+                swatch975 = tinycolor(j[8])       
+                
+                // 0: "#4d65cb"
+                // 1: "#3a57bb"
+                // 2: "#244aab"
+                // 3: "#003d9b"
+                // 4: "#00318c"
+                // 5: "#00257d"
+                // 6: "#001a6e"
+                // 7: "#000f60"
+                // 8: "#000000"                
+
+
+            } else if (index == 11) {
+                //
+                // If 300 weight, generate tints
+                //
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[9])
+                swatch035 = tinycolor(a[8])
+                swatch050 = tinycolor(a[7])
+                swatch075 = tinycolor(a[6])
+                swatch080 = tinycolor(a[5])
+                swatch085 = tinycolor(a[4])
+                swatch090 = tinycolor(a[3])
+                swatch100 = tinycolor(a[2])
+                swatch200 = tinycolor(a[1])
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(11)
+
+
+                swatch400 = tinycolor(j[1])
+                swatch500 = tinycolor(j[2])
+                swatch600 = tinycolor(j[3])
+                swatch700 = tinycolor(j[4])
+                swatch750 = tinycolor(j[5])
+                swatch800 = tinycolor(j[6])
+                swatch900 = tinycolor(j[7])
+                swatch950 = tinycolor(j[8])
+                swatch975 = tinycolor(j[9])                     
+
+            } else if (index == 10) {
+                //
+                // If 200 weight, generate tints
+                //
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[8])
+                swatch035 = tinycolor(a[7])
+                swatch050 = tinycolor(a[6])
+                swatch075 = tinycolor(a[5])
+                swatch080 = tinycolor(a[4])
+                swatch085 = tinycolor(a[3])
+                swatch090 = tinycolor(a[2])
+                swatch100 = tinycolor(a[1])
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(12)
+
+                swatch300 = tinycolor(j[1])
+                swatch400 = tinycolor(j[2])
+                swatch500 = tinycolor(j[3])
+                swatch600 = tinycolor(j[4])
+                swatch700 = tinycolor(j[5])
+                swatch750 = tinycolor(j[6])
+                swatch800 = tinycolor(j[7])
+                swatch900 = tinycolor(j[8])
+                swatch950 = tinycolor(j[9])
+                swatch975 = tinycolor(j[10])                  
+
+            } else if (index == 9) {
+                //
+                // If 100 weight, generate tints
+                //
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[7])
+                swatch035 = tinycolor(a[6])
+                swatch050 = tinycolor(a[5])
+                swatch075 = tinycolor(a[4])
+                swatch080 = tinycolor(a[3])
+                swatch085 = tinycolor(a[2])
+                swatch090 = tinycolor(a[1])
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(13)
+
+                swatch200 = tinycolor(j[1])
+                swatch300 = tinycolor(j[2])
+                swatch400 = tinycolor(j[3])
+                swatch500 = tinycolor(j[4])
+                swatch600 = tinycolor(j[5])
+                swatch700 = tinycolor(j[6])
+                swatch750 = tinycolor(j[7])
+                swatch800 = tinycolor(j[8])
+                swatch900 = tinycolor(j[9])
+                swatch950 = tinycolor(j[10])
+                swatch975 = tinycolor(j[11])                   
+
+            } else if (index == 8) {
+
+                //
+                // If 90 weight, generate tints
+                //
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(14)
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[6])
+                swatch035 = tinycolor(a[5])
+                swatch050 = tinycolor(a[4])
+                swatch075 = tinycolor(a[3])
+                swatch080 = tinycolor(a[2])
+                swatch085 = tinycolor(a[1])
+                // swatch090
+                swatch100 = tinycolor(j[1])
+                swatch200 = tinycolor(j[2])
+                swatch300 = tinycolor(j[3])
+                swatch400 = tinycolor(j[4])
+                swatch500 = tinycolor(j[5])
+                swatch600 = tinycolor(j[6])
+                swatch700 = tinycolor(j[7])
+                swatch750 = tinycolor(j[8])
+                swatch800 = tinycolor(j[9])
+                swatch900 = tinycolor(j[10])
+                swatch950 = tinycolor(j[11])
+                swatch975 = tinycolor(j[12])                    
+
+            } else if (index == 7) {
+
+                                //
+                // If 85 weight, generate tints
+                //
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(15)
+
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[5])
+                swatch035 = tinycolor(a[4])
+                swatch050 = tinycolor(a[3])
+                swatch075 = tinycolor(a[2])
+                swatch080 = tinycolor(a[1])
+                // swatch085
+                swatch090 = tinycolor(j[1])
+                swatch100 = tinycolor(j[2])
+                swatch200 = tinycolor(j[3])
+                swatch300 = tinycolor(j[4])
+                swatch400 = tinycolor(j[5])
+                swatch500 = tinycolor(j[6])
+                swatch600 = tinycolor(j[7])
+                swatch700 = tinycolor(j[8])
+                swatch750 = tinycolor(j[9])
+                swatch800 = tinycolor(j[10])
+                swatch900 = tinycolor(j[11])
+                swatch950 = tinycolor(j[12])
+                swatch975 = tinycolor(j[13]) 
+
+            } else if (index == 6) {
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(16)
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[4])
+                swatch035 = tinycolor(a[3])
+                swatch050 = tinycolor(a[2])
+                swatch075 = tinycolor(a[1])
+                // swatch080
+                swatch085 = tinycolor(j[1])
+                swatch090 = tinycolor(j[2])
+                swatch100 = tinycolor(j[3])
+                swatch200 = tinycolor(j[4])
+                swatch300 = tinycolor(j[5])
+                swatch400 = tinycolor(j[6])
+                swatch500 = tinycolor(j[7])
+                swatch600 = tinycolor(j[8])
+                swatch700 = tinycolor(j[9])
+                swatch750 = tinycolor(j[10])
+                swatch800 = tinycolor(j[11])
+                swatch900 = tinycolor(j[12])
+                swatch950 = tinycolor(j[13])
+                swatch975 = tinycolor(j[14]) 
+
+            } else if (index == 5) {
+
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(17)
+
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[3])
+                swatch035 = tinycolor(a[2])
+                swatch050 = tinycolor(a[1])
+                                // swatch075
+                                swatch080 = tinycolor(j[1])
+                                swatch085 = tinycolor(j[2])
+                                swatch090 = tinycolor(j[3])
+                                swatch100 = tinycolor(j[4])
+                                swatch200 = tinycolor(j[5])
+                                swatch300 = tinycolor(j[6])
+                                swatch400 = tinycolor(j[7])
+                                swatch500 = tinycolor(j[8])
+                                swatch600 = tinycolor(j[9])
+                                swatch700 = tinycolor(j[10])
+                                swatch750 = tinycolor(j[11])
+                                swatch800 = tinycolor(j[12])
+                                swatch900 = tinycolor(j[13])
+                                swatch950 = tinycolor(j[14])
+                                swatch975 = tinycolor(j[15]) 
+            } else if (index == 4) {
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(18)
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[2])
+                swatch035 = tinycolor(a[1])
+                // swatch050
+                swatch075 = tinycolor(j[1])
+                swatch080 = tinycolor(j[2])
+                swatch085 = tinycolor(j[3])
+                swatch090 = tinycolor(j[4])
+                swatch100 = tinycolor(j[5])
+                swatch200 = tinycolor(j[6])
+                swatch300 = tinycolor(j[7])
+                swatch400 = tinycolor(j[8])
+                swatch500 = tinycolor(j[9])
+                swatch600 = tinycolor(j[10])
+                swatch700 = tinycolor(j[11])
+                swatch750 = tinycolor(j[12])
+                swatch800 = tinycolor(j[13])
+                swatch900 = tinycolor(j[14])
+                swatch950 = tinycolor(j[15])
+                swatch975 = tinycolor(j[16]) 
+            } else if (index == 3) {
+                j = chroma.scale([c, '#000000']).mode(colorModel).colors(19)
+
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[1])
+                //swatch035
+                swatch050 = tinycolor(j[1])
+                swatch075 = tinycolor(j[2])
+                swatch080 = tinycolor(j[3])
+                swatch085 = tinycolor(j[4])
+                swatch090 = tinycolor(j[5])
+                swatch100 = tinycolor(j[6])
+                swatch200 = tinycolor(j[7])
+                swatch300 = tinycolor(j[8])
+                swatch400 = tinycolor(j[9])
+                swatch500 = tinycolor(j[10])
+                swatch600 = tinycolor(j[11])
+                swatch700 = tinycolor(j[12])
+                swatch750 = tinycolor(j[13])
+                swatch800 = tinycolor(j[14])
+                swatch900 = tinycolor(j[15])
+                swatch950 = tinycolor(j[16])
+                swatch975 = tinycolor(j[17])                 
+            } else if (index == 2) {
+                swatch015 = tinycolor(b[1])
+                swatch025 = tinycolor(a[1])
+            }
+
+
+
+            // given 'color', I should be able to map it to correct
+            // weight immediatly. If closest L* is 45, then it is 400
+            // and all works as normal.
+            //
+            // Likewise, if the L* match is 60
+        }
+
         function createShadesAndTints(color, shades, tints) {
 
             swatch900 = darkenToTarget(color.clone(), shades[0])
@@ -592,18 +948,8 @@ class Palettizer {
         }
 
         function lighten2Targ(color, target) {
-
-            // chroma(x).set('lab.l', target);
-            // console.log(x)
-
-            // let a = chroma(x).get('lab.a');
-            // let b = chroma(x).get('lab.b');
-
             let result = chroma(color.toHexString()).set('lab.l', target);
-
             return tinycolor(result.hex())
-
-
         }
 
         function lighten(color) {
@@ -656,6 +1002,35 @@ class Palettizer {
 
         }
 
+        function overlayBaseToTint() {
+
+
+            let x = chroma.scale([swatch015.clone().toHexString(), swatch100.clone().toHexString()]).colors(7);
+            // console.log(x)
+            swatch025 = tinycolor(x[1])
+            swatch035 = tinycolor(x[2])
+            swatch050 = tinycolor(x[3])
+            swatch075 = tinycolor(x[4])
+            swatch085 = tinycolor(x[5])
+
+            return
+            let base = swatch400.clone().toHexString()
+            let x15 = swatch015.clone().toHexString()
+
+            let x25 = swatch025.clone().toHexString()
+            let x35 = swatch035.clone().toHexString()
+            let x50 = swatch050.clone().toHexString()
+            let x75 = swatch075.clone().toHexString()
+
+            swatch015 = tinycolor(chroma.mix(base, x15, 0.95, 'lab').hex())
+            swatch025 = tinycolor(chroma.mix(base, x25, 0.95, 'lab').hex())
+            swatch035 = tinycolor(chroma.mix(base, x35, 0.95, 'lab').hex())
+            swatch050 = tinycolor(chroma.mix(base, x50, 0.95, 'lab').hex())
+            swatch075 = tinycolor(chroma.mix(base, x75, 0.95, 'lab').hex())
+
+        }
+
+
         function desaturateTints2(desaturationTargets) {
 
             let lightnessTarget300 = getLightnessValue(swatch300.toHexString())
@@ -699,7 +1074,9 @@ class Palettizer {
                 swatch035: swatch035.toHexString(),
                 swatch050: swatch050.toHexString(),
                 swatch075: swatch075.toHexString(),
+                swatch080: swatch080.toHexString(),
                 swatch085: swatch085.toHexString(),
+                swatch090: swatch090.toHexString(),
                 swatch100: swatch100.toHexString(),
                 swatch200: swatch200.toHexString(),
                 swatch300: swatch300.toHexString(),
@@ -707,9 +1084,12 @@ class Palettizer {
                 swatch500: swatch500.toHexString(),
                 swatch600: swatch600.toHexString(),
                 swatch700: swatch700.toHexString(),
+                swatch750: swatch750.toHexString(),
                 swatch800: swatch800.toHexString(),
                 swatch900: swatch900.toHexString(),
-                swatch950: swatch950,
+                swatch950: swatch950.toHexString(),
+                swatch975: swatch975.toHexString(),
+                swatch1000: swatch1000,
             }
         }
 

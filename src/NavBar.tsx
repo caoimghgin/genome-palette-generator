@@ -67,7 +67,7 @@ export const NavBar: React.FC<Props> = (props) => {
         justifyContent: 'center',
         width: '100%',
         background: 'green',
-        height: '88px',
+        height: '48px',
         marginBottom: '22pt',
         borderBottom: '1px solid ' + localStorage.getItem('neutral-050'),
     };

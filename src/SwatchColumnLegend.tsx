@@ -1,5 +1,5 @@
 import React from 'react';
-import { weights } from './constants'
+import { weights, l_targets } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
@@ -13,8 +13,8 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
                 placeholder="Enter a message"
             />
 
-            {weights.map(row => (
-                <Swatch label={row}/>
+            {l_targets.map(row => (
+                <Swatch label={row.toString()}/>
             ))}
         </div>
     )
@@ -32,7 +32,7 @@ export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
         justifyContent: 'center',
         width: '100%',
         background: "#FFFFFF",
-        height: '48px',
+        height: '40px',
     };
 
     return (
