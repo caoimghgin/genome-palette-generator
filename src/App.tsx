@@ -33,6 +33,11 @@ import { SwatchModel } from './models'
 import Spectro from "./utilities/palettizer-rfc-2/spectro"
 
 
+import { SwatchColumnsRandom }  from "./SwatchColumnsRandom";
+import { SwatchColumnsBlueSky }  from "./SwatchColumnsBlueSky";
+
+
+
 function App() {
 
 // Lc 45 is "sort of" like 3:1
@@ -51,7 +56,8 @@ function App() {
             <NavBar/>
             <Modal {...sModal as SwatchModel} />
 
-            <SwatchColumnLegend/>
+
+            {/* <SwatchColumnLegend/> */}
 
                 {/* TROUBLE TROUBLE...
 
@@ -135,15 +141,29 @@ function App() {
 
  {/* b1eb35 LIMe-GREEN*/}
 
+
+
+ {/* TROUBLE COLORS
+ #0c5c69 
+ #19ab1d
+ #4bd633
+ */}
+
+            {/* <SwatchColumnLegend/>
             <SwatchColumn model={{hex:"#426FC8", semantic: "primary"}}/> 
             <SwatchColumn model={{hex:"#426FC8", semantic: "secondary"}}/> 
             <SwatchColumn model={{hex:"#1369D0", semantic: "info"}}/>
             <SwatchColumn model={{hex:"#DA1E28", semantic: "danger"}}/> 
-
             <SwatchColumn model={{hex:"#198038", semantic: "success"}}/> 
-
             <SwatchColumn model={{hex:"#FFB000", semantic: "warning"}}/> 
-            <SwatchColumn model={{hex:"#6F6F6F", semantic: "neutral"}}/> 
+            <SwatchColumn model={{hex:"#6F6F6F", semantic: "neutral"}}/>  */}
+
+
+
+
+            <SwatchColumnsRandom/>
+            {/* <SwatchColumnsBlueSky/> */}
+
 
             {/* <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />
             <SwatchColumn model={{hex:spectro.generateRandomColor(null), semantic: "Random"}} />

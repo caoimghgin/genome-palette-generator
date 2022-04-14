@@ -24,8 +24,18 @@ export function SwatchesModelFactory(model: ISwatchBase): SwatchModel[] {
         swatch.colorChecker = new ColorCheckerModel("bob", 1)
         result.push(swatch)
     }
-    console.log("I WORK")
 
     return result
 
 }
+
+function foo() {
+    // const weights = [97.5, 95, 90, 85, 80, 70, 60, 55, 50, 45, 40, 35, 30, 20, 15]
+    // const midtoneNames = ["DEEP", "DARK-DEEP", "DARK", "MEDIUM-DARK", "MEDIUM", "MEDIUM-LIGHT", "LIGHT", "BRIGHT", "INVALID"]
+    // var closest = weights.reduce(function (prev, curr) {
+    //     return (Math.abs(curr - L_400) < Math.abs(prev - L_400) ? curr : prev);
+    // });
+    // let L_400 = this.getLightnessValue(base)
+
+}
+
