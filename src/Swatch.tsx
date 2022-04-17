@@ -10,17 +10,16 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
-
     let label = "n/a"
     localStorage.setItem(model.name, model.hex)
     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
 
-    let hexString = model.hex.toString()
+    // let hexString = model.hex.toString()
+    // if (hexString != "#000000") {
+    //     label = model.hex.toString()
+    // }
 
-    if (hexString != "#000000") {
-        label = model.hex.toString()
 
-    }
     
     // Do not write 000 or 950 weights if semantic name != 'neutral'
     // if (!(model.semantic != 'neutral' && (model.weight == '000' || model.weight == '950'))) {
@@ -60,6 +59,8 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         background: model.hex,
         height: '40px',
         color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
+        boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px #FFF' : '0px'),
+
     };
 
     const asdf = {

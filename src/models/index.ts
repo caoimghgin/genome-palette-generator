@@ -1,18 +1,36 @@
+import Spectro from "../utilities/palettizer-rfc-2/spectro"
+
 export class SwatchModel {
     key!: string
+    index?: number
     name!: string
     hex!: string
+    original?: SwatchModel
     weight!: string
     semantic!: string
+    lightness!: number
     LAB!: LAB
     LCH!: LCH
     HSV!: HSV
     WCAG2!: number
     WCAG3!: number
     colorChecker!: ColorCheckerModel
+    isUserDefined!: boolean
+    l_target?: number
+
     constructor(hex: string) {
         this.hex = hex
+        var spectro = new Spectro()
+        this.LAB = new LAB(spectro.getLabValue(hex))
+        this.LCH = new LCH(spectro.getLchValue(hex))
+        this.HSV = new HSV(spectro.getHsvValue(hex))
+        this.colorChecker = spectro.getClosestColorCheckerName(hex)
+        this.lightness = this.LAB.L
+        this.WCAG2 = spectro.getWCAG(hex)
+        this.WCAG3 = spectro.getAPCA(hex)
+        this.isUserDefined = false
     }
+
 }
 
 export class ColorCheckerModel {
@@ -58,7 +76,7 @@ export class HSV {
 }
 
 export interface ISwatchBase {
-    hex: string;
+    hexString: string;
     semantic: string;
     colorChecker?: ISwatchColorChecker
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { SwatchModel, ISwatchBase} from './models'
 import { Swatch }  from "./Swatch";
-import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
+// import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
+import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -23,7 +24,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         let value = e.currentTarget.value;
         if (value.length === 7) {
             console.log(value)
-            setBase({ hex: value, semantic: base.semantic })
+            setBase({ hexString: value, semantic: base.semantic })
         }
     }
 
@@ -34,7 +35,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
             <input
                 type="text"
-                defaultValue={model.hex}
+                defaultValue={model.hexString}
                 placeholder="Enter a message"
                 onChange={(e) => inputHandeler(e)}
             />

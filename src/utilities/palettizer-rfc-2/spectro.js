@@ -4,7 +4,7 @@ import tinycolor, { readability }  from 'tinycolor2'
 import { sRGBtoY, APCAcontrast } from  './apca'
 
 import { colorNames, hueValues, neutralTolerance, colorCheckerValuesLab } from '../../constants'
-import { createNull } from 'typescript'
+// import { createNull } from 'typescript'
 
 class Spectro {
 
@@ -25,7 +25,7 @@ class Spectro {
                 ccName = j.name
                 console.log(ccName)
 
-              } while (x != ccName);
+              } while (x !== ccName);
 
               return color
         }
@@ -41,7 +41,7 @@ class Spectro {
                 ccName = j.name
                 console.log(ccName)
 
-              } while (x != ccName);
+              } while (x !== ccName);
 
               return color
         
@@ -64,6 +64,40 @@ class Spectro {
     getColorSpecs(color) {
         let result = undefined
         result = this.getClosestColorCheckerName(color)
+        return result
+    }
+
+    createColorObject(input) {
+        let result = undefined
+        let color = tinycolor(input)
+
+        let hue = this.getHueValue(color)
+        var closest = hueValues.reduce(function (prev, curr) {
+            return (Math.abs(curr - hue) < Math.abs(prev - hue) ? curr : prev);
+        });
+        let colorType = "CHROMA"
+        let saturation = this.getSaturationValue(color)
+        let lightness = this.getLightnessValue(color)
+        let colorValue = this.getColorValue(color)
+        let colorChecker = this.getClosestColorCheckerName(color)
+        let chroma = this.getLchValue(color)[1]
+
+        if (this.isNeutral(color)) { colorType = colorNames[colorNames.length - 1] }
+
+        let hexValue = color.toHexString()
+        result = {
+            color: color,
+            name: colorChecker.name, 
+            type: colorType,             
+            hex: color.toHexString(), 
+            hue: Math.round(hue), 
+            saturation: Math.round(saturation), 
+            value: Math.round(colorValue), 
+            // C: Math.round(chroma(hexValue).lch()[1]),
+            // H: Math.round(chroma(hexValue).lch()[2]),
+            lightness: lightness, 
+            ccDE: colorChecker.dE,
+            chroma: chroma}
         return result
     }
 

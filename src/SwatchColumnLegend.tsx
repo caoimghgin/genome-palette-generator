@@ -13,9 +13,14 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
                 placeholder="Enter a message"
             />
 
-            {l_targets.map(row => (
+            {/* {l_targets.map(row => (
+                <Swatch label={row.toString()}/>
+            ))} */}
+
+            {weights.map(row => (
                 <Swatch label={row.toString()}/>
             ))}
+
         </div>
     )
 
