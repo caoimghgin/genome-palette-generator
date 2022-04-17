@@ -20,30 +20,14 @@ class Palettizer {
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
         let tints_shades = this.renderTintsAndShades(index)
         this.populateSwatchesArray(tints_shades, index)
-        
-        this.normalizeWeightAtIndex(20)
-        this.normalizeWeightAtIndex(19)
-        this.normalizeWeightAtIndex(18)
-        this.normalizeWeightAtIndex(17)
-        this.normalizeWeightAtIndex(16)
-        this.normalizeWeightAtIndex(15)
-        this.normalizeWeightAtIndex(14)
-        this.normalizeWeightAtIndex(13)
-        this.normalizeWeightAtIndex(12)
-        this.normalizeWeightAtIndex(11)
-        this.normalizeWeightAtIndex(10)
-        this.normalizeWeightAtIndex(9)
-        this.normalizeWeightAtIndex(8)
-        this.normalizeWeightAtIndex(7)
+        this.normalizeSwatchWeights(tints_shades)
 
-        this.normalizeWeightAtIndex(6)
-        this.normalizeWeightAtIndex(5)
-        this.normalizeWeightAtIndex(4)
-        this.normalizeWeightAtIndex(5)
-        this.normalizeWeightAtIndex(6)
-        this.normalizeWeightAtIndex(1)
+    }
 
-
+    normalizeSwatchWeights(tints_shades) {
+        for (var i=0; i<tints_shades.length; i++) {
+            this.normalizeWeightAtIndex(i)
+        }
     }
 
     normalizeWeightAtIndex(index) {

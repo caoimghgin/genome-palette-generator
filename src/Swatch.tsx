@@ -13,6 +13,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     let label = "n/a"
     localStorage.setItem(model.name, model.hex)
     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
+    label = model.LCH.L.toString()
 
     // let hexString = model.hex.toString()
     // if (hexString != "#000000") {
