@@ -1,7 +1,6 @@
 import React from 'react';
 import { swatchExportDictionary, semantics } from "./constants"
 
-
 const weights = {
     '000': '000',
     '015': '015',

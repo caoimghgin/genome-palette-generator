@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { SwatchModel } from './models'
 import Modal from 'react-modal';
 
-const customStyles = {
-
-};
-
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -15,29 +11,9 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
     label = model.LCH.L.toString()
 
-    // let hexString = model.hex.toString()
-    // if (hexString != "#000000") {
-    //     label = model.hex.toString()
-    // }
-
-
-    
-    // Do not write 000 or 950 weights if semantic name != 'neutral'
-    // if (!(model.semantic != 'neutral' && (model.weight == '000' || model.weight == '950'))) {
-    //     localStorage.setItem(model.name, model.hex)
-    //     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
-    //     // label = "-"
-    //     // label = model.LCH.L.toString()
-
-    // }
-
     function onClickHandler() {
         console.table(model)
         setIsOpen(true);
-
-        // let foo = prompt('Type here');
-        // let bar = confirm('Confirm or deny');
-        // console.log(foo, bar);
     }
 
     function closeModal() {
@@ -52,6 +28,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     }
 
     const wrapper = {
+        fontSize: '14px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -81,7 +58,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                style={customStyles}
                 contentLabel="Example Modal"
             >
                 <button onClick={closeModal}>close</button>

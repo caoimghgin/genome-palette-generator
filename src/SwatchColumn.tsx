@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { SwatchModel, ISwatchBase} from './models'
 import { Swatch }  from "./Swatch";
-// import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
 
 interface ISwatchColumn {
@@ -10,13 +9,7 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
-    // window.postMessage(JSON.stringify({
-    //     message: "HI",
-    //     time: new Date()
-    // }), 'http://receiver.com');
-
     const [base, setBase] = useState<ISwatchBase>(model);
-    // const [swatches, setSwatches] = useState<SwatchModel[]>(model);
 
     const wrapper = { display: 'inline-block' };
 
