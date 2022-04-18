@@ -1,6 +1,7 @@
 
 export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
-
+export const rowHeight = '36px'
+export const fontSize =  '14px'
 
 export function doFetch() {
     fetch(url + 'cvh_strict')

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SwatchModel } from './models'
 import Modal from 'react-modal';
+import { rowHeight, fontSize } from './constants';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
@@ -28,16 +29,16 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     }
 
     const wrapper = {
-        fontSize: '14px',
+        fontSize: fontSize,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
         background: model.hex,
-        height: '40px',
+        height: rowHeight ,
         color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
-        boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px #FFF' : '0px'),
+        boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px #FFF' : ''),
 
     };
 

@@ -2,6 +2,7 @@ import convert from 'color-convert'
 import deltaE from "delta-e"
 import tinycolor, { readability }  from 'tinycolor2'
 import { sRGBtoY, APCAcontrast } from  './apca'
+import chroma from "chroma-js"
 
 import { colorNames, hueValues, neutralTolerance, colorCheckerValuesLab } from '../../constants'
 // import { createNull } from 'typescript'
@@ -155,9 +156,7 @@ class Spectro {
         return result * 100
     }
 
-    getLightnessValue(hexString) {
-        return convert.hex.lab(hexString)[0]
-    }
+
 
     getLabValue(hexString) {
         return convert.hex.lab(hexString)
@@ -207,24 +206,50 @@ class Spectro {
         return convert.hex.lab(hexString)[0]
     }
 
-    darken(color) {
-        return tinycolor(color.clone()).darken(1)
-    }
+
 
     lighten(color) {
         return tinycolor(color.clone()).lighten(1)
     }
 
-    darkenToTarget(color, saturation, targetValue) {
-        let result = color.clone()
-        while (this.getLightnessValue(result) > targetValue) {
-            result = this.darken(result)
+    // darkenToTarget(color, targetValue) {
+    //     let result = tinycolor(color)
+    //     while (this.getLightnessValue(result) > targetValue) {
+    //         result = this.darken(result)
+    //     }
+    //     return result
+    // }
+
+    // darken(color) {
+    //     return tinycolor(color.clone()).darken(1)
+    // }
+
+    // getLightnessValue(hexString) {
+    //     // return chroma(hexString).get('lab.l');
+    //     return convert.hex.lab(hexString)[0]
+    // }
+
+    darkenToTarget(color, targetValue) {
+        return    chroma(color).set('lch.l', targetValue);
+
+        let result = color
+       
+        while ( chroma(result).get('lab.l') > targetValue) {
+            // result = chroma(result).darken(1).hex()
+            result = chroma(result).set('lch.l', targetValue);
         }
         return result
     }
 
+    darken(color) {
+        return chroma(color).darken().hex()
 
+        // return tinycolor(color.clone()).darken(1)
+    }
 
+    getLightnessValue(hexString) {
+        return chroma(hexString).get('lab.l');
+    }
 
 }
 

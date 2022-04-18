@@ -1,5 +1,6 @@
 import React from 'react';
-import { weights, l_targets } from './constants'
+import { brotliDecompress } from 'zlib';
+import { weights, rowHeight, fontSize } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
@@ -31,13 +32,15 @@ interface ILabel { label: string }
 export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
 
     const wrapper = {
+        fontSize: fontSize,
+        fontWeight: 800,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
         background: "#FFFFFF",
-        height: '40px',
+        height: rowHeight ,
     };
 
     return (
