@@ -5,12 +5,17 @@ import Spectro from './spectro'
 
 class Palettizer {
 
-    constructor(hexValue, semantic) {
+    constructor(hexValue, semantic, columnName) {
         this.spectro = new Spectro()
-        this.colorModel = 'lch'
+
+        this.columnName = columnName
+        
+        // this.colorModel = 'lch' // better overall
+        this.colorModel = 'oklab' // works better on blue tints (lch turns tints to purple shade)
+
         this.semantic = semantic
 
-        this.swatch = new SwatchModel(hexValue)
+        this.swatch = new SwatchModel(hexValue, columnName)
         this.swatch.isUserDefined = true
         this.swatch.semantic = semantic
 
@@ -24,23 +29,16 @@ class Palettizer {
         this.populateSwatchesArray(tints_shades, index)
         this.normalizeSwatchWeights(tints_shades)
 
-        // if (index < 9) {
-        //     let hex = this.swatch.hex
-        //     let target = this.swatch.l_target
-        //     let result = this.spectro.darkenToTarget(hex, 50)
-        //     console.log(hex + " " + target + " " + result)
+        // this.spreadToMidtone(index)
 
+    }
 
-        //     let swatch = new SwatchModel(result)
-        //     this.swatches[11] = swatch
-
-        // }
-
-
-        // Curious things...Palettizer
-        // #3b02c3
-        // #3a02cf
-
+    spreadToMidtone(index) {
+        if (index === 3) {
+            var shades = chroma.scale([this.swatches[index].hex, this.swatches[11].hex]).mode(this.colorModel).colors(9)
+        } 
+   
+      
     }
 
     normalizeSwatchWeights(tints_shades) {
@@ -68,6 +66,7 @@ class Palettizer {
         newSwatch.l_target = swatch.l_target
         newSwatch.semantic = swatch.semantic
         newSwatch.name = swatch.name
+        newSwatch.column = this.columnName
      
         this.swatches[index] = newSwatch
 
@@ -85,6 +84,7 @@ class Palettizer {
         this.swatch.weight = weights[index]
         this.swatch.l_target = l_targets[index]
         this.swatch.name = this.semantic + "-" + weights[index]
+        // (hex, index, semantic)
 
         return index
     }
@@ -99,9 +99,7 @@ class Palettizer {
         // remove first value from shades (it is userDefined, and in last item of tints array)
         shades.shift()
         // return array with all tints and shades, including userDefined at index.
-
         return tints.concat(shades);
-
     }
 
     renderTintsAndShadesQuarterTones(index) {
@@ -123,6 +121,7 @@ class Palettizer {
                 swatch.l_target = l_targets[i]
                 swatch.semantic = this.semantic
                 swatch.name = this.semantic + "-" + weights[i]
+                swatch.column = this.columnName
                 this.swatches[i] = swatch
             }
           }

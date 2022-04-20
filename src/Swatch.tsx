@@ -9,8 +9,30 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     let label = "n/a"
     localStorage.setItem(model.name, model.hex)
+
+    // semantic agnostic column/index of swatch saved to localStorage
+    localStorage.setItem(model.column + model.index, JSON.stringify(model))
+
+    // console.log(JSON.stringify(model))
+
+
+    // let newObject = window.localStorage.getItem("obj-" + model.name);
+    // let a = undefined
+    // if(newObject) {
+    //     try {
+    //          a = JSON.parse(newObject);
+    //     } catch(e) {
+    //         alert(e); // error in the above string (in this case, yes)!
+    //     }
+    // }
+    // console.log(a)
+
+
+
+
     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
     label = model.LCH.L.toString()
+    label = model.LCH.L.toString() + " / " + model.hex
 
     function onClickHandler() {
         console.table(model)

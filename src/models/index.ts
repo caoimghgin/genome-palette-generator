@@ -2,6 +2,7 @@ import Spectro from "../utilities/palettizer-rfc-2/spectro"
 
 export class SwatchModel {
     key!: string
+    column!: string
     index?: number
     name!: string
     hex!: string
@@ -18,8 +19,9 @@ export class SwatchModel {
     isUserDefined!: boolean
     l_target?: number
 
-    constructor(hex: string) {
+    constructor( hex: string, column: string) {
         this.hex = hex
+        this.column = column
         var spectro = new Spectro()
         this.LAB = new LAB(spectro.getLabValue(hex))
         this.LCH = new LCH(spectro.getLchValue(hex))
@@ -78,7 +80,7 @@ export class HSV {
 export interface ISwatchBase {
     hexString: string;
     semantic: string;
-    colorChecker?: ISwatchColorChecker
+    columnName?: string;
 }
 
 export class ISwatchColorChecker {

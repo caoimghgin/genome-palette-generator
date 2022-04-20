@@ -13,7 +13,7 @@ export const SwatchColumnsRandom: React.FC<Props> = (props) => {
         <div>
             <SwatchColumnLegend />
             
-            {/* <SwatchColumn model={{ hexString: "#3a02cf", semantic: "testing..." }} /> */}
+            {/* <SwatchColumn model={{ hexString: "#f5ee6b", semantic: "testing..." }} /> */}
 
             {/* <SwatchColumn model={{ hexString: "#4d5467", semantic: "600" }} />
             <SwatchColumn model={{ hexString: "#41485b", semantic: "700" }} />

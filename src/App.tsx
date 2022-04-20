@@ -25,13 +25,38 @@
 import './App.css';
 import { NavBar } from "./NavBar"
 import { SwatchColumnsRandom }  from "./SwatchColumnsRandom";
+import { SwatchColumn } from "./SwatchColumn";
+import { SwatchColumnLegend } from "./SwatchColumnLegend";
 
 function App() {
+
+    // clear localStorage
+    localStorage.clear();
+    console.log("I clear all localStorage now...")
+    localStorage.setItem('columnName', 'A')
+
+    //
+    // I need a global variable than can increment A, B, C, ... for column. 
+    //
 
     return (
         <div className="App">
             <NavBar/>
-            <SwatchColumnsRandom/>
+            {/* <SwatchColumnsRandom/> */}
+
+            <SwatchColumnLegend />
+
+            <SwatchColumn model={{ hexString: "#4D65CB", semantic: "primary" }} />
+            <SwatchColumn model={{ hexString: "#0274B6", semantic: "secondary" }} />
+            <SwatchColumn model={{ hexString: "#007F30", semantic: "success" }} />
+            <SwatchColumn model={{ hexString: "#006ADE", semantic: "info" }} />
+            <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "warning" }} />
+            <SwatchColumn model={{ hexString: "#DA1E28", semantic: "danger" }} />
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { brotliDecompress } from 'zlib';
-import { weights, rowHeight, fontSize } from './constants'
+import { weights, rowHeight, fontSize, l_targets } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
@@ -14,13 +14,13 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
                 placeholder="Enter a message"
             />
 
-            {/* {l_targets.map(row => (
+            {l_targets.map(row => (
                 <Swatch label={row.toString()}/>
-            ))} */}
-
+            ))} 
+{/* 
             {weights.map(row => (
                 <Swatch label={row.toString()}/>
-            ))}
+            ))} */}
 
         </div>
     )
