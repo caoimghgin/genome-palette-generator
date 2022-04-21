@@ -2,6 +2,7 @@ import React from 'react';
 import { SwatchModel } from './models'
 
 import { swatchExportDictionary, semantics, weights, l_targets } from "./constants"
+import Swatch from './Swatch';
 
 interface ISemanticWeightValues {
     value: string,
@@ -15,21 +16,41 @@ export const NavBar: React.FC<Props> = (props) => {
     window.onmessage = (event) => {
         console.log(`Received message: ${event.data}`);
     };
-    
+
     const downloadJSON = () => {
 
-        //
-        // Get SwatchModel object from localStorage
-        //
-        // This is more agnostic, allowing the key values to be abstracted
-        // from the opinionated weights. May consider using L* values + column number
-        //
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToJSON(swatches)
+        downloadSwatches(json)
+        return
 
-        //
-        // This means I can loop through A, B, C, D...0, 1, 2, 3 (A0, A1, A2) and collect
-        // all the swatches until there is a null
-        //
-        //
+    }
+
+    const formatSwatchesToJSON = (swatches: SwatchModel[]) => {
+
+        let result = {} as any
+
+        swatches.forEach(function (swatch, index) {
+
+            if (!result[swatch.column]) { result[swatch.column] = {} }
+
+            result[swatch.column][swatch.row] = {
+                id: swatch.id,
+                value: swatch.hex,
+                lightness: swatch.lightness,
+                l_target: swatch.l_target,
+                userDefined: swatch.isUserDefined,
+                ccName: swatch.colorChecker.name
+            }
+
+        });
+
+        return JSON.stringify({ color: { palette: result } }, null, 4);
+
+    }
+
+
+    const getSwatchesFromlocalStorage = () => {
 
         let result = []
         let columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
@@ -40,67 +61,26 @@ export const NavBar: React.FC<Props> = (props) => {
             for (let row = 0; row < l_targets.length; row++) {
                 let swatchId = columns[column] + row
                 let swatchData = window.localStorage.getItem(swatchId)
-                if (!swatchData) { 
-                    break loopColumns 
+                if (!swatchData) {
+                    break loopColumns
                 } else {
                     try {
                         let swatch = JSON.parse(swatchData) as SwatchModel
-                        console.log(swatch)
                         result.push(swatch)
-                   } catch(e) {
-                       alert(e); // get out of loop                       
-                   }
+                    } catch (e) {
+                        alert(e); // get out of loop                       
+                    }
                 }
 
             }
 
         }
+        return result
+    }
 
-        // let swatchJSON = window.localStorage.getItem("A0");
-        // let swatch = undefined
-        // if(swatchJSON) {
-        //     try {
-        //          swatch = JSON.parse(swatchJSON) as SwatchModel;
-        //     } catch(e) {
-        //         alert(e); 
-        //         // get out of loop
-        //     }
-        // }
-        // console.log(swatch)
 
-        let dict = {} as any
-
-        Object.keys(semantics).forEach(function (semantic) {
-            dict[semantic] = {}
-
-            // Object.keys(x_weights).forEach(function (weight) {
-            //     let semantic_weight = semantic + "-" + weight
-            //     let value = localStorage.getItem(semantic_weight), description: "laksdjf"
-            //     if (value) dict[semantic][weight] = { value: value }
-            // });
-
-            // Object.keys(weights).forEach(function (weight) {
-            //     let semantic_weight = semantic + "-" + weight
-            //     let value = localStorage.getItem(semantic_weight), description: "laksdjf"
-            //     if (value) dict[semantic][weight] = { value: value }
-            // });
-
-            for (const weight of weights) { 
-                let semantic_weight = semantic + "-" + weight
-                let value = localStorage.getItem(semantic_weight), description: "laksdjf"
-                if (value) {
-                    dict[semantic][weight] = { value: value }
-                } else {
-                    console.log("Could not find " + semantic_weight)
-                }
-              }
-
-        });
-
-        const items = { ...dict };
-
+    const downloadSwatches = (res: string) => {
         let tempLink;
-        let res = JSON.stringify({ color: { palette: items } }, null, 4);
         var data = new Blob([res], { type: 'text/csv' });
         var csvURL = window.URL.createObjectURL(data);
         tempLink = document.createElement('a');

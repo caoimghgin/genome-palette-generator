@@ -62,6 +62,8 @@ class Palettizer {
         let newSwatch = new SwatchModel(newHexValue)
 
         newSwatch.index = swatch.index
+        newSwatch.row = swatch.row
+        newSwatch.id = swatch.id
         newSwatch.weight = swatch.weight
         newSwatch.l_target = swatch.l_target
         newSwatch.semantic = swatch.semantic
@@ -81,6 +83,8 @@ class Palettizer {
         let index = l_targets.indexOf(target)
         this.swatches[index] = color
         this.swatch.index = index
+        this.swatch.id = this.columnName + index
+        this.swatch.row = index
         this.swatch.weight = weights[index]
         this.swatch.l_target = l_targets[index]
         this.swatch.name = this.semantic + "-" + weights[index]
@@ -117,6 +121,9 @@ class Palettizer {
             if (i !== index) {
                 let swatch = new SwatchModel(tints_shades[i])
                 swatch.index = i
+                swatch.row = i
+                swatch.id = this.columnName + i
+
                 swatch.weight = weights[i]
                 swatch.l_target = l_targets[i]
                 swatch.semantic = this.semantic

@@ -1,8 +1,10 @@
 import Spectro from "../utilities/palettizer-rfc-2/spectro"
 
 export class SwatchModel {
+    id!: string
     key!: string
     column!: string
+    row!: number
     index?: number
     name!: string
     hex!: string
@@ -20,9 +22,12 @@ export class SwatchModel {
     l_target?: number
 
     constructor( hex: string, column: string) {
+        var spectro = new Spectro()
+
         this.hex = hex
         this.column = column
-        var spectro = new Spectro()
+        this.row = 0
+
         this.LAB = new LAB(spectro.getLabValue(hex))
         this.LCH = new LCH(spectro.getLchValue(hex))
         this.HSV = new HSV(spectro.getHsvValue(hex))
