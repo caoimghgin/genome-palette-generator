@@ -7,7 +7,7 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
         this.spectro = new Spectro()
-
+        console.log("Does this fire second time? ", columnName)
         this.columnName = columnName
         
         // this.colorModel = 'lch' // better overall
@@ -28,17 +28,6 @@ class Palettizer {
         let tints_shades = this.renderTintsAndShades(index)
         this.populateSwatchesArray(tints_shades, index)
         this.normalizeSwatchWeights(tints_shades)
-
-        // this.spreadToMidtone(index)
-
-    }
-
-    spreadToMidtone(index) {
-        if (index === 3) {
-            var shades = chroma.scale([this.swatches[index].hex, this.swatches[11].hex]).mode(this.colorModel).colors(9)
-        } 
-   
-      
     }
 
     normalizeSwatchWeights(tints_shades) {
@@ -62,13 +51,14 @@ class Palettizer {
         let newSwatch = new SwatchModel(newHexValue)
 
         newSwatch.index = swatch.index
+        newSwatch.column = this.columnName
         newSwatch.row = swatch.row
+
         newSwatch.id = swatch.id
         newSwatch.weight = swatch.weight
         newSwatch.l_target = swatch.l_target
         newSwatch.semantic = swatch.semantic
         newSwatch.name = swatch.name
-        newSwatch.column = this.columnName
      
         this.swatches[index] = newSwatch
 
@@ -81,14 +71,16 @@ class Palettizer {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
         });
         let index = l_targets.indexOf(target)
+
+        this.swatch.id = this.columnName + index
+        this.swatch.column = this.columnName 
+        this.swatch.row = index
+
         this.swatches[index] = color
         this.swatch.index = index
-        this.swatch.id = this.columnName + index
-        this.swatch.row = index
         this.swatch.weight = weights[index]
         this.swatch.l_target = l_targets[index]
         this.swatch.name = this.semantic + "-" + weights[index]
-        // (hex, index, semantic)
 
         return index
     }
@@ -121,14 +113,15 @@ class Palettizer {
             if (i !== index) {
                 let swatch = new SwatchModel(tints_shades[i])
                 swatch.index = i
-                swatch.row = i
+
                 swatch.id = this.columnName + i
+                swatch.column = this.columnName
+                swatch.row = i
 
                 swatch.weight = weights[i]
                 swatch.l_target = l_targets[i]
                 swatch.semantic = this.semantic
                 swatch.name = this.semantic + "-" + weights[i]
-                swatch.column = this.columnName
                 this.swatches[i] = swatch
             }
           }

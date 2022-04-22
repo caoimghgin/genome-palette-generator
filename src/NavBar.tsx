@@ -20,6 +20,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const downloadJSON = () => {
 
         let swatches = getSwatchesFromlocalStorage()
+        console.log(swatches[12])
         let json = formatSwatchesToJSON(swatches)
         downloadSwatches(json)
         return

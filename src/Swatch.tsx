@@ -8,10 +8,12 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     let label = "n/a"
-    localStorage.setItem(model.name, model.hex)
 
     // semantic agnostic column/index of swatch saved to localStorage
-    localStorage.setItem(model.column + model.index, JSON.stringify(model))
+    localStorage.setItem(model.id, JSON.stringify(model))
+    console.log("I CHANGE ID: ", model.id) // It's nil on update, why???
+    console.log("I CHANGE COLUMN: ", model.column) // It's nil on update, why???
+    console.log("I CHANGE ROW: ", model.row) // It's nil on update, why???
 
     // console.log(JSON.stringify(model))
 

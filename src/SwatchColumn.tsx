@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SwatchModel, ISwatchBase} from './models'
 import { Swatch }  from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
@@ -9,23 +9,38 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
-    let columnName = localStorage.getItem('columnName') as string
-    localStorage.setItem('columnName', nextChar(columnName))
-    console.log(columnName)
-
-    model.columnName = columnName
-
     const [base, setBase] = useState<ISwatchBase>(model);
+    const [column, setColumn] = useState<string>('A');
+
+    useEffect(() => {
+        console.log("Mounting...");
+        
+        let columnName = localStorage.getItem('columnName') as string
+        localStorage.setItem('columnName', nextChar(columnName))
+        setColumn(columnName)
+
+
+    }, []);
+
     const wrapper = { display: 'inline-block' };
 
+    // let columnName = localStorage.getItem('columnName') as string
+    // localStorage.setItem('columnName', nextChar(columnName))
+    // console.log(columnName)
+    model.columnName = column
+    // setBase(model)
+
     console.log(base)
-    var swatches = SwatchesModelFactory(base)
+    var swatches = SwatchesModelFactory(base, column)
 
     function nextChar(c: string) {
         return String.fromCharCode(c.charCodeAt(0) + 1);
     }
 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
+
+        console.log("My column = " + column)
+
         let value = e.currentTarget.value;
         if (value.length === 7) {
             console.log(value)
