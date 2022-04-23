@@ -13,12 +13,14 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [column, setColumn] = useState<string>('A');
 
     useEffect(() => {
-        console.log("Mounting...");
-        
-        let columnName = localStorage.getItem('columnName') as string
-        localStorage.setItem('columnName', nextChar(columnName))
-        setColumn(columnName)
-
+        let columnName = localStorage.getItem('columnName') 
+        if (!columnName) {
+            localStorage.setItem('columnName', 'A')
+            setColumn('A')
+        } else {
+            localStorage.setItem('columnName', nextChar(columnName))
+            setColumn(columnName)
+        }
 
     }, []);
 

@@ -2,10 +2,9 @@ import Spectro from "../utilities/palettizer-rfc-2/spectro"
 
 export class SwatchModel {
     id!: string
-    key!: string
     column!: string
     row!: number
-    index?: number
+    // index?: number
     name!: string
     hex!: string
     original?: SwatchModel

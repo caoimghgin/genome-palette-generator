@@ -1,13 +1,6 @@
 import React from 'react';
 import { SwatchModel } from './models'
-
-import { swatchExportDictionary, semantics, weights, l_targets } from "./constants"
-import Swatch from './Swatch';
-
-interface ISemanticWeightValues {
-    value: string,
-    description: string,
-}
+import { columns, l_targets } from "./constants"
 
 interface Props { }
 
@@ -18,7 +11,6 @@ export const NavBar: React.FC<Props> = (props) => {
     };
 
     const downloadJSON = () => {
-
         let swatches = getSwatchesFromlocalStorage()
         console.log(swatches[12])
         let json = formatSwatchesToJSON(swatches)
@@ -50,11 +42,9 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
-
     const getSwatchesFromlocalStorage = () => {
 
         let result = []
-        let columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
 
         loopColumns:
         for (let column = 0; column < columns.length; column++) {
@@ -78,7 +68,6 @@ export const NavBar: React.FC<Props> = (props) => {
         }
         return result
     }
-
 
     const downloadSwatches = (res: string) => {
         let tempLink;

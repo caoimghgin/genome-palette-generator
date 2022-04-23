@@ -11,25 +11,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     // semantic agnostic column/index of swatch saved to localStorage
     localStorage.setItem(model.id, JSON.stringify(model))
-    console.log("I CHANGE ID: ", model.id) // It's nil on update, why???
-    console.log("I CHANGE COLUMN: ", model.column) // It's nil on update, why???
-    console.log("I CHANGE ROW: ", model.row) // It's nil on update, why???
-
-    // console.log(JSON.stringify(model))
-
-
-    // let newObject = window.localStorage.getItem("obj-" + model.name);
-    // let a = undefined
-    // if(newObject) {
-    //     try {
-    //          a = JSON.parse(newObject);
-    //     } catch(e) {
-    //         alert(e); // error in the above string (in this case, yes)!
-    //     }
-    // }
-    // console.log(a)
-
-
 
 
     label = model.LCH.L.toString() + " / " + model.LCH.C.toString()

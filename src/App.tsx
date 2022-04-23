@@ -32,12 +32,7 @@ function App() {
 
     // clear localStorage
     localStorage.clear();
-    console.log("I clear all localStorage now...")
-    localStorage.setItem('columnName', 'A')
-
-    //
-    // I need a global variable than can increment A, B, C, ... for column. 
-    //
+    console.log("All localStorage cleared")
 
     return (
         <div className="App">
