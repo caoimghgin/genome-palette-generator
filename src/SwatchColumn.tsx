@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { SwatchModel, ISwatchBase} from './models'
-import { Swatch }  from "./Swatch";
+import { SwatchModel, ISwatchBase } from './models'
+import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
+import { columns } from './constants'
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -13,36 +14,38 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [column, setColumn] = useState<string>('A');
 
     useEffect(() => {
-        let columnName = localStorage.getItem('columnName') 
-        if (!columnName) {
-            localStorage.setItem('columnName', 'A')
-            setColumn('A')
-        } else {
-            localStorage.setItem('columnName', nextChar(columnName))
-            setColumn(columnName)
-        }
-
+        initColumnIndex()
+        let columnIndex = localStorage.getItem('columnIndex') as string
+        let index = parseInt(columnIndex) +1
+        setColumn(columns[index])
+        localStorage.setItem('columnIndex', index.toString()) 
     }, []);
+
+    function initColumnIndex() {
+        let columnIndex = localStorage.getItem('columnIndex') as string
+        if (columnIndex === null) { 
+            localStorage.setItem('columnIndex', '-1') 
+        }
+    }
 
     const wrapper = { display: 'inline-block' };
 
-    // let columnName = localStorage.getItem('columnName') as string
-    // localStorage.setItem('columnName', nextChar(columnName))
-    // console.log(columnName)
+    const inputWrapper = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+
+    }
+
     model.columnName = column
-    // setBase(model)
 
     console.log(base)
     var swatches = SwatchesModelFactory(base, column)
 
-    function nextChar(c: string) {
-        return String.fromCharCode(c.charCodeAt(0) + 1);
-    }
-
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
-
         console.log("My column = " + column)
-
         let value = e.currentTarget.value;
         if (value.length === 7) {
             console.log(value)
@@ -50,27 +53,34 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
+    function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
+        console.log("My column = " + column)
+        let value = e.currentTarget.value;
+        console.log(value)
+    }
+
     return (
         <div style={wrapper as React.CSSProperties}>
 
-        <form>
-        <input
-                type="text"
-                defaultValue={model.hexString}
-                placeholder="Enter a message"
-                onChange={(e) => inputHandeler(e)}
-            />
-            {/* <input
-                type="text"
-                defaultValue={model.hexString}
-                placeholder="Enter a message"
-                onChange={(e) => inputHandeler(e)}
-            /> */}
+            <div style={inputWrapper as React.CSSProperties}>
+                <input
+                    type="text"
+                    defaultValue={model.hexString}
+                    placeholder="Enter a message"
+                    onChange={(e) => inputHandeler(e)}
+                />
+                <input
+                    type="text"
+                    defaultValue="semantic"
+                    placeholder="Enter a message"
+                    onChange={(e) => semanticInputHandler(e)}
+                />
+            </div>
+
 
             {swatches.map(swatch => (
                 <Swatch {...swatch as SwatchModel} />
             ))}
-        </form>
 
         </div>
     )
