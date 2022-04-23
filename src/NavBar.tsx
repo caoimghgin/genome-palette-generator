@@ -33,7 +33,8 @@ export const NavBar: React.FC<Props> = (props) => {
                 lightness: swatch.lightness,
                 l_target: swatch.l_target,
                 userDefined: swatch.isUserDefined,
-                ccName: swatch.colorChecker.name
+                ccName: swatch.colorChecker.name,
+                semantic: swatch.semantic
             }
 
         });
@@ -57,6 +58,11 @@ export const NavBar: React.FC<Props> = (props) => {
                 } else {
                     try {
                         let swatch = JSON.parse(swatchData) as SwatchModel
+                        let semantic = window.localStorage.getItem(columns[column]) as string
+                        console.log(columns[column])
+                        console.log(semantic)
+                        swatch.semantic = semantic
+
                         result.push(swatch)
                     } catch (e) {
                         alert(e); // get out of loop                       

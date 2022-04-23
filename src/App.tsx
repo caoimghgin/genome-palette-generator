@@ -41,15 +41,14 @@ function App() {
 
             <SwatchColumnLegend />
 
-            <SwatchColumn model={{ hexString: "#4D65CB", semantic: "primary" }} />
-            <SwatchColumn model={{ hexString: "#0274B6", semantic: "secondary" }} />
-            <SwatchColumn model={{ hexString: "#007F30", semantic: "success" }} />
-            <SwatchColumn model={{ hexString: "#006ADE", semantic: "info" }} />
-            <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "warning" }} />
-            <SwatchColumn model={{ hexString: "#DA1E28", semantic: "danger" }} />
-            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
-            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
-            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+            <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
+            <SwatchColumn model={{ hexString: "#8856CB", semantic: "secondary" }} />
+            <SwatchColumn model={{ hexString: "#816D4D", semantic: "tertiary" }} />
+            <SwatchColumn model={{ hexString: "#0A8200", semantic: "positive" }} />
+            <SwatchColumn model={{ hexString: "#E10000", semantic: "negative" }} />
+            <SwatchColumn model={{ hexString: "#0274B6", semantic: "system" }} />
+            <SwatchColumn model={{ hexString: "#8856CB", semantic: "promotional" }} />
+            <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
             <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
 
         </div>
