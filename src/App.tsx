@@ -46,7 +46,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#816D4D", semantic: "tertiary" }} />
             <SwatchColumn model={{ hexString: "#0A8200", semantic: "positive" }} />
             <SwatchColumn model={{ hexString: "#E10000", semantic: "negative" }} />
-            <SwatchColumn model={{ hexString: "#0274B6", semantic: "system" }} />
+            <SwatchColumn model={{ hexString: "#1a67e6", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#8856CB", semantic: "promotional" }} />
             <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
             <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />

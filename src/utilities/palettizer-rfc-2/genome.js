@@ -12,6 +12,7 @@ class Palettizer {
         
         // this.colorModel = 'lch' // better overall
         this.colorModel = 'oklab' // works better on blue tints (lch turns tints to purple shade)
+        this.colorModelDarks = 'lch' // I like lch better for 3/4 and shadow tones.
 
         this.semantic = semantic
 
@@ -89,7 +90,7 @@ class Palettizer {
         // Create the L*97.5 tint, between last tint and white
         tints.splice(1, 0, chroma.scale([tints[1], tints[0]]).mode(this.colorModel).colors(3)[1])
         // create shades
-        var shades = chroma.scale([this.swatches[index].hex, '#000000']).mode(this.colorModel).colors(l_targets.length - index)
+        var shades = chroma.scale([this.swatches[index].hex, '#000000']).mode(this.colorModelDarks).colors(l_targets.length - index)
         // remove first value from shades (it is userDefined, and in last item of tints array)
         shades.shift()
         // return array with all tints and shades, including userDefined at index.
