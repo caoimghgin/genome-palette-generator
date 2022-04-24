@@ -37,14 +37,14 @@ export const SwatchColumnsRandom: React.FC<Props> = (props) => {
             <SwatchColumn model={{ hexString: "#213A5F", semantic: "blue90" }} />
             <SwatchColumn model={{ hexString: "#192C48", semantic: "blue100" }} /> */}
 
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
-            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "Random" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "A" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "B" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "C" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "D" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "E" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "F" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "G" }} />
+            <SwatchColumn model={{ hexString: spectro.generateRandomColor(null), semantic: "H" }} />
 
         </div>
     )

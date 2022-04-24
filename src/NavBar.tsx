@@ -1,6 +1,6 @@
 import React from 'react';
 import { SwatchModel } from './models'
-import { columns, l_targets } from "./constants"
+import {zeroPad, columns, l_targets, weights_carbon, weights_newskit, weights_lightning } from "./constants"
 
 interface Props { }
 
@@ -10,16 +10,33 @@ export const NavBar: React.FC<Props> = (props) => {
         console.log(`Received message: ${event.data}`);
     };
 
-    const downloadJSON = () => {
+    const downloadAsGenomeJSON = () => {
         let swatches = getSwatchesFromlocalStorage()
-        console.log(swatches[12])
-        let json = formatSwatchesToJSON(swatches)
+        let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
         return
-
     }
 
-    const formatSwatchesToJSON = (swatches: SwatchModel[]) => {
+    const downloadAsCarbonJSON = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToCarbonJSON(swatches)
+        downloadSwatches(json)   
+    }
+
+    const downloadAsNewsKitJSON = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToNewsKitJSON(swatches)
+        downloadSwatches(json)
+    }
+
+    const downloadAsLightningJSON = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToLightningJSON(swatches)
+        downloadSwatches(json)
+        return
+    }
+
+    const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
 
         let result = {} as any
 
@@ -43,6 +60,95 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
+    const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
+
+        let result = {} as any
+
+        swatches.forEach(function (swatch, index) {
+
+            // Populate result with parent semantic node
+            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+
+             if (weights_carbon[index % l_targets.length] !== 'X') {
+                result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
+                    id: swatch.id,
+                    value: swatch.hex,
+                    lightness: swatch.lightness,
+                    l_target: swatch.l_target,
+                    userDefined: swatch.isUserDefined,
+                    ccName: swatch.colorChecker.name,
+                    semantic: swatch.semantic
+                }
+             }
+        });
+
+        //
+        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+        //
+        return JSON.stringify({ color: { palette: result } }, null, 4);
+
+    }    
+
+    const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
+
+        let result = {} as any
+
+        swatches.forEach(function (swatch, index) {
+
+            // Populate result with parent semantic node
+            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+
+             if (weights_newskit[index % l_targets.length] !== 'X') {
+                result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
+                    id: swatch.id,
+                    value: swatch.hex,
+                    lightness: swatch.lightness,
+                    l_target: swatch.l_target,
+                    userDefined: swatch.isUserDefined,
+                    ccName: swatch.colorChecker.name,
+                    semantic: swatch.semantic
+                }
+             }
+        });
+
+        //
+        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+        //
+        return JSON.stringify({ color: { palette: result } }, null, 4);
+
+    }        
+
+    const formatSwatchesToLightningJSON = (swatches: SwatchModel[]) => {
+
+        let result = {} as any
+
+        swatches.forEach(function (swatch, index) {
+
+            // Populate result with parent semantic node
+            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+
+            let weights = weights_lightning
+
+             if (weights[index % l_targets.length] !== 'X') {
+                result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
+                    id: swatch.id,
+                    value: swatch.hex,
+                    lightness: swatch.lightness,
+                    l_target: swatch.l_target,
+                    userDefined: swatch.isUserDefined,
+                    ccName: swatch.colorChecker.name,
+                    semantic: swatch.semantic
+                }
+             }
+        });
+
+        //
+        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+        //
+        return JSON.stringify({ color: { palette: result } }, null, 4);
+
+    }        
+
     const getSwatchesFromlocalStorage = () => {
 
         let result = []
@@ -59,8 +165,6 @@ export const NavBar: React.FC<Props> = (props) => {
                     try {
                         let swatch = JSON.parse(swatchData) as SwatchModel
                         let semantic = window.localStorage.getItem(columns[column]) as string
-                        console.log(columns[column])
-                        console.log(semantic)
                         swatch.semantic = semantic
 
                         result.push(swatch)
@@ -87,7 +191,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const wrapper = {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
@@ -99,7 +203,11 @@ export const NavBar: React.FC<Props> = (props) => {
 
     return (
         <div style={wrapper as React.CSSProperties}>
-            <button onClick={downloadJSON}> Download </button>
+            <button onClick={downloadAsGenomeJSON}> Genome </button>
+            <button onClick={downloadAsCarbonJSON}> Carbon </button>
+            <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
+            <button onClick={downloadAsLightningJSON}> Lightning </button>
+
         </div>
     )
 

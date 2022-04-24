@@ -3,6 +3,14 @@ export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
 export const rowHeight = '36px'
 export const fontSize =  '14px'
 
+export const weights_carbon = ['X','X', 10, 20, 'X', 30, 'X', 40, 'X', 50, 'X', 'X', 60, 'X', 70, 'X', 80, 'X', 90, 'X', 100, 'X']
+export const weights_newskit = ['X', 'X', 10, 20, 'X', 'X', 30, 40, 'X', 50, 'X', 60, 'X', 70, 'X',  'X', 80, 90, 'X', 100, 'X', 'X']
+export const weights_lightning = ['X', 'X', 95, 90, 'X', 80, 'X', 70, 65, 60, 'X', 50, 'X', 40, 'X',  30, 'X', 20, 15, 10, 'X', 'X']
+
+
+export const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+
 export function doFetch() {
     fetch(url + 'cvh_strict')
         .then((res) => res.json())
