@@ -1,16 +1,94 @@
 import React from 'react';
 import { SwatchModel } from './models'
-import {zeroPad, columns, l_targets, weights_carbon, weights_newskit, weights_lightning } from "./constants"
+import {zeroPad, 
+    columns, 
+    l_targets, 
+    weights_carbon, 
+    weights_newskit, 
+    weights_lightning, 
+    targets_carbon, 
+    targets_lightning, 
+    targets_newskit, 
+    targets_genome,
+    Event } from "./constants"
 
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
-    window.onmessage = (event) => {
-        console.log(`Received message: ${event.data}`);
-    };
+    const getClosestIndex = (color: SwatchModel, targets: Array<any>) => {
+        // const l_star = [100, 97.5, 95, 90, 85, 80, 70, 60, 55, 50, 45, 40, 35, 30, 20, 15, 0]
+        var closest = targets.reduce(function (prev, curr) {
+            return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
+        });
+        let index = targets.indexOf(closest)
+    }
 
-    const downloadAsGenomeJSON = () => {
+    const displayBestFitSwatches = (targets: any) => {
+
+        //
+        // This is great, BUUUUTTT...
+        // Still need to weed out any conflicting isUserDefined=false
+        // swatches to populate result with correct swatches. 
+        // The getSwatchesFromlocalStorage() function returns
+        // a flat array.
+        //
+
+        let swatches = getSwatchesFromlocalStorage()
+        const userDefinedSwatches = swatches.filter(obj => {
+            return obj.isUserDefined === true;
+          });
+
+          let results = userDefinedSwatches.map(a => a.id);
+          console.log(results)
+
+          dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
+
+    }
+
+    const displayUserDefinedSwatches = () => {
+
+        let swatches = getSwatchesFromlocalStorage()
+        const userDefinedSwatches = swatches.filter(obj => {
+            return obj.isUserDefined === true;
+          });
+
+          let results = userDefinedSwatches.map(a => a.id);
+          console.log(results)
+
+          dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
+
+    }
+
+    const displaySwatches = (targets: any) => {
+        
+        //
+        // in theory, I'd...
+        //
+        //  1) Read all swatches 'getSwatchesFromlocalStorage()'
+        //  2) Find all isUserDefined=true
+        //  3) Find closest match to chosen target (Lightning, Material, Carbon, Genome...)
+        //  4) Populate an array matching length of target at index with the swatch.id (A12)
+        //  5) Find remaining isUserDefined=false and populat the rest of the array (avoiding slots already populated)
+        //  6) Send that array as a CustomEvent {'A1', 'A3', ... 'J1', 'J2'}, now each swatch explicitly told what is visible and what is not.
+
+
+
+
+
+        let swatches = getSwatchesFromlocalStorage()
+
+        const results = swatches.filter(obj => {
+            return obj.isUserDefined === true;
+          });
+          console.log(results)
+
+
+        const event = new CustomEvent(Event.DISPLAY_SWATCHES, { detail: targets });
+        dispatchEvent(event);
+    }
+
+    const downloadAsRootJSON = () => {
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
@@ -203,10 +281,19 @@ export const NavBar: React.FC<Props> = (props) => {
 
     return (
         <div style={wrapper as React.CSSProperties}>
-            <button onClick={downloadAsGenomeJSON}> Genome </button>
+
+            <button onClick={downloadAsRootJSON}> Root </button>
             <button onClick={downloadAsCarbonJSON}> Carbon </button>
             <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
             <button onClick={downloadAsLightningJSON}> Lightning </button>
+
+            <button onClick={() => displaySwatches(targets_newskit)}>display NewsKit</button>
+            <button onClick={() => displaySwatches(targets_carbon)}>display Carbon</button>
+            <button onClick={() => displaySwatches(targets_lightning)}>display Lightning</button>
+            <button onClick={() => displaySwatches(targets_genome)}>display Genome</button>
+            <button onClick={() => displaySwatches(l_targets)}>display Root</button>
+            <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
+
 
         </div>
     )

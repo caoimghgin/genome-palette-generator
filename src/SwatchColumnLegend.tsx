@@ -1,10 +1,16 @@
 import React from 'react';
 import { brotliDecompress } from 'zlib';
-import { weights, rowHeight, fontSize, l_targets } from './constants'
+import { weights, rowHeight, fontSize, l_targets, Event } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
+    const [isVisible, setIsVisible] = React.useState(true)
 
-    const wrapper = { display: 'inline-block' };
+    window.addEventListener(Event.DISPLAY_SWATCHES, ((e: CustomEvent) => {
+        setIsVisible(false)
+     }) as EventListener);
+
+  
+    const wrapper = { display: (isVisible ? 'inline-block' : 'none') }
 
     return (
         <div style={wrapper}>
