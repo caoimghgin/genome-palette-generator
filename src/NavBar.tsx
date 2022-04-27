@@ -24,8 +24,8 @@ export const NavBar: React.FC<Props> = (props) => {
         var closest = targets.reduce(function (prev, curr) {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
         });
-       return targets.indexOf(closest)
-    }     
+        return targets.indexOf(closest)
+    }
 
     const displayBestFitSwatches = (targets: any) => {
 
@@ -49,81 +49,42 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
-    const foo = ( swatches: Array<SwatchModel>, targets: any ) => {
-        
-        let result: any = []
+    const foo = (swatches: Array<SwatchModel>, targets: any) => {
+
+        let result = [] as any
 
         for (let column = 0; column < columns.length; column++) {
-            const columnSwatches = swatches.filter(obj => {
+
+            let visibleSwatches = [] as any
+
+            var columnSwatches = swatches.filter(obj => {
                 return obj.column === columns[column];
             });
+
             if (columnSwatches.length === 0) { break }
 
-
-
-
-
-            // if the target includes the SwatchModel.l_target, then make visible
-            let x = [] as any
+            // if target includes the SwatchModel.l_target, then make visible
             columnSwatches.forEach(function (swatch, index) {
-                x.push(targets.includes(swatch.l_target) ? swatch : undefined)
+                visibleSwatches.push(targets.includes(swatch.l_target) ? swatch : undefined)
             })
 
+            // Override visibleSwatches with swatch.isUserDefined = true
             columnSwatches.forEach(function (swatch, index) {
                 if (swatch.isUserDefined) {
-                    let r = getClosestIndex(swatch, [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1])
-                    x[r] = swatch
+                    visibleSwatches[getClosestIndex(swatch, targets)] = swatch
                 }
             })
 
-            console.log(x)
+            let visibleSwatchesDefined = visibleSwatches.filter(function(x:SwatchModel) { 
+                return x !== undefined;
+            })
 
-
-            // I now have a full column of swatches, I need to slot each into L* weight for given target
-            // ....
-
-            // let mappedToTarget = [] as any
-            // columnSwatches.forEach(function (swatch, index) {
-            //     let r = getClosestIndex(swatch, [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1])
-            //     mappedToTarget.push(r)
-            // })
-
-            // Now, take the userDefinedTrue and replace any value at that slot!
-            // ...
-
-            // Collect all the ids and return for display
-            // ...
-
-            // PROFIT!!!
-
+            let swatchIds = visibleSwatchesDefined.map((a: { id: string; }) => a.id);
+            result.push(...swatchIds)
 
         }
 
-   
-
-        // swatches.forEach(function (swatch, index) {
-
-        //     const columnSwatches = swatches.filter(obj => {
-        //         return obj.column === columns[index % l_targets.length];
-        //       });
-
-        // })
-
-        // for (let column = 0; column < columns.length; column++) {
-
-        //     const columnSwatches = swatches.filter(obj => {
-        //         return obj.column === columns[column];
-        //       });
-
-        //       let results = columnSwatches.map(a => a.id);
-        //       if (results === undefined) { break; }
-        //       result = results
-
-        // }
-
-
-
-
+        console.log(result)
 
     }
 
@@ -227,7 +188,7 @@ export const NavBar: React.FC<Props> = (props) => {
             // Populate result with parent semantic node
             if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-            if (weights_carbon[index % l_targets.length] !== 'X') {
+            if (weights_carbon[index % l_targets.length] !== -1) {
                 result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
                     id: swatch.id,
                     value: swatch.hex,
@@ -256,7 +217,7 @@ export const NavBar: React.FC<Props> = (props) => {
             // Populate result with parent semantic node
             if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-            if (weights_newskit[index % l_targets.length] !== 'X') {
+            if (weights_newskit[index % l_targets.length] !== -1) {
                 result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
                     id: swatch.id,
                     value: swatch.hex,
@@ -287,7 +248,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
             let weights = weights_lightning
 
-            if (weights[index % l_targets.length] !== 'X') {
+            if (weights[index % l_targets.length] !== -1) {
                 result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
                     id: swatch.id,
                     value: swatch.hex,

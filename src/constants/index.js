@@ -3,17 +3,17 @@ export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
 export const rowHeight = '36px'
 export const fontSize =  '14px'
 
-export const weights_carbon = ['X','X', 10, 20, 'X', 30, 'X', 40, 'X', 50, 'X', 'X', 60, 'X', 70, 'X', 80, 'X', 90, 'X', 100, 'X']
-export const targets_carbon = ['X', 'X', 95, 90, 'X', 80, 'X', 70, 'X', 60, 'X', 'X', 45, 'X', 35, 'X', 25, 'X', 15, 'X', 5, 'X' ]
+export const weights_carbon = [-1,-1, 10, 20, -1, 30, -1, 40, -1, 50, -1, -1, 60, -1, 70, -1, 80, -1, 90, -1, 100, -1]
+export const targets_carbon = [-1, -1, 95, 90, -1, 80, -1, 70, -1, 60, -1, -1, 45, -1, 35, -1, 25, -1, 15, -1, 5, -1 ]
 
-export const weights_newskit = ['X', 'X', 10, 20, 'X', 'X', 30, 40, 'X', 50, 'X', 60, 'X', 70, 'X',  'X', 80, 90, 'X', 100, 'X', 'X']
-export const targets_newskit = ['X', 'X', 95, 90, 'X', 'X', 80, 70, 'X', 60, 'X', 50, 'X', 35, 'X', 'X', 25, 20, "X", 10, 'X', 'X']
+export const weights_newskit = [-1, -1, 10, 20, -1, -1, 30, 40, -1, 50, -1, 60, -1, 70, -1,  -1, 80, 90, -1, 100, -1, -1]
+export const targets_newskit = [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1]
 
-export const weights_lightning = ['X', 'X', 95, 90, 'X', 80, 'X', 70, 65, 60, 'X', 50, 'X', 40, 'X',  30, 'X', 20, 15, 10, 'X', 'X']
-export const targets_lightning = ['X', 'X', 95, 90, 'X', 80, 'X', 70, 65, 60, 'X', 50, 'X', 40, 'X',  30, 'X', 20, 15, 10, 'X', 'X']
+export const weights_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
+export const targets_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
 
-export const weights_genome = ["X", 15, 25, 35, 50, 75, "X", "X", "X", 100, 200, 300, 400, 500, 600, 700, "X", 800, 900, "X", "X", "X"]		
-export const targets_genome = ["X", 97.5, 95, 90, 85, 80, "X", "X", "X", 60, 55, 50, 45, 40, 30, 20, "X", 15, 10, "X", "X", "X" ]
+export const weights_genome = [-1, 15, 25, 35, 50, 75, -1, -1, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]		
+export const targets_genome = [-1, 97.5, 95, 90, 85, 80, -1, -1, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
 
 // export const weights_clarity = ["X", "X", 50, 100, 200, "X", 300, "X", 400, 500, "X", "X", 600, 700, 800, "X", "X", 900, "X", 1000, "X", "X"]
 // export const targets_clarity = ["X", "X", 95, 90, 85, "X", 75, 70, "X", 60, 55, 50, 45, 40, 30, 20, "X", 15, 20, 10, "X", "X" ]
