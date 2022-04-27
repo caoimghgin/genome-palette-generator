@@ -1,16 +1,19 @@
 import React from 'react';
 import { SwatchModel } from './models'
-import {zeroPad, 
-    columns, 
-    l_targets, 
-    weights_carbon, 
-    weights_newskit, 
-    weights_lightning, 
-    targets_carbon, 
-    targets_lightning, 
-    targets_newskit, 
+import {
+    zeroPad,
+    columns,
+    l_targets,
+    weights_carbon,
+    weights_newskit,
+    weights_lightning,
+    targets_carbon,
+    targets_lightning,
+    targets_newskit,
     targets_genome,
-    Event } from "./constants"
+    Event
+} from "./constants"
+import { exit } from 'process';
 
 interface Props { }
 
@@ -21,8 +24,8 @@ export const NavBar: React.FC<Props> = (props) => {
         var closest = targets.reduce(function (prev, curr) {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
         });
-        let index = targets.indexOf(closest)
-    }
+       return targets.indexOf(closest)
+    }     
 
     const displayBestFitSwatches = (targets: any) => {
 
@@ -37,33 +40,114 @@ export const NavBar: React.FC<Props> = (props) => {
         let swatches = getSwatchesFromlocalStorage()
         const userDefinedSwatches = swatches.filter(obj => {
             return obj.isUserDefined === true;
-          });
+        });
 
-          let results = userDefinedSwatches.map(a => a.id);
-          console.log(results)
+        let results = userDefinedSwatches.map(a => a.id);
+        console.log(results)
 
-          dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
+
+    }
+
+    const foo = ( swatches: Array<SwatchModel>, targets: any ) => {
+        
+        let result: any = []
+
+        for (let column = 0; column < columns.length; column++) {
+            const columnSwatches = swatches.filter(obj => {
+                return obj.column === columns[column];
+            });
+            if (columnSwatches.length === 0) { break }
+
+
+
+
+
+            // if the target includes the SwatchModel.l_target, then make visible
+            let x = [] as any
+            columnSwatches.forEach(function (swatch, index) {
+                x.push(targets.includes(swatch.l_target) ? swatch : undefined)
+            })
+
+            columnSwatches.forEach(function (swatch, index) {
+                if (swatch.isUserDefined) {
+                    let r = getClosestIndex(swatch, [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1])
+                    x[r] = swatch
+                }
+            })
+
+            console.log(x)
+
+
+            // I now have a full column of swatches, I need to slot each into L* weight for given target
+            // ....
+
+            // let mappedToTarget = [] as any
+            // columnSwatches.forEach(function (swatch, index) {
+            //     let r = getClosestIndex(swatch, [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1])
+            //     mappedToTarget.push(r)
+            // })
+
+            // Now, take the userDefinedTrue and replace any value at that slot!
+            // ...
+
+            // Collect all the ids and return for display
+            // ...
+
+            // PROFIT!!!
+
+
+        }
+
+   
+
+        // swatches.forEach(function (swatch, index) {
+
+        //     const columnSwatches = swatches.filter(obj => {
+        //         return obj.column === columns[index % l_targets.length];
+        //       });
+
+        // })
+
+        // for (let column = 0; column < columns.length; column++) {
+
+        //     const columnSwatches = swatches.filter(obj => {
+        //         return obj.column === columns[column];
+        //       });
+
+        //       let results = columnSwatches.map(a => a.id);
+        //       if (results === undefined) { break; }
+        //       result = results
+
+        // }
+
+
+
+
 
     }
 
     const displayUserDefinedSwatches = () => {
 
         let swatches = getSwatchesFromlocalStorage()
+
+        foo(swatches, targets_newskit)
+
         const userDefinedSwatches = swatches.filter(obj => {
             return obj.isUserDefined === true;
-          });
+        });
 
-          let results = userDefinedSwatches.map(a => a.id);
-          console.log(results)
+        let results = userDefinedSwatches.map(a => a.id);
+        console.log(results)
 
-          dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
 
     }
 
     const displaySwatches = (targets: any) => {
-        
+
         //
-        // in theory, I'd...
+        // in theory, I would...
         //
         //  1) Read all swatches 'getSwatchesFromlocalStorage()'
         //  2) Find all isUserDefined=true
@@ -72,16 +156,12 @@ export const NavBar: React.FC<Props> = (props) => {
         //  5) Find remaining isUserDefined=false and populat the rest of the array (avoiding slots already populated)
         //  6) Send that array as a CustomEvent {'A1', 'A3', ... 'J1', 'J2'}, now each swatch explicitly told what is visible and what is not.
 
-
-
-
-
         let swatches = getSwatchesFromlocalStorage()
 
         const results = swatches.filter(obj => {
             return obj.isUserDefined === true;
-          });
-          console.log(results)
+        });
+        console.log(results)
 
 
         const event = new CustomEvent(Event.DISPLAY_SWATCHES, { detail: targets });
@@ -98,7 +178,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const downloadAsCarbonJSON = () => {
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToCarbonJSON(swatches)
-        downloadSwatches(json)   
+        downloadSwatches(json)
     }
 
     const downloadAsNewsKitJSON = () => {
@@ -147,7 +227,7 @@ export const NavBar: React.FC<Props> = (props) => {
             // Populate result with parent semantic node
             if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-             if (weights_carbon[index % l_targets.length] !== 'X') {
+            if (weights_carbon[index % l_targets.length] !== 'X') {
                 result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
                     id: swatch.id,
                     value: swatch.hex,
@@ -157,7 +237,7 @@ export const NavBar: React.FC<Props> = (props) => {
                     ccName: swatch.colorChecker.name,
                     semantic: swatch.semantic
                 }
-             }
+            }
         });
 
         //
@@ -165,7 +245,7 @@ export const NavBar: React.FC<Props> = (props) => {
         //
         return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }    
+    }
 
     const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
 
@@ -176,7 +256,7 @@ export const NavBar: React.FC<Props> = (props) => {
             // Populate result with parent semantic node
             if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-             if (weights_newskit[index % l_targets.length] !== 'X') {
+            if (weights_newskit[index % l_targets.length] !== 'X') {
                 result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
                     id: swatch.id,
                     value: swatch.hex,
@@ -186,7 +266,7 @@ export const NavBar: React.FC<Props> = (props) => {
                     ccName: swatch.colorChecker.name,
                     semantic: swatch.semantic
                 }
-             }
+            }
         });
 
         //
@@ -194,7 +274,7 @@ export const NavBar: React.FC<Props> = (props) => {
         //
         return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }        
+    }
 
     const formatSwatchesToLightningJSON = (swatches: SwatchModel[]) => {
 
@@ -207,7 +287,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
             let weights = weights_lightning
 
-             if (weights[index % l_targets.length] !== 'X') {
+            if (weights[index % l_targets.length] !== 'X') {
                 result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
                     id: swatch.id,
                     value: swatch.hex,
@@ -217,7 +297,7 @@ export const NavBar: React.FC<Props> = (props) => {
                     ccName: swatch.colorChecker.name,
                     semantic: swatch.semantic
                 }
-             }
+            }
         });
 
         //
@@ -225,7 +305,7 @@ export const NavBar: React.FC<Props> = (props) => {
         //
         return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }        
+    }
 
     const getSwatchesFromlocalStorage = () => {
 
