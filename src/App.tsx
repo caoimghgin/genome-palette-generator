@@ -37,11 +37,11 @@ function App() {
     return (
         <div className="App">
             <NavBar/>
-            {/* <SwatchColumnsRandom/> */}
+            <SwatchColumnsRandom/>
             
-            <SwatchColumnLegend />
+            {/* <SwatchColumnLegend />
             <SwatchColumn model={{ hexString: "#71539f", semantic: "PROBLEM" }} />
-            <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
+            <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} /> */}
 
 
             {/* 71539f */}

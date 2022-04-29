@@ -12,8 +12,8 @@ export const targets_newskit = [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, 
 export const weights_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
 export const targets_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
 
-export const weights_genome = [-1, 15, 25, 35, 50, 75, -1, -1, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]		
-export const targets_genome = [-1, 97.5, 95, 90, 85, 80, -1, -1, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
+export const weights_genome = [-1, 15, 25, 35, 50, 75, -1, 85, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]		
+export const targets_genome = [-1, 97.5, 95, 90, 85, 80, -1, 70, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
 
 // export const weights_clarity = ["X", "X", 50, 100, 200, "X", 300, "X", 400, 500, "X", "X", 600, 700, 800, "X", "X", 900, "X", 1000, "X", "X"]
 // export const targets_clarity = ["X", "X", 95, 90, 85, "X", 75, 70, "X", 60, 55, 50, 45, 40, 30, 20, "X", 15, 20, 10, "X", "X" ]
@@ -25,7 +25,6 @@ export const Event = {
     DISPLAY_SWATCHES : "displaySwatches",
     DISPLAY_SWATCHES_ID : "displaySwatchesId",
     DISPLAY_LEGEND : "displayLegend",
-
   };
 
 

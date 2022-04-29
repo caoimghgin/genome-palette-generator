@@ -46,32 +46,27 @@ export const NavBar: React.FC<Props> = (props) => {
                 visibleSwatches.push(targets.includes(swatch.l_target) ? swatch : undefined)
             })
 
-            console.log(targets)
-            console.log(visibleSwatches)
+            //
+            // Shoehorn in the userDefined swatch, closest match
+            //
+            let userDefinedSwatch = columnSwatches.filter(obj => {
+                return obj.isUserDefined === true;
+            });
 
-
-            // Override visibleSwatches with swatch.isUserDefined = true
-            columnSwatches.forEach(function (swatch) {
-                if (swatch.isUserDefined) {
-                    let index = getClosestIndex(swatch, targets)
-
-                    if (visibleSwatches[index] != undefined) {
-                        visibleSwatches[index] = swatch
-                    } else {
-                        console.log("STRANGE FIT")
-                    }
-                }
-            })
-
-            let visibleSwatchesDefined = visibleSwatches.filter(function(x:SwatchModel) { 
+            let visibleSwatchesDefined = visibleSwatches.filter(function (x: SwatchModel) {
                 return x !== undefined;
             })
 
-            // console.log(visibleSwatches)
+            let targetsOptimized = targets.filter(function (x: number) {
+                return x !== -1;
+            })
 
-            console.log("LENGTH of defined swatches:" + visibleSwatchesDefined.length)
+            let index = getClosestIndex(userDefinedSwatch[0], targetsOptimized)
+            visibleSwatchesDefined[index] = userDefinedSwatch[0]
 
-
+            //
+            // Pull out the grid id of swatches. This will broadcast to all listening swatches
+            //
             let swatchIds = visibleSwatchesDefined.map((a: { id: string; }) => a.id);
             result.push(...swatchIds)
 
