@@ -58,17 +58,18 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }
 
     function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
-        console.log("My column = " + column)
-        let value = e.currentTarget.value;
-        setSemantic(value)
-        console.log(value)
+        setSemantic(e.currentTarget.value)
 
-        // store the column, map to chosen semantic
-        //
-        // BIG LOAD to do every keystroke. Need to optimize
-        //
-        // localStorage.setItem(column, semantic) 
+        setTimeout(function(){
+            localStorage.setItem(column, semantic) 
+            console.log(column + " " + semantic)
+        }, 250);
 
+
+        // setInterval(function(){ 
+        //     localStorage.setItem(column, semantic) 
+        //     console.log(column + " " + semantic)
+        // }, 500)
     }
 
     return (

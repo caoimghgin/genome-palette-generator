@@ -24,6 +24,8 @@ export const zeroPad = (num, places) => String(num).padStart(places, '0')
 export const Event = {
     DISPLAY_SWATCHES : "displaySwatches",
     DISPLAY_SWATCHES_ID : "displaySwatchesId",
+    DISPLAY_LEGEND : "displayLegend",
+
   };
 
 

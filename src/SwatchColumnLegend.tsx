@@ -3,10 +3,23 @@ import { brotliDecompress } from 'zlib';
 import { weights, rowHeight, fontSize, l_targets, Event } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
-    const [isVisible, setIsVisible] = React.useState(true)
 
-    window.addEventListener(Event.DISPLAY_SWATCHES, ((e: CustomEvent) => {
-        setIsVisible(false)
+    const [isVisible, setIsVisible] = React.useState(true)
+    const [model, setModel] = React.useState(l_targets)
+
+    window.addEventListener(Event.DISPLAY_LEGEND, ((e: CustomEvent) => {
+
+        let data = e.detail
+
+        var filtered = data.filter(function(x:any) {
+            return x !== -1;
+       });
+
+        console.log(filtered)
+
+        // setIsVisible(false)
+       setModel(filtered)
+
      }) as EventListener);
 
   
@@ -20,7 +33,7 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
                 placeholder="Enter a message"
             />
 
-            {l_targets.map(row => (
+            {model.map(row => (
                 <Swatch label={row.toString()}/>
             ))} 
 {/* 

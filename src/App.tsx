@@ -38,8 +38,19 @@ function App() {
         <div className="App">
             <NavBar/>
             {/* <SwatchColumnsRandom/> */}
-
+            
             <SwatchColumnLegend />
+            <SwatchColumn model={{ hexString: "#71539f", semantic: "PROBLEM" }} />
+            <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
+
+
+            {/* 71539f */}
+            {/* cfb73f */}
+            {/* 114d8a */}
+            {/* 19673c */}
+            
+
+            {/* <SwatchColumnLegend />
             <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
             <SwatchColumn model={{ hexString: "#8856CB", semantic: "secondary" }} />
             <SwatchColumn model={{ hexString: "#816D4D", semantic: "tertiary" }} />
@@ -48,7 +59,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#8856CB", semantic: "promotional" }} />
             <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
-            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} /> */}
 
         </div>
     );

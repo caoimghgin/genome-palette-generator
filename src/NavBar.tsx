@@ -11,7 +11,8 @@ import {
     targets_lightning,
     targets_newskit,
     targets_genome,
-    Event
+    Event,
+    weights_genome
 } from "./constants"
 import { exit } from 'process';
 
@@ -20,36 +21,13 @@ interface Props { }
 export const NavBar: React.FC<Props> = (props) => {
 
     const getClosestIndex = (color: SwatchModel, targets: Array<any>) => {
-        // const l_star = [100, 97.5, 95, 90, 85, 80, 70, 60, 55, 50, 45, 40, 35, 30, 20, 15, 0]
         var closest = targets.reduce(function (prev, curr) {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
         });
         return targets.indexOf(closest)
     }
 
-    const displayBestFitSwatches = (targets: any) => {
-
-        //
-        // This is great, BUUUUTTT...
-        // Still need to weed out any conflicting isUserDefined=false
-        // swatches to populate result with correct swatches. 
-        // The getSwatchesFromlocalStorage() function returns
-        // a flat array.
-        //
-
-        let swatches = getSwatchesFromlocalStorage()
-        const userDefinedSwatches = swatches.filter(obj => {
-            return obj.isUserDefined === true;
-        });
-
-        let results = userDefinedSwatches.map(a => a.id);
-        console.log(results)
-
-        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
-
-    }
-
-    const foo = (swatches: Array<SwatchModel>, targets: any) => {
+    const mapSwatchesToTarget = (swatches: Array<SwatchModel>, targets: any) => {
 
         let result = [] as any
 
@@ -68,10 +46,20 @@ export const NavBar: React.FC<Props> = (props) => {
                 visibleSwatches.push(targets.includes(swatch.l_target) ? swatch : undefined)
             })
 
+            console.log(targets)
+            console.log(visibleSwatches)
+
+
             // Override visibleSwatches with swatch.isUserDefined = true
-            columnSwatches.forEach(function (swatch, index) {
+            columnSwatches.forEach(function (swatch) {
                 if (swatch.isUserDefined) {
-                    visibleSwatches[getClosestIndex(swatch, targets)] = swatch
+                    let index = getClosestIndex(swatch, targets)
+
+                    if (visibleSwatches[index] != undefined) {
+                        visibleSwatches[index] = swatch
+                    } else {
+                        console.log("STRANGE FIT")
+                    }
                 }
             })
 
@@ -79,12 +67,37 @@ export const NavBar: React.FC<Props> = (props) => {
                 return x !== undefined;
             })
 
+            // console.log(visibleSwatches)
+
+            console.log("LENGTH of defined swatches:" + visibleSwatchesDefined.length)
+
+
             let swatchIds = visibleSwatchesDefined.map((a: { id: string; }) => a.id);
             result.push(...swatchIds)
 
         }
+        return result
+    }
 
-        console.log(result)
+    const mapTargetsToLegendWeights = (targets: any) => {
+
+        if (targets === targets_newskit) return weights_newskit
+        if (targets === targets_carbon) return weights_carbon
+        if (targets === targets_genome) return weights_genome
+        if (targets === targets_lightning) return weights_lightning
+        if (targets === l_targets) return l_targets
+
+        return []
+    }
+
+    const displaySwatches = (targets: any) => {
+
+        let swatches = getSwatchesFromlocalStorage()
+        let swatchIds = mapSwatchesToTarget(swatches, targets)
+        let legendWeights = mapTargetsToLegendWeights(targets)
+
+        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: legendWeights }));
 
     }
 
@@ -92,41 +105,19 @@ export const NavBar: React.FC<Props> = (props) => {
 
         let swatches = getSwatchesFromlocalStorage()
 
-        foo(swatches, targets_newskit)
+        // foo(swatches, targets_newskit)
 
         const userDefinedSwatches = swatches.filter(obj => {
             return obj.isUserDefined === true;
         });
 
         let results = userDefinedSwatches.map(a => a.id);
-        console.log(results)
+
 
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
-
-    }
-
-    const displaySwatches = (targets: any) => {
-
-        //
-        // in theory, I would...
-        //
-        //  1) Read all swatches 'getSwatchesFromlocalStorage()'
-        //  2) Find all isUserDefined=true
-        //  3) Find closest match to chosen target (Lightning, Material, Carbon, Genome...)
-        //  4) Populate an array matching length of target at index with the swatch.id (A12)
-        //  5) Find remaining isUserDefined=false and populat the rest of the array (avoiding slots already populated)
-        //  6) Send that array as a CustomEvent {'A1', 'A3', ... 'J1', 'J2'}, now each swatch explicitly told what is visible and what is not.
-
-        let swatches = getSwatchesFromlocalStorage()
-
-        const results = swatches.filter(obj => {
-            return obj.isUserDefined === true;
-        });
-        console.log(results)
+        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: [] }));
 
 
-        const event = new CustomEvent(Event.DISPLAY_SWATCHES, { detail: targets });
-        dispatchEvent(event);
     }
 
     const downloadAsRootJSON = () => {
@@ -334,7 +325,6 @@ export const NavBar: React.FC<Props> = (props) => {
             <button onClick={() => displaySwatches(targets_genome)}>display Genome</button>
             <button onClick={() => displaySwatches(l_targets)}>display Root</button>
             <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
-
 
         </div>
     )
