@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { SwatchModel, ISwatchBase } from './models'
 import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
 import { columns } from './constants'
+import { debounce } from 'lodash';
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -17,19 +18,32 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     useEffect(() => {
         initColumnIndex()
         let columnIndex = localStorage.getItem('columnIndex') as string
-        let index = parseInt(columnIndex) +1
+        let index = parseInt(columnIndex) + 1
         setColumn(columns[index])
-        localStorage.setItem('columnIndex', index.toString()) 
 
-        console.log("This is column: " + columns[index] + " and This is semantic: " + model.semantic)
-        localStorage.setItem(columns[index], model.semantic) 
+        localStorage.setItem('columnIndex', index.toString())
+        localStorage.setItem(columns[index], model.semantic)
 
     }, []);
 
-    function initColumnIndex() {
+    useEffect(() => {
+        console.log("CHANGED", column, semantic)
+        debounceAndSave(column, semantic)
+    }, [semantic]);
+
+    const debounceAndSave = useCallback(debounce((col, sem) => {
+        console.log("CHANGED & SAVED", col, sem)
+        localStorage.setItem(col, sem)
+    }, 500), []);
+
+    function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
+        setSemantic(e.currentTarget.value)
+    }
+
+    function initColumnIndex(): void {
         let columnIndex = localStorage.getItem('columnIndex') as string
-        if (columnIndex === null) { 
-            localStorage.setItem('columnIndex', '-1') 
+        if (columnIndex === null) {
+            localStorage.setItem('columnIndex', '-1')
         }
     }
 
@@ -57,20 +71,9 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
-    function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
-        setSemantic(e.currentTarget.value)
-
-        setTimeout(function(){
-            localStorage.setItem(column, semantic) 
-            console.log(column + " " + semantic)
-        }, 250);
 
 
-        // setInterval(function(){ 
-        //     localStorage.setItem(column, semantic) 
-        //     console.log(column + " " + semantic)
-        // }, 500)
-    }
+
 
     return (
         <div style={wrapper as React.CSSProperties}>
