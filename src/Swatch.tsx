@@ -32,15 +32,13 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [isVisible, setIsVisible] = React.useState(true)
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [color, setColor] = React.useState("000000");
-
+    const [height, setHeight] = React.useState(rowHeight);
 
     window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
         setIsVisible(e.detail.includes(model.id))
+        // setHeight('72px')
      }) as EventListener);
 
-    window.addEventListener(Event.DISPLAY_SWATCHES, ((e: CustomEvent) => {
-        setIsVisible(e.detail.includes(model.l_target))
-     }) as EventListener);
 
 
     useEffect(() => {
@@ -79,7 +77,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         justifyContent: 'center',
         width: '100%',
         background: model.hex,
-        height: rowHeight,
+        height: height,
         color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
         boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : ''),
         

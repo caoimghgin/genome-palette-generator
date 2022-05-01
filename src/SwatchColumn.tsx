@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { SwatchModel, ISwatchBase } from './models'
 import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
-import { columns } from './constants'
+import { columns, columnWidth } from './constants'
 import { debounce } from 'lodash';
 
 interface ISwatchColumn {
@@ -27,12 +27,10 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }, []);
 
     useEffect(() => {
-        console.log("CHANGED", column, semantic)
         debounceAndSave(column, semantic)
     }, [semantic]);
 
     const debounceAndSave = useCallback(debounce((col, sem) => {
-        console.log("CHANGED & SAVED", col, sem)
         localStorage.setItem(col, sem)
     }, 500), []);
 
@@ -54,7 +52,8 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
+        width: columnWidth,
+
     }
 
     model.columnName = column
@@ -70,10 +69,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
             setBase({ hexString: value, semantic: base.semantic })
         }
     }
-
-
-
-
 
     return (
         <div style={wrapper as React.CSSProperties}>
@@ -92,7 +87,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     onChange={(e) => semanticInputHandler(e)}
                 />
             </div>
-
 
             {swatches.map(swatch => (
                 <Swatch {...swatch as SwatchModel} />

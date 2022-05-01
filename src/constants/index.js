@@ -1,6 +1,7 @@
 
 export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
-export const rowHeight = '36px'
+export const rowHeight = '34px'
+export const columnWidth = '150px'
 export const fontSize =  '14px'
 
 export const weights_carbon = [-1,-1, 10, 20, -1, 30, -1, 40, -1, 50, -1, -1, 60, -1, 70, -1, 80, -1, 90, -1, 100, -1]
@@ -17,6 +18,28 @@ export const targets_genome = [-1, 97.5, 95, 90, 85, 80, -1, 70, -1, 60, 55, 50,
 
 // export const weights_clarity = ["X", "X", 50, 100, 200, "X", 300, "X", 400, 500, "X", "X", 600, 700, 800, "X", "X", 900, "X", 1000, "X", "X"]
 // export const targets_clarity = ["X", "X", 95, 90, 85, "X", 75, 70, "X", 60, 55, 50, 45, 40, 30, 20, "X", 15, 20, 10, "X", "X" ]
+
+
+export const color_carbon = {
+	weights: [-1,-1, 10, 20, -1, 30, -1, 40, -1, 50, -1, -1, 60, -1, 70, -1, 80, -1, 90, -1, 100, -1],
+	targets: [-1, -1, 95, 90, -1, 80, -1, 70, -1, 60, -1, -1, 45, -1, 35, -1, 25, -1, 15, -1, 5, -1 ]
+}
+
+export const color_newskit = {
+	weights:  [-1, -1, 10, 20, -1, -1, 30, 40, -1, 50, -1, 60, -1, 70, -1,  -1, 80, 90, -1, 100, -1, -1],
+	targets: [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1]
+}
+
+export const color_lightning = {
+	weights: [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1],
+	targets: [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
+}
+
+export const color_genome = {
+	weights:  [-1, 15, 25, 35, 50, 75, -1, 85, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]	,
+	targets: [-1, 97.5, 95, 90, 85, 80, -1, 70, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
+}
+
 
 export const zeroPad = (num, places) => String(num).padStart(places, '0')
 

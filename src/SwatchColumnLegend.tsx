@@ -1,10 +1,9 @@
 import React from 'react';
 import { brotliDecompress } from 'zlib';
-import { weights, rowHeight, fontSize, l_targets, Event } from './constants'
+import { weights, rowHeight, columnWidth, fontSize, l_targets, Event } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
-    const [isVisible, setIsVisible] = React.useState(true)
     const [model, setModel] = React.useState(l_targets)
 
     window.addEventListener(Event.DISPLAY_LEGEND, ((e: CustomEvent) => {
@@ -17,21 +16,18 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
 
         console.log(filtered)
 
-        // setIsVisible(false)
        setModel(filtered)
 
      }) as EventListener);
 
   
-    const wrapper = { display: (isVisible ? 'inline-block' : 'none') }
+    const wrapper = { 
+        display: 'inline-block',
+        paddingTop: '44px'
+    }
 
     return (
         <div style={wrapper}>
-
-            <input
-                type="text"
-                placeholder="Enter a message"
-            />
 
             {model.map(row => (
                 <Swatch label={row.toString()}/>
@@ -55,11 +51,13 @@ export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
         fontWeight: 800,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
-        width: '100%',
+        width: columnWidth,
         background: "#FFFFFF",
         height: rowHeight ,
+        textAlign: 'right',
+        paddingRight: '20px'
     };
 
     return (
