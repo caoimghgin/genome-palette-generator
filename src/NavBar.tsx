@@ -1,18 +1,25 @@
 import React from 'react';
 import { SwatchModel } from './models'
 import {
+    Event,
     zeroPad,
     columns,
     l_targets,
-    weights_carbon,
-    weights_newskit,
-    weights_lightning,
-    targets_carbon,
-    targets_lightning,
-    targets_newskit,
-    targets_genome,
-    Event,
-    weights_genome
+    // weights_carbon,
+    // weights_newskit,
+    // weights_lightning,
+    // targets_carbon,
+    // targets_lightning,
+    // targets_newskit,
+    // targets_genome,
+    // weights_genome,
+    color_carbon,
+    color_lightning,
+    color_newskit,
+    color_genome,
+    color_spectrum,
+    color_colorbox,
+    color_ap
 } from "./constants"
 import { exit } from 'process';
 
@@ -43,7 +50,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
             // if target includes the SwatchModel.l_target, then make visible
             columnSwatches.forEach(function (swatch, index) {
-                visibleSwatches.push(targets.includes(swatch.l_target) ? swatch : undefined)
+                visibleSwatches.push(targets.targets.includes(swatch.l_target) ? swatch : undefined)
             })
 
             //
@@ -57,7 +64,7 @@ export const NavBar: React.FC<Props> = (props) => {
                 return x !== undefined;
             })
 
-            let targetsOptimized = targets.filter(function (x: number) {
+            let targetsOptimized = targets.targets.filter(function (x: number) {
                 return x !== -1;
             })
 
@@ -74,25 +81,25 @@ export const NavBar: React.FC<Props> = (props) => {
         return result
     }
 
-    const mapTargetsToLegendWeights = (targets: any) => {
+    // const mapTargetsToLegendWeights = (targets: any) => {
 
-        if (targets === targets_newskit) return weights_newskit
-        if (targets === targets_carbon) return weights_carbon
-        if (targets === targets_genome) return weights_genome
-        if (targets === targets_lightning) return weights_lightning
-        if (targets === l_targets) return l_targets
+    //     if (targets === color_new) return weights_newskit
+    //     if (targets === targets_carbon) return weights_carbon
+    //     if (targets === targets_genome) return weights_genome
+    //     if (targets === targets_lightning) return weights_lightning
+    //     if (targets === l_targets) return l_targets
 
-        return []
-    }
+    //     return []
+    // }
 
     const displaySwatches = (targets: any) => {
 
         let swatches = getSwatchesFromlocalStorage()
         let swatchIds = mapSwatchesToTarget(swatches, targets)
-        let legendWeights = mapTargetsToLegendWeights(targets)
+        // let legendWeights = mapTargetsToLegendWeights(targets)
 
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
-        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: legendWeights }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: targets.weights }));
 
     }
 
@@ -115,144 +122,144 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
-    const downloadAsRootJSON = () => {
-        let swatches = getSwatchesFromlocalStorage()
-        let json = formatSwatchesToGenomeJSON(swatches)
-        downloadSwatches(json)
-        return
-    }
+    // const downloadAsRootJSON = () => {
+    //     let swatches = getSwatchesFromlocalStorage()
+    //     let json = formatSwatchesToGenomeJSON(swatches)
+    //     downloadSwatches(json)
+    //     return
+    // }
 
-    const downloadAsCarbonJSON = () => {
-        let swatches = getSwatchesFromlocalStorage()
-        let json = formatSwatchesToCarbonJSON(swatches)
-        downloadSwatches(json)
-    }
+    // const downloadAsCarbonJSON = () => {
+    //     let swatches = getSwatchesFromlocalStorage()
+    //     let json = formatSwatchesToCarbonJSON(swatches)
+    //     downloadSwatches(json)
+    // }
 
-    const downloadAsNewsKitJSON = () => {
-        let swatches = getSwatchesFromlocalStorage()
-        let json = formatSwatchesToNewsKitJSON(swatches)
-        downloadSwatches(json)
-    }
+    // const downloadAsNewsKitJSON = () => {
+    //     let swatches = getSwatchesFromlocalStorage()
+    //     let json = formatSwatchesToNewsKitJSON(swatches)
+    //     downloadSwatches(json)
+    // }
 
-    const downloadAsLightningJSON = () => {
-        let swatches = getSwatchesFromlocalStorage()
-        let json = formatSwatchesToLightningJSON(swatches)
-        downloadSwatches(json)
-        return
-    }
+    // const downloadAsLightningJSON = () => {
+    //     let swatches = getSwatchesFromlocalStorage()
+    //     let json = formatSwatchesToLightningJSON(swatches)
+    //     downloadSwatches(json)
+    //     return
+    // }
 
-    const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
+    // const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
 
-        let result = {} as any
+    //     let result = {} as any
 
-        swatches.forEach(function (swatch, index) {
+    //     swatches.forEach(function (swatch, index) {
 
-            if (!result[swatch.column]) { result[swatch.column] = {} }
+    //         if (!result[swatch.column]) { result[swatch.column] = {} }
 
-            result[swatch.column][swatch.row] = {
-                id: swatch.id,
-                value: swatch.hex,
-                lightness: swatch.lightness,
-                l_target: swatch.l_target,
-                userDefined: swatch.isUserDefined,
-                ccName: swatch.colorChecker.name,
-                semantic: swatch.semantic
-            }
+    //         result[swatch.column][swatch.row] = {
+    //             id: swatch.id,
+    //             value: swatch.hex,
+    //             lightness: swatch.lightness,
+    //             l_target: swatch.l_target,
+    //             userDefined: swatch.isUserDefined,
+    //             ccName: swatch.colorChecker.name,
+    //             semantic: swatch.semantic
+    //         }
 
-        });
+    //     });
 
-        return JSON.stringify({ color: { palette: result } }, null, 4);
+    //     return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }
+    // }
 
-    const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
+    // const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
 
-        let result = {} as any
+    //     let result = {} as any
 
-        swatches.forEach(function (swatch, index) {
+    //     swatches.forEach(function (swatch, index) {
 
-            // Populate result with parent semantic node
-            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+    //         // Populate result with parent semantic node
+    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-            if (weights_carbon[index % l_targets.length] !== -1) {
-                result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
-                    id: swatch.id,
-                    value: swatch.hex,
-                    lightness: swatch.lightness,
-                    l_target: swatch.l_target,
-                    userDefined: swatch.isUserDefined,
-                    ccName: swatch.colorChecker.name,
-                    semantic: swatch.semantic
-                }
-            }
-        });
+    //         if (weights_carbon[index % l_targets.length] !== -1) {
+    //             result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
+    //                 id: swatch.id,
+    //                 value: swatch.hex,
+    //                 lightness: swatch.lightness,
+    //                 l_target: swatch.l_target,
+    //                 userDefined: swatch.isUserDefined,
+    //                 ccName: swatch.colorChecker.name,
+    //                 semantic: swatch.semantic
+    //             }
+    //         }
+    //     });
 
-        //
-        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-        //
-        return JSON.stringify({ color: { palette: result } }, null, 4);
+    //     //
+    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+    //     //
+    //     return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }
+    // }
 
-    const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
+    // const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
 
-        let result = {} as any
+    //     let result = {} as any
 
-        swatches.forEach(function (swatch, index) {
+    //     swatches.forEach(function (swatch, index) {
 
-            // Populate result with parent semantic node
-            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+    //         // Populate result with parent semantic node
+    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-            if (weights_newskit[index % l_targets.length] !== -1) {
-                result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
-                    id: swatch.id,
-                    value: swatch.hex,
-                    lightness: swatch.lightness,
-                    l_target: swatch.l_target,
-                    userDefined: swatch.isUserDefined,
-                    ccName: swatch.colorChecker.name,
-                    semantic: swatch.semantic
-                }
-            }
-        });
+    //         if (weights_newskit[index % l_targets.length] !== -1) {
+    //             result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
+    //                 id: swatch.id,
+    //                 value: swatch.hex,
+    //                 lightness: swatch.lightness,
+    //                 l_target: swatch.l_target,
+    //                 userDefined: swatch.isUserDefined,
+    //                 ccName: swatch.colorChecker.name,
+    //                 semantic: swatch.semantic
+    //             }
+    //         }
+    //     });
 
-        //
-        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-        //
-        return JSON.stringify({ color: { palette: result } }, null, 4);
+    //     //
+    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+    //     //
+    //     return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }
+    // }
 
-    const formatSwatchesToLightningJSON = (swatches: SwatchModel[]) => {
+    // const formatSwatchesToLightningJSON = (swatches: SwatchModel[]) => {
 
-        let result = {} as any
+    //     let result = {} as any
 
-        swatches.forEach(function (swatch, index) {
+    //     swatches.forEach(function (swatch, index) {
 
-            // Populate result with parent semantic node
-            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
+    //         // Populate result with parent semantic node
+    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-            let weights = weights_lightning
+    //         let weights = weights_lightning
 
-            if (weights[index % l_targets.length] !== -1) {
-                result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
-                    id: swatch.id,
-                    value: swatch.hex,
-                    lightness: swatch.lightness,
-                    l_target: swatch.l_target,
-                    userDefined: swatch.isUserDefined,
-                    ccName: swatch.colorChecker.name,
-                    semantic: swatch.semantic
-                }
-            }
-        });
+    //         if (weights[index % l_targets.length] !== -1) {
+    //             result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
+    //                 id: swatch.id,
+    //                 value: swatch.hex,
+    //                 lightness: swatch.lightness,
+    //                 l_target: swatch.l_target,
+    //                 userDefined: swatch.isUserDefined,
+    //                 ccName: swatch.colorChecker.name,
+    //                 semantic: swatch.semantic
+    //             }
+    //         }
+    //     });
 
-        //
-        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-        //
-        return JSON.stringify({ color: { palette: result } }, null, 4);
+    //     //
+    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+    //     //
+    //     return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    }
+    // }
 
     const getSwatchesFromlocalStorage = () => {
 
@@ -309,16 +316,19 @@ export const NavBar: React.FC<Props> = (props) => {
     return (
         <div style={wrapper as React.CSSProperties}>
 
-            <button onClick={downloadAsRootJSON}> Root </button>
+            {/* <button onClick={downloadAsRootJSON}> Root </button>
             <button onClick={downloadAsCarbonJSON}> Carbon </button>
             <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
-            <button onClick={downloadAsLightningJSON}> Lightning </button>
+            <button onClick={downloadAsLightningJSON}> Lightning </button> */}
 
-            <button onClick={() => displaySwatches(targets_newskit)}>display NewsKit</button>
-            <button onClick={() => displaySwatches(targets_carbon)}>display Carbon</button>
-            <button onClick={() => displaySwatches(targets_lightning)}>display Lightning</button>
-            <button onClick={() => displaySwatches(targets_genome)}>display Genome</button>
-            <button onClick={() => displaySwatches(l_targets)}>display Root</button>
+            <button onClick={() => displaySwatches(color_spectrum)}>display Spectrum</button>
+            <button onClick={() => displaySwatches(color_newskit)}>display NewsKit</button>
+            <button onClick={() => displaySwatches(color_carbon)}>display Carbon</button>
+            <button onClick={() => displaySwatches(color_lightning)}>display Lightning</button>
+            <button onClick={() => displaySwatches(color_genome)}>display Genome</button>
+            <button onClick={() => displaySwatches(color_colorbox)}>display ColorBox</button>
+            <button onClick={() => displaySwatches(color_ap)}>display AP</button>
+
             <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
 
         </div>
