@@ -5,14 +5,6 @@ import {
     zeroPad,
     columns,
     l_targets,
-    // weights_carbon,
-    // weights_newskit,
-    // weights_lightning,
-    // targets_carbon,
-    // targets_lightning,
-    // targets_newskit,
-    // targets_genome,
-    // weights_genome,
     color_carbon,
     color_lightning,
     color_newskit,
@@ -81,22 +73,10 @@ export const NavBar: React.FC<Props> = (props) => {
         return result
     }
 
-    // const mapTargetsToLegendWeights = (targets: any) => {
-
-    //     if (targets === color_new) return weights_newskit
-    //     if (targets === targets_carbon) return weights_carbon
-    //     if (targets === targets_genome) return weights_genome
-    //     if (targets === targets_lightning) return weights_lightning
-    //     if (targets === l_targets) return l_targets
-
-    //     return []
-    // }
-
     const displaySwatches = (targets: any) => {
 
         let swatches = getSwatchesFromlocalStorage()
         let swatchIds = mapSwatchesToTarget(swatches, targets)
-        // let legendWeights = mapTargetsToLegendWeights(targets)
 
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: targets.weights }));
@@ -106,8 +86,6 @@ export const NavBar: React.FC<Props> = (props) => {
     const displayUserDefinedSwatches = () => {
 
         let swatches = getSwatchesFromlocalStorage()
-
-        // foo(swatches, targets_newskit)
 
         const userDefinedSwatches = swatches.filter(obj => {
             return obj.isUserDefined === true;
@@ -119,21 +97,49 @@ export const NavBar: React.FC<Props> = (props) => {
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: [] }));
 
+    }
+
+    const downloadAsRootJSON = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToGenomeJSON(swatches)
+        downloadSwatches(json)
+    }
+
+    const logSwatches = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        console.log(swatches)
+  
+    }
+
+    const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
+
+        let result = {} as any
+
+        swatches.forEach(function (swatch, index) {
+
+            if (!result[swatch.column]) { result[swatch.column] = {} }
+
+            result[swatch.column][swatch.row] = {
+                id: swatch.id,
+                value: swatch.hex,
+                lightness: swatch.lightness,
+                l_target: swatch.l_target,
+                userDefined: swatch.isUserDefined,
+                ccName: swatch.colorChecker.name,
+                semantic: swatch.semantic
+            }
+
+        });
+
+        return JSON.stringify({ color: { palette: result } }, null, 4);
 
     }
 
-    // const downloadAsRootJSON = () => {
-    //     let swatches = getSwatchesFromlocalStorage()
-    //     let json = formatSwatchesToGenomeJSON(swatches)
-    //     downloadSwatches(json)
-    //     return
-    // }
-
-    // const downloadAsCarbonJSON = () => {
-    //     let swatches = getSwatchesFromlocalStorage()
-    //     let json = formatSwatchesToCarbonJSON(swatches)
-    //     downloadSwatches(json)
-    // }
+    const downloadAsCarbonJSON = () => {
+        let swatches = getSwatchesFromlocalStorage()
+        let json = formatSwatchesToCarbonJSON(swatches)
+        downloadSwatches(json)
+    }
 
     // const downloadAsNewsKitJSON = () => {
     //     let swatches = getSwatchesFromlocalStorage()
@@ -148,58 +154,36 @@ export const NavBar: React.FC<Props> = (props) => {
     //     return
     // }
 
-    // const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
 
-    //     let result = {} as any
 
-    //     swatches.forEach(function (swatch, index) {
+    const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
 
-    //         if (!result[swatch.column]) { result[swatch.column] = {} }
+        let result = {} as any
 
-    //         result[swatch.column][swatch.row] = {
-    //             id: swatch.id,
-    //             value: swatch.hex,
-    //             lightness: swatch.lightness,
-    //             l_target: swatch.l_target,
-    //             userDefined: swatch.isUserDefined,
-    //             ccName: swatch.colorChecker.name,
-    //             semantic: swatch.semantic
-    //         }
+        swatches.forEach(function (swatch, index) {
 
-    //     });
+            // Populate result with parent semantic node
+            if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
 
-    //     return JSON.stringify({ color: { palette: result } }, null, 4);
+            if (color_carbon.weights[index % l_targets.length] !== -1) {
+                result[swatch.semantic][swatch.semantic + "-" + color_carbon.weights[index % l_targets.length]] = {
+                    id: swatch.id,
+                    value: swatch.hex,
+                    lightness: swatch.lightness,
+                    l_target: swatch.l_target,
+                    userDefined: swatch.isUserDefined,
+                    ccName: swatch.colorChecker.name,
+                    semantic: swatch.semantic
+                }
+            }
+        });
 
-    // }
+        //
+        // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
+        //
+        return JSON.stringify({ color: { palette: result } }, null, 4);
 
-    // const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
-
-    //     let result = {} as any
-
-    //     swatches.forEach(function (swatch, index) {
-
-    //         // Populate result with parent semantic node
-    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
-
-    //         if (weights_carbon[index % l_targets.length] !== -1) {
-    //             result[swatch.semantic][swatch.semantic + "-" + weights_carbon[index % l_targets.length]] = {
-    //                 id: swatch.id,
-    //                 value: swatch.hex,
-    //                 lightness: swatch.lightness,
-    //                 l_target: swatch.l_target,
-    //                 userDefined: swatch.isUserDefined,
-    //                 ccName: swatch.colorChecker.name,
-    //                 semantic: swatch.semantic
-    //             }
-    //         }
-    //     });
-
-    //     //
-    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-    //     //
-    //     return JSON.stringify({ color: { palette: result } }, null, 4);
-
-    // }
+    }
 
     // const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
 
@@ -316,10 +300,13 @@ export const NavBar: React.FC<Props> = (props) => {
     return (
         <div style={wrapper as React.CSSProperties}>
 
-            {/* <button onClick={downloadAsRootJSON}> Root </button>
+           <button onClick={downloadAsRootJSON}> DOWNLOAD </button>
+            {/* 
             <button onClick={downloadAsCarbonJSON}> Carbon </button>
             <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
             <button onClick={downloadAsLightningJSON}> Lightning </button> */}
+
+<button onClick={downloadAsCarbonJSON}> Carbon </button>
 
             <button onClick={() => displaySwatches(color_spectrum)}>display Spectrum</button>
             <button onClick={() => displaySwatches(color_newskit)}>display NewsKit</button>
@@ -330,6 +317,7 @@ export const NavBar: React.FC<Props> = (props) => {
             <button onClick={() => displaySwatches(color_ap)}>display AP</button>
 
             <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
+            <button onClick={() => logSwatches()}> LOG </button>
 
         </div>
     )

@@ -7,7 +7,6 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
         this.spectro = new Spectro()
-        console.log("Does this fire second time? ", columnName)
         this.columnName = columnName
         
         // this.colorModel = 'lch' // better overall

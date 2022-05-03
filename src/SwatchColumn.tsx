@@ -16,26 +16,31 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [semantic, setSemantic] = useState<string>(model.semantic);
 
     useEffect(() => {
+
         initColumnIndex()
         let columnIndex = localStorage.getItem('columnIndex') as string
         let index = parseInt(columnIndex) + 1
         setColumn(columns[index])
+
+        console.log(columns[index], model.semantic, index)
 
         localStorage.setItem('columnIndex', index.toString())
         localStorage.setItem(columns[index], model.semantic)
 
     }, []);
 
-    useEffect(() => {
-        debounceAndSave(column, semantic)
-    }, [semantic]);
+    // useEffect(() => {
+    //     debounceAndSave(column, semantic)
+    // }, [semantic]);
 
     const debounceAndSave = useCallback(debounce((col, sem) => {
         localStorage.setItem(col, sem)
     }, 500), []);
 
     function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
-        setSemantic(e.currentTarget.value)
+        let value = e.currentTarget.value
+        setSemantic(value)
+        debounceAndSave(column, value)
     }
 
     function initColumnIndex(): void {
