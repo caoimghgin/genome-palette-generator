@@ -156,8 +156,6 @@ class Spectro {
         return result * 100
     }
 
-
-
     getLabValue(hexString) {
         return convert.hex.lab(hexString)
     }
@@ -183,7 +181,13 @@ class Spectro {
 
         return {key: lowestItems[0], value: lowestItems[1] }
 
-        return `Lowest value is ${lowestItems[1]}, with a key of ${lowestItems[0]}`;
+      }
+
+      getDeltaE(hex_a, hex_b, tolerance) {
+     
+        let result = chroma.deltaE(hex_a, hex_b);
+        return result
+
       }
 
     getClosestColorCheckerName(color) {

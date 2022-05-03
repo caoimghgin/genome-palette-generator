@@ -14,6 +14,8 @@ import {
     color_ap
 } from "./constants"
 import { exit } from 'process';
+import Spectro from './utilities/palettizer-rfc-2/spectro'
+
 
 interface Props { }
 
@@ -107,8 +109,24 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const logSwatches = () => {
         let swatches = getSwatchesFromlocalStorage()
-        console.log(swatches)
-  
+        let r = findClosestSwatches(swatches, "#ffc107")
+        // console.log(swatches)
+    }
+
+    const findClosestSwatches = (swatches: SwatchModel[], hex: string) => {
+
+        let spectro = new Spectro()
+        let result = {} as any
+        let tolerance = 10
+
+        swatches.forEach(function (swatch, index) {
+            // perform CIE lab DeltaE on each swatch, store result in an array
+            // sort array. The smallest numbers are the closest match
+            let dE = spectro.getDeltaE(hex, swatch.hex)
+            if (dE <= tolerance) result[swatch.id] = dE;
+        })
+
+        console.log(result)
     }
 
     const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
@@ -317,7 +335,7 @@ export const NavBar: React.FC<Props> = (props) => {
             <button onClick={() => displaySwatches(color_ap)}>display AP</button>
 
             <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
-            <button onClick={() => logSwatches()}> LOG </button>
+            <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
 
         </div>
     )
