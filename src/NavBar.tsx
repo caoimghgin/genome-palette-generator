@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SwatchModel } from './models'
 import {
     Event,
@@ -16,11 +16,61 @@ import {
 import { exit } from 'process';
 import Spectro from './utilities/palettizer-rfc-2/spectro'
 
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
 
 interface Props { }
 
+const options = [
+    { value: '0', label: 'Spectrum' },
+    { value: '1', label: 'NewsKit' },
+    { value: '2', label: 'Carbon' },  
+    { value: '3', label: 'Lightning' },
+    { value: '4', label: 'Genome' },        
+    { value: '5', label: 'ColorBox' },        
+    { value: '6', label: 'Accessible Palette' },
+    { value: '7', label: 'User Defined' },
+  ];
+const defaultOption = options[0];
+
 export const NavBar: React.FC<Props> = (props) => {
 
+    const onSelect = (event: any) => {
+
+        let selection = parseInt(event.value)
+
+        switch (parseInt(event.value)) {
+            case 0:
+                displaySwatches(color_spectrum)
+              break;
+            case 1:
+                displaySwatches(color_newskit)
+              break;
+            case 2:
+                displaySwatches(color_carbon)
+              break;
+            case 3:
+                displaySwatches(color_lightning)
+              break;
+            case 4:
+                displaySwatches(color_genome)
+              break;
+            case 5:
+                displaySwatches(color_colorbox)
+              break;
+            case 6:
+                displaySwatches(color_ap)
+                break;
+                case 7:
+                    displayUserDefinedSwatches()
+                    break;
+          }
+
+
+
+    }
+    
     const getClosestIndex = (color: SwatchModel, targets: Array<any>) => {
         var closest = targets.reduce(function (prev, curr) {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
@@ -95,7 +145,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
         let results = userDefinedSwatches.map(a => a.id);
 
-
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: [] }));
 
@@ -109,8 +158,8 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const logSwatches = () => {
         let swatches = getSwatchesFromlocalStorage()
-        let r = findClosestSwatches(swatches, "#ffc107")
-        // console.log(swatches)
+        let result = findClosestSwatches(swatches, "#ffc107")
+        console.log(result)
     }
 
     const findClosestSwatches = (swatches: SwatchModel[], hex: string) => {
@@ -126,7 +175,7 @@ export const NavBar: React.FC<Props> = (props) => {
             if (dE <= tolerance) result[swatch.id] = dE;
         })
 
-        console.log(result)
+        return result
     }
 
     const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
@@ -318,24 +367,26 @@ export const NavBar: React.FC<Props> = (props) => {
     return (
         <div style={wrapper as React.CSSProperties}>
 
-           <button onClick={downloadAsRootJSON}> DOWNLOAD </button>
+           {/* <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
             {/* 
             <button onClick={downloadAsCarbonJSON}> Carbon </button>
             <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
             <button onClick={downloadAsLightningJSON}> Lightning </button> */}
 
-<button onClick={downloadAsCarbonJSON}> Carbon </button>
 
-            <button onClick={() => displaySwatches(color_spectrum)}>display Spectrum</button>
+            {/* <button onClick={() => displaySwatches(color_spectrum)}>display Spectrum</button>
             <button onClick={() => displaySwatches(color_newskit)}>display NewsKit</button>
             <button onClick={() => displaySwatches(color_carbon)}>display Carbon</button>
             <button onClick={() => displaySwatches(color_lightning)}>display Lightning</button>
             <button onClick={() => displaySwatches(color_genome)}>display Genome</button>
             <button onClick={() => displaySwatches(color_colorbox)}>display ColorBox</button>
-            <button onClick={() => displaySwatches(color_ap)}>display AP</button>
+            <button onClick={() => displaySwatches(color_ap)}>display AP</button> */}
+            <Dropdown options={options} onChange={onSelect} value={defaultOption} placeholder="Select an option" />;
 
-            <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button>
+            {/* <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button> */}
             <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
+            <button onClick={downloadAsRootJSON}> DOWNLOAD </button>
+            <button onClick={downloadAsCarbonJSON}> Carbon </button>
 
         </div>
     )
