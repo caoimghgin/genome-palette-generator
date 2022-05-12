@@ -1,10 +1,53 @@
+import { Dictionary } from "lodash";
 import Spectro from "../utilities/palettizer-rfc-2/spectro"
+
+interface IMapModel {
+    target: number;
+    weight: string | undefined;
+ }
+
+export class MapModel {
+
+    private _values: IMapModel[];
+
+    constructor( values: IMapModel[]) {
+
+        this._values = []
+        this.values = values
+    
+    }
+
+    public targets() {
+        var result = this._values.map(function (x) { 
+            return x.target
+        });
+        return result.reverse();
+    }
+
+    public weights() {
+        var result = this._values.map(function (x) { 
+            return x.weight
+        });
+        return result.reverse();
+    }
+
+    public set values(theValues: IMapModel[]) {
+       
+        var result = theValues.map(function (x) { 
+            return ((x.weight == undefined) ? {"target": -1, "weight": x.weight} : {"target": x.target, "weight": x.weight} )
+          });
+          this._values = result
+    }
+
+    public get values() {
+        return this._values;
+    }
+}
 
 export class SwatchModel {
     id!: string
     column!: string
     row!: number
-    // index?: number
     name!: string
     hex!: string
     original?: SwatchModel
@@ -18,7 +61,7 @@ export class SwatchModel {
     WCAG3!: number
     colorChecker!: ColorCheckerModel
     isUserDefined!: boolean
-    l_target?: number
+    l_target!: number
 
     constructor( hex: string, column: string) {
         var spectro = new Spectro()
@@ -26,6 +69,7 @@ export class SwatchModel {
         this.hex = hex
         this.column = column
         this.row = 0
+        this.l_target = -1
 
         this.LAB = new LAB(spectro.getLabValue(hex))
         this.LCH = new LCH(spectro.getLchValue(hex))

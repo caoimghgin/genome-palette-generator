@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SwatchModel } from './models'
 import Modal from 'react-modal';
-import { rowHeight, fontSize, weights_newskit, Event } from './constants';
+import { rowHeight, fontSize, Event } from './constants';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 

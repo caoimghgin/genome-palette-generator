@@ -11,7 +11,7 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
         let data = e.detail
 
         var filtered = data.filter(function(x:any) {
-            return x !== -1;
+            return x !== undefined;
        });
 
         console.log(filtered)

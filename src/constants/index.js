@@ -1,78 +1,34 @@
 
 export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
-export const rowHeight = '34px'
+export const rowHeight = '44px'
 export const columnWidth = '150px'
-export const fontSize =  '14px'
+export const fontSize = '14px'
 
-export const weights_carbon = [-1,-1, 10, 20, -1, 30, -1, 40, -1, 50, -1, -1, 60, -1, 70, -1, 80, -1, 90, -1, 100, -1]
-export const targets_carbon = [-1, -1, 95, 90, -1, 80, -1, 70, -1, 60, -1, -1, 45, -1, 35, -1, 25, -1, 15, -1, 5, -1 ]
-
-export const weights_newskit = [-1, -1, 10, 20, -1, -1, 30, 40, -1, 50, -1, 60, -1, 70, -1,  -1, 80, 90, -1, 100, -1, -1]
-export const targets_newskit = [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1]
-
-export const weights_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
-export const targets_lightning = [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
-
-export const weights_genome = [-1, 15, 25, 35, 50, 75, -1, 85, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]		
-export const targets_genome = [-1, 97.5, 95, 90, 85, 80, -1, 70, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
-
-// export const weights_clarity = ["X", "X", 50, 100, 200, "X", 300, "X", 400, 500, "X", "X", 600, 700, 800, "X", "X", 900, "X", 1000, "X", "X"]
-// export const targets_clarity = ["X", "X", 95, 90, 85, "X", 75, 70, "X", 60, 55, 50, 45, 40, 30, 20, "X", 15, 20, 10, "X", "X" ]
-
-
-export const color_carbon = {
-	weights: [-1,-1, 10, 20, -1, 30, -1, 40, -1, 50, -1, -1, 60, -1, 70, -1, 80, -1, 90, -1, 100, -1],
-	targets: [-1, -1, 95, 90, -1, 80, -1, 70, -1, 60, -1, -1, 45, -1, 35, -1, 25, -1, 15, -1, 5, -1 ]
-}
-
-export const color_newskit = {
-	weights:  [-1, -1, 10, 20, -1, -1, 30, 40, -1, 50, -1, 60, -1, 70, -1,  -1, 80, 90, -1, 100, -1, -1],
-	targets: [-1, -1, 95, 90, -1, -1, 80, 70, -1, 60, -1, 50, -1, 35, -1, -1, 25, 20, -1, 10, -1, -1]
-}
-
-export const color_lightning = {
-	weights: [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1],
-	targets: [-1, -1, 95, 90, -1, 80, -1, 70, 65, 60, -1, 50, -1, 40, -1,  30, -1, 20, 15, 10, -1, -1]
-}
-
-export const color_genome = {
-	weights:  [-1, 15, 25, 35, 50, 75, -1, 85, -1, 100, 200, 300, 400, 500, 600, 700, -1, 800, 900, -1, -1, -1]	,
-	targets: [-1, 97.5, 95, 90, 85, 80, -1, 70, -1, 60, 55, 50, 45, 40, 30, 20, -1, 15, 10, -1, -1, -1 ]
-}
-
-export const color_colorbox = {
-	weights:  [ -1,  -1,  0,  0.5,  1,  -1,  1.5,  2,  -1,  3,  -1,  4,  -1,  5,  6,  7,  -1,  8,  -1,  9, -1,  10 ],
-	targets:  [ -1,  -1,  95,  90,  85,  -1,  75,  70,  -1,  60,  -1,  50,  -1,  40,  35,  30,  -1,  20,  -1,  10, -1,  0 ],
-
-}
-
-export const color_spectrum = {
-	weights:  [ 100,  97.5,  95,  90,  85,  80,  75,  70,  65,  60,  55,  50,  45,  40,  35,  30,  25,  20,  15,  10, 5,  0 ],
-	targets:  [ 100,  97.5,  95,  90,  85,  80,  75,  70,  65,  60,  55,  50,  45,  40,  35,  30,  25,  20,  15,  10, 5,  0 ]
-}
-
-export const color_ap = {
-    weights: [ -1, 50, 100, -1, 200, -1, 300,-1, 400, 500, -1, 600, -1, 700, -1, 800, 900, -1, -1, -1, -1, -1],
-	targets:  [ -1,  97.5,  95,  -1,  85,  -1 ,  75,  -1,  65,  60,  -1,  50,  -1,  40,  -1,  30,  25,  -1, -1, -1, -1, -1]
-}
-
+const options = [
+    { value: '0', label: 'Spectrum' },
+    { value: '1', label: 'NewsKit' },
+    { value: '2', label: 'Carbon' },  
+    { value: '3', label: 'Lightning' },
+    { value: '4', label: 'Ant' },        
+    { value: '5', label: 'ColorBox' },        
+    { value: '6', label: 'Accessible Palette' },
+    { value: '7', label: 'User Defined' },
+  ];
 
 export const zeroPad = (num, places) => String(num).padStart(places, '0')
 
-
 export const Event = {
-    DISPLAY_SWATCHES : "displaySwatches",
-    DISPLAY_SWATCHES_ID : "displaySwatchesId",
-    DISPLAY_LEGEND : "displayLegend",
-  };
-
+    DISPLAY_SWATCHES: "displaySwatches",
+    DISPLAY_SWATCHES_ID: "displaySwatchesId",
+    DISPLAY_LEGEND: "displayLegend",
+};
 
 export function doFetch() {
     fetch(url + 'cvh_strict')
         .then((res) => res.json())
         .then((response) => {
-        console.log(response);
-    })
+            console.log(response);
+        })
         .catch(console.log);
 }
 
@@ -87,28 +43,28 @@ export function doPost() {
     fetch(url + 'blah', requestOptions)
         .then((res) => res.json())
         .then((response) => {
-        console.log(response);
-    })
+            console.log(response);
+        })
         .catch(console.log);
 }
 
 
 export const columns = [
-    'A', 
-    'B', 
-    'C', 
-    'D', 
-    'E', 
-    'F', 
-    'G', 
-    'H', 
-    'I', 
-    'J', 
-    'K', 
-    'L', 
-    'M', 
-    'N', 
-    'O', 
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
     'P',
     'Q',
     'R',
@@ -122,12 +78,7 @@ export const columns = [
     'Z'
 ]
 
-
-
 //https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples
-
-
-
 
 export const semantics = {
     primary: "primary",
@@ -174,38 +125,38 @@ export function getKeyValues() {
     let result = []
 
     for (const [semantic] of Object.entries(semantics)) {
-        for (const weight of weights) { 
+        for (const weight of weights) {
             result.push(semantic + "-" + weight)
         }
 
-      }
+    }
 
-      return result
+    return result
 
 }
 
 export const l_targets = [
-    100, 
-    97.5, 
-    95, 
-    90, 
-    85, 
-    80, 
-    75, 
-    70, 
-    65, 
-    60, 
-    55, 
-    50, 
-    45, 
-    40, 
-    35, 
-    30, 
-    25, 
-    20, 
-    15, 
+    100,
+    97.5,
+    95,
+    90,
+    85,
+    80,
+    75,
+    70,
+    65,
+    60,
+    55,
+    50,
+    45,
+    40,
+    35,
+    30,
+    25,
+    20,
+    15,
     10,
-    5, 
+    5,
     0
 ]
 
@@ -293,8 +244,6 @@ export const dataRow = {
     "colorChecker": { "name": undefined, "deltaE": undefined },
     "WCAG2": undefined
 }
-// #cb894f
-// #a96620
 
 export const colorCheckerValuesHex = {
     "DARK-SKIN": '745144',
@@ -330,10 +279,10 @@ export const colorCheckerValuesHex = {
     "PINK": 'fd759f',
     "VERDUN-GREEN": '00704a',
     "VERDON-GREEN-DARK": '637304',
-    "CADMIUM-GREEN" : '036635',
+    "CADMIUM-GREEN": '036635',
     "X-GREEN": '00720d',
-    "MALACHITE-GREEN" : "07b745",
-    "MALACHITE-GREEN-DARK" : "02ab61", 
+    "MALACHITE-GREEN": "07b745",
+    "MALACHITE-GREEN-DARK": "02ab61",
     "DEEP-BRONZE": "474806",
     "OLIVE-GREEN": "5f835e",
 }
@@ -344,7 +293,7 @@ export const colorCheckerValuesLab = {
     "DARK-TAN": { L: 50, A: 24, B: 49 },
     "LGHT-TAN": { L: 63, A: 22, B: 41 },
     "BLUE-SKY": { L: 50, A: -5, B: -22 },
-    "GOLD": { L: 47, A: 4.61, B: 20.99 }, 
+    "GOLD": { L: 47, A: 4.61, B: 20.99 },
     "FOLIAGE-GREEN": { L: 43, A: -13, B: -2 },
     "BLUE-FLOWER": { L: 55, A: 9, B: -25 },
     "BLUISH-GREEN": { L: 71, A: -33, B: 0 },
@@ -373,9 +322,9 @@ export const colorCheckerValuesLab = {
     "VERDUN-GREEN": { L: 40, A: -25, B: 46 },
     "VERDUN-GREEN-DARK": { L: 46, A: -16, B: 49 },
     "CADMIUM-GREEN": { L: 41, A: -36, B: 13 },
-    "MALACHITE-GREEN" : { L: 62, A: -52, B: 27 },
-    "MALACHITE-GREEN-LIGHT" : { L: 65, A: -58, B: 45 },
-    "DEEP-BRONZE" : { L: 30, A: -7, B: 35 },
+    "MALACHITE-GREEN": { L: 62, A: -52, B: 27 },
+    "MALACHITE-GREEN-LIGHT": { L: 65, A: -58, B: 45 },
+    "DEEP-BRONZE": { L: 30, A: -7, B: 35 },
     "OLIVE-GREEN": { L: 51, A: -19, B: 16 },
 }
 
@@ -389,14 +338,9 @@ export const X = {
     "VERDUN-GREEN": { L: 40, A: -25, B: 46 },
     "VERDUN-GREEN-DARK": { L: 46, A: -16, B: 49 },
     "CADMIUM-GREEN": { L: 41, A: -36, B: 13 },
-    "MALACHITE-GREEN" : { L: 62, A: -52, B: 27 },
-    "MALACHITE-GREEN-LIGHT" : { L: 65, A: -58, B: 45 },
+    "MALACHITE-GREEN": { L: 62, A: -52, B: 27 },
+    "MALACHITE-GREEN-LIGHT": { L: 65, A: -58, B: 45 },
 }
-
-
-
-
-
 
 export const swatchExportDictionary = {
     "primary-015": "",
@@ -476,7 +420,7 @@ export const swatchExportDictionary = {
     "danger-600": "",
     "danger-700": "",
     "danger-800": "",
-    "danger-900": "",  
+    "danger-900": "",
     "neutral-000": "",
     "neutral-015": "",
     "neutral-025": "",
