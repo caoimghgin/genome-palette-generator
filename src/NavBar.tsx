@@ -1,6 +1,7 @@
 import React from 'react';
-import { SwatchModel, MapModel } from './models'
-import { weightedTargets } from "./constants/weightedTargets"
+import { SwatchModel } from './models'
+import { SwatchMapModel } from './models/SwatchMapModel';
+import { Options, weightedTargets } from "./constants/weightedTargets"
 
 import {
     Event,
@@ -8,7 +9,6 @@ import {
     columns,
     l_targets,
 } from "./constants"
-
 
 import { exit } from 'process';
 import Spectro from './utilities/palettizer-rfc-2/spectro'
@@ -18,25 +18,13 @@ import 'react-dropdown/style.css';
 
 interface Props { }
 
-const options = [
-    { value: '0', label: 'Spectrum' },
-    { value: '1', label: 'NewsKit' },
-    { value: '2', label: 'Carbon' },  
-    { value: '3', label: 'Lightning' },
-    { value: '4', label: 'Ant' },        
-    { value: '5', label: 'ColorBox' },        
-    { value: '6', label: 'Accessible Palette' },
-    { value: '7', label: 'User Defined' },
-  ];
-
-const defaultOption = options[0];
 
 export const NavBar: React.FC<Props> = (props) => {
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
         let selection = weightedTargets(index)
-        let map = new MapModel(selection.rows)
+        let map = new SwatchMapModel(selection) // need to pass in the full weightedTargets, not just the rows..
         displaySwatches(map)
     }
     
@@ -47,10 +35,12 @@ export const NavBar: React.FC<Props> = (props) => {
         return targets.indexOf(closest)
     }
 
-    const mapSwatchesToTarget = (swatches: Array<SwatchModel>,  mapper: MapModel) => {
-        console.log("MY TARGETS:", mapper.targets())
-        console.log("MY WEIGHTS:", mapper.weights())
+    const mapSwatchesToTarget = (swatches: SwatchModel[],  mapper: SwatchMapModel) => {
 
+        //
+        // Before I go through this, need to determine if the color is a neutral
+        // Need to get the right targets for neutrals (not assume all will be same targets)
+        //
         let t_targets = mapper.targets()
 
         let result = [] as any
@@ -98,7 +88,12 @@ export const NavBar: React.FC<Props> = (props) => {
         return result
     }
 
-    const displaySwatches = (mapper: MapModel) => {
+    const displaySwatches = (mapper: SwatchMapModel) => {
+
+        //
+        // Somehow, I need to contextually create columns/rows 
+        // for neutrals so I can display them here
+        //
 
         let swatches = getSwatchesFromlocalStorage()
         let swatchIds = mapSwatchesToTarget(swatches, mapper)
@@ -341,28 +336,9 @@ export const NavBar: React.FC<Props> = (props) => {
 
     return (
         <div style={wrapper as React.CSSProperties}>
-
-           {/* <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
-            {/* 
-            <button onClick={downloadAsCarbonJSON}> Carbon </button>
-            <button onClick={downloadAsNewsKitJSON}> NewsKit </button>
-            <button onClick={downloadAsLightningJSON}> Lightning </button> */}
-
-
-            {/* <button onClick={() => displaySwatches(color_spectrum)}>display Spectrum</button>
-            <button onClick={() => displaySwatches(color_newskit)}>display NewsKit</button>
-            <button onClick={() => displaySwatches(color_carbon)}>display Carbon</button>
-            <button onClick={() => displaySwatches(color_lightning)}>display Lightning</button>
-            <button onClick={() => displaySwatches(color_genome)}>display Genome</button>
-            <button onClick={() => displaySwatches(color_colorbox)}>display ColorBox</button>
-            <button onClick={() => displaySwatches(color_ap)}>display AP</button> */}
-            <Dropdown options={options} onChange={onSelect} value={defaultOption} placeholder="Select an option" />;
-
-            {/* <button onClick={() => displayUserDefinedSwatches()}> DEFINED </button> */}
+            <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />;
             <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
             <button onClick={downloadAsRootJSON}> DOWNLOAD </button>
-            {/* <button onClick={downloadAsCarbonJSON}> Carbon </button> */}
-
         </div>
     )
 
