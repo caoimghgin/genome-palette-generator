@@ -8,7 +8,7 @@ class Palettizer {
         this.spectro = new Spectro()
         this.columnName = columnName
         
-        this.colorModel = 'lch' // works better on blue tints (lch turns tints to purple shade)
+        this.colorModel = 'oklab' // works better on blue tints (lch/lab turns blue tints to purple shade)
         this.colorModelDarks = 'lch' // I like lch better for 3/4 and shadow tones.
 
         this.semantic = semantic
