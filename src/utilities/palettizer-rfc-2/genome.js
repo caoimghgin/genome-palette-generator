@@ -9,7 +9,7 @@ class Palettizer {
         this.columnName = columnName
         
         this.colorModel = 'oklab' // works better on blue tints (lch/lab turns blue tints to purple shade)
-        this.colorModelDarks = 'lch' // I like lch better for 3/4 and shadow tones.
+        this.colorModelDarks = 'lab' // lab is better for 3/4 and shadow tones than 'oklab'
 
         this.semantic = semantic
 
@@ -21,7 +21,6 @@ class Palettizer {
         this.swatch.semantic = semantic
 
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
-
 
     }
 

@@ -80,7 +80,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         height: height,
         color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
         boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : ''),
-        
+
+        // .zoom-box:hover {
+        //     transform: scale(1.5);
+        //   }
     };
 
     const asdf = {
