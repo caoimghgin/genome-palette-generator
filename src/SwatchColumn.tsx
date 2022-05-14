@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { SwatchModel, ISwatchBase } from './models'
+import { SwatchModel } from './models/SwatchModel'
+import { ISwatchBase } from './models/SwatchBase'
 import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
 import { columns, columnWidth } from './constants'
@@ -15,6 +16,9 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [column, setColumn] = useState<string>('A');
     const [semantic, setSemantic] = useState<string>(model.semantic);
 
+    model.columnName = column
+    var swatches = SwatchesModelFactory(base, model.columnName)
+
     useEffect(() => {
 
         initColumnIndex()
@@ -28,10 +32,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         localStorage.setItem(columns[index], model.semantic)
 
     }, []);
-
-    // useEffect(() => {
-    //     debounceAndSave(column, semantic)
-    // }, [semantic]);
 
     const debounceAndSave = useCallback(debounce((col, sem) => {
         localStorage.setItem(col, sem)
@@ -60,11 +60,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         width: columnWidth,
 
     }
-
-    model.columnName = column
-
-    console.log(base)
-    var swatches = SwatchesModelFactory(base, column)
 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         console.log("My column = " + column)

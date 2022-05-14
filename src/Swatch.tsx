@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SwatchModel } from './models'
+import { SwatchModel } from './models/SwatchModel'
 import Modal from 'react-modal';
 import { rowHeight, fontSize, Event } from './constants';
 

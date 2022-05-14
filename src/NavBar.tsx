@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwatchModel } from './models'
+import { SwatchModel } from './models/SwatchModel'
 import { SwatchMapModel } from './models/SwatchMapModel';
 import { Options, weightedTargets } from "./constants/weightedTargets"
 

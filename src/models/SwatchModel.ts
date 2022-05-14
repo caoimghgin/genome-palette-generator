@@ -1,48 +1,5 @@
 import Spectro from "../utilities/palettizer-rfc-2/spectro"
 
-interface IMapModel {
-    target: number;
-    weight: string | undefined;
- }
-
-export class MapModel {
-
-    private _values: IMapModel[];
-
-    constructor( values: IMapModel[]) {
-
-        this._values = []
-        this.values = values
-    
-    }
-
-    public targets() {
-        var result = this._values.map(function (x) { 
-            return x.target
-        });
-        return result.reverse();
-    }
-
-    public weights() {
-        var result = this._values.map(function (x) { 
-            return x.weight
-        });
-        return result.reverse();
-    }
-
-    public set values(theValues: IMapModel[]) {
-       
-        var result = theValues.map(function (x) { 
-            return ((x.weight == undefined) ? {"target": -1, "weight": x.weight} : {"target": x.target, "weight": x.weight} )
-          });
-          this._values = result
-    }
-
-    public get values() {
-        return this._values;
-    }
-}
-
 export class SwatchModel {
     id!: string
     column!: string
@@ -124,15 +81,4 @@ export class HSV {
         this.S = HSV[1]
         this.V = HSV[2]
     }
-}
-
-export interface ISwatchBase {
-    hexString: string;
-    semantic: string;
-    columnName?: string;
-}
-
-export class ISwatchColorChecker {
-    name?: String;
-    dE?: number;
 }
