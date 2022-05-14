@@ -4,7 +4,6 @@ import { SwatchModel } from '../../models'
 import Spectro from './spectro'
 
 class Palettizer {
-
     constructor(hexValue, semantic, columnName) {
         this.spectro = new Spectro()
         this.columnName = columnName
@@ -15,10 +14,15 @@ class Palettizer {
         this.semantic = semantic
 
         this.swatch = new SwatchModel(hexValue, columnName)
+
         this.swatch.isUserDefined = true
+        this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
+
         this.swatch.semantic = semantic
 
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
+
+
     }
 
     createSwatchColumn() {
@@ -57,7 +61,8 @@ class Palettizer {
         newSwatch.l_target = swatch.l_target
         newSwatch.semantic = swatch.semantic
         newSwatch.name = swatch.name
-     
+        newSwatch.isNeutral = swatch.isNeutral
+
         this.swatches[index] = newSwatch
 
     }
@@ -99,6 +104,8 @@ class Palettizer {
         // do things
     }
 
+
+
     populateSwatchesArray(tints_shades, index) {
 
         // Loop through tints_shades, transforming into ColorModel object
@@ -112,6 +119,7 @@ class Palettizer {
 
                 swatch.id = this.columnName + i
                 swatch.column = this.columnName
+                swatch.isNeutral = this.swatch.isNeutral
                 swatch.row = i
 
                 swatch.weight = weights[i]

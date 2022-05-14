@@ -168,12 +168,10 @@ class Spectro {
         return convert.hex.hsv(hexString)
     }
 
-    isNeutral(color) {
-        let value = this.getSaturationValue(color)
-        if (value > neutralTolerance) {
-            return false
-        }
-        return true
+    isNeutral(value) {
+
+        return ((value > 12) ? false : true)
+   
     }
 
      lowestValueAndKey(obj) {
@@ -183,7 +181,7 @@ class Spectro {
 
       }
 
-      getDeltaE(hex_a, hex_b, tolerance) {
+      getDeltaE(hex_a, hex_b) {
      
         let result = chroma.deltaE(hex_a, hex_b);
         return result

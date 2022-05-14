@@ -284,7 +284,7 @@ const weightedTargets_genome: weightedTargetsColumn = {
         { target: 100, weight: undefined},
     ],
     neutrals: [
-        { target: 0, weight: "1000" },
+        { target: 0, weight: undefined },
         { target: 5, weight: "900" },
         { target: 10, weight: "800" },
         { target: 15, weight: "700" },
@@ -305,6 +305,6 @@ const weightedTargets_genome: weightedTargetsColumn = {
         { target: 90, weight: "50" },
         { target: 95, weight: "025" },
         { target: 97.5, weight: "015" },
-        { target: 100, weight: "000"},
+        { target: 100, weight: undefined},
     ]
 }

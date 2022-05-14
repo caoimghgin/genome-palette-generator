@@ -41,7 +41,6 @@ export const NavBar: React.FC<Props> = (props) => {
         // Before I go through this, need to determine if the color is a neutral
         // Need to get the right targets for neutrals (not assume all will be same targets)
         //
-        let t_targets = mapper.targets()
 
         let result = [] as any
 
@@ -55,7 +54,14 @@ export const NavBar: React.FC<Props> = (props) => {
 
             if (columnSwatches.length === 0) { break }
 
+
+            // TEST FOR NEUTRALITY HERE.
+            console.log("AM I NEUTRAL?", columnSwatches[12].isNeutral)
+
             // if target includes the SwatchModel.l_target, then make visible
+
+            let t_targets = mapper.newTargets(columnSwatches[12].isNeutral)
+
             columnSwatches.forEach(function (swatch, index) {
                 visibleSwatches.push(t_targets.includes(swatch.l_target) ? swatch : undefined)
             })

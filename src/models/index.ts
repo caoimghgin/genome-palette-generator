@@ -1,4 +1,3 @@
-import { Dictionary } from "lodash";
 import Spectro from "../utilities/palettizer-rfc-2/spectro"
 
 interface IMapModel {
@@ -61,6 +60,7 @@ export class SwatchModel {
     WCAG3!: number
     colorChecker!: ColorCheckerModel
     isUserDefined!: boolean
+    isNeutral!: boolean
     l_target!: number
 
     constructor( hex: string, column: string) {
@@ -79,6 +79,7 @@ export class SwatchModel {
         this.WCAG2 = spectro.getWCAG(hex)
         this.WCAG3 = spectro.getAPCA(hex)
         this.isUserDefined = false
+        this.isNeutral = false
     }
 
 }
