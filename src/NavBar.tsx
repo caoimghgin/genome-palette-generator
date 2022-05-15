@@ -3,6 +3,9 @@ import { SwatchModel } from './models/SwatchModel'
 import { SwatchMapModel } from './models/SwatchMapModel';
 import { Options, weightedTargets } from "./constants/weightedTargets"
 
+import logo from './logo.svg';
+
+
 import {
     Event,
     zeroPad,
@@ -17,7 +20,6 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 interface Props { }
-
 
 export const NavBar: React.FC<Props> = (props) => {
 
@@ -337,6 +339,8 @@ export const NavBar: React.FC<Props> = (props) => {
 
     return (
         <div style={wrapper as React.CSSProperties}>
+        <img src={logo} className="App-logo" alt="logo" />
+
             <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
             {/* <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
             <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
