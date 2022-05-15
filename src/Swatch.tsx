@@ -2,48 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { SwatchModel } from './models/SwatchModel'
 import Modal from 'react-modal';
 import { rowHeight, fontSize, Event } from './constants';
+import styled from '@emotion/styled';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
-
-    //
-    // User defined swatches may not fit into the L*5 slots of chosen color system.
-    // With current alg, they will be chopped off. Need to find a way to communicate
-    // to 'replace' isUserDefined=false with isUserDefined=true IF the 'true' swatch
-    // is hidden.
-    //
-    //
-    // Am I thinking of this wrong? Perhaps a message to a controller that reads
-    // all stored swatches, and re-renders only those that best match, preferring 
-    // user defined colors. 
-
-    // The problem here is I'm working on an individual swatch that has no idea about
-    // any other swatch on the grid. I'll need to know the entire row contents to make
-    // that decision. Then, perhaps I can individually message each swatch by ID to turn
-    // on or off as required. For instance, controller tells A0, A1, A2 swatches to be NOT visible
-    // Each swatch would have addEventListener(model.id), so everything can listen to directions
-    // of the controller.
-    //
-    // OR...
-    // I could broadcast 'A0, A2, A4...B0, B2, B3' array. Use.detail.includes(model.id) is 
-    // the trigger for visible. So, the NavBar must sort out the details and send the message.
-    // THIS IS MUCH BETTER. 
-    //
 
     const [isVisible, setIsVisible] = React.useState(true)
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [color, setColor] = React.useState("000000");
     const [height, setHeight] = React.useState(rowHeight);
 
+
+        isOK()
+
+
     window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
         setIsVisible(e.detail.includes(model.id))
         // setHeight('72px')
-     }) as EventListener);
-
-
+    }) as EventListener);
 
     useEffect(() => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
-    }, []);    
+    }, []);
 
     let label = "n/a"
 
@@ -68,37 +47,40 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
             console.table(model)
         }
     }
-    
-    const wrapper = {
-        fontSize: fontSize,
-        display: (isVisible ? 'flex' : 'none'),
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        background: model.hex,
-        height: height,
-        color: (model.LAB.L < 51 ? '#FFFFFF' : '#000000'),
-        boxShadow: (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : ''),
 
-        // .zoom-box:hover {
-        //     transform: scale(1.5);
-        //   }
-    };
+    const LayoutWrapper = styled.div`
+        visibility: visible;
 
-    const asdf = {
+        font-size:  ${props => fontSize};
+        height: ${props => height};
+        color: ${props => (model.LAB.L < 51 ? '#FFFFFF' : '#000000')};
+        background: ${props => model.hex};
+        display: ${props => (isVisible ? 'flex' : 'none')};
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')};
+        width: 100%;
+        &:hover { 
+            transform: scale(1.2);
+            transition: 0.2s;
+            transition-timing-function: ease-in;
+            filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.25));
+        };
+  `;
+
+    const Uppercase = {
         textTransform: 'uppercase',
     };
 
-    isOK()
 
     return (
         <div>
 
-            <div key={model.name} style={wrapper as React.CSSProperties}
+            <LayoutWrapper key={model.name}
                 onClick={() => onClickHandler()}>
-                {label}
-            </div>
+               {label}
+            </LayoutWrapper>
 
             <Modal
                 isOpen={modalIsOpen}
@@ -106,7 +88,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
                 contentLabel="Example Modal"
             >
                 <button onClick={closeModal}>close</button>
-                <h1 style={asdf as React.CSSProperties}> {model.name} </h1>
+                <h1 style={Uppercase as React.CSSProperties}> {model.name} </h1>
                 <h3> Base: {model.semantic} +400, '{model.colorChecker.name}', dE {model.colorChecker.dE} </h3>
                 <p> hex: {model.hex}</p>
                 <p> L*: {model.LAB.L}</p>
