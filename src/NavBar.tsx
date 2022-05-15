@@ -54,12 +54,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
             if (columnSwatches.length === 0) { break }
 
-
-            // TEST FOR NEUTRALITY HERE.
-            console.log("AM I NEUTRAL?", columnSwatches[12].isNeutral)
-
             // if target includes the SwatchModel.l_target, then make visible
-
             let t_targets = mapper.newTargets(columnSwatches[12].isNeutral)
 
             columnSwatches.forEach(function (swatch, index) {
@@ -334,17 +329,17 @@ export const NavBar: React.FC<Props> = (props) => {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        background: 'green',
-        height: '48px',
+        background: '#f8f8f8',
+        height: '88px',
         marginBottom: '22pt',
-        borderBottom: '1px solid ' + localStorage.getItem('neutral-050'),
+        borderBottom: '1px solid #e2e2e2' ,   
     };
 
     return (
         <div style={wrapper as React.CSSProperties}>
-            <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />;
-            <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
-            <button onClick={downloadAsRootJSON}> DOWNLOAD </button>
+            <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
+            {/* <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
+            <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
         </div>
     )
 

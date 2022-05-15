@@ -12,7 +12,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [height, setHeight] = React.useState(rowHeight);
 
 
-        isOK()
+    isOK()
 
 
     window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
@@ -82,7 +82,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
                {label}
             </LayoutWrapper>
 
-            <Modal
+            {/* <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
@@ -95,7 +95,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
                 <p> WCAG2: {model.WCAG2} : 1</p>
                 <p> WCAG3: {model.WCAG3}</p>
 
-            </Modal>
+            </Modal> */}
 
         </div>
     )
