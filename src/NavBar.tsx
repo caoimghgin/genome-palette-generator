@@ -2,9 +2,7 @@ import React from 'react';
 import { SwatchModel } from './models/SwatchModel'
 import { SwatchMapModel } from './models/SwatchMapModel';
 import { Options, weightedTargets } from "./constants/weightedTargets"
-
 import logo from './logo.svg';
-
 
 import {
     Event,
@@ -29,7 +27,7 @@ export const NavBar: React.FC<Props> = (props) => {
         let map = new SwatchMapModel(selection) // need to pass in the full weightedTargets, not just the rows..
         displaySwatches(map)
     }
-    
+
     const getClosestIndex = (color: SwatchModel, targets: Array<any>) => {
         var closest = targets.reduce(function (prev, curr) {
             return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
@@ -37,7 +35,7 @@ export const NavBar: React.FC<Props> = (props) => {
         return targets.indexOf(closest)
     }
 
-    const mapSwatchesToTarget = (swatches: SwatchModel[],  mapper: SwatchMapModel) => {
+    const mapSwatchesToTarget = (swatches: SwatchModel[], mapper: SwatchMapModel) => {
 
         //
         // Before I go through this, need to determine if the color is a neutral
@@ -329,22 +327,35 @@ export const NavBar: React.FC<Props> = (props) => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'left',
         width: '100%',
         background: '#f8f8f8',
         height: '88px',
         marginBottom: '22pt',
-        borderBottom: '1px solid #e2e2e2' ,   
+        borderBottom: '1px solid #e2e2e2',
+    };
+
+
+    const content = {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'left',
+        paddingLeft: '22pt',
     };
 
     return (
         <div style={wrapper as React.CSSProperties}>
-        <img src={logo} className="App-logo" alt="logo" />
+            <div style={content as React.CSSProperties}>
 
-            <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
-            {/* <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
+                <img src={logo} className="App-logo" alt="logo" />
+
+                <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
+                {/* <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
             <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
+            </div>
         </div>
+
     )
 
 }
