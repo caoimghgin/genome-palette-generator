@@ -171,7 +171,7 @@ const ContainerRight = styled.div`
  
 
     const tbd_resources = () => {
-        alert("-- A dropdown menu appears showing 'QuickStart', 'GitHub', 'Figma Plugin', 'Contact information', ... --");
+        alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
     }
 
     const tbd_import = () => {
