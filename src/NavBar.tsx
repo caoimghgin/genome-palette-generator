@@ -163,14 +163,12 @@ const ContainerRight = styled.div`
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
+
+        alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
+
     }
 
-    const tbd = () => {
-        alert("To be done");
-        // let swatches = getSwatchesFromlocalStorage()
-        // let json = formatSwatchesToGenomeJSON(swatches)
-        // downloadSwatches(json)
-    }
+ 
 
     const tbd_resources = () => {
         alert("-- A dropdown menu appears showing 'QuickStart', 'GitHub', 'Figma Plugin', 'Contact information', ... --");
