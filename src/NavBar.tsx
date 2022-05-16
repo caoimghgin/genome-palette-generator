@@ -172,6 +172,18 @@ const ContainerRight = styled.div`
         // downloadSwatches(json)
     }
 
+    const tbd_resources = () => {
+        alert("-- A dropdown menu appears showing 'QuickStart', 'GitHub', 'Figma Plugin', 'Contact information', ... --");
+    }
+
+    const tbd_import = () => {
+        alert("-- Filebrowser appears allowing user to import a previously exported Genome Color Space 'gcs.json' file --");
+    }
+
+    const tbd_tools = () => {
+        alert("-- A dropdown menu appears showing special tools. For instance, the ability to enter a hex value and find closest match in current color table for 'tweaking' --");
+    }
+
     const logSwatches = () => {
         let swatches = getSwatchesFromlocalStorage()
         let result = findClosestSwatches(swatches, "#ffc107")
@@ -366,7 +378,7 @@ const ContainerRight = styled.div`
         var csvURL = window.URL.createObjectURL(data);
         tempLink = document.createElement('a');
         tempLink.href = csvURL;
-        tempLink.setAttribute('download', 'palette.json');
+        tempLink.setAttribute('download', 'gcs.json');
         tempLink.click();
     }
 
@@ -412,11 +424,13 @@ const ContainerRight = styled.div`
         
                 <ContainerRight>
 
-                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={tbd}> Resources </button> 
+                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_resources}> Resources </button> 
 
-                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={tbd}> Import </button> 
+                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_tools}> Tools </button> 
 
-                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={downloadAsRootJSON}> Export </button> 
+                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_import}> Import </button> 
+
+                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={downloadAsRootJSON}> Export </button> 
 
                 </ContainerRight>
 
