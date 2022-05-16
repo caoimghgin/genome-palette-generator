@@ -61,6 +61,8 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     }
 
+
+
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         console.log("My column = " + column)
         let value = e.currentTarget.value;
@@ -74,17 +76,19 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         <div style={wrapper as React.CSSProperties}>
 
             <div style={inputWrapper as React.CSSProperties}>
-                <input
-                    type="text"
-                    defaultValue={model.hexString}
-                    placeholder="Enter a message"
-                    onChange={(e) => inputHandeler(e)}
-                />
+
                 <input
                     type="text"
                     defaultValue={semantic}
                     placeholder="Enter a message"
                     onChange={(e) => semanticInputHandler(e)}
+                />
+
+<input
+                    type="text"
+                    defaultValue={model.hexString}
+                    placeholder="Enter a message"
+                    onChange={(e) => inputHandeler(e)}
                 />
             </div>
 

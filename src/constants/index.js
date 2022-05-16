@@ -5,7 +5,7 @@ export const columnWidth = '150px'
 export const fontSize = '14px'
 
 const options = [
-    { value: '0', label: 'Spectrum' },
+    { value: '0', label: 'All' },
     { value: '1', label: 'NewsKit' },
     { value: '2', label: 'Carbon' },  
     { value: '3', label: 'Lightning' },

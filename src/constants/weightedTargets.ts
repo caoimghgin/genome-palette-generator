@@ -10,7 +10,7 @@ export type weightedTargetsColumn = {
 };
 
 export const Options = [
-    { value: '0', label: 'Spectrum' },
+    { value: '0', label: 'All' },
     { value: '1', label: 'NewsKit' },
     { value: '2', label: 'Carbon' },
     { value: '3', label: 'Lightning' },
