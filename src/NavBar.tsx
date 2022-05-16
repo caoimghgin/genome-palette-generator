@@ -7,10 +7,59 @@ import Spectro from './utilities/palettizer-rfc-2/spectro'
 import Dropdown from 'react-dropdown';
 import logo from './logo.svg';
 import 'react-dropdown/style.css';
+import styled from '@emotion/styled';
 
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
+
+    const Wrapper = styled.div`
+        background-color: #f8f8f8;
+        border-bottom: '1px solid #e2e2e2'
+        width: 100%;
+        height: 88px;
+        margin-bottom: 22px;
+`;
+
+    const Container = styled.div`
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+`;
+
+const ContainerLeft = styled.div`
+  grid-row: 1 / 4;
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+    padding-left: 44px;
+`;
+
+const ContainerCenter = styled.div`
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+`;
+
+const ContainerRight = styled.div`
+  grid-row: 1 / 4;
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 44px;
+
+`;
+
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
@@ -114,6 +163,13 @@ export const NavBar: React.FC<Props> = (props) => {
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
+    }
+
+    const tbd = () => {
+        alert("To be done");
+        // let swatches = getSwatchesFromlocalStorage()
+        // let json = formatSwatchesToGenomeJSON(swatches)
+        // downloadSwatches(json)
     }
 
     const logSwatches = () => {
@@ -335,18 +391,37 @@ export const NavBar: React.FC<Props> = (props) => {
         paddingLeft: '22pt',
     };
 
+    const dropdown_width = {
+        width:'150px',
+        paddingLeft: '24px'
+    };
+
     return (
-        <div style={wrapper as React.CSSProperties}>
-            <div style={content as React.CSSProperties}>
 
-                <img src={logo} className="App-logo" alt="logo" />
+        <Wrapper>
 
-                <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
-                {/* <button onClick={() => logSwatches()}> *** FIND CLOSEST *** </button>
-            <button onClick={downloadAsRootJSON}> DOWNLOAD </button> */}
-            </div>
-        </div>
+            <Container>
+                <ContainerLeft>
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <div style={dropdown_width}>
+                    <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
+                    </div>
+                </ContainerLeft>
 
+                <ContainerCenter> </ContainerCenter>
+        
+                <ContainerRight>
+
+                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={tbd}> Resources </button> 
+
+                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={tbd}> Import </button> 
+
+                    <button style={{ marginLeft: '20px', padding: '12px'}} onClick={downloadAsRootJSON}> Export </button> 
+
+                </ContainerRight>
+
+            </Container>
+        </Wrapper>
     )
 
 }
