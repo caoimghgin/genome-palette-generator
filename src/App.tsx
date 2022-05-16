@@ -24,6 +24,7 @@
 
 import './App.css';
 import { NavBar } from "./NavBar"
+import { Footer }  from "./Footer"
 import { SwatchColumnsRandom }  from "./SwatchColumnsRandom";
 import { SwatchColumn } from "./SwatchColumn";
 import { SwatchColumnLegend } from "./SwatchColumnLegend";
@@ -38,9 +39,6 @@ function App() {
         <div className="App">
             <NavBar/>
             {/* <SwatchColumnsRandom/> */}
-            
-
-            
 
             <SwatchColumnLegend />
             <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
@@ -53,6 +51,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
             <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
 
+            <Footer/>
         </div>
     );
 }

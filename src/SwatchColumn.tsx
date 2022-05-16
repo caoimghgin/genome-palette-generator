@@ -50,7 +50,11 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
-    const wrapper = { display: 'inline-block' };
+    const wrapper = {
+        display: 'inline-block',
+        marginBottom: '88px'
+
+    };
 
     const inputWrapper = {
         display: 'flex',
@@ -58,7 +62,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         alignItems: 'center',
         justifyContent: 'center',
         width: columnWidth,
-
     }
 
 
@@ -84,7 +87,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     onChange={(e) => semanticInputHandler(e)}
                 />
 
-<input
+                <input 
                     type="text"
                     defaultValue={model.hexString}
                     placeholder="Enter a message"
