@@ -13,53 +13,6 @@ interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
-    const Wrapper = styled.div`
-        background-color: #f8f8f8;
-        border-bottom: '1px solid #e2e2e2'
-        width: 100%;
-        height: 88px;
-        margin-bottom: 22px;
-`;
-
-    const Container = styled.div`
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-        align-self: center;
-        align-items: center;
-        justify-content: center;
-`;
-
-const ContainerLeft = styled.div`
-  grid-row: 1 / 4;
-  grid-column: 1 / 2;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-    padding-left: 44px;
-`;
-
-const ContainerCenter = styled.div`
-  grid-row: 1 / 4;
-  grid-column: 2 / 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-`;
-
-const ContainerRight = styled.div`
-  grid-row: 1 / 4;
-  grid-column: 3 / 4;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  padding-right: 44px;
-
-`;
-
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
@@ -163,12 +116,8 @@ const ContainerRight = styled.div`
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
-
         alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
-
     }
-
- 
 
     const tbd_resources = () => {
         alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
@@ -228,118 +177,6 @@ const ContainerRight = styled.div`
 
     }
 
-    // const downloadAsCarbonJSON = () => {
-    //     let swatches = getSwatchesFromlocalStorage()
-    //     let json = formatSwatchesToCarbonJSON(swatches)
-    //     downloadSwatches(json)
-    // }
-
-    // const downloadAsNewsKitJSON = () => {
-    //     let swatches = getSwatchesFromlocalStorage()
-    //     let json = formatSwatchesToNewsKitJSON(swatches)
-    //     downloadSwatches(json)
-    // }
-
-    // const downloadAsLightningJSON = () => {
-    //     let swatches = getSwatchesFromlocalStorage()
-    //     let json = formatSwatchesToLightningJSON(swatches)
-    //     downloadSwatches(json)
-    //     return
-    // }
-
-
-
-    // const formatSwatchesToCarbonJSON = (swatches: SwatchModel[]) => {
-
-    //     let result = {} as any
-
-    //     let mm = new MapModel(targetWeight_carbon)
-
-    //     swatches.forEach(function (swatch, index) {
-
-    //         // Populate result with parent semantic node
-    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
-
-    //         if (mm.targets()[index % l_targets.length] !== -1) {
-    //             result[swatch.semantic][swatch.semantic + "-" + mm.weights()[index % l_targets.length]] = {
-    //                 id: swatch.id,
-    //                 value: swatch.hex,
-    //                 lightness: swatch.lightness,
-    //                 l_target: swatch.l_target,
-    //                 userDefined: swatch.isUserDefined,
-    //                 ccName: swatch.colorChecker.name,
-    //                 semantic: swatch.semantic
-    //             }
-    //         }
-    //     });
-
-    //     //
-    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-    //     //
-    //     return JSON.stringify({ color: { palette: result } }, null, 4);
-
-    // }
-
-    // const formatSwatchesToNewsKitJSON = (swatches: SwatchModel[]) => {
-
-    //     let result = {} as any
-
-    //     swatches.forEach(function (swatch, index) {
-
-    //         // Populate result with parent semantic node
-    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
-
-    //         if (weights_newskit[index % l_targets.length] !== -1) {
-    //             result[swatch.semantic][swatch.semantic + zeroPad(weights_newskit[index % l_targets.length], 3)] = {
-    //                 id: swatch.id,
-    //                 value: swatch.hex,
-    //                 lightness: swatch.lightness,
-    //                 l_target: swatch.l_target,
-    //                 userDefined: swatch.isUserDefined,
-    //                 ccName: swatch.colorChecker.name,
-    //                 semantic: swatch.semantic
-    //             }
-    //         }
-    //     });
-
-    //     //
-    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-    //     //
-    //     return JSON.stringify({ color: { palette: result } }, null, 4);
-
-    // }
-
-    // const formatSwatchesToLightningJSON = (swatches: SwatchModel[]) => {
-
-    //     let result = {} as any
-
-    //     swatches.forEach(function (swatch, index) {
-
-    //         // Populate result with parent semantic node
-    //         if (!result[swatch.semantic]) { result[swatch.semantic] = {} }
-
-    //         let weights = weights_lightning
-
-    //         if (weights[index % l_targets.length] !== -1) {
-    //             result[swatch.semantic][swatch.semantic + "-" + weights[index % l_targets.length]] = {
-    //                 id: swatch.id,
-    //                 value: swatch.hex,
-    //                 lightness: swatch.lightness,
-    //                 l_target: swatch.l_target,
-    //                 userDefined: swatch.isUserDefined,
-    //                 ccName: swatch.colorChecker.name,
-    //                 semantic: swatch.semantic
-    //             }
-    //         }
-    //     });
-
-    //     //
-    //     // Need to loop again to pick up any userDefined colors on the 'X' and insert at closest weight into result
-    //     //
-    //     return JSON.stringify({ color: { palette: result } }, null, 4);
-
-    // }
-
     const getSwatchesFromlocalStorage = () => {
 
         let result = []
@@ -380,31 +217,56 @@ const ContainerRight = styled.div`
         tempLink.click();
     }
 
-    const wrapper = {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'left',
-        width: '100%',
-        background: '#f8f8f8',
-        height: '88px',
-        marginBottom: '22pt',
-        borderBottom: '1px solid #e2e2e2',
-    };
+    const Wrapper = styled.div`
+        background-color: #f8f8f8;
+        border-bottom: '1px solid #e2e2e2'
+        width: 100%;
+        height: 88px;
+        margin-bottom: 22px;
+`;
 
+    const Container = styled.div`
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+`;
 
-    const content = {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'left',
-        paddingLeft: '22pt',
-    };
+    const ContainerLeft = styled.div`
+        grid-row: 1 / 4;
+        grid-column: 1 / 2;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding-left: 44px;
+`;
 
-    const dropdown_width = {
-        width:'150px',
-        paddingLeft: '24px'
-    };
+    const ContainerCenter = styled.div`
+        grid-row: 1 / 4;
+        grid-column: 2 / 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+`;
+
+    const ContainerRight = styled.div`
+        grid-row: 1 / 4;
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        padding-right: 44px;
+`;
+
+    const DropdownContainer = styled.div`
+        width: 150px;
+        padding-left: 24px;
+        text-align: left;
+`;
 
     return (
 
@@ -413,22 +275,19 @@ const ContainerRight = styled.div`
             <Container>
                 <ContainerLeft>
                     <img src={logo} className="App-logo" alt="logo" />
-                    <div style={dropdown_width}>
-                    <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
-                    </div>
+                    <DropdownContainer>
+                        <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
+                    </DropdownContainer>
                 </ContainerLeft>
 
                 <ContainerCenter> </ContainerCenter>
-        
+
                 <ContainerRight>
 
-                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_resources}> Resources </button> 
-
-                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_tools}> Tools </button> 
-
-                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={tbd_import}> Import </button> 
-
-                    <button style={{ marginLeft: '12px', padding: '12px'}} onClick={downloadAsRootJSON}> Export </button> 
+                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button>
+                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button>
+                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button>
+                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button>
 
                 </ContainerRight>
 
