@@ -5,6 +5,7 @@ import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
 import { columns, columnWidth } from './constants'
 import { debounce } from 'lodash';
+import styled from '@emotion/styled';
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -50,22 +51,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
-    const wrapper = {
-        display: 'inline-block',
-        marginBottom: '88px'
-
-    };
-
-    const inputWrapper = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: columnWidth,
-    }
-
-
-
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         console.log("My column = " + column)
         let value = e.currentTarget.value;
@@ -75,8 +60,30 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
+    const Wrapper = styled.div`
+        visibility: visible;
+        display: inline-block;
+        margin-bottom: 88px;
+  `;
+
+    // const InputWrapper = styled.div`
+    // display: flex;
+    // flex-direction: column
+    // align-items: center;
+    // justify-content: center;
+    // width: ${props => columnWidth};
+    // `;    
+
+    const inputWrapper = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: columnWidth,
+    }
+
     return (
-        <div style={wrapper as React.CSSProperties}>
+        <Wrapper>
 
             <div style={inputWrapper as React.CSSProperties}>
 
@@ -87,7 +94,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     onChange={(e) => semanticInputHandler(e)}
                 />
 
-                <input 
+                <input
                     type="text"
                     defaultValue={model.hexString}
                     placeholder="Enter a message"
@@ -99,7 +106,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 <Swatch {...swatch as SwatchModel} />
             ))}
 
-        </div>
+        </Wrapper>
     )
 
 }
