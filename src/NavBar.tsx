@@ -116,7 +116,7 @@ export const NavBar: React.FC<Props> = (props) => {
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
         downloadSwatches(json)
-        alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
+        // alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
     }
 
     const tbd_resources = () => {
@@ -160,20 +160,35 @@ export const NavBar: React.FC<Props> = (props) => {
         swatches.forEach(function (swatch, index) {
 
             if (!result[swatch.column]) { result[swatch.column] = {} }
+            if (!result[swatch.column]["values"]) { result[swatch.column]["values"] = {} }
 
-            result[swatch.column][swatch.row] = {
+            // find the name of the column here (not bob)
+            let columName = localStorage.getItem(swatch.column) as string
+            result[swatch.column]["name"] = columName
+
+            result[swatch.column]["values"][swatch.row] = {
                 id: swatch.id,
                 value: swatch.hex,
                 lightness: swatch.lightness,
                 l_target: swatch.l_target,
                 userDefined: swatch.isUserDefined,
                 ccName: swatch.colorChecker.name,
-                semantic: swatch.semantic
             }
 
         });
 
-        return JSON.stringify({ color: { palette: result } }, null, 4);
+
+console.log(result)
+
+        for (var i = 0; i < result.length; i++) {
+            console.log(result[i]);
+            //Do something
+        }
+
+
+
+        // return JSON.stringify({ color: { palette: result } }, null, 4);
+        return JSON.stringify(result, null, 4);
 
     }
 
