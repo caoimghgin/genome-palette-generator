@@ -27,8 +27,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         let index = parseInt(columnIndex) + 1
         setColumn(columns[index])
 
-        console.log(columns[index], model.semantic, index)
-
         localStorage.setItem('columnIndex', index.toString())
         localStorage.setItem(columns[index], model.semantic)
 
@@ -40,7 +38,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
         let value = e.currentTarget.value
-        setSemantic(value)
         debounceAndSave(column, value)
     }
 
@@ -66,14 +63,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         margin-bottom: 88px;
   `;
 
-    // const InputWrapper = styled.div`
-    // display: flex;
-    // flex-direction: column
-    // align-items: center;
-    // justify-content: center;
-    // width: ${props => columnWidth};
-    // `;    
-
     const inputWrapper = {
         display: 'flex',
         flexDirection: 'column',
@@ -86,20 +75,20 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         <Wrapper>
 
             <div style={inputWrapper as React.CSSProperties}>
-
                 <input
                     type="text"
+                    key="6e03882a"
                     defaultValue={semantic}
                     placeholder="Enter a message"
                     onChange={(e) => semanticInputHandler(e)}
                 />
-
-                <input
+                 <input
                     type="text"
+                    key="78b51b30"
                     defaultValue={model.hexString}
                     placeholder="Enter a message"
                     onChange={(e) => inputHandeler(e)}
-                />
+                /> 
             </div>
 
             {swatches.map(swatch => (
