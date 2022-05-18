@@ -10,20 +10,17 @@ export type weightedTargetsColumn = {
 };
 
 export const Options = [
-    { value: '0', label: 'All' },
-    { value: '1', label: 'NewsKit' },
-    { value: '2', label: 'Carbon' },
-    { value: '3', label: 'Lightning' },
-    { value: '4', label: 'Ant' },
-    { value: '5', label: 'Accessible Palette' },
-    { value: '6', label: 'ColorBox' },
-    { value: '7', label: 'Genome' },
-    { value: '8', label: 'User Defined' },
+    { value: '0', label: 'Non-optimized' },
+    { value: '1', label: 'IBM Carbon' },
+    { value: '2', label: 'SalesForce Lightning' },
+    { value: '3', label: 'Ant' },
+    { value: '4', label: 'Accessible Palette' },
+    { value: '5', label: 'ColorBox' },
+    { value: '6', label: 'Genome' },
   ];
 
 enum WeightedTargetsOptions {
     Spectrum = 0,
-    NewsKit,
     Carbon,
     Lightning,
     Ant,
@@ -39,8 +36,6 @@ export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsC
             return weightedTargets_spectrum
         case WeightedTargetsOptions.Carbon:
             return weightedTargets_carbon
-        case WeightedTargetsOptions.NewsKit:
-            return weightedTargets_newskit
         case WeightedTargetsOptions.Lightning:
             return weightedTargets_lightning
         case WeightedTargetsOptions.Ant:

@@ -278,7 +278,7 @@ console.log(result)
 `;
 
     const DropdownContainer = styled.div`
-        width: 150px;
+        width: 220px;
         padding-left: 24px;
         text-align: left;
 `;
