@@ -19,7 +19,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     }, []);
 
     let label = model.hex
-    let infoLabel = model.LAB.L.toString() + " / " + model.hex
+    let infoLabel = "L*" + model.LAB.L.toString() + " / " + model.hex
 
     // semantic agnostic column/index of swatch saved to localStorage
     localStorage.setItem(model.id, JSON.stringify(model))
@@ -71,7 +71,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
         <Wrapper key={model.name}>
             {label}
-            {/* <WrapperInfo> {infoLabel} </WrapperInfo> */}
+            <WrapperInfo> {infoLabel} </WrapperInfo>
         </Wrapper>
 
     )

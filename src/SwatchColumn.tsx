@@ -67,6 +67,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         alignItems: 'center',
         justifyContent: 'center',
         width: columnWidth,
+        marginBottom: '22px'
     }
 
     return (
