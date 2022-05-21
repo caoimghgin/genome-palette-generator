@@ -58,6 +58,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const Wrapper = styled.div`
         visibility: visible;
         display: inline-block;
+        width: 140px;
         margin-bottom: 88px;
   `;
 
@@ -66,13 +67,20 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
         marginBottom: '22px'
     }
 
     const InputStyleSemantic = styled.input`
     text-align: center;
-    
+    width: 120px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding-top: 4px;
+    color: #3b3b3b;
+        padding-bottom: 4px;
+        border: 2px solid #e2e2e2;        
+
         /* text-align: center;
         font-weight: bold;
         font-size: 17px; */
@@ -86,7 +94,12 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     `    
 
 const InputStyleValue = styled.input`
-text-align: center;
+    text-align: center;
+    width: 120px;
+    font-size: 14px;
+    padding-top: 2px;
+        padding-bottom: 2px;
+        border: 2px solid #e2e2e2;        
     /* text-align: center;
     font-weight: normal;
     font-size: 17px; */
