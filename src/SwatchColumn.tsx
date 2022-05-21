@@ -49,10 +49,8 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }
 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
-        console.log("My column = " + column)
         let value = e.currentTarget.value;
         if (value.length === 7) {
-            console.log(value)
             setBase({ hexString: value, semantic: base.semantic })
         }
     }
