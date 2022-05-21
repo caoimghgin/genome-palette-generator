@@ -9,6 +9,8 @@ import logo from './logo.svg';
 import 'react-dropdown/style.css';
 import styled from '@emotion/styled';
 
+import Tooltip from './Tooltip'
+
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
@@ -178,7 +180,7 @@ export const NavBar: React.FC<Props> = (props) => {
         });
 
 
-console.log(result)
+        console.log(result)
 
         for (var i = 0; i < result.length; i++) {
             console.log(result[i]);

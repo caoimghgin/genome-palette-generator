@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SwatchModel } from './models/SwatchModel'
 import { rowHeight, fontSize, Event } from './constants';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
@@ -18,43 +18,62 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
     }, []);
 
-    let label = "n/a"
+    let label = model.hex
+    let infoLabel = model.LAB.L.toString() + " / " + model.hex
 
     // semantic agnostic column/index of swatch saved to localStorage
     localStorage.setItem(model.id, JSON.stringify(model))
 
-    label = model.LCH.L.toString() + " / " + model.LCH.C.toString()
-    label = model.LCH.L.toString()
-    label = model.LCH.L.toString() + " / " + model.hex
+    const WrapperInfo = styled.div`
+            visibility: hidden;
+            display: none;
+            opacity:0;
+
+        color: ${props => (model.LAB.L < 51 ? '#FFFFFF' : '#000000')};
+        background: ${props => model.hex};
+
+
+        transition:visibility 0.3s linear,opacity 0.3s linear;
+
+        text-align: center;
+        vertical-align: middle;
+        line-height: 65px;
+
+        width:180px;
+        height:70px;
+        filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.25)); 
+    `
 
     const Wrapper = styled.div`
+        display: ${props => (isVisible ? 'flex' : 'none')};
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
         visibility: visible;
-        font-size:  ${props => fontSize};
+        font-size:  16px;
         height: ${props => height};
         color: ${props => (model.LAB.L < 51 ? '#FFFFFF' : '#000000')};
         background: ${props => model.hex};
-        display: ${props => (isVisible ? 'flex' : 'none')};
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
         box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')};
         width: 100%;
         &:hover { 
-            transform: scale(1.2);
-            transition: 0.2s;
-            transition-timing-function: ease-in;
-            filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.25));
+            ${WrapperInfo} {
+                opacity:1;
+                visibility: visible;
+                display: inline-block;
+                position: absolute;
+            }
         };
   `;
 
     return (
-        <div>
 
-            <Wrapper key={model.name}>
-               {label}
-            </Wrapper>
+        <Wrapper key={model.name}>
+            {label}
+            {/* <WrapperInfo> {infoLabel} </WrapperInfo> */}
+        </Wrapper>
 
-        </div>
     )
 
 }
