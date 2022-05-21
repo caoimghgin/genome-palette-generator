@@ -22,6 +22,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     let infoLabel = "L*" + model.LAB.L.toString() + " / " + model.hex
 
     // semantic agnostic column/index of swatch saved to localStorage
+        /*
+    If I add 'isVisible' property, I could simply write everything to localStore and send a message 
+    for the UI to update by reading the localStore.
+    */
     localStorage.setItem(model.id, JSON.stringify(model))
 
     const WrapperInfo = styled.div`
@@ -31,7 +35,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
         color: ${props => (model.LAB.L < 51 ? '#FFFFFF' : '#000000')};
         background: ${props => model.hex};
-
 
         transition:visibility 0.3s linear,opacity 0.3s linear;
 
@@ -67,11 +70,15 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         };
   `;
 
+const onClick = (event: any) => {
+    console.table(model)
+}
+
     return (
 
         <Wrapper key={model.name}>
             {label}
-            <WrapperInfo> {infoLabel} </WrapperInfo>
+            <WrapperInfo onClick={onClick}> {infoLabel} </WrapperInfo>
         </Wrapper>
 
     )
