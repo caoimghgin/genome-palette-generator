@@ -66,22 +66,49 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: columnWidth,
+        width: '100%',
         marginBottom: '22px'
     }
+
+    const InputStyleSemantic = styled.input`
+    text-align: center;
+    
+        /* text-align: center;
+        font-weight: bold;
+        font-size: 17px; */
+        /* margin-bottom: 8px;
+        margin-right: 2px;
+        margin-left: 2px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        width: 100% */
+
+    `    
+
+const InputStyleValue = styled.input`
+text-align: center;
+    /* text-align: center;
+    font-weight: normal;
+    font-size: 17px; */
+    /* margin-right: 2px;
+        margin-left: 2px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    width: 100% */
+`    
 
     return (
         <Wrapper>
 
             <div style={inputWrapper as React.CSSProperties}>
-                <input
+                <InputStyleSemantic
                     type="text"
                     key="6e03882a"
                     defaultValue={semantic}
                     placeholder="Enter a message"
                     onChange={(e) => semanticInputHandler(e)}
                 />
-                 <input
+                 <InputStyleValue
                     type="text"
                     key="78b51b30"
                     defaultValue={model.hexString}
