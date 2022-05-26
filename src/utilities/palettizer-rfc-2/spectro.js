@@ -5,6 +5,7 @@ import { sRGBtoY, APCAcontrast } from  './apca'
 import chroma from "chroma-js"
 
 import { colorNames, hueValues, neutralTolerance, colorCheckerValuesLab } from '../../constants'
+import { result } from 'lodash'
 // import { createNull } from 'typescript'
 
 class Spectro {
@@ -46,6 +47,20 @@ class Spectro {
 
               return color
         
+    }
+
+    getWCAGBools(color) {
+        let result = []
+
+        let white = chroma.contrast(color, "#FFFFFF");
+        let black = chroma.contrast(color, "#000000");
+
+        result.push( (white >= 3) ? true : false)
+        result.push( (white >= 4.5) ? true : false)
+        result.push( (black >= 3) ? true : false)
+        result.push( (black >= 4.5) ? true : false)
+
+        return result
     }
 
     getWCAG(color) {
@@ -156,8 +171,13 @@ class Spectro {
         return result * 100
     }
 
-    getLabValue(hexString) {
-        return convert.hex.lab(hexString)
+    getLabValue(hex) {
+        // return convert.hex.lab(hexString)
+        return chroma(hex).lab()
+    }
+
+    getLightnessValue(color) {
+        let result = chroma(color).get('lab.l');
     }
 
     getLchValue(hexString) {

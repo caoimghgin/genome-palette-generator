@@ -13,12 +13,16 @@ export class SwatchModel {
     LAB!: LAB
     LCH!: LCH
     HSV!: HSV
-    WCAG2!: number
-    WCAG3!: number
     colorChecker!: ColorCheckerModel
     isUserDefined!: boolean
     isNeutral!: boolean
     l_target!: number
+    WCAG2!: number
+    WCAG3!: number
+    WCAG_W_30!: boolean
+    WCAG_W_45!: boolean
+    WCAG_K_30!: boolean
+    WCAG_K_45!: boolean
 
     constructor( hex: string, column: string) {
         var spectro = new Spectro()
@@ -37,6 +41,13 @@ export class SwatchModel {
         this.WCAG3 = spectro.getAPCA(hex)
         this.isUserDefined = false
         this.isNeutral = false
+
+        let wcag:any = spectro.getWCAGBools(hex)
+        this.WCAG_W_30 = wcag[0]
+        this.WCAG_W_45 = wcag[1]
+        this.WCAG_K_30 = wcag[2]
+        this.WCAG_K_45 = wcag[3]
+
     }
 
 }
@@ -55,7 +66,9 @@ export class LAB {
     a: number
     b: number
     constructor(Lab: number[]) {
-        this.L = Lab[0]
+
+        this.L = parseFloat(Lab[0].toFixed(2))
+        // this.L = Lab[0]
         this.a = Lab[1]
         this.b = Lab[2]
     }
