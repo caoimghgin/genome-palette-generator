@@ -62,10 +62,10 @@ class Palettizer {
         newSwatch.name = swatch.name
         newSwatch.isNeutral = swatch.isNeutral
 
-        newSwatch.WCAG2_K_30 = swatch.WCAG2_K_30
-        newSwatch.WCAG2_K_45 = swatch.WCAG2_K_45
-        newSwatch.WCAG2_W_30 = swatch.WCAG2_W_30
-        newSwatch.WCAG2_W_45 = swatch.WCAG2_W_45
+        // newSwatch.WCAG2_K_30 = swatch.WCAG2_K_30
+        // newSwatch.WCAG2_K_45 = swatch.WCAG2_K_45
+        // newSwatch.WCAG2_W_30 = swatch.WCAG2_W_30
+        // newSwatch.WCAG2_W_45 = swatch.WCAG2_W_45
 
         this.swatches[index] = newSwatch
 

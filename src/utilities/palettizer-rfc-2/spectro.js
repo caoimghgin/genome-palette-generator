@@ -52,27 +52,25 @@ class Spectro {
     getWCAGBools(color) {
         let result = []
 
-        let white = chroma.contrast(color, "#FFFFFF");
-        let black = chroma.contrast(color, "#000000");
+        let onWhite = chroma.contrast(color, "#FFFFFF");
+        let onBlack = chroma.contrast(color, "#000000");
 
-        result.push( (white >= 3) ? true : false)
-        result.push( (white >= 4.5) ? true : false)
-        result.push( (black >= 3) ? true : false)
-        result.push( (black >= 4.5) ? true : false)
+        result.push( ( onWhite >= 3 ) ? true : false)
+        result.push( ( onWhite >= 4.5 ) ? true : false)
+        result.push( ( onBlack >= 3 ) ? true : false)
+        result.push( ( onBlack >= 4.5 ) ? true : false)
 
         return result
     }
 
     getWCAG(color) {
-        let result = readability(color, '#FFFFFF');
+        let result = chroma.contrast(color, "#FFFFFF");
         return Math.round((result + Number.EPSILON) * 100) / 100
     }
 
     getAPCA(color) {
         let txt = sRGBtoY("FFFFFF")
         let bkg = sRGBtoY(color)
-        // console.log("WORKING: (" + txt + " -> " + bkg + ")")
-        // let r = APCAcontrast(b, a) // 81
         let r = APCAcontrast(txt, bkg) // 86
         return Math.abs(r)
     }
