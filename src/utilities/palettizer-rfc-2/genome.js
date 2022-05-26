@@ -45,10 +45,15 @@ class Palettizer {
         // do not modify if user defined
         if (swatch.isUserDefined) { return }
 
+        let target = swatch.l_target
+        if (target === 50) {
+            target = 49.8
+        }
+
         const n = 5
         var newHexValue =  this.swatches[index].hex
         for (let i = 0; i < n; i++) {
-            newHexValue = chroma(newHexValue).set('lab.l',  swatch.l_target.toString()).hex()
+            newHexValue = chroma(newHexValue).set('lab.l',  target.toString()).hex()
         }
         let newSwatch = new SwatchModel(newHexValue)
 
