@@ -19,10 +19,10 @@ export class SwatchModel {
     l_target!: number
     WCAG2!: number
     WCAG3!: number
-    WCAG_W_30!: boolean
-    WCAG_W_45!: boolean
-    WCAG_K_30!: boolean
-    WCAG_K_45!: boolean
+    WCAG2_W_30!: boolean
+    WCAG2_W_45!: boolean
+    WCAG2_K_30!: boolean
+    WCAG2_K_45!: boolean
 
     constructor( hex: string, column: string) {
         var spectro = new Spectro()
@@ -43,10 +43,10 @@ export class SwatchModel {
         this.isNeutral = false
 
         let wcag:any = spectro.getWCAGBools(hex)
-        this.WCAG_W_30 = wcag[0]
-        this.WCAG_W_45 = wcag[1]
-        this.WCAG_K_30 = wcag[2]
-        this.WCAG_K_45 = wcag[3]
+        this.WCAG2_W_30 = wcag[0]
+        this.WCAG2_W_45 = wcag[1]
+        this.WCAG2_K_30 = wcag[2]
+        this.WCAG2_K_45 = wcag[3]
 
     }
 

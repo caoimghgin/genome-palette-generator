@@ -117,6 +117,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const downloadAsRootJSON = () => {
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
+
         downloadSwatches(json)
         // alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
     }
@@ -136,7 +137,6 @@ export const NavBar: React.FC<Props> = (props) => {
     const logSwatches = () => {
         let swatches = getSwatchesFromlocalStorage()
         let result = findClosestSwatches(swatches, "#ffc107")
-        console.log(result)
     }
 
     const findClosestSwatches = (swatches: SwatchModel[], hex: string) => {
@@ -175,21 +175,14 @@ export const NavBar: React.FC<Props> = (props) => {
                 l_target: swatch.l_target,
                 userDefined: swatch.isUserDefined,
                 ccName: swatch.colorChecker.name,
+                WCAG2_W_30: swatch.WCAG2_W_30,
+                WCAG2_W_45: swatch.WCAG2_W_45,
+                WCAG2_K_30: swatch.WCAG2_K_30,
+                WCAG2_K_45: swatch.WCAG2_K_45,
             }
 
         });
 
-
-        console.log(result)
-
-        for (var i = 0; i < result.length; i++) {
-            console.log(result[i]);
-            //Do something
-        }
-
-
-
-        // return JSON.stringify({ color: { palette: result } }, null, 4);
         return JSON.stringify(result, null, 4);
 
     }
