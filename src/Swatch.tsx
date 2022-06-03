@@ -18,8 +18,11 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
     }, []);
 
-    let label = model.hex
-    let infoLabel = "L*" + model.LAB.L.toString() + " / " + model.hex
+
+    let label = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
+    // let infoLabel = "L*" + model.LAB.L.toString() + " / " + model.hex 
+
+    let infoLabel = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex  : "L*" + model.LAB.L.toString() + " / " + model.hex )
 
     // semantic agnostic column/index of swatch saved to localStorage
         /*
@@ -40,10 +43,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
         text-align: center;
         vertical-align: middle;
-        line-height: 65px;
+        line-height: 80px;
 
-        width:180px;
-        height:70px;
+        width:200px;
+        height:80px;
         filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.25)); 
     `
 
@@ -58,7 +61,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         height: ${props => height};
         color: ${props => (model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
         background: ${props => model.hex};
-        box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')};
+        /* box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')}; */
         width: 100%;
         &:hover { 
             ${WrapperInfo} {
