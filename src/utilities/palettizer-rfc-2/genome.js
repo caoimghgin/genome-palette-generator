@@ -49,7 +49,7 @@ class Palettizer {
         let target = swatch.l_target
         if (target === 50) {target = 49.5}
 
-        const n = 5
+        const n = 10
         var newHexValue =  this.swatches[index].hex
         for (let i = 0; i < n; i++) {
             newHexValue = chroma(newHexValue).set('lab.l',  target.toString()).hex()
