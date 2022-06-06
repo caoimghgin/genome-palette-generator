@@ -15,25 +15,11 @@ export class SwatchMapModel {
 
         this._values = []
         this.values = values.rows
-
         this._model = values
     
     }
 
     public newTargets(isNeutral: boolean) {
-
-        let values = this._model.rows
-
-        // if (isNeutral) {
-        //     console.log("I AM NEUTRAL BY GUM!")
-        // }
-        // if (this._model.neutrals.length > 1) {
-        //     console.log("And I have a NEUTRAL TARGET ARRAY")
-
-        // } else {
-        //     console.log("But I don't have a neutral target array")
-
-        // }
 
         if (isNeutral && (this._model.neutrals.length > 1)) {
             this.values = this._model.neutrals

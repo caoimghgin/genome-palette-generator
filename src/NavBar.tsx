@@ -162,13 +162,13 @@ export const NavBar: React.FC<Props> = (props) => {
         swatches.forEach(function (swatch, index) {
 
             if (!result[swatch.column]) { result[swatch.column] = {} }
-            if (!result[swatch.column]["values"]) { result[swatch.column]["values"] = {} }
+            if (!result[swatch.column]["rows"]) { result[swatch.column]["rows"] = {} }
 
-            // find the name of the column here (not bob)
+            // find the name of the column here 
             let columName = localStorage.getItem(swatch.column) as string
-            result[swatch.column]["name"] = columName
+            result[swatch.column]["semantic"] = columName
 
-            result[swatch.column]["values"][swatch.row] = {
+            result[swatch.column]["rows"][swatch.row] = {
                 id: swatch.id,
                 value: swatch.hex,
                 lightness: swatch.lightness,
