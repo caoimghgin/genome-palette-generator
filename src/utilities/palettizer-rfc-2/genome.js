@@ -42,12 +42,17 @@ class Palettizer {
 
         let swatch = this.swatches[index]
 
-        // do not modify if user defined
+        // do not modify if user defined OR neutral
         if (swatch.isUserDefined) { return }
 
         //49.8 == 48.8 (De of 1 for a perfect midtone)
         let target = swatch.l_target
-        if (target === 50) {target = 49.5}
+        if (swatch.isNeutral === false) { 
+            if (target === 50) {target = 48.5} 
+            if (target === 60) {target = 57.5}
+         } else {
+            if (target === 50) {target = 49.5} 
+         }
 
         const n = 10
         var newHexValue =  this.swatches[index].hex

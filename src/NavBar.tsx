@@ -11,10 +11,11 @@ import styled from '@emotion/styled';
 
 import Tooltip from './Tooltip'
 
+import { Matrix } from "./modules/SwatchMatrix";
+
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
-
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
@@ -86,13 +87,12 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const displaySwatches = (mapper: SwatchMapModel) => {
 
-        //
-        // Somehow, I need to contextually create columns/rows 
-        // for neutrals so I can display them here
-        //
+        // let swatches = getSwatchesFromlocalStorage()
+        // let swatchIds = mapSwatchesToTarget(swatches, mapper)
 
-        let swatches = getSwatchesFromlocalStorage()
-        let swatchIds = mapSwatchesToTarget(swatches, mapper)
+        let swatches = xGetSwatchesFromlocalStorage()
+        let mappedSwatches = xMapSwatchesToTarget(swatches, mapper)
+        let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
@@ -114,7 +114,14 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
+    const downloadJSON = () => {
+        let swatches = xGetSwatchesFromlocalStorage()
+        let json = JSON.stringify(swatches, null, 4);
+        downloadSwatches(json)
+    }
+
     const downloadAsRootJSON = () => {
+
         let swatches = getSwatchesFromlocalStorage()
         let json = formatSwatchesToGenomeJSON(swatches)
 
@@ -123,6 +130,11 @@ export const NavBar: React.FC<Props> = (props) => {
     }
 
     const tbd_resources = () => {
+
+        let map = new SwatchMapModel(weightedTargets(1)) // need to pass in the full weightedTargets, not just the rows..
+        let grid = xGetSwatchesFromlocalStorage()
+        let result = xMapSwatchesToTarget(grid, map)
+
         alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
     }
 
@@ -185,6 +197,105 @@ export const NavBar: React.FC<Props> = (props) => {
 
         return JSON.stringify(result, null, 4);
 
+    }
+
+    const xGetSwatchesFromlocalStorage = () => {
+
+        let grid = new Matrix.Grid()
+
+        for (let column = 0; column < columns.length; column++) {
+
+            let semantic = window.localStorage.getItem(columns[column]) as String
+            if (!semantic) { break }
+
+            let col = new Matrix.Column()
+            col.semantic = semantic
+
+            for (let row = 0; row < l_targets.length; row++) {
+                let swatchData = window.localStorage.getItem( columns[column] + row )
+                if (!swatchData) { break }
+                let swatch = JSON.parse(swatchData) as Matrix.Swatch
+                col.rows.push(swatch) 
+            }
+
+            grid.columns.push(col)
+        }
+
+        return grid
+
+    }
+
+    const xGetClosestIndex = (swatch: Matrix.Swatch, targets: Array<any>) => {
+        
+        // var closest = targets.reduce(function (prev, curr) {
+        //     return (Math.abs(curr - swatch.lightness) < Math.abs(prev - swatch.lightness) ? curr : prev);
+        // });
+        // return targets.indexOf(closest)
+
+        let m = (swatch.l_target === 85 ? -2.5 : 0)
+        var closest = targets.reduce(function (prev, curr) {
+            return (Math.abs(curr - (swatch.lightness + m)) < Math.abs(prev - (swatch.lightness + m)) ? curr : prev);
+        });
+        return targets.indexOf(closest)
+
+    }
+
+    const removeUndefinedWeightSwatches = (grid: Matrix.Grid) => {
+        grid.columns.forEach(function (column, index, arr) {
+            let weightOptimizedSwatches = column.rows.filter(swatch => { 
+                return swatch.weight !== undefined;
+            });
+            grid.columns[index].rows = weightOptimizedSwatches
+        });
+        return grid
+    }
+
+    const getSwatchIds = (grid: Matrix.Grid) => {
+        let result: string[] = [];
+        grid.columns.forEach(function (column, index, arr) {
+            let ids = column.rows.filter(swatch => { 
+                result.push(swatch.id as string)
+            });
+        });
+        return result
+    }
+
+    const xMapSwatchesToTarget = (grid: Matrix.Grid, mapper: SwatchMapModel) => {
+
+        grid.columns.forEach(function (column, index, arr) {
+
+            let neutralTargets = column.rows[12].isNeutral
+            let targets = mapper.newTargets(neutralTargets)
+
+            column.rows.forEach(function (row, index, arr) {
+                row.weight = undefined
+                if (targets.includes(row.l_target)) {
+                    row.weight = mapper.weights()[index] 
+                }
+                // good to get the id's of all the visible swatches
+                // let id = ( targets.includes(row.l_target) ? row.id : undefined )
+            });
+
+            //
+            // The userDefinedSwatch may not slot neatly into the L*5 grid. If the defined 
+            // swatch is not present, then insert into grid, replacing for closest match.
+            //
+            column.rows.filter(swatch => { 
+                if ( swatch.isUserDefined === true && swatch.weight === undefined ) {
+                    let index = xGetClosestIndex(swatch, targets)
+                    swatch.weight = column.rows[index].weight 
+                    column.rows[index].weight = undefined
+                }
+            });
+
+          });
+
+        //   console.log(removeUndefinedWeightSwatches(grid))
+        //   console.log(getSwatchIds(removeUndefinedWeightSwatches(grid)))
+        console.log(getSwatchIds(grid))
+
+          return grid
+    
     }
 
     const getSwatchesFromlocalStorage = () => {
@@ -297,7 +408,9 @@ export const NavBar: React.FC<Props> = (props) => {
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button>
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button>
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button>
-                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button>
+                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button> */}
+                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadJSON}> Export </button>
+
 
                 </ContainerRight>
 
