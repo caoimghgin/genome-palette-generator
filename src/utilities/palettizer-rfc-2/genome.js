@@ -48,9 +48,13 @@ class Palettizer {
         //49.8 == 48.8 (De of 1 for a perfect midtone)
         let target = swatch.l_target
         if (swatch.isNeutral === false) { 
+            if (target === 5) {target = 7}
+            if (target === 10) {target = 13.5}
             if (target === 50) {target = 48.5} 
             if (target === 60) {target = 57.5}
          } else {
+            if (target === 5) {target = 7}
+            if (target === 10) {target = 13.5}
             if (target === 50) {target = 49.5} 
          }
 
