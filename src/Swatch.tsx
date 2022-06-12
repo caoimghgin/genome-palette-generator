@@ -36,7 +36,9 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
             display: none;
             opacity:0;
 
-        color: ${props => (model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
+        color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
+        font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
+
         background: ${props => model.hex};
 
         transition:visibility 0.3s linear,opacity 0.3s linear;
@@ -59,7 +61,8 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         visibility: visible;
         font-size:  16px;
         height: ${props => height};
-        color: ${props => (model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
+        color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
+        font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
         background: ${props => model.hex};
         /* box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')}; */
         width: 100%;

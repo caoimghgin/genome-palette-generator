@@ -27,7 +27,7 @@ export class SwatchModel {
     constructor( hex: string, column: string) {
         var spectro = new Spectro()
 
-        this.hex = hex
+        this.hex = hex.toUpperCase()
         this.column = column
         this.row = 0
         this.l_target = -1

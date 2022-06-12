@@ -41,7 +41,7 @@ function App() {
             {/* <SwatchColumnsRandom/> */}
 
             <SwatchColumnLegend />
-            {/* WSJ
+            {/* WSJ */}
             <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
             <SwatchColumn model={{ hexString: "#8856CB", semantic: "secondary" }} />
             <SwatchColumn model={{ hexString: "#816D4D", semantic: "tertiary" }} />
@@ -50,7 +50,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
             <SwatchColumn model={{ hexString: "#007AFF", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} /> */}
+            <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
 
             {/* Bootstrap
             <SwatchColumn model={{ hexString: "#007BFF", semantic: "primary" }} />
@@ -85,7 +85,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} /> */}
 
-            <SwatchColumn model={{ hexString: "#0176d3", semantic: "primary" }} />
+            {/* <SwatchColumn model={{ hexString: "#0176d3", semantic: "primary" }} />
             <SwatchColumn model={{ hexString: "#0176d3", semantic: "secondary" }} />
             <SwatchColumn model={{ hexString: "#0176d3", semantic: "tertiary" }} />
             <SwatchColumn model={{ hexString: "#2e844a", semantic: "positive" }} />
@@ -93,9 +93,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#fe9339", semantic: "highlight" }} />
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} /> 
-
-            
+            <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} />  */}
 
             <Footer/>
         </div>
