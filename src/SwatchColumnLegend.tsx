@@ -47,8 +47,8 @@ interface ILabel { label: string }
 export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
 
     const wrapper = {
-        fontSize: fontSize,
-        fontWeight: 800,
+        fontSize: '14pt',
+        fontWeight: 700,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',

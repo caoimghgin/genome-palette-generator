@@ -1,8 +1,8 @@
 
 export const url = "https://api.npoint.io/93993ebc2b8a15e89afd/";
-export const rowHeight = '44px'
-export const columnWidth = '150px'
-export const fontSize = '14px'
+export const rowHeight = '60px'
+export const columnWidth = '180px'
+export const fontSize = '14pt'
 
 const options = [
     { value: '0', label: 'All' },
