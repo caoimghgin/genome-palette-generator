@@ -38,6 +38,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
         color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
         font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
+        font-size: 14pt;
         background: ${props => model.hex};
         transition:visibility 0.3s linear,opacity 0.3s linear;
         text-align: center;
@@ -57,7 +58,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         /* font-size:  ${props => ( ( model.WCAG2_W_30 || model.WCAG2_W_45 ) && model.WCAG2_W_45 || 
         ( !model.WCAG2_W_30 || !model.WCAG2_W_45 ) && model.WCAG2_W_30 ? '12pt': '14pt')}; */
 
-        font-size:  ${props => ( ( model.WCAG2_W_30 || model.WCAG2_W_45 ) ? '12pt' : '14pt')};
+        /* font-size:  ${props => ( ( model.WCAG2_W_30 || model.WCAG2_W_45 ) ? '12pt' : '14pt')}; */
 
         height: ${props => height};
         color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
