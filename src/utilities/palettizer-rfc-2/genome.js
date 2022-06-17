@@ -8,7 +8,7 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
 
-        this.optimization = "wsj"
+        this.optimization = "ddd"
 
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
 
@@ -126,110 +126,23 @@ class Palettizer {
     createSwatchColumn() {
 
         let tints_shades = []
+        // let index = this.getIndex(this.swatch)
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
         tints_shades = this.renderTintsAndShades(index)
 
         if (this.pinnedQuarterToneSwatch !== undefined) {
             let pinnedSwatchB = this.pinnedQuarterToneSwatch.hex
-            tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
+            tints_shades[this.getIndex(pinnedSwatchB)] = pinnedSwatchB
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
         }
 
         if (this.pinnedThreeQuarterToneSwatch !== undefined) {
             let pinnedSwatchA = this.pinnedThreeQuarterToneSwatch.hex
-            tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
+            tints_shades[this.getIndex(pinnedSwatchA)] = pinnedSwatchA
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
         }
-
-        // if (this.semantic === "primary") {
-
-        //     if (this.pinnedQuarterToneSwatch !== undefined) {
-        //         let pinnedSwatchB = this.pinnedQuarterToneSwatch.hex
-        //         tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //         tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //         tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-        //     }
-
-        //     if (this.pinnedThreeQuarterToneSwatch !==undefined) {
-        //         let pinnedSwatchA = this.pinnedThreeQuarterToneSwatch.hex
-        //         tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //         tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //         tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-        //     }
-
-        // }
-
-        // if (this.semantic === "secondary") {
-
-        //     let pinnedSwatchB = "#C0A1FF"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-        //     let pinnedSwatchA = "#59348A"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-
-        // }
-
-        // if (this.semantic === "tertiary") {
-
-        //     let pinnedSwatchB = "#9E855E"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-        //     let pinnedSwatchA = "#69583E"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-
-        // }
-
-        // if (this.semantic === "positive") {
-
-        //     let pinnedSwatchB = "#73EF69"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-        //     let pinnedSwatchA = "#064F00"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-
-        // }
-
-        // if (this.semantic === "negative") {
-
-        //     let pinnedSwatchB = "#FF8585"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-        //     let pinnedSwatchA = "#BA0000"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-
-        // }
-
-        // if (this.semantic === "highlight") {
-
-        //     let pinnedSwatchB = "#FFECB1"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-        //     let pinnedSwatchA = "#5B3D2F"
-        //     tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-        //     tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
-
-        // }
 
         this.populateSwatchesArray(tints_shades, index)
         // this.normalizeSwatchWeights(tints_shades)
@@ -240,7 +153,7 @@ class Palettizer {
         this.renderShades(hex, "#000000", true, false)
 
         let insertColor = hex
-        let idx = this.normalizedTargetWeightIndex(insertColor)
+        let idx = this.getIndex(insertColor)
         let insertSwatch = new SwatchModel(insertColor)
         insertSwatch.id = this.columnName + idx
         insertSwatch.column = this.columnName
@@ -264,8 +177,8 @@ class Palettizer {
 
     renderShades(start, end, clipStart, clipEnd) {
 
-        let startIndex = this.normalizedTargetWeightIndex(start)
-        let endIndex = this.normalizedTargetWeightIndex(end)
+        let startIndex = this.getIndex(start)
+        let endIndex = this.getIndex(end)
         let steps = (endIndex - startIndex) + 1
 
         let candidateSwatches = chroma.scale([start, end]).mode(this.colorModel).colors(steps * 3)
@@ -306,8 +219,8 @@ class Palettizer {
 
     xRenderTints(base, end, clipStart, clipEnd) {
 
-        let baseIndex = this.normalizedTargetWeightIndex(base)
-        let endIndex = this.normalizedTargetWeightIndex(end)
+        let baseIndex = this.getIndex(base)
+        let endIndex = this.getIndex(end)
         let steps = (baseIndex - endIndex) + 1
 
         let candidateSwatches = chroma.scale([end, base]).mode(this.colorModel).colors(steps * 3)
@@ -341,8 +254,8 @@ class Palettizer {
 
     xRenderShades(base, end, clipBase, clipEnd) {
 
-        let startIndex = this.normalizedTargetWeightIndex(base)
-        let endIndex = this.normalizedTargetWeightIndex(end)
+        let startIndex = this.getIndex(base)
+        let endIndex = this.getIndex(end)
         let steps = (endIndex - startIndex) + 1
 
         let candidateSwatches = chroma.scale([base, end]).mode(this.colorModel).colors(steps * 3)
@@ -375,13 +288,12 @@ class Palettizer {
         return this.swatches.find(element => element.isUserDefined);
     }
 
-    normalizedTargetWeightIndex(hex) {
+    getIndex(hex) {
         let lightness = parseFloat(this.spectro.getLabValue(hex)[0].toFixed(2))
         var target = l_targets.reduce(function (prev, curr) {
             return (Math.abs(curr - lightness) < Math.abs(prev - lightness) ? curr : prev);
         });
-        let index = l_targets.indexOf(target)
-        return index
+        return l_targets.indexOf(target)
     }
 
     normalizeSwatchWeights(tints_shades) {
@@ -440,21 +352,31 @@ class Palettizer {
 
     }
 
+    // populateSwatch(swatch) {
+    //     this.swatch.id = this.columnName + index
+    //     this.swatch.column = this.columnName
+    //     this.swatch.row = index
+    //     this.swatches[index] = swatch
+    //     this.swatch.weight = weights[index]
+    //     this.swatch.l_target = l_targets[index]
+    //     this.swatch.name = this.semantic + "-" + weights[index]
+    // }
+
     mapUserDefinedColorToNormalizedSwatchWeight() {
-        let color = this.swatch
-        var target = l_targets.reduce(function (prev, curr) {
-            return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
-        });
-        let index = l_targets.indexOf(target)
+        
+        // let swatch = this.swatch
+
+        let index = this.getIndex(this.swatch.hex)
 
         this.swatch.id = this.columnName + index
         this.swatch.column = this.columnName
         this.swatch.row = index
 
-        this.swatches[index] = color
         this.swatch.weight = weights[index]
         this.swatch.l_target = l_targets[index]
         this.swatch.name = this.semantic + "-" + weights[index]
+
+        this.swatches[index] = this.swatch
 
         return index
     }
@@ -462,7 +384,7 @@ class Palettizer {
     insertTintAndShades(tints_shades, insert) {
         if (insert.length < 2) return tints_shades
         let r = [...tints_shades]
-        let startIndex = this.normalizedTargetWeightIndex(insert[0])
+        let startIndex = this.getIndex(insert[0])
         // console.log("startIndex:", startIndex, insert.length)
 
         r.splice(startIndex, insert.length, ...insert)

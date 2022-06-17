@@ -1,4 +1,5 @@
 import Spectro from "../utilities/palettizer-rfc-2/spectro"
+import { l_targets } from '../constants'
 
 export class SwatchModel {
     id!: string
@@ -28,11 +29,6 @@ export class SwatchModel {
     constructor( hex: string, column: string) {
         var spectro = new Spectro()
 
-        this.hex = hex.toUpperCase()
-        this.column = column
-        this.row = 0
-        this.l_target = -1
-
         this.LAB = new LAB(spectro.getLabValue(hex))
         this.LCH = new LCH(spectro.getLchValue(hex))
         this.HSV = new HSV(spectro.getHsvValue(hex))
@@ -43,6 +39,11 @@ export class SwatchModel {
         this.isUserDefined = false
         this.isAnchored = false
         this.isNeutral = false
+
+        this.hex = hex.toUpperCase()
+        this.column = column
+        this.row = getRow(this.lightness)
+        this.l_target = getTarget(this.row)
 
         let wcag:any = spectro.getWCAGBools(hex)
         this.WCAG2_W_30 = wcag[0]
@@ -70,9 +71,8 @@ export class LAB {
     constructor(Lab: number[]) {
 
         this.L = parseFloat(Lab[0].toFixed(2))
-        // this.L = Lab[0]
-        this.a = Lab[1]
-        this.b = Lab[2]
+        this.a = parseFloat(Lab[1].toFixed(2))
+        this.b = parseFloat(Lab[2].toFixed(2))
     }
 }
 
@@ -96,4 +96,15 @@ export class HSV {
         this.S = HSV[1]
         this.V = HSV[2]
     }
+}
+
+function getRow(L: number) {
+    var target = l_targets.reduce(function (prev, curr) {
+        return (Math.abs(curr - L) < Math.abs(prev - L) ? curr : prev);
+    });
+    return l_targets.indexOf(target)
+}
+
+function getTarget(index: number) {
+    return l_targets[index]
 }
