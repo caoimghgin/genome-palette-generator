@@ -5,6 +5,7 @@ import Swatch from "../../Swatch"
 import Spectro from './spectro'
 
 class Palettizer {
+
     constructor(hexValue, semantic, columnName) {
         this.spectro = new Spectro()
         this.columnName = columnName
@@ -25,10 +26,31 @@ class Palettizer {
 
     createSwatchColumn() {
 
+        let tints_shades = []
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
-        let tints_shades = this.renderTintsAndShades(index)
+        tints_shades = this.renderTintsAndShades(index)
+
+        let pinnedSwatchA = "#015483"
+        let pinnedSwatchB = "#66C7FF"
+
+        if (this.semantic === "foo") {
+
+            tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchA)] = pinnedSwatchA
+            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
+            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
+
+            tints_shades[this.normalizedTargetWeightIndex(pinnedSwatchB)] = pinnedSwatchB
+            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
+            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
+
+            let test = this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true)
+            console.log("Test:", test)
+
+        }
+
         this.populateSwatchesArray(tints_shades, index)
-        // this.testInsertColor("#56377F")
+
+
         // this.normalizeSwatchWeights(tints_shades)
     }
 
@@ -125,12 +147,12 @@ class Palettizer {
             rowArray[index] = candidateSwatches[r]
         })
 
-        console.log(rowArray)
+        // console.log(rowArray)
 
         if (clipStart) { rowArray.shift() }
         if (clipEnd) { rowArray.pop() }
 
-        console.log(rowArray)
+        // console.log(rowArray)
         return rowArray
 
     }
@@ -161,7 +183,9 @@ class Palettizer {
             rowArray[index] = candidateSwatches[r]
         })
 
-        if (clipBase) {rowArray.shift()}
+        if (clipBase) { rowArray.shift() }
+        if (clipEnd) { rowArray.pop() }
+
         return rowArray
 
     }
@@ -194,17 +218,20 @@ class Palettizer {
 
         //49.8 == 48.8 (De of 1 for a perfect midtone)
         let target = swatch.l_target
-        if (swatch.isNeutral === false) {
-            if (target === 5) { target = 7 }
-            if (target === 10) { target = 13.5 }
-            if (target === 50) { target = 48.5 }
-            if (target === 55) { target = 53.0} 
-            if (target === 60) { target = 55.0 }
-        } else {
-            if (target === 5) { target = 7 }
-            if (target === 10) { target = 13.5 }
-            if (target === 50) { target = 49.5 }
-        }
+        
+        if (target === 50) { target = 49.5 }
+
+        // if (swatch.isNeutral === false) {
+        //     if (target === 5) { target = 7 }
+        //     if (target === 10) { target = 13.5 }
+        //     if (target === 50) { target = 48.5 }
+        //     if (target === 55) { target = 53.0} 
+        //     if (target === 60) { target = 55.0 }
+        // } else {
+        //     if (target === 5) { target = 7 }
+        //     if (target === 10) { target = 13.5 }
+        //     if (target === 50) { target = 49.5 }
+        // }
 
         const n = 10
         var newHexValue = this.swatches[index].hex
@@ -251,23 +278,32 @@ class Palettizer {
         return index
     }
 
+    insertTintAndShades(tints_shades, insert) {
+        let r = [...tints_shades]
+        let startIndex = this.normalizedTargetWeightIndex(insert[0])
+
+        r.splice(startIndex, insert.length, ...insert)
+
+        console.log("start", tints_shades)
+        console.log("spliced...", r)
+        return r
+    }
+
     renderTintsAndShades(index) {
 
         let baseColor = this.swatches[index].hex
         // Render tints
-        var tints = chroma.scale(['#FFFFFF', baseColor]).mode(this.colorModel).colors(index)
-        // Create the L*97.5 tint, between last tint and white
-        tints.splice(1, 0, chroma.scale([tints[1], tints[0]]).mode(this.colorModel).colors(3)[1])
+        // var tints = chroma.scale(['#FFFFFF', baseColor]).mode(this.colorModel).colors(index)
+        // // Create the L*97.5 tint, between last tint and white
+        // tints.splice(1, 0, chroma.scale([tints[1], tints[0]]).mode(this.colorModel).colors(3)[1])
         
         // // create shades
         // var shades = chroma.scale([this.swatches[index].hex, '#000000']).mode(this.colorModel).colors(l_targets.length - index)
         // // remove first value from shades (it is userDefined, and in last item of tints array)
         // shades.shift()
-        
-        
         // this.xRenderTints(baseColor, "#FFFFFF", true, true)
 
-        tints = this.xRenderTints(baseColor, "#FFFFFF", false, true)
+        let tints = this.xRenderTints(baseColor, "#FFFFFF", false, true)
         tints.push(baseColor)
         let shades = this.xRenderShades(baseColor, "#000000", true, false)
 

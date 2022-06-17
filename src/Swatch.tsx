@@ -6,7 +6,6 @@ import styled from '@emotion/styled/macro';
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     const [isVisible, setIsVisible] = React.useState(true)
-    const [modalIsOpen, setIsOpen] = React.useState(false);
     const [color, setColor] = React.useState("000000");
     const [height, setHeight] = React.useState(rowHeight);
 
@@ -18,17 +17,12 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
     }, []);
 
-
     let label = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
-    // let infoLabel = "L*" + model.LAB.L.toString() + " / " + model.hex 
+    let infoLabel = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
+    if (model.isAnchored) { label = "📍 " + label}
+    if (model.isAnchored) { infoLabel = "📍 " + infoLabel}
 
-    let infoLabel = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex  : "L*" + model.LAB.L.toString() + " / " + model.hex )
-
-    // semantic agnostic column/index of swatch saved to localStorage
-        /*
-    If I add 'isVisible' property, I could simply write everything to localStore and send a message 
-    for the UI to update by reading the localStore.
-    */
+    
     localStorage.setItem(model.id, JSON.stringify(model))
 
     const WrapperInfo = styled.div`
@@ -55,16 +49,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         justify-content: center;
         align-items: center;
         visibility: visible;
-        /* font-size:  ${props => ( ( model.WCAG2_W_30 || model.WCAG2_W_45 ) && model.WCAG2_W_45 || 
-        ( !model.WCAG2_W_30 || !model.WCAG2_W_45 ) && model.WCAG2_W_30 ? '12pt': '14pt')}; */
-
-        /* font-size:  ${props => ( ( model.WCAG2_W_30 || model.WCAG2_W_45 ) ? '12pt' : '14pt')}; */
-
         height: ${props => height};
         color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
         font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
         background: ${props => model.hex};
-        /* box-shadow: ${props => (model.isUserDefined ? 'inset 0px 0px 0px 1px ' + color : '')}; */
         width: 100%;
         &:hover { 
             ${WrapperInfo} {
@@ -76,9 +64,9 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         };
   `;
 
-const onClick = (event: any) => {
-    console.table(model)
-}
+    const onClick = (event: any) => {
+        console.table(model)
+    }
 
     return (
 

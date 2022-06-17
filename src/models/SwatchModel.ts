@@ -15,6 +15,7 @@ export class SwatchModel {
     HSV!: HSV
     colorChecker!: ColorCheckerModel
     isUserDefined!: boolean
+    isAnchored!: boolean
     isNeutral!: boolean
     l_target!: number
     WCAG2!: number
@@ -40,6 +41,7 @@ export class SwatchModel {
         this.WCAG2 = spectro.getWCAG(hex)
         this.WCAG3 = spectro.getAPCA(hex)
         this.isUserDefined = false
+        this.isAnchored = false
         this.isNeutral = false
 
         let wcag:any = spectro.getWCAGBools(hex)
