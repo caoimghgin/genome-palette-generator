@@ -8,7 +8,7 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
 
-        this.optimization = "ddd"
+        this.optimization = "xxx"
 
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
 
@@ -29,7 +29,7 @@ class Palettizer {
         //                                                                                  //
         //////////////////////////////////////////////////////////////////////////////////////
 
-        if (this.optimization = "wsj") {
+        if (this.optimization === "wsj") {
             if (this.semantic === "primary") {
 
                 let pinnedHexQuarterTone = "#66C7FF"
@@ -130,14 +130,14 @@ class Palettizer {
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
         tints_shades = this.renderTintsAndShades(index)
 
-        if (this.pinnedQuarterToneSwatch !== undefined) {
+        if (this.pinnedQuarterToneSwatch != undefined) {
             let pinnedSwatchB = this.pinnedQuarterToneSwatch.hex
             tints_shades[this.getIndex(pinnedSwatchB)] = pinnedSwatchB
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
         }
 
-        if (this.pinnedThreeQuarterToneSwatch !== undefined) {
+        if (this.pinnedThreeQuarterToneSwatch != undefined) {
             let pinnedSwatchA = this.pinnedThreeQuarterToneSwatch.hex
             tints_shades[this.getIndex(pinnedSwatchA)] = pinnedSwatchA
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
