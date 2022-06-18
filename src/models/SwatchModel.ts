@@ -26,7 +26,7 @@ export class SwatchModel {
     WCAG2_K_30!: boolean
     WCAG2_K_45!: boolean
 
-    constructor( hex: string, column: string) {
+    constructor( hex: string, column: string, semantic: string ) {
         var spectro = new Spectro()
 
         this.LAB = new LAB(spectro.getLabValue(hex))
@@ -42,6 +42,7 @@ export class SwatchModel {
 
         this.hex = hex.toUpperCase()
         this.column = column
+        this.semantic = semantic
         this.row = getRow(this.lightness)
         this.l_target = getTarget(this.row)
 
