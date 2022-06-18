@@ -252,12 +252,9 @@ class Palettizer {
             rowArray[index] = candidateSwatches[r]
         })
 
-        // console.log(rowArray)
-
         if (clipStart) { rowArray.shift() }
         if (clipEnd) { rowArray.pop() }
 
-        // console.log(rowArray)
         return rowArray
 
     }
@@ -316,26 +313,9 @@ class Palettizer {
     normalizeWeightAtIndex(index) {
 
         let swatch = this.swatches[index]
-
-        // do not modify if user defined OR neutral
         if (swatch.isUserDefined || swatch.isPinned) { return }
-
-        //49.8 == 48.8 (De of 1 for a perfect midtone)
         let target = swatch.l_target
-
         if (target === 50) { target = 49.5 }
-
-        // if (swatch.isNeutral === false) {
-        //     if (target === 5) { target = 7 }
-        //     if (target === 10) { target = 13.5 }
-        //     if (target === 50) { target = 48.5 }
-        //     if (target === 55) { target = 53.0} 
-        //     if (target === 60) { target = 55.0 }
-        // } else {
-        //     if (target === 5) { target = 7 }
-        //     if (target === 10) { target = 13.5 }
-        //     if (target === 50) { target = 49.5 }
-        // }
 
         const n = 10
         var newHexValue = this.swatches[index].hex
@@ -353,29 +333,10 @@ class Palettizer {
         newSwatch.semantic = swatch.semantic
         newSwatch.name = swatch.name
         newSwatch.isNeutral = swatch.isNeutral
-
-        // newSwatch.WCAG2_K_30 = swatch.WCAG2_K_30
-        // newSwatch.WCAG2_K_45 = swatch.WCAG2_K_45
-        // newSwatch.WCAG2_W_30 = swatch.WCAG2_W_30
-        // newSwatch.WCAG2_W_45 = swatch.WCAG2_W_45
-
         this.swatches[index] = newSwatch
-
     }
 
-    // populateSwatch(swatch) {
-    //     this.swatch.id = this.columnName + index
-    //     this.swatch.column = this.columnName
-    //     this.swatch.row = index
-    //     this.swatches[index] = swatch
-    //     this.swatch.weight = weights[index]
-    //     this.swatch.l_target = l_targets[index]
-    //     this.swatch.name = this.semantic + "-" + weights[index]
-    // }
-
     mapUserDefinedColorToNormalizedSwatchWeight() {
-
-        // let swatch = this.swatch
 
         let index = this.getIndex(this.swatch.hex)
 
@@ -396,42 +357,18 @@ class Palettizer {
         if (insert.length < 2) return tints_shades
         let r = [...tints_shades]
         let startIndex = this.getIndex(insert[0])
-        // console.log("startIndex:", startIndex, insert.length)
-
         r.splice(startIndex, insert.length, ...insert)
-
-        console.log("start", tints_shades)
-        console.log("spliced...", r)
         return r
     }
 
     renderTintsAndShades(index) {
 
         let baseColor = this.swatches[index].hex
-        // Render tints
-        // var tints = chroma.scale(['#FFFFFF', baseColor]).mode(this.colorModel).colors(index)
-        // // Create the L*97.5 tint, between last tint and white
-        // tints.splice(1, 0, chroma.scale([tints[1], tints[0]]).mode(this.colorModel).colors(3)[1])
-
-        // // create shades
-        // var shades = chroma.scale([this.swatches[index].hex, '#000000']).mode(this.colorModel).colors(l_targets.length - index)
-        // // remove first value from shades (it is userDefined, and in last item of tints array)
-        // shades.shift()
-        // this.xRenderTints(baseColor, "#FFFFFF", true, true)
-
         let tints = this.xRenderTints(baseColor, "#FFFFFF", false, true)
         tints.push(baseColor)
         let shades = this.xRenderShades(baseColor, "#000000", true, false)
-
-        // return array with all tints and shades, including userDefined at index.
         return tints.concat(shades);
     }
-
-    renderTintsAndShadesQuarterTones(index) {
-        // do things
-    }
-
-
 
     populateSwatchesArray(tints_shades, index) {
 
