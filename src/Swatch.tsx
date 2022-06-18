@@ -19,8 +19,8 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     let label = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
     let infoLabel = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
-    if (model.isAnchored) { label = "📍 " + label}
-    if (model.isAnchored) { infoLabel = "📍 " + infoLabel}
+    if (model.isPinned) { label = "📍 " + label}
+    if (model.isPinned) { infoLabel = "📍 " + infoLabel}
 
     
     localStorage.setItem(model.id, JSON.stringify(model))

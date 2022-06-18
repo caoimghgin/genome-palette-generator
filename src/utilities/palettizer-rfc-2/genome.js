@@ -8,7 +8,7 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
 
-        this.optimization = "xxx"
+        this.pinned = "xxx"
 
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
 
@@ -29,7 +29,7 @@ class Palettizer {
         //                                                                                  //
         //////////////////////////////////////////////////////////////////////////////////////
 
-        if (this.optimization === "wsj") {
+        if (this.pinned === "wsj") {
             if (this.semantic === "primary") {
 
                 let pinnedHexQuarterTone = "#66C7FF"
@@ -135,6 +135,11 @@ class Palettizer {
             tints_shades[this.getIndex(pinnedSwatchB)] = pinnedSwatchB
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
+
+            let s = new SwatchModel(pinnedSwatchB, this.columnName)
+            s.isPinned = true
+            s.id = this.columnName + s.row
+            this.swatches[s.row] = s
         }
 
         if (this.pinnedThreeQuarterToneSwatch != undefined) {
@@ -142,10 +147,16 @@ class Palettizer {
             tints_shades[this.getIndex(pinnedSwatchA)] = pinnedSwatchA
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
             tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
+
+            let s = new SwatchModel(pinnedSwatchA, this.columnName)
+            s.isPinned = true
+            s.id = this.columnName + s.row
+            this.swatches[s.row] = s
+
         }
 
         this.populateSwatchesArray(tints_shades, index)
-        // this.normalizeSwatchWeights(tints_shades)
+        this.normalizeSwatchWeights(tints_shades)
     }
 
     testInsertColor(hex) {
@@ -307,7 +318,7 @@ class Palettizer {
         let swatch = this.swatches[index]
 
         // do not modify if user defined OR neutral
-        if (swatch.isUserDefined) { return }
+        if (swatch.isUserDefined || swatch.isPinned) { return }
 
         //49.8 == 48.8 (De of 1 for a perfect midtone)
         let target = swatch.l_target
@@ -363,7 +374,7 @@ class Palettizer {
     // }
 
     mapUserDefinedColorToNormalizedSwatchWeight() {
-        
+
         // let swatch = this.swatch
 
         let index = this.getIndex(this.swatch.hex)
@@ -430,9 +441,8 @@ class Palettizer {
         // flag we set in constructor.
 
         for (var i = 0; i < tints_shades.length; i++) {
-            if (i !== index) {
+            if (this.swatches[i].id === undefined) {
                 let swatch = new SwatchModel(tints_shades[i])
-
                 swatch.id = this.columnName + i
                 swatch.column = this.columnName
                 swatch.isNeutral = this.swatch.isNeutral
