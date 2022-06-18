@@ -22,7 +22,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     if (model.isPinned) { label = "📍 " + label}
     if (model.isPinned) { infoLabel = "📍 " + infoLabel}
 
-    
     localStorage.setItem(model.id, JSON.stringify(model))
 
     const WrapperInfo = styled.div`

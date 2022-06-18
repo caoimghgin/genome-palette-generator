@@ -7,10 +7,7 @@ import { ISwatchBase } from "../models/SwatchBase"
 export function SwatchesModelFactory(model: ISwatchBase, column: string): SwatchModel[] {
 
     let genome = new Palettizer(model.hexString, model.semantic, column)
-    
-    genome.createSwatchColumn()
-    let swatchColumn = genome.swatches
-    return swatchColumn
+    return genome.createSwatchColumn()
 
 }
 

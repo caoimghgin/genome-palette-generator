@@ -1,7 +1,6 @@
 import chroma from "chroma-js"
 import { l_targets, weights } from '../../constants'
 import { SwatchModel } from '../../models/SwatchModel'
-import Swatch from "../../Swatch"
 import Spectro from './spectro'
 
 class Palettizer {
@@ -10,7 +9,7 @@ class Palettizer {
 
         this.pinned = "xxx"
 
-        this.swatches = Array(l_targets.length).fill(new SwatchModel("#CCCCCC"));
+        this.swatches = Array(l_targets.length).fill(new SwatchModel("#FFFFFF", columnName, semantic));
 
         this.spectro = new Spectro()
         this.columnName = columnName
@@ -23,7 +22,6 @@ class Palettizer {
 
         this.pinnedQuarterToneSwatch = undefined
         this.pinnedThreeQuarterToneSwatch = undefined
-
 
         //////////////////////////////////////////////////////////////////////////////////////
         //                                                                                  //
@@ -38,10 +36,14 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
 
             }
 
@@ -53,11 +55,14 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
-
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
             }
 
             if (this.semantic === "tertiary") {
@@ -68,11 +73,14 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
-
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
             }
 
             if (this.semantic === "positive") {
@@ -83,11 +91,14 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
-
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
             }
 
             if (this.semantic === "negative") {
@@ -98,10 +109,14 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
 
             }
 
@@ -113,15 +128,26 @@ class Palettizer {
                 this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
                 this.pinnedQuarterToneSwatch.semantic = semantic
                 this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
 
                 this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
                 this.pinnedThreeQuarterToneSwatch.semantic = semantic
                 this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
 
             }
         }
 
     }
+
+    //
+    // I want to add all the defined/pinned swatches into the array
+    // then I can ask the array to get every defined/pinned, sort them by row (index)
+    // and holistically generate SHADES from white to next pinned, to next defined, to pinned
+    // and finally to black. Should be much easier to work with.
+    //
 
     createSwatchColumn() {
 
@@ -131,51 +157,76 @@ class Palettizer {
         tints_shades = this.renderTintsAndShades(index)
 
         if (this.pinnedQuarterToneSwatch != undefined) {
-            let pinnedSwatchB = this.pinnedQuarterToneSwatch.hex
-            tints_shades[this.getIndex(pinnedSwatchB)] = pinnedSwatchB
-            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchB, this.swatch.hex, true, true))
-            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderTints(pinnedSwatchB, "#FFFFFF", true, false))
-
-            let s = new SwatchModel(pinnedSwatchB, this.columnName)
-            s.isPinned = true
-            s.id = this.columnName + s.row
-            this.swatches[s.row] = s
+            this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
         }
 
         if (this.pinnedThreeQuarterToneSwatch != undefined) {
-            let pinnedSwatchA = this.pinnedThreeQuarterToneSwatch.hex
-            tints_shades[this.getIndex(pinnedSwatchA)] = pinnedSwatchA
-            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(this.swatch.hex, pinnedSwatchA, true, true))
-            tints_shades = this.insertTintAndShades(tints_shades, this.xRenderShades(pinnedSwatchA, "#000000", true, false))
+            this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+        }
 
-            let s = new SwatchModel(pinnedSwatchA, this.columnName)
-            s.isPinned = true
-            s.id = this.columnName + s.row
-            this.swatches[s.row] = s
+        this.createTintsShades()
+        this.normalizeSwatchWeights(tints_shades)
+        return this.swatches
+    }
+
+    createTintsShades() {
+
+        let index = 0
+        let swatches = [...this.swatches]
+
+        let swatchA = swatches[index]
+        swatchA.id = this.columnName + index
+        let swatchB = swatches.find(swatch => ((swatch.isPinned === true) || (swatch.isUserDefined === true)));
+
+        if (swatchB === undefined) {
+            let hex = "#000000"
+            let swatch = new SwatchModel(hex, this.semantic)
+            swatch.id = this.columnName +  swatch.row
+            swatch.isNeutral = this.swatch.isNeutral
+            swatch.semantic = this.semantic
+            this.swatches[this.getIndex(hex)] = swatch
+            this.swatches[swatch.row] = swatch
+            swatchB = swatch
 
         }
 
-        this.populateSwatchesArray(tints_shades, index)
-        this.normalizeSwatchWeights(tints_shades)
-    }
+        let shades = this.xRenderShades(swatchA.hex, swatchB.hex, true, true)
 
-    testInsertColor(hex) {
+        let stop = false;
+        do {
+            if (swatchB.hex === "#000000") stop = true
 
-        this.renderShades(hex, "#000000", true, false)
+            shades = this.xRenderShades(swatchA.hex, swatchB.hex, true, true)
 
-        let insertColor = hex
-        let idx = this.getIndex(insertColor)
-        let insertSwatch = new SwatchModel(insertColor)
-        insertSwatch.id = this.columnName + idx
-        insertSwatch.column = this.columnName
-        insertSwatch.isNeutral = this.swatch.isNeutral
-        insertSwatch.row = idx
-        insertSwatch.l_target = l_targets[idx]
-        insertSwatch.semantic = this.semantic
-        insertSwatch.name = this.semantic + "-" + weights[idx]
-        this.swatches[idx] = insertSwatch
+            for (var i = 0; i < shades.length; i++) {
+                let hex = shades[i]
+                let swatch = new SwatchModel(hex, this.semantic)
+                swatch.id = this.columnName + swatch.row
+                swatch.column = this.columnName
+                swatch.isNeutral = this.swatch.isNeutral
+                swatch.semantic = this.semantic
+                this.swatches[this.getIndex(hex)] = swatch
+            }
+            index = index + shades.length + 1
+            swatches.splice(0, shades.length + 2);
 
-        return
+            swatchA = Object.assign({}, swatchB);
+            swatchB = swatches.find(swatch => ((swatch.isPinned === true) || (swatch.isUserDefined === true)));
+
+            if (swatchB === undefined) {
+                let hex = "#000000"
+                let swatch = new SwatchModel(hex, this.semantic)
+                swatch.id = this.columnName +  swatch.row
+                swatch.isNeutral = this.swatch.isNeutral
+                swatch.semantic = this.semantic
+                this.swatches[this.getIndex(hex)] = swatch
+                this.swatches[swatch.row] = swatch
+                swatchB = swatch
+
+            }
+
+
+        } while (stop === false);
 
     }
 
@@ -376,6 +427,11 @@ class Palettizer {
         // and placing each into the 'this.swatches' array, IF the index of the
         // hexValue does not equal given index of method. This preserves the 'userDefined'
         // flag we set in constructor.
+
+        for (var i = 0; i < this.swatches.length; i++) {
+            this.swatches[i].id = this.columnName + i
+        }
+        return
 
         for (var i = 0; i < tints_shades.length; i++) {
             if (this.swatches[i].id === undefined) {

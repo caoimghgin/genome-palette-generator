@@ -272,8 +272,6 @@ export const NavBar: React.FC<Props> = (props) => {
                 if (targets.includes(row.l_target)) {
                     row.weight = mapper.weights()[index] 
                 }
-                // good to get the id's of all the visible swatches
-                // let id = ( targets.includes(row.l_target) ? row.id : undefined )
             });
 
             //
@@ -289,10 +287,6 @@ export const NavBar: React.FC<Props> = (props) => {
             });
 
           });
-
-        //   console.log(removeUndefinedWeightSwatches(grid))
-        //   console.log(getSwatchIds(removeUndefinedWeightSwatches(grid)))
-        console.log(getSwatchIds(grid))
 
           return grid
     
