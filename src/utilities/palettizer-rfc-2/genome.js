@@ -7,15 +7,17 @@ class Palettizer {
 
     constructor(hexValue, semantic, columnName) {
 
-        this.pinned = "xxx"
-
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#FFFFFF", columnName, semantic));
+
+        this.pinned = "wsj"
 
         this.spectro = new Spectro()
         this.columnName = columnName
         this.colorModel = 'oklab' // works better on blue tints (lch/lab turns blue tints to purple shade)
         this.semantic = semantic
-        this.swatch = new SwatchModel(hexValue, columnName)
+        
+        
+        this.swatch = new SwatchModel(hexValue, columnName, semantic)
         this.swatch.isUserDefined = true
         this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
         this.swatch.semantic = semantic
@@ -26,119 +28,6 @@ class Palettizer {
         //////////////////////////////////////////////////////////////////////////////////////
         //                                                                                  //
         //////////////////////////////////////////////////////////////////////////////////////
-
-        if (this.pinned === "wsj") {
-            if (this.semantic === "primary") {
-
-                let pinnedHexQuarterTone = "#66C7FF"
-                let pinnedHexThreeQuarterTone = "#015483"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-            }
-
-            if (this.semantic === "secondary") {
-
-                let pinnedHexQuarterTone = "#C0A1FF"
-                let pinnedHexThreeQuarterTone = "#59348A"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-            }
-
-            if (this.semantic === "tertiary") {
-
-                let pinnedHexQuarterTone = "#9E855E"
-                let pinnedHexThreeQuarterTone = "#69583E"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-            }
-
-            if (this.semantic === "positive") {
-
-                let pinnedHexQuarterTone = "#73EF69"
-                let pinnedHexThreeQuarterTone = "#064F00"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-            }
-
-            if (this.semantic === "negative") {
-
-                let pinnedHexQuarterTone = "#FF8585"
-                let pinnedHexThreeQuarterTone = "#BA0000"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-            }
-
-            if (this.semantic === "highlight") {
-
-                let pinnedHexQuarterTone = "#FFECB1"
-                let pinnedHexThreeQuarterTone = "#5B3D2F"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName)
-                this.pinnedQuarterToneSwatch.semantic = semantic
-                this.pinnedQuarterToneSwatch.isAnchored = true
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName)
-                this.pinnedThreeQuarterToneSwatch.semantic = semantic
-                this.pinnedThreeQuarterToneSwatch.isAnchored = true
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-            }
-        }
 
     }
 
@@ -156,17 +45,135 @@ class Palettizer {
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
         tints_shades = this.renderTintsAndShades(index)
 
-        if (this.pinnedQuarterToneSwatch != undefined) {
-            this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-        }
 
-        if (this.pinnedThreeQuarterToneSwatch != undefined) {
-            this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-        }
+
+        this.insertPinnedColors()
 
         this.createTintsShades()
         this.normalizeSwatchWeights(tints_shades)
         return this.swatches
+    }
+
+    insertPinnedColors() {
+        if (this.pinned === "wsj") {
+            if (this.semantic === "primary") {
+
+                let pinnedHexQuarterTone = "#66C7FF"
+                let pinnedHexThreeQuarterTone = "#015483"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+
+
+            }
+
+            if (this.semantic === "secondary") {
+
+                let pinnedHexQuarterTone = "#C0A1FF"
+                let pinnedHexThreeQuarterTone = "#59348A"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+            }
+
+            if (this.semantic === "tertiary") {
+
+                let pinnedHexQuarterTone = "#9E855E"
+                let pinnedHexThreeQuarterTone = "#69583E"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+            }
+
+            if (this.semantic === "positive") {
+
+                let pinnedHexQuarterTone = "#73EF69"
+                let pinnedHexThreeQuarterTone = "#064F00"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+            }
+
+            if (this.semantic === "negative") {
+
+                let pinnedHexQuarterTone = "#FF8585"
+                let pinnedHexThreeQuarterTone = "#BA0000"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+
+            }
+
+            if (this.semantic === "highlight") {
+
+                let pinnedHexQuarterTone = "#FFECB1"
+                let pinnedHexThreeQuarterTone = "#5B3D2F"
+
+                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
+                this.pinnedQuarterToneSwatch.isAnchored = true
+                this.pinnedQuarterToneSwatch.isPinned = true
+                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
+
+                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
+                this.pinnedThreeQuarterToneSwatch.isAnchored = true
+                this.pinnedThreeQuarterToneSwatch.isPinned = true
+                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
+
+                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
+                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
+
+            }
+        }
     }
 
     createTintsShades() {
