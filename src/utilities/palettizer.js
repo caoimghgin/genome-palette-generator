@@ -5,11 +5,12 @@ import Spectro from './spectro'
 
 class Palettizer {
 
-    constructor(hexValue, semantic, columnName) {
+    constructor(hexValue, semantic, columnName, hexValues) {
 
+        this.hexValues = hexValues
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#FFFFFF", columnName, semantic));
 
-        this.pinned = "xxx"
+        // this.pinned = "xxx"
 
         this.spectro = new Spectro()
         this.columnName = columnName
@@ -21,12 +22,19 @@ class Palettizer {
         this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
         this.swatch.semantic = semantic
 
-        this.pinnedQuarterToneSwatch = undefined
-        this.pinnedThreeQuarterToneSwatch = undefined
+        // this.pinnedQuarterToneSwatch = undefined
+        // this.pinnedThreeQuarterToneSwatch = undefined
 
     }
 
+
+
     createSwatchColumn() {
+
+        //
+        // transition from single 'base' color to accepting an array of colors
+        //
+
         this.insertPinnedColors()
         this.createTintsShades()
         this.normalizeSwatchWeights()
@@ -34,116 +42,26 @@ class Palettizer {
     }
 
     insertPinnedColors() {
-
-        this.swatch.id = this.columnName + this.swatch.row
-        this.swatches[this.swatch.row] = this.swatch
-
-        if (this.pinned === "wsj") {
-            if (this.semantic === "primary") {
-
-                let pinnedHexQuarterTone = "#66C7FF"
-                let pinnedHexThreeQuarterTone = "#015483"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-
+        this.hexValues.forEach((hexValue, index) => {
+            console.log(`Current index: ${index}`);
+            console.log(hexValue);
+            if (index == 0) {
+                this.swatch = new SwatchModel(hexValue, this.columnName, this.semantic)
+                this.swatch.isUserDefined = true
+                this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
+                this.swatch.semantic = this.semantic
+                this.swatch.id = this.columnName + this.swatch.row
+                this.swatches[this.swatch.row] = this.swatch
+            } else {
+                this.swatch = new SwatchModel(hexValue, this.columnName, this.semantic)
+                this.swatch.isPinned = true
+                this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
+                this.swatch.semantic = this.semantic
+                this.swatch.id = this.columnName + this.swatch.row
+                this.swatches[this.swatch.row] = this.swatch
             }
 
-            if (this.semantic === "secondary") {
-
-                let pinnedHexQuarterTone = "#C0A1FF"
-                let pinnedHexThreeQuarterTone = "#59348A"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-            }
-
-            if (this.semantic === "tertiary") {
-
-                let pinnedHexQuarterTone = "#9E855E"
-                let pinnedHexThreeQuarterTone = "#69583E"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-            }
-
-            if (this.semantic === "positive") {
-
-                let pinnedHexQuarterTone = "#73EF69"
-                let pinnedHexThreeQuarterTone = "#064F00"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-            }
-
-            if (this.semantic === "negative") {
-
-                let pinnedHexQuarterTone = "#FF8585"
-                let pinnedHexThreeQuarterTone = "#BA0000"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-
-            }
-
-            if (this.semantic === "highlight") {
-
-                let pinnedHexQuarterTone = "#FFECB1"
-                let pinnedHexThreeQuarterTone = "#5B3D2F"
-
-                this.pinnedQuarterToneSwatch = new SwatchModel(pinnedHexQuarterTone, this.columnName, this.semantic)
-                this.pinnedQuarterToneSwatch.isPinned = true
-                this.pinnedQuarterToneSwatch.id = this.columnName + this.pinnedQuarterToneSwatch.row
-
-                this.pinnedThreeQuarterToneSwatch = new SwatchModel(pinnedHexThreeQuarterTone, this.columnName, this.semantic)
-                this.pinnedThreeQuarterToneSwatch.isPinned = true
-                this.pinnedThreeQuarterToneSwatch.id = this.columnName + this.pinnedThreeQuarterToneSwatch.row
-
-                this.swatches[this.pinnedQuarterToneSwatch.row] = this.pinnedQuarterToneSwatch
-                this.swatches[this.pinnedThreeQuarterToneSwatch.row] = this.pinnedThreeQuarterToneSwatch
-
-            }
-        }
+        });
     }
 
     createTintsShades() {
