@@ -87,9 +87,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const displaySwatches = (mapper: SwatchMapModel) => {
 
-        // let swatches = getSwatchesFromlocalStorage()
-        // let swatchIds = mapSwatchesToTarget(swatches, mapper)
-
         let swatches = xGetSwatchesFromlocalStorage()
         let mappedSwatches = xMapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
