@@ -1,5 +1,5 @@
 
-import Palettizer from "../utilities/palettizer-rfc-2/genome"
+import Palettizer from "../utilities/palettizer"
 
 import { SwatchModel } from '../models/SwatchModel'
 import { ISwatchBase } from "../models/SwatchBase"
