@@ -44,11 +44,7 @@ class Palettizer {
         // let index = this.getIndex(this.swatch)
         let index = this.mapUserDefinedColorToNormalizedSwatchWeight()
         tints_shades = this.renderTintsAndShades(index)
-
-
-
         this.insertPinnedColors()
-
         this.createTintsShades()
         this.normalizeSwatchWeights(tints_shades)
         return this.swatches
@@ -207,13 +203,19 @@ class Palettizer {
 
             for (var i = 0; i < shades.length; i++) {
                 let hex = shades[i]
+                let index = this.getIndex(hex)
                 let swatch = new SwatchModel(hex, this.semantic)
                 swatch.id = this.columnName + swatch.row
                 swatch.column = this.columnName
                 swatch.isNeutral = this.swatch.isNeutral
                 swatch.semantic = this.semantic
-                this.swatches[this.getIndex(hex)] = swatch
+
+                if (!this.swatches[index].isPinned && 
+                    !this.swatches[index].isUserDefined ) {
+                    this.swatches[index] = swatch
+                }
             }
+
             index = index + shades.length + 1
             swatches.splice(0, shades.length + 2);
 
@@ -222,11 +224,12 @@ class Palettizer {
 
             if (swatchB === undefined) {
                 let hex = "#000000"
+                let index = this.getIndex(hex)
                 let swatch = new SwatchModel(hex, this.semantic)
                 swatch.id = this.columnName +  swatch.row
                 swatch.isNeutral = this.swatch.isNeutral
                 swatch.semantic = this.semantic
-                this.swatches[this.getIndex(hex)] = swatch
+                this.swatches[index] = swatch
                 this.swatches[swatch.row] = swatch
                 swatchB = swatch
 
