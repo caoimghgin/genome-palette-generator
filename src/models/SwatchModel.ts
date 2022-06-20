@@ -5,10 +5,7 @@ export class SwatchModel {
     id!: string
     column!: string
     row!: number
-    name!: string
     hex!: string
-    original?: SwatchModel
-    weight!: string
     semantic!: string
     lightness!: number
     LAB!: LAB

@@ -69,7 +69,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     return (
 
-        <Wrapper key={model.name}>
+        <Wrapper key={model.id}>
             {label}
             <WrapperInfo onClick={onClick}> {infoLabel} </WrapperInfo>
         </Wrapper>

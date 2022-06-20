@@ -6,45 +6,24 @@ import Spectro from './spectro'
 class Palettizer {
 
     constructor(hexValue, semantic, columnName, hexValues) {
-
-        this.hexValues = hexValues
+        this.spectro = new Spectro()
         this.swatches = Array(l_targets.length).fill(new SwatchModel("#FFFFFF", columnName, semantic));
 
-        // this.pinned = "xxx"
-
-        this.spectro = new Spectro()
+        this.hexValues = hexValues
         this.columnName = columnName
         this.colorModel = 'oklab' // works better on blue tints (lch/lab turns blue tints to purple shade)
         this.semantic = semantic
-        
-        this.swatch = new SwatchModel(hexValue, columnName, semantic)
-        this.swatch.isUserDefined = true
-        this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
-        this.swatch.semantic = semantic
-
-        // this.pinnedQuarterToneSwatch = undefined
-        // this.pinnedThreeQuarterToneSwatch = undefined
-
     }
 
-
-
     createSwatchColumn() {
-
-        //
-        // transition from single 'base' color to accepting an array of colors
-        //
-
         this.insertPinnedColors()
-        this.createTintsShades()
+        this.createTintsAndShades()
         this.normalizeSwatchWeights()
         return this.swatches
     }
 
     insertPinnedColors() {
         this.hexValues.forEach((hexValue, index) => {
-            console.log(`Current index: ${index}`);
-            console.log(hexValue);
             if (index == 0) {
                 this.swatch = new SwatchModel(hexValue, this.columnName, this.semantic)
                 this.swatch.isUserDefined = true
@@ -52,6 +31,7 @@ class Palettizer {
                 this.swatch.semantic = this.semantic
                 this.swatch.id = this.columnName + this.swatch.row
                 this.swatches[this.swatch.row] = this.swatch
+                console.log("Set user defined")
             } else {
                 this.swatch = new SwatchModel(hexValue, this.columnName, this.semantic)
                 this.swatch.isPinned = true
@@ -64,7 +44,7 @@ class Palettizer {
         });
     }
 
-    createTintsShades() {
+    createTintsAndShades() {
 
         let index = 0
         let swatches = [...this.swatches]
@@ -164,29 +144,69 @@ class Palettizer {
     }
 
     normalizeSwatchWeights() {
+
+        console.log(this.swatches)
+
+        this.swatches.forEach((swatch, index) => {
+            
+            if (!swatch.isUserDefined && !swatch.isPinned) {
+                const n = 10
+
+                let target = l_targets[index]
+                if (target === 50) { target = 49.75 } // Bring the L*50 slightly lower to pass WCAG2 Large text
+
+                var newHexValue = swatch.hex
+                for (let i = 0; i < n; i++) {
+                    newHexValue = chroma(newHexValue).set('lab.l', target.toString()).hex()
+                }
+                let normalizedSwatch = new SwatchModel(newHexValue, this.columnName, this.semantic)
+                normalizedSwatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
+                normalizedSwatch.semantic = this.semantic
+                normalizedSwatch.id = this.columnName + normalizedSwatch.row
+                this.swatches[index] = normalizedSwatch
+            }
+
+        });
+
+        return
+
+
+
         for (var index = 0; index < this.swatches.length; index++) {
             let swatch = this.swatches[index]
-            if (swatch.isUserDefined || swatch.isPinned) { return }
-            let target = swatch.l_target
-            if (target === 50) { target = 49.5 }
-    
-            const n = 10
-            var newHexValue = this.swatches[index].hex
-            for (let i = 0; i < n; i++) {
-                newHexValue = chroma(newHexValue).set('lab.l', target.toString()).hex()
+
+            console.log(swatch)
+
+            if (swatch.isUserDefined) { 
+                console.log("I refuse to normalize", swatch.id, swatch.hex, "because it is USER DEFINED")
             }
-            let newSwatch = new SwatchModel(newHexValue)
-    
-            newSwatch.column = this.columnName
-            newSwatch.row = swatch.row
-    
-            newSwatch.id = swatch.id
-            newSwatch.weight = swatch.weight
-            newSwatch.l_target = swatch.l_target
-            newSwatch.semantic = swatch.semantic
-            newSwatch.name = swatch.name
-            newSwatch.isNeutral = swatch.isNeutral
-            this.swatches[index] = newSwatch
+
+            if (swatch.isPinned) { 
+                console.log("I refuse to normalize", swatch.id, swatch.hex, "because it is USER PINNED")
+            }
+
+            if (!swatch.isUserDefined || !swatch.isPinned) {
+                let target = swatch.l_target
+                if (target === 50) { target = 60.2 }
+        
+                const n = 10
+                var newHexValue = this.swatches[index].hex
+                for (let i = 0; i < n; i++) {
+                    newHexValue = chroma(newHexValue).set('lab.l', target.toString()).hex()
+                }
+
+                let newSwatch = new SwatchModel(newHexValue)
+                newSwatch.column = this.columnName
+                newSwatch.row = swatch.row
+                newSwatch.id = swatch.id
+                // newSwatch.weight = swatch.weight
+                newSwatch.l_target = swatch.l_target
+                newSwatch.semantic = swatch.semantic
+                // newSwatch.name = swatch.name
+                newSwatch.isNeutral = swatch.isNeutral
+                this.swatches[index] = newSwatch
+            }
+
         }
     }
 
