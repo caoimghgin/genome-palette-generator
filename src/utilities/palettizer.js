@@ -144,8 +144,6 @@ class Palettizer {
 
     normalizeSwatchWeights() {
 
-        console.log(this.swatches)
-
         this.swatches.forEach((swatch, index) => {
             
             if (!swatch.isUserDefined && !swatch.isPinned) {

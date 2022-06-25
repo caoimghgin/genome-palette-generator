@@ -131,10 +131,11 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         }
     }
 
-    function insertPinnedColors(e: React.FormEvent<HTMLInputElement>) {
-        let value = e.currentTarget.value;
-        console.log(value)
+    const insertPinnedColors = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        alert("-- A modal appears allowing users to insert additional 'pinned' colors in column: " + semantic);
     }
+
 
     const Wrapper = styled.div`
         visibility: visible;
@@ -150,6 +151,14 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         justifyContent: 'center',
         marginBottom: '22px'
     }
+
+    const buttonWrapper = styled.button`
+    text-align: center;
+    width: 120px;
+    font-size: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+`
 
     const InputStyleSemantic = styled.input`
     text-align: center;
@@ -187,7 +196,12 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     value={colors[0]}
                     onChange={(e) => inputHandeler(e)}
                 />
-                {/* <button> + </button> */}
+
+                
+                
+                <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
+
+   
 
             </div>
 
