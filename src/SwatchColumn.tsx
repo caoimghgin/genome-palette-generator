@@ -15,11 +15,30 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     const [column, setColumn] = useState<string>('A');
     const [semantic, setSemantic] = useState<string>(model.semantic);
-    const [colors, setColors] = React.useState<Array<string>>([model.hexString]);
+    const [baseColor, setBaseColor] = React.useState<Array<string>>([model.hexString]);
+    const [pinnedColors, setPinnedColors] = React.useState<Array<string>>([]);
+    const [swatches, setSwatches] = React.useState<Array<SwatchModel>>([]);
 
-    let swatches = createSwatches("xxx")
+    // Run once on instantiation
+    useEffect(() => {
+        // setPinnedColors(["#66C7FF", "#015483"])
+        initColumnIndex()
+        let columnIndex = localStorage.getItem('columnIndex') as string
+        let index = parseInt(columnIndex) + 1
+        setColumn(columns[index])
+
+        localStorage.setItem('columnIndex', index.toString())
+        localStorage.setItem(columns[index], model.semantic)
+
+    }, []);
+
+    // Update on change of pinnedColors, baseColor, or column
+    useEffect(() => {
+        setSwatches(createSwatches("xxx"))
+    }, [pinnedColors, baseColor, column]);
 
     function createSwatches(override: string) {
+
         if (override == "wsj") {
             switch (column) {
                 case "A":
@@ -41,7 +60,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "I":
                     return SwatchesModelFactory(column, semantic, ["#6F6F6F", "#F5F5F5", "#EBEBEB", "#CCCCCC", "#555555", "#333333", "#222222", "#111111"])
                 default:
-                    return SwatchesModelFactory(column, semantic, colors)
+                    return SwatchesModelFactory(column, semantic, baseColor)
             }
         } else if (override == "mw") {
             switch (column) {
@@ -64,7 +83,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "I":
                     return SwatchesModelFactory(column, semantic, ["#202020"])
                 default:
-                    return SwatchesModelFactory(column, semantic, colors)
+                    return SwatchesModelFactory(column, semantic, baseColor)
             }
         } else if (override == "brn") {
             switch (column) {
@@ -87,25 +106,13 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "I":
                     return SwatchesModelFactory(column, semantic, ["#6D7878", "#F5F5F5", "#E5E5E5", "#6D7878", "#4D5B5C", "#001E20", "#969F9F"])
                 default:
-                    return SwatchesModelFactory(column, semantic, colors)
+                    return SwatchesModelFactory(column, semantic, baseColor)
             }
         } else {
-            return SwatchesModelFactory(column, semantic, colors)
+            return SwatchesModelFactory(column, semantic, baseColor.concat(pinnedColors))
         }
 
     }
-
-    useEffect(() => {
-
-        initColumnIndex()
-        let columnIndex = localStorage.getItem('columnIndex') as string
-        let index = parseInt(columnIndex) + 1
-        setColumn(columns[index])
-
-        localStorage.setItem('columnIndex', index.toString())
-        localStorage.setItem(columns[index], model.semantic)
-
-    }, []);
 
     const debounceAndSave = useCallback(debounce((col, sem) => {
         localStorage.setItem(col, sem)
@@ -127,7 +134,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         let value = e.currentTarget.value;
         if (value.length === 7) {
-            setColors([value])
+            setBaseColor([value])
         }
     }
 
@@ -192,16 +199,12 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 <InputStyleValue
                     type="text"
                     key="78b51b30"
-                    defaultValue={colors[0]}
-                    value={colors[0]}
+                    defaultValue={baseColor}
+                    value={baseColor}
                     onChange={(e) => inputHandeler(e)}
                 />
 
-                
-                
                 <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
-
-   
 
             </div>
 
