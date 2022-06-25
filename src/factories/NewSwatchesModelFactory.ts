@@ -1,11 +1,10 @@
 
 import Palettizer from "../utilities/palettizer"
 import { SwatchModel } from '../models/SwatchModel'
-import { ISwatchBase } from "../models/SwatchBase"
 
-export function SwatchesModelFactory(model: ISwatchBase, column: string, hexValues: string[]): SwatchModel[] {
+export function SwatchesModelFactory(column: string, semantic: string, hexValues: string[]): SwatchModel[] {
 
-    let palettizer = new Palettizer(model.hexString, model.semantic, column, hexValues)
+    let palettizer = new Palettizer(column, semantic, hexValues)
     return palettizer.createSwatchColumn()
 
 }
