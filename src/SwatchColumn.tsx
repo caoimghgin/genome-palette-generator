@@ -13,16 +13,13 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
-    const [base, setBase] = useState<ISwatchBase>(model);
     const [column, setColumn] = useState<string>('A');
     const [semantic, setSemantic] = useState<string>(model.semantic);
     const [colors, setColors] = React.useState<Array<string>>([model.hexString]);
 
-    model.columnName = column
-
     let swatches = createSwatches("xxx")
 
-    function createSwatches(override:string) {
+    function createSwatches(override: string) {
         if (override == "wsj") {
             switch (column) {
                 case "A":
@@ -40,12 +37,12 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "G":
                     return SwatchesModelFactory(column, semantic, ["#0F62FE"])
                 case "H":
-                    return SwatchesModelFactory(column, semantic, ["#007AFF"])   
+                    return SwatchesModelFactory(column, semantic, ["#007AFF"])
                 case "I":
-                     return SwatchesModelFactory(column, semantic, ["#6F6F6F", "#F5F5F5", "#EBEBEB", "#CCCCCC", "#555555", "#333333", "#222222", "#111111"])                                       
+                    return SwatchesModelFactory(column, semantic, ["#6F6F6F", "#F5F5F5", "#EBEBEB", "#CCCCCC", "#555555", "#333333", "#222222", "#111111"])
                 default:
-                    return SwatchesModelFactory(column, semantic, [base.hexString])
-            }           
+                    return SwatchesModelFactory(column, semantic, colors)
+            }
         } else if (override == "mw") {
             switch (column) {
                 case "A":
@@ -61,14 +58,14 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "F":
                     return SwatchesModelFactory(column, semantic, ["#FCB839", "#FFCF3D"])
                 case "G":
-                    return SwatchesModelFactory(column, semantic, ["#0F62FE"])    
+                    return SwatchesModelFactory(column, semantic, ["#0F62FE"])
                 case "H":
-                    return SwatchesModelFactory(column, semantic, ["#3677A8"])   
+                    return SwatchesModelFactory(column, semantic, ["#3677A8"])
                 case "I":
-                     return SwatchesModelFactory(column, semantic, ["#202020"])                                           
+                    return SwatchesModelFactory(column, semantic, ["#202020"])
                 default:
-                    return SwatchesModelFactory(column, semantic, [base.hexString])
-            }  
+                    return SwatchesModelFactory(column, semantic, colors)
+            }
         } else if (override == "brn") {
             switch (column) {
                 case "A":
@@ -84,16 +81,16 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 case "F":
                     return SwatchesModelFactory(column, semantic, ["#E9CB2D", "#B88D1F", "#957100"])
                 case "G":
-                    return SwatchesModelFactory(column, semantic, ["#0F62FE"])    
+                    return SwatchesModelFactory(column, semantic, ["#0F62FE"])
                 case "H":
-                    return SwatchesModelFactory(column, semantic, ["#3677A8"])   
+                    return SwatchesModelFactory(column, semantic, ["#3677A8"])
                 case "I":
-                     return SwatchesModelFactory(column, semantic, ["#6D7878", "#F5F5F5", "#E5E5E5", "#6D7878", "#4D5B5C", "#001E20", "#969F9F"])                                           
+                    return SwatchesModelFactory(column, semantic, ["#6D7878", "#F5F5F5", "#E5E5E5", "#6D7878", "#4D5B5C", "#001E20", "#969F9F"])
                 default:
-                    return SwatchesModelFactory(column, semantic, [base.hexString])
-            }              
-        } else  {
-            return SwatchesModelFactory(column, semantic, [base.hexString])
+                    return SwatchesModelFactory(column, semantic, colors)
+            }
+        } else {
+            return SwatchesModelFactory(column, semantic, colors)
         }
 
     }
@@ -116,6 +113,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
         let value = e.currentTarget.value
+        // setSemantic(value)
         debounceAndSave(column, value)
     }
 
@@ -129,9 +127,13 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
         let value = e.currentTarget.value;
         if (value.length === 7) {
-            setBase({ hexString: value, semantic: base.semantic })
             setColors([value])
         }
+    }
+
+    function insertPinnedColors(e: React.FormEvent<HTMLInputElement>) {
+        let value = e.currentTarget.value;
+        console.log(value)
     }
 
     const Wrapper = styled.div`
@@ -139,7 +141,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         display: inline-block;
         width: 140px;
         margin-bottom: 88px;
-  `;
+  `
 
     const inputWrapper = {
         display: 'flex',
@@ -157,36 +159,16 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     margin-bottom: 8px;
     padding-top: 4px;
     color: #3b3b3b;
-        padding-bottom: 4px;
-        border: 2px solid #e2e2e2;        
-
-        /* text-align: center;
-        font-weight: bold;
-        font-size: 17px; */
-        /* margin-bottom: 8px;
-        margin-right: 2px;
-        margin-left: 2px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        width: 100% */
-
-    `
-
+    padding-bottom: 4px;
+    border: 2px solid #e2e2e2;        
+`
     const InputStyleValue = styled.input`
     text-align: center;
     width: 120px;
     font-size: 14px;
     padding-top: 2px;
-        padding-bottom: 2px;
-        border: 2px solid #e2e2e2;        
-    /* text-align: center;
-    font-weight: normal;
-    font-size: 17px; */
-    /* margin-right: 2px;
-        margin-left: 2px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-    width: 100% */
+    padding-bottom: 2px;
+    border: 2px solid #e2e2e2;
 `
     return (
         <Wrapper>
@@ -196,7 +178,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     type="text"
                     key="6e03882a"
                     defaultValue={semantic}
-                    placeholder="Enter a message"
                     onChange={(e) => semanticInputHandler(e)}
                 />
                 <InputStyleValue
@@ -204,10 +185,9 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                     key="78b51b30"
                     defaultValue={colors[0]}
                     value={colors[0]}
-                    placeholder="Enter a message"
                     onChange={(e) => inputHandeler(e)}
                 />
-
+                {/* <button> + </button> */}
 
             </div>
 
