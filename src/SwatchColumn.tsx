@@ -8,6 +8,8 @@ import { debounce } from 'lodash';
 import styled from '@emotion/styled';
 import ReactModal from 'react-modal';
 
+import SelectPinnedColorsView from './SelectPinnedColorsView'
+
 interface ISwatchColumn {
     model: ISwatchBase;
 }
@@ -42,17 +44,21 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }, []);
 
     // Update on change of pinnedColors, baseColor, or column
-    useEffect(() => {        
+    useEffect(() => {   
         setSwatches(createSwatches())
+        closeModal()     
     }, [pinnedColors, baseColor]);
 
     useEffect(() => {      
-        //
-        // This useEffect fires upon update of 'column' variable. It's only purpose
-        // is to insert estabilished brand colors so they do not need to be retyped
-        //  
+
         setSwatches(createSwatches())
-        // manualInsertColors("brn")
+        //
+        // This manualInsertColors() within useEffect() fires upon update of 'column' variable. 
+        // It's only purpose is to insert estabilished brand colors so they do not need to be retyped
+        //  
+        manualInsertColors("wsj")
+        //
+        //
     }, [column]);
 
     function manualInsertColors(brand: string) {
@@ -309,14 +315,7 @@ const customStyles = {
            contentLabel="Minimal Modal Example"
         >
           <button onClick={closeModal}>Close Modal</button>
-          <form>
-            <input type="text" name="pinned1" />
-            <input type="text" name="pinned2" />
-            <input type="text" name="pinned3" />
-            <input type="text" name="pinned4" />
-            <input type="text" name="pinned5" />
-            <input type="submit" value="Submit" />
-        </form>
+          <SelectPinnedColorsView pinnedColors={pinnedColors} updatePinnedColors={setPinnedColors}/>
 
         </ReactModal>
 
