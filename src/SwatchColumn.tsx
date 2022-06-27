@@ -56,7 +56,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         // This manualInsertColors() within useEffect() fires upon update of 'column' variable. 
         // It's only purpose is to insert estabilished brand colors so they do not need to be retyped
         //  
-        manualInsertColors("wsj")
+        // manualInsertColors("wsj")
         //
         //
     }, [column]);
