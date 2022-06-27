@@ -334,7 +334,7 @@ const customStyles = {
                     onChange={(e) => inputHandeler(e)}
                 />
 
-                {/* <button onClick={insertPinnedColors} className="button" name="button 4"> + </button> */}
+                <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
 
             </div>
 

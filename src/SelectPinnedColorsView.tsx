@@ -13,26 +13,24 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
     const [pin3, setPin3] = useState('');
 
     useEffect(() => {
-        console.log("ALL THE PROPS...", pinnedColors)
-        console.log("updatePinnedColors...", updatePinnedColors)
-
-        if (pinnedColors.length > 0) {
-            setPin1(pinnedColors[0])
-        }
+        if (pinnedColors[0] !== undefined) { setPin1(pinnedColors[0]) }
+        if (pinnedColors[1] !== undefined) { setPin2(pinnedColors[1]) }
+        if (pinnedColors[2] !== undefined) { setPin3(pinnedColors[2]) }
     }, []);
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault(); // Preventing the page from reloading
-        // console.log(pin1, pin2, pin3)
-        // Do something 
-        // alert(term);
-        updatePinnedColors(["#C0E8FF", "#003353"])  
-        console.log([pin1, pin2, pin3])
+        let r = []
+        if (pin1 != '') { r.push(pin1) }
+        if (pin2 != '') { r.push(pin2) }
+        if (pin3 != '') { r.push(pin3) }
+        updatePinnedColors(r)
     }
 
     return (
         <div>
-            <h1> Hello! </h1>
+            <h1> Pin Colors </h1>
+            <p> Add hex codes in the fields below to insert additional colors in the column.</p>
             <div className="container">
                 <form id="contact-form" onSubmit={submitForm} method="POST">
                     <div className="form-group">
