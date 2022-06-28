@@ -187,6 +187,19 @@ export const NavBar: React.FC<Props> = (props) => {
                 }
             });
 
+
+            //
+            // The pinned may not slot neatly into the L*5 grid. If the defined 
+            // swatch is not present, then insert into grid, replacing for closest match.
+            //
+            column.rows.filter(swatch => { 
+                if ( swatch.isPinned === true && swatch.weight === undefined ) {
+                    let index = getClosestIndex(swatch, targets)
+                    swatch.weight = column.rows[index].weight 
+                    column.rows[index].weight = undefined
+                }
+            });
+
             //
             // The userDefinedSwatch may not slot neatly into the L*5 grid. If the defined 
             // swatch is not present, then insert into grid, replacing for closest match.

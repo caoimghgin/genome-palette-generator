@@ -26,6 +26,7 @@ export module Matrix {
         HSV!: HSV
         colorChecker!: ColorCheckerModel
         isUserDefined!: boolean
+        isPinned!: boolean
         isNeutral!: boolean
         l_target!: number
         WCAG2!: number
