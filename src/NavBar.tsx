@@ -130,10 +130,10 @@ export const NavBar: React.FC<Props> = (props) => {
             col.semantic = semantic
 
             for (let row = 0; row < l_targets.length; row++) {
-                let swatchData = window.localStorage.getItem( columns[column] + row )
+                let swatchData = window.localStorage.getItem(columns[column] + row)
                 if (!swatchData) { break }
                 let swatch = JSON.parse(swatchData) as Matrix.Swatch
-                col.rows.push(swatch) 
+                col.rows.push(swatch)
             }
 
             grid.columns.push(col)
@@ -155,7 +155,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const removeUndefinedWeightSwatches = (grid: Matrix.Grid) => {
         grid.columns.forEach(function (column, index, arr) {
-            let weightOptimizedSwatches = column.rows.filter(swatch => { 
+            let weightOptimizedSwatches = column.rows.filter(swatch => {
                 return swatch.weight !== undefined;
             });
             grid.columns[index].rows = weightOptimizedSwatches
@@ -166,7 +166,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const getSwatchIds = (grid: Matrix.Grid) => {
         let result: string[] = [];
         grid.columns.forEach(function (column, index, arr) {
-            let ids = column.rows.filter(swatch => { 
+            let ids = column.rows.filter(swatch => {
                 result.push(swatch.id as string)
             });
         });
@@ -183,20 +183,23 @@ export const NavBar: React.FC<Props> = (props) => {
             column.rows.forEach(function (row, index, arr) {
                 row.weight = undefined
                 if (targets.includes(row.l_target)) {
-                    row.weight = mapper.weights()[index] 
+                    row.weight = mapper.weights()[index]
                 }
             });
 
-
             //
-            // The pinned may not slot neatly into the L*5 grid. If the defined 
-            // swatch is not present, then insert into grid, replacing for closest match.
+            // The pinned may not slot neatly into the L*5 matrix. If defined
+            // swatch is not present, then insert into matrix, replacing for closest match.
             //
-            column.rows.filter(swatch => { 
-                if ( swatch.isPinned === true && swatch.weight === undefined ) {
+            column.rows.filter(swatch => {
+                if (swatch.isPinned === true && swatch.weight === undefined) {
                     let index = getClosestIndex(swatch, targets)
-                    swatch.weight = column.rows[index].weight 
-                    column.rows[index].weight = undefined
+                    // need to test if a .isUserDefined is in the slot!
+                    let testing = column.rows[index]
+                    if (testing.isUserDefined == false) {
+                        swatch.weight = column.rows[index].weight
+                        column.rows[index].weight = undefined
+                    }
                 }
             });
 
@@ -204,18 +207,18 @@ export const NavBar: React.FC<Props> = (props) => {
             // The userDefinedSwatch may not slot neatly into the L*5 grid. If the defined 
             // swatch is not present, then insert into grid, replacing for closest match.
             //
-            column.rows.filter(swatch => { 
-                if ( swatch.isUserDefined === true && swatch.weight === undefined ) {
+            column.rows.filter(swatch => {
+                if (swatch.isUserDefined === true && swatch.weight === undefined) {
                     let index = getClosestIndex(swatch, targets)
-                    swatch.weight = column.rows[index].weight 
+                    swatch.weight = column.rows[index].weight
                     column.rows[index].weight = undefined
                 }
             });
 
-          });
+        });
 
-          return grid
-    
+        return grid
+
     }
 
     const getSwatchesFromlocalStorage = () => {
