@@ -8,9 +8,6 @@ import Dropdown from 'react-dropdown';
 import logo from './logo.svg';
 import 'react-dropdown/style.css';
 import styled from '@emotion/styled';
-
-import Tooltip from './Tooltip'
-
 import { Matrix } from "./modules/SwatchMatrix";
 
 interface Props { }
@@ -24,90 +21,14 @@ export const NavBar: React.FC<Props> = (props) => {
         displaySwatches(map)
     }
 
-    const getClosestIndex = (color: SwatchModel, targets: Array<any>) => {
-        var closest = targets.reduce(function (prev, curr) {
-            return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
-        });
-        return targets.indexOf(closest)
-    }
-
-    const mapSwatchesToTarget = (swatches: SwatchModel[], mapper: SwatchMapModel) => {
-
-        //
-        // Before I go through this, need to determine if the color is a neutral
-        // Need to get the right targets for neutrals (not assume all will be same targets)
-        //
-
-        let result = [] as any
-
-        for (let column = 0; column < columns.length; column++) {
-
-            let visibleSwatches = [] as any
-
-            var columnSwatches = swatches.filter(obj => {
-                return obj.column === columns[column];
-            });
-
-            if (columnSwatches.length === 0) { break }
-
-            // if target includes the SwatchModel.l_target, then make visible
-            let t_targets = mapper.newTargets(columnSwatches[12].isNeutral)
-
-            columnSwatches.forEach(function (swatch, index) {
-                visibleSwatches.push(t_targets.includes(swatch.l_target) ? swatch : undefined)
-            })
-
-            //
-            // Shoehorn in the userDefined swatch, closest match
-            //
-            let userDefinedSwatch = columnSwatches.filter(obj => {
-                return obj.isUserDefined === true;
-            });
-
-            let visibleSwatchesDefined = visibleSwatches.filter(function (x: SwatchModel) {
-                return x !== undefined;
-            })
-
-            let targetsOptimized = t_targets.filter(function (x: number) {
-                return x !== -1;
-            })
-
-            let index = getClosestIndex(userDefinedSwatch[0], targetsOptimized)
-            visibleSwatchesDefined[index] = userDefinedSwatch[0]
-
-            //
-            // Pull out the grid id of swatches. This will broadcast to all listening swatches
-            //
-            let swatchIds = visibleSwatchesDefined.map((a: { id: string; }) => a.id);
-            result.push(...swatchIds)
-
-        }
-        return result
-    }
-
     const displaySwatches = (mapper: SwatchMapModel) => {
 
         let swatches = xGetSwatchesFromlocalStorage()
-        let mappedSwatches = xMapSwatchesToTarget(swatches, mapper)
+        let mappedSwatches = mapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
-
-    }
-
-    const displayUserDefinedSwatches = () => {
-
-        let swatches = getSwatchesFromlocalStorage()
-
-        const userDefinedSwatches = swatches.filter(obj => {
-            return obj.isUserDefined === true;
-        });
-
-        let results = userDefinedSwatches.map(a => a.id);
-
-        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: results }));
-        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: [] }));
 
     }
 
@@ -130,7 +51,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
         let map = new SwatchMapModel(weightedTargets(1)) // need to pass in the full weightedTargets, not just the rows..
         let grid = xGetSwatchesFromlocalStorage()
-        let result = xMapSwatchesToTarget(grid, map)
+        let result = mapSwatchesToTarget(grid, map)
 
         alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
     }
@@ -222,12 +143,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
     }
 
-    const xGetClosestIndex = (swatch: Matrix.Swatch, targets: Array<any>) => {
-        
-        // var closest = targets.reduce(function (prev, curr) {
-        //     return (Math.abs(curr - swatch.lightness) < Math.abs(prev - swatch.lightness) ? curr : prev);
-        // });
-        // return targets.indexOf(closest)
+    const getClosestIndex = (swatch: Matrix.Swatch, targets: Array<any>) => {
 
         let m = (swatch.l_target === 85 ? -2.5 : 0)
         var closest = targets.reduce(function (prev, curr) {
@@ -257,7 +173,7 @@ export const NavBar: React.FC<Props> = (props) => {
         return result
     }
 
-    const xMapSwatchesToTarget = (grid: Matrix.Grid, mapper: SwatchMapModel) => {
+    const mapSwatchesToTarget = (grid: Matrix.Grid, mapper: SwatchMapModel) => {
 
         grid.columns.forEach(function (column, index, arr) {
 
@@ -277,7 +193,7 @@ export const NavBar: React.FC<Props> = (props) => {
             //
             column.rows.filter(swatch => { 
                 if ( swatch.isUserDefined === true && swatch.weight === undefined ) {
-                    let index = xGetClosestIndex(swatch, targets)
+                    let index = getClosestIndex(swatch, targets)
                     swatch.weight = column.rows[index].weight 
                     column.rows[index].weight = undefined
                 }
