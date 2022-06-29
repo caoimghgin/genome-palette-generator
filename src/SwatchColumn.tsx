@@ -44,12 +44,12 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }, []);
 
     // Update on change of pinnedColors, baseColor, or column
-    useEffect(() => {   
+    useEffect(() => {
         setSwatches(createSwatches())
-        closeModal()     
+        closeModal()
     }, [pinnedColors, baseColor]);
 
-    useEffect(() => {      
+    useEffect(() => {
 
         setSwatches(createSwatches())
         //
@@ -80,48 +80,48 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     }
 
     function manualInsertColorsWSJ() {
-      
-            switch (column) {
-                case "A":
-                    setBaseColor("#0274B6")
-                    setPinnedColors(["#66C7FF", "#015483"])
-                    break;
-                case "B":
-                    setBaseColor("#8856CB")
-                    setPinnedColors(["#C0A1FF", "#59348A"])
-                    break;
-                case "C":
-                    setBaseColor("#816D4D")
-                    setPinnedColors(["#9E855E", "#69583E"])
-                    break;
-                case "D":
-                    setBaseColor("#0A8200")
-                    setPinnedColors(["#73EF69", "#064F00"])
-                    break;
-                case "E":
-                    setBaseColor("#E10000")
-                    setPinnedColors(["#FF8585", "#BA0000"])
-                    break;
-                case "F":
-                    setBaseColor("#FFCF3D")
-                    setPinnedColors([ "#FFECB1", "#5B3D2F"])
-                    break;
-                case "G":
-                    setBaseColor("#0F62FE")
-                    setPinnedColors([])
-                    break;
-                case "H":
-                    setBaseColor("#007AFF")
-                    setPinnedColors([])
-                    break;
-                case "I":                    
-                    setBaseColor("#6F6F6F")
-                    setPinnedColors([ "#F5F5F5", "#EBEBEB", "#CCCCCC", "#555555", "#333333", "#222222", "#111111"])
-                    break;
-                default:
-                    break;
-            }
-}
+
+        switch (column) {
+            case "A":
+                setBaseColor("#0274B6")
+                setPinnedColors(["#66C7FF", "#015483"])
+                break;
+            case "B":
+                setBaseColor("#8856CB")
+                setPinnedColors(["#C0A1FF", "#59348A"])
+                break;
+            case "C":
+                setBaseColor("#816D4D")
+                setPinnedColors(["#9E855E", "#69583E"])
+                break;
+            case "D":
+                setBaseColor("#0A8200")
+                setPinnedColors(["#73EF69", "#064F00"])
+                break;
+            case "E":
+                setBaseColor("#E10000")
+                setPinnedColors(["#FF8585", "#BA0000"])
+                break;
+            case "F":
+                setBaseColor("#FFCF3D")
+                setPinnedColors(["#FFECB1", "#5B3D2F"])
+                break;
+            case "G":
+                setBaseColor("#0F62FE")
+                setPinnedColors([])
+                break;
+            case "H":
+                setBaseColor("#007AFF")
+                setPinnedColors([])
+                break;
+            case "I":
+                setBaseColor("#6F6F6F")
+                setPinnedColors(["#F5F5F5", "#EBEBEB", "#CCCCCC", "#555555", "#333333", "#222222", "#111111"])
+                break;
+            default:
+                break;
+        }
+    }
 
     function manualInsertColorsMW() {
         switch (column) {
@@ -147,7 +147,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 break;
             case "F":
                 setBaseColor("#FCB839")
-                setPinnedColors([ "#FFCF3D" ])
+                setPinnedColors(["#FFCF3D"])
                 break;
             case "G":
                 setBaseColor("#0F62FE")
@@ -157,77 +157,72 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 setBaseColor("#3677A8")
                 setPinnedColors([])
                 break;
-            case "I":                    
+            case "I":
                 setBaseColor("#202020")
                 setPinnedColors([])
                 break;
             default:
                 break;
         }
-}
-
-function manualInsertColorsBRN() {
-
-    switch (column) {
-        case "A":
-            setBaseColor("#007BBD")
-            setPinnedColors(["#409CCD", "#00416F", "#1A2737"])
-            break;
-        case "B":
-            setBaseColor("#00C1E3")
-            setPinnedColors(["#99EBFB", "#005f86"])
-            break;
-        case "C":
-            setBaseColor("#6A156D")
-            setPinnedColors(["#825FC3"])
-            break;
-        case "D":
-            setBaseColor("#128578")
-            setPinnedColors(["#66C5A5", "#33AF94", "#09815C"])
-            break;
-        case "E":
-            setBaseColor("#D93D12")
-            setPinnedColors(["#C5341F", "#A52E0F"])
-            break;
-        case "F":
-            setBaseColor("#E9CB2D")
-            setPinnedColors([ "#B88D1F", "#957100" ])
-            break;
-        case "G":
-            setBaseColor("#0F62FE")
-            setPinnedColors([])
-            break;
-        case "H":
-            setBaseColor("#3677A8")
-            setPinnedColors([])
-            break;
-        case "I":     
-            setBaseColor("#6D7878")
-            setPinnedColors(["#F5F5F5", "#E5E5E5", "#6D7878", "#4D5B5C", "#001E20", "#969F9F"])
-            break;
-        default:
-            break;
     }
-}
+
+    function manualInsertColorsBRN() {
+
+        switch (column) {
+            case "A":
+                setBaseColor("#007BBD")
+                setPinnedColors(["#409CCD", "#00416F", "#1A2737"])
+                break;
+            case "B":
+                setBaseColor("#00C1E3")
+                setPinnedColors(["#99EBFB", "#005f86"])
+                break;
+            case "C":
+                setBaseColor("#6A156D")
+                setPinnedColors(["#825FC3"])
+                break;
+            case "D":
+                setBaseColor("#128578")
+                setPinnedColors(["#66C5A5", "#33AF94", "#09815C"])
+                break;
+            case "E":
+                setBaseColor("#D93D12")
+                setPinnedColors(["#C5341F", "#A52E0F"])
+                break;
+            case "F":
+                setBaseColor("#E9CB2D")
+                setPinnedColors(["#B88D1F", "#957100"])
+                break;
+            case "G":
+                setBaseColor("#0F62FE")
+                setPinnedColors([])
+                break;
+            case "H":
+                setBaseColor("#3677A8")
+                setPinnedColors([])
+                break;
+            case "I":
+                setBaseColor("#6D7878")
+                setPinnedColors(["#F5F5F5", "#E5E5E5", "#6D7878", "#4D5B5C", "#001E20", "#969F9F"])
+                break;
+            default:
+                break;
+        }
+    }
 
     function createSwatches() {
-
         return SwatchesModelFactory(column, semantic, [baseColor].concat(pinnedColors))
-
     }
 
     const debounceAndSave = useCallback(debounce((col, sem) => {
         localStorage.setItem(col, sem)
+        setSemantic(sem)
     }, 500), []);
 
 
-    function addPinnedHandler(e: React.FormEvent<HTMLInputElement>) {
-        let value = e.currentTarget.value
-        console.log(value)
-    }
-
-    function semanticInputHandler(e: React.FormEvent<HTMLInputElement>) {
-        let value = e.currentTarget.value
+    function semanticInputHandler(event: React.FormEvent<HTMLInputElement>) {
+        event.preventDefault();
+        let value = event.currentTarget.value
         debounceAndSave(column, value)
     }
 
@@ -238,8 +233,9 @@ function manualInsertColorsBRN() {
         }
     }
 
-    function inputHandeler(e: React.FormEvent<HTMLInputElement>) {
-        let value = e.currentTarget.value;
+    function colorInputHandeler(event: React.FormEvent<HTMLInputElement>) {
+        event.preventDefault(); // Preventing the page from reloading
+        let value = event.currentTarget.value;
         if (value.length === 7) {
             setBaseColor(value)
         }
@@ -247,10 +243,7 @@ function manualInsertColorsBRN() {
 
     const insertPinnedColors = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        // openModal = true
         openModal()
-        // setPinnedColors(["#66C7FF", "#015483"])
-        // alert("-- A modal appears allowing users to insert additional 'pinned' colors in column: " + semantic);
     }
 
     const Wrapper = styled.div`
@@ -259,84 +252,32 @@ function manualInsertColorsBRN() {
         width: 140px;
         margin-bottom: 88px;
   `
-
-    const inputWrapper = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '22px'
-    }
-
-    const buttonWrapper = styled.button`
-    text-align: center;
-    width: 120px;
-    font-size: 14px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-`
-
-    const InputStyleSemantic = styled.input`
-    text-align: center;
-    width: 120px;
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    padding-top: 4px;
-    color: #3b3b3b;
-    padding-bottom: 4px;
-    border: 2px solid #e2e2e2;        
-`
-    const InputStyleValue = styled.input`
-    text-align: center;
-    width: 120px;
-    font-size: 14px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    border: 2px solid #e2e2e2;
-`
-
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
+    const StyledField = styled.div`
+        text-align: center;
+        width: 120px;
+        font-size: 17px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    `
 
     return (
         <Wrapper>
 
-        <ReactModal 
-           isOpen={modalIsOpen}
-           contentLabel="Minimal Modal Example"
-        >
-          <button onClick={closeModal}>Close Modal</button>
-          <SelectPinnedColorsView pinnedColors={pinnedColors} updatePinnedColors={setPinnedColors}/>
+            <ReactModal isOpen={modalIsOpen} contentLabel="Minimal Modal Example">
+                <button onClick={closeModal}>Close Modal</button>
+                <SelectPinnedColorsView pinnedColors={pinnedColors} updatePinnedColors={setPinnedColors} />
+            </ReactModal>
 
-        </ReactModal>
+            <StyledField>
+                <input type="text" id="semantic" defaultValue={semantic} onChange={(e) => semanticInputHandler(e)} required />
+                <input type="text" id="color" defaultValue={baseColor} onChange={(e) => colorInputHandeler(e)} required />
+            </StyledField>
 
-            <div style={inputWrapper as React.CSSProperties}>
-                <InputStyleSemantic
-                    type="text"
-                    key="6e03882a"
-                    defaultValue={semantic}
-                    onChange={(e) => semanticInputHandler(e)}
-                />
-                <InputStyleValue
-                    type="text"
-                    key="78b51b30"
-                    defaultValue={baseColor}
-                    value={baseColor}
-                    onChange={(e) => inputHandeler(e)}
-                />
+            <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
 
-                <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
-
-            </div>
+            {/* </div> */}
 
             {swatches.map(swatch => (
                 <Swatch {...swatch as SwatchModel} />
