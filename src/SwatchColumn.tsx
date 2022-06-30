@@ -7,8 +7,24 @@ import { columns, columnWidth } from './constants'
 import { debounce } from 'lodash';
 import styled from '@emotion/styled';
 import ReactModal from 'react-modal';
-
 import SelectPinnedColorsView from './SelectPinnedColorsView'
+
+ReactModal.setAppElement("#root");
+
+const customStyles = {
+    overlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.4)"
+      },
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        padding: 44,
+        transform: "translate(-50%, -50%)"
+      }
+  };
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -265,7 +281,10 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     return (
         <Wrapper>
 
-            <ReactModal isOpen={modalIsOpen} contentLabel="Minimal Modal Example">
+            <ReactModal
+             isOpen={modalIsOpen} 
+             style={customStyles}
+             contentLabel="Minimal Modal Example">
                 <button onClick={closeModal}>Close Modal</button>
                 <SelectPinnedColorsView pinnedColors={pinnedColors} updatePinnedColors={setPinnedColors} />
             </ReactModal>
