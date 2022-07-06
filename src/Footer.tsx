@@ -73,10 +73,13 @@ const StyledContent = styled.p`
                    <StyledContent>
                     <b>Genome Color Space</b> is an <b>Open-Source Color Tool for Color Systems.</b> It was created to be <b>Simple, Effective, Universal, Extensible,</b> and <b>WCAG Compliant</b>. 
                    Its purpose is to help designers create brand-specific Color Systems from existing style-guides and easily facilitate white-labeling at scale.
-                   <p>Genome is <b>Color System Agnostic</b>, allowing the user to choose <b>Material Design</b>, <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and many more.
-                   Genome <b> is not affiliated</b> with any Design System or organization. Therefore, the results are informed by my <b>personal research</b>  and (<i>hopefully, well informed</i>) <b>opinions </b> 
+                   
+                   <p> <b>Genome is Color System Agnostic</b>, allowing the user to choose <b>Material Design</b>, <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and many more. In fact, you could make your own if you wanted.</p>
+ 
+                   <p>To import the results of this tool into your design application,  <b>you'll want to download a plugin.</b> Today, a Figma plugin is available but I'll write for AdobeXD and even Sketch in the future. </p>
+
+                   <p><b>DISCLAIMER:</b> This Color Tool<b> IS NOT AFFILIATED</b> with any Design System or organization. Unless otherwise noted, all results are the <b>research</b> and <b>opinions </b> of myself.
                    </p>
-                   <p>To easily import the results of this tool into your design application, you'll want to download a plugin. Today, a Figma plugin is available but I'll write for AdobeXD and even Sketch in the future. </p>
 
                    </StyledContent>
 
