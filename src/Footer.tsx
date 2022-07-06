@@ -71,11 +71,12 @@ const StyledContent = styled.p`
                 <ContainerCenter>
 
                    <StyledContent>
-                    <b>The Genome Color Space</b> is a Color Tool for Design Systems. It was created to be <b>Simple, Effective, Universal, Extensible,</b> and <b>WCAG Compliant</b>. 
-                   Its purpose is to help designers and engineers create brand-specific Color Systems from existing style-guides quickly and easily.
-                   <p><b>Genome</b> is "Color System Agnostic" so the user may choose <b>Material Design</b>, <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and many more. In fact, the user may manually create their own by importing as 'Non-Optimized'.
-                   Some Color Systems do not offer a Color Tool and Genome helps bridge the gap, but this tool is not affiliated with any Color System or Design System so the output is purely my research and opinions. Genome is opinionated on WCAG Color Contrast so the results may not align with output of non-opinionated Color Tools. </p>
-                   <p>To easily use the results of this tool, you'll want to download the Figma plugin. I'll write for AdobeXD and even Sketch in the future. I love Figma, but to be truly universal we do not tightly bind ourselves to any one technology.</p>
+                    <b>Genome Color Space</b> is an <b>Open-Source Color Tool for Color Systems.</b> It was created to be <b>Simple, Effective, Universal, Extensible,</b> and <b>WCAG Compliant</b>. 
+                   Its purpose is to help designers create brand-specific Color Systems from existing style-guides and easily facilitate white-labeling at scale.
+                   <p>The <b>Genome</b> Color Tool is <b>Agnostic to any Color System</b>, allowing the user to choose <b>Material Design</b>, <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and many more. 
+                   Some Color Systems do not offer a Color Tool and Genome helps bridge the gap, <b>but Genome is not affiliated with any Color System or Design System</b>, therefore the output is informed by my personal research and opinions. 
+                   Genome is highly opinionated on WCAG Color Contrast so the results <b>WILL NOT</b> align with output of non-opinionated Color Tools.</p>
+                   <p>To easily import the results of this tool into your design application, you'll want to download a plugin. Today, a Figma plugin is available but I'll write for AdobeXD and even Sketch in the future. </p>
 
                    </StyledContent>
 
