@@ -262,6 +262,14 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         openModal()
     }
 
+    function pinnedColorsButtonLabel() {
+        if (pinnedColors.length) {
+            return "(" + pinnedColors.length + ")" + " +"
+        }
+        return "+"
+
+    }
+
     const Wrapper = styled.div`
         visibility: visible;
         display: inline-block;
@@ -270,13 +278,22 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
   `
     const StyledField = styled.div`
         text-align: center;
-        width: 120px;
+        width: 100px;
         font-size: 17px;
         font-weight: bold;
         margin-bottom: 8px;
         padding-top: 4px;
         padding-bottom: 4px;
     `
+
+const StyledButton = styled.button`
+/* visibility: visible;
+display: inline-block; */
+width: 120px;
+/* padding-bottom: 24px; */
+margin-bottom: 16px;
+
+`
 
     return (
         <Wrapper>
@@ -294,7 +311,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
                 <input type="text" id="color" defaultValue={baseColor} onChange={(e) => colorInputHandeler(e)} required />
             </StyledField>
 
-            <button onClick={insertPinnedColors} className="button" name="button 4"> + </button>
+            <StyledButton onClick={insertPinnedColors} className="button" name="button 4"> {pinnedColorsButtonLabel()} </StyledButton>
 
             {/* </div> */}
 
