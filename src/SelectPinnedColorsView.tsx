@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled'
 
 interface IPinnedColors {
-    pinnedColors: string[];
+    semantic: string
     userDefined: string;
-    dismissModal: () => void
+    pinnedColors: string[]
     updatePinnedColors: (arg: string[]) => void
 }
 
-export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, userDefined, dismissModal, updatePinnedColors} : IPinnedColors) => {
+export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, userDefined, semantic, updatePinnedColors} : IPinnedColors) => {
 
     const [pin1, setPin1] = useState('');
     const [pin2, setPin2] = useState('');
@@ -16,14 +16,24 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
     const [pin4, setPin4] = useState('');
     const [pin5, setPin5] = useState('');
 
+    const ModalContainer = styled.div(props => ({
+        width: '600px',
+        height: '100%',   
+      }))
+
     const SwatchContainer = styled.div(props => ({
         width: '100%',
-        height: '200px',
-        backgroundColor: userDefined
+        height: '120px',
+        backgroundColor: userDefined,
+        color: 'white',
+        padding: '24px'
       }))
 
       const FormContainer = styled.div(props => ({
-        padding: "44px"
+        paddingLeft: "44px",
+        paddingRight: "44px",
+        paddingBottom: "44px"
+
       }))
 
     useEffect(() => {
@@ -54,12 +64,14 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
     }
 
     return (
-        <div>
-            <SwatchContainer/>
+        <ModalContainer>
+            <SwatchContainer> {semantic} </SwatchContainer>
 
             <FormContainer className="container">
-            <h1> Pin Colors </h1>
-            <p> Add hex codes in the fields below to insert additional colors in the column.</p>
+            <h2> Add More Colors </h2>
+            <p> Enter additional hex codes of similar hues in the fields below to insert in the column.
+                Order does not matter. Genome will place each value in the closest matching weight for WCAG compliance.
+            </p>
                 <form id="contact-form" onSubmit={submitForm} method="POST">
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
@@ -88,12 +100,14 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
                         <input type="text" className="form-control" id="pin5" value={pin3} onChange={(e) => setPin5(e.target.value)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin5)} />
                     </div>
+                    <button type="submit" className="btn btn-primary">Cancel</button>
                     <button type="submit" className="btn btn-primary">Submit</button>
+
+
                 </form>
-                <button onClick={dismissModal}>Cancel</button>
 
             </FormContainer>
-        </div>
+        </ModalContainer>
     )
 }
 

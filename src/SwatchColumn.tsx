@@ -302,9 +302,9 @@ margin-bottom: 16px;
              isOpen={modalIsOpen} 
              style={customStyles}
              contentLabel="Minimal Modal Example">
-                <SelectPinnedColorsView pinnedColors={pinnedColors} 
+                <SelectPinnedColorsView semantic={semantic}
                                         userDefined={baseColor}
-                                        dismissModal={closeModal}
+                                        pinnedColors={pinnedColors} 
                                         updatePinnedColors={setPinnedColors} />
             </ReactModal>
 
