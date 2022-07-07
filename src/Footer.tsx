@@ -5,13 +5,10 @@ interface Props { }
 
 export const Footer: React.FC<Props> = (props) => {
 
-    const content = "The Genome Color System is a Color Tool for Design Systems. It was created to be Simple, Effective, Universal, Extensible, and WCAG Compliant. It's purpose is to help designers and engineers create brand-specific Color Systems from existing style-guides quickly and easily."
-
     const Wrapper = styled.div`
         background-color: #17324c;
         color: #FFFFFF;
         width: 100%;
-        /* height: 400px; */
 `;
 
     const Container = styled.div`
@@ -52,7 +49,7 @@ export const Footer: React.FC<Props> = (props) => {
         padding-right: 44px;
 `;
 
-const StyledContent = styled.p`
+    const StyledContent = styled.p`
         font-size: 18px;
         line-height: 32px;
         text-align: left;
@@ -62,38 +59,26 @@ const StyledContent = styled.p`
     return (
 
         <Wrapper>
-
             <Container>
-                <ContainerLeft>
-
-                </ContainerLeft>
-
+                <ContainerLeft/>
                 <ContainerCenter>
+                    <StyledContent>
 
-                   <StyledContent>
-                    <b>Genome Color Space</b> is an <b>Open-Source Color Tool for Color Systems.</b> It was created to be <b>Simple, Effective, Universal, Extensible,</b> and <b>WCAG Compliant</b>. 
-                   Its purpose is to help designers create brand-specific Color Systems from existing style-guides and easily facilitate white-labeling at scale.
-                   
-                   <p> <b>Genome is Color System Agnostic</b> which allows the user to choose Color Systems such as <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and more. 
-                   In fact, Genome is a handy tool to make your own.</p>
- 
-                   <p>To import the results of this tool into your design application, <b>you'll want to download a plugin.</b> Today, a Figma plugin is available but I'll write for AdobeXD and even Sketch in the future. </p>
+                        <b>Genome Color Space</b> is an <b>Open-Source Color Tool for Color Systems.</b> It was created to be <b>Simple, Effective, Universal, Extensible,</b> and <b>WCAG Compliant</b>.
+                        Its purpose is to help designers create brand-specific Color Systems from existing style-guides and easily facilitate white-labeling at scale.
 
-                   <p><b>DISCLAIMER:</b> The Genome Color Tool<b> IS NOT AFFILIATED</b> with any Design System, Color System or larger organization. Unless otherwise noted, all results are soley the <b>research</b> and <b>opinions </b> of myself.
-                   Personally speaking, Genome is the result of <b>amazingly good research</b> and <b>very fine opinions</b>, but you can be the judge of that.
-                   </p>
+                        <p> <b>Genome is Color System Agnostic</b> which allows the user to choose Color Systems such as <b>IBM Carbon</b>, <b>SalesForce</b>, <b>Lyft</b>, and more.
+                            In fact, Genome is a handy tool to make your own.</p>
 
-                   </StyledContent>
+                        <p>To import the results of this tool into your design application, <b>you'll want to download a plugin.</b> Today, a Figma plugin is available but I'll write for AdobeXD and even Sketch in the future. </p>
 
-   
+                        <p><b>DISCLAIMER:</b> The Genome Color Tool<b> IS NOT AFFILIATED</b> with any Design System, Color System or larger organization. Unless otherwise noted, all results are soley the <b>research</b> and <b>opinions </b> of myself.
+                            Personally speaking, Genome is the result of <b>amazingly good research</b> and <b>very fine opinions</b>, but you can be the judge of that.
+                        </p>
 
+                    </StyledContent>
                 </ContainerCenter>
-
-                <ContainerRight>
-
-
-                </ContainerRight>
-
+                <ContainerRight/>
             </Container>
         </Wrapper>
     )
