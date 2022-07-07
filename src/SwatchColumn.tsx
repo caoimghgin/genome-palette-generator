@@ -21,7 +21,7 @@ const customStyles = {
         right: "auto",
         bottom: "auto",
         marginRight: "-50%",
-        padding: 44,
+        padding: "0",
         transform: "translate(-50%, -50%)"
       }
   };
@@ -302,8 +302,10 @@ margin-bottom: 16px;
              isOpen={modalIsOpen} 
              style={customStyles}
              contentLabel="Minimal Modal Example">
-                <button onClick={closeModal}>Close Modal</button>
-                <SelectPinnedColorsView pinnedColors={pinnedColors} updatePinnedColors={setPinnedColors} />
+                <SelectPinnedColorsView pinnedColors={pinnedColors} 
+                                        userDefined={baseColor}
+                                        dismissModal={closeModal}
+                                        updatePinnedColors={setPinnedColors} />
             </ReactModal>
 
             <StyledField>

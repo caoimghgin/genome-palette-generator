@@ -1,18 +1,30 @@
-import React, { useState, useEffect, useCallback } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled'
 
 interface IPinnedColors {
     pinnedColors: string[];
+    userDefined: string;
+    dismissModal: () => void
     updatePinnedColors: (arg: string[]) => void
 }
 
-export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, updatePinnedColors} : IPinnedColors) => {
+export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, userDefined, dismissModal, updatePinnedColors} : IPinnedColors) => {
 
     const [pin1, setPin1] = useState('');
     const [pin2, setPin2] = useState('');
     const [pin3, setPin3] = useState('');
     const [pin4, setPin4] = useState('');
     const [pin5, setPin5] = useState('');
+
+    const SwatchContainer = styled.div(props => ({
+        width: '100%',
+        height: '200px',
+        backgroundColor: userDefined
+      }))
+
+      const FormContainer = styled.div(props => ({
+        padding: "44px"
+      }))
 
     useEffect(() => {
         if (pinnedColors[0] !== undefined) { setPin1(pinnedColors[0]) }
@@ -43,15 +55,16 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
 
     return (
         <div>
+            <SwatchContainer/>
+
+            <FormContainer className="container">
             <h1> Pin Colors </h1>
             <p> Add hex codes in the fields below to insert additional colors in the column.</p>
-            <div className="container">
                 <form id="contact-form" onSubmit={submitForm} method="POST">
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
                         <input type="text" className="form-control" id="pin1" value={pin1} onChange={(e) => setPin1(e.target.value)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin1)} />
-
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
@@ -77,7 +90,9 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
-            </div>
+                <button onClick={dismissModal}>Cancel</button>
+
+            </FormContainer>
         </div>
     )
 }
