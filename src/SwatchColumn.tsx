@@ -32,6 +32,11 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
+    window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
+        // setIsVisible(e.detail.includes(model.id))
+        setVisibleSwatches(e.detail)
+    }) as EventListener);
+
     window.addEventListener(Event.EDITABLE, ((e: CustomEvent) => {
         let editable = e.detail
         setDisabled(editable)
@@ -51,6 +56,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [swatches, setSwatches] = React.useState<Array<SwatchModel>>([]);
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [disabled, setDisabled] = React.useState(false)
+    const [visibleSwatches, setVisibleSwatches] = React.useState<Array<string>>([]);
 
     function openModal() {
         setIsOpen(true);
@@ -275,6 +281,19 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         openModal()
     }
 
+    const filterVisibleSwatches = () => {
+        if (visibleSwatches.length > 0) {
+            let visibleSwatchesFiltered = swatches.filter((swatch, index, array) => {
+                if (visibleSwatches.includes(swatch.id)) {
+                    return swatch
+                }
+            });
+            return visibleSwatchesFiltered
+        }
+        return swatches
+
+    }
+
     function pinnedColorsButtonLabel() {
         if (pinnedColors.length) {
             return "(" + pinnedColors.length + ")" + " +"
@@ -330,7 +349,7 @@ margin-bottom: 16px;
                 <StyledButton onClick={insertPinnedColors} className="button" name="button 4" disabled={disabled}> {pinnedColorsButtonLabel()} </StyledButton>
             </StyledField>
 
-            {swatches.map(swatch => (
+            {filterVisibleSwatches().map(swatch => (
                 <Swatch {...swatch as SwatchModel} />
             ))}
 

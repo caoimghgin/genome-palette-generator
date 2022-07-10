@@ -9,9 +9,14 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [color, setColor] = React.useState("000000");
     const [height, setHeight] = React.useState(rowHeight);
 
-    window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
-        setIsVisible(e.detail.includes(model.id))
-    }) as EventListener);
+    //
+    // This is a LOT of event listeners. I wonder if we can move logic back to the column
+    // and have it re-render on update? Filtering out what should display directly. Should prevent 
+    // any race conditions.
+    //
+    // window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
+    //     setIsVisible(e.detail.includes(model.id))
+    // }) as EventListener);
 
     useEffect(() => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
