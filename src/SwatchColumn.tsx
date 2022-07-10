@@ -3,7 +3,7 @@ import { SwatchModel } from './models/SwatchModel'
 import { ISwatchBase } from './models/SwatchBase'
 import { Swatch } from "./Swatch";
 import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
-import { columns, columnWidth } from './constants'
+import { columns, Event } from './constants'
 import { debounce } from 'lodash';
 import styled from '@emotion/styled';
 import ReactModal from 'react-modal';
@@ -32,12 +32,25 @@ interface ISwatchColumn {
 
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
+    window.addEventListener(Event.EDITABLE, ((e: CustomEvent) => {
+        let editable = e.detail
+        setDisabled(editable)
+    //     var isUndefined = data.filter(function(x:any) {
+    //         return x === undefined;
+    //    });
+    //     // console.log("isUndefined = ", isUndefined.length)
+    //     setDisabled(isUndefined.length)
+    //    setModel(filtered)
+
+     }) as EventListener);
+
     const [column, setColumn] = useState<string>('A');
     const [semantic, setSemantic] = useState<string>(model.semantic);
     const [baseColor, setBaseColor] = React.useState<string>(model.hexString);
     const [pinnedColors, setPinnedColors] = React.useState<Array<string>>([]);
     const [swatches, setSwatches] = React.useState<Array<SwatchModel>>([]);
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [disabled, setDisabled] = React.useState(false)
 
     function openModal() {
         setIsOpen(true);
@@ -278,7 +291,10 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
   `
     const StyledField = styled.div`
         text-align: center;
-        width: 100px;
+        align: center;
+        align-content: center;
+
+        width: 50px;
         font-size: 17px;
         font-weight: bold;
         margin-bottom: 8px;
@@ -289,7 +305,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 const StyledButton = styled.button`
 /* visibility: visible;
 display: inline-block; */
-width: 120px;
+width: 130px;
 /* padding-bottom: 24px; */
 margin-bottom: 16px;
 
@@ -309,13 +325,10 @@ margin-bottom: 16px;
             </ReactModal>
 
             <StyledField>
-                <input type="text" id="semantic" defaultValue={semantic} onChange={(e) => semanticInputHandler(e)} required />
-                <input type="text" id="color" defaultValue={baseColor} onChange={(e) => colorInputHandeler(e)} required />
+                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px'}} type="text" id="semantic" defaultValue={semantic} disabled={disabled} onChange={(e) => semanticInputHandler(e)} required />
+                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px'}} type="text" id="color" defaultValue={baseColor} disabled={disabled} onChange={(e) => colorInputHandeler(e)} required />
+                <StyledButton onClick={insertPinnedColors} className="button" name="button 4" disabled={disabled}> {pinnedColorsButtonLabel()} </StyledButton>
             </StyledField>
-
-            <StyledButton onClick={insertPinnedColors} className="button" name="button 4"> {pinnedColorsButtonLabel()} </StyledButton>
-
-            {/* </div> */}
 
             {swatches.map(swatch => (
                 <Swatch {...swatch as SwatchModel} />

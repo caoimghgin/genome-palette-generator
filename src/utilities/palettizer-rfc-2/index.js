@@ -156,7 +156,6 @@ class Palettizer {
         function getSaturationValue(color) {
             let hexValue = color.toHexString()
             let z = chroma(hexValue).get('lch.c');
-            console.log(z)
             ///
             let result = color.toHsv()
             let saturationValue = result.s
@@ -367,21 +366,12 @@ class Palettizer {
 
         function generateShadesAndTints3(color) {
 
-
-
-
             const weights = ["000", "015", "025", "035", "050", "075", "085", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
             const l_star = [100, 97.5, 95, 90, 85, 80, 70, 60, 55, 50, 45, 40, 35, 30, 20, 15, 0]
             var closest = l_star.reduce(function (prev, curr) {
                 return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
             });
             let index = l_star.indexOf(closest)
-            let thingIwant = weights[index]
-            console.log("chosen color is " + color.hex + " weight:" + thingIwant)
-
-
-
-
 
             let fTargets = []
 
@@ -501,8 +491,6 @@ class Palettizer {
                 return (Math.abs(curr - color.lightness) < Math.abs(prev - color.lightness) ? curr : prev);
             });
             let index = l_targets.indexOf(target)
-            // this.swatches[index] = color.hex
-            // console.log(this.swatches)
 
         }
 
@@ -1238,7 +1226,6 @@ class Palettizer {
 
 
             let x = chroma.scale([swatch015.clone().toHexString(), swatch100.clone().toHexString()]).colors(7);
-            // console.log(x)
             swatch025 = tinycolor(x[1])
             swatch035 = tinycolor(x[2])
             swatch050 = tinycolor(x[3])

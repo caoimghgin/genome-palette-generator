@@ -18,7 +18,6 @@ function App() {
 
             <SwatchColumnLegend />
 
-
             {/* WSJ  */}
             <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
             <SwatchColumn model={{ hexString: "#8856CB", semantic: "secondary" }} />

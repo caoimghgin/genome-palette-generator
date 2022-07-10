@@ -27,9 +27,19 @@ export const NavBar: React.FC<Props> = (props) => {
         let mappedSwatches = mapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
-        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
-        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
+        // if (mapper.weights().includes(undefined)) {
+        //     dispatchEvent(new CustomEvent(Event.EDITABLE, { detail: true}));
+        // } else {
+        //     dispatchEvent(new CustomEvent(Event.EDITABLE, { detail: false}));
+        // }
 
+        // setTimeout(function() {
+        //     dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
+        //     dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
+        //   }, 50);
+
+        dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
     }
 
     const downloadJSON = () => {

@@ -1,6 +1,5 @@
 import React from 'react';
-import { brotliDecompress } from 'zlib';
-import { weights, rowHeight, columnWidth, fontSize, l_targets, Event } from './constants'
+import { rowHeight, columnWidth, l_targets, Event } from './constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
@@ -13,8 +12,6 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
         var filtered = data.filter(function(x:any) {
             return x !== undefined;
        });
-
-        console.log(filtered)
 
        setModel(filtered)
 

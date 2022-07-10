@@ -15,17 +15,14 @@ class Spectro {
 
         if (x === null) {
             color = tinycolor.random();
-            console.log(this.getClosestColorCheckerName(color.toHexString()))
             return color.toHexString()
         } else {
-            console.log("ELSE")
             let ccName = null;
 
             do {
                 color = tinycolor.random();
                 let j = this.getClosestColorCheckerName(color.toHexString());
                 ccName = j.name
-                console.log(ccName)
 
               } while (x !== ccName);
 
@@ -41,7 +38,6 @@ class Spectro {
                 color = tinycolor.random();
                 let j = this.getClosestColorCheckerName(color.toHexString());
                 ccName = j.name
-                console.log(ccName)
 
               } while (x !== ccName);
 
