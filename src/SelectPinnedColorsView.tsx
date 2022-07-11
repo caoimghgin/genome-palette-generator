@@ -42,7 +42,6 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
         if (pinnedColors[2] !== undefined) { setPin3(pinnedColors[2]) }
         if (pinnedColors[3] !== undefined) { setPin4(pinnedColors[3]) }
         if (pinnedColors[4] !== undefined) { setPin5(pinnedColors[4]) }
-
     }, []);
 
     const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,6 +62,27 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
         return color
     }
 
+    function hexInputHandler(event: React.FormEvent<HTMLInputElement>) {
+        event.preventDefault();
+
+        let value = event.currentTarget.value
+        let pin = event.currentTarget.id
+        var re = /[0-9A-Fa-f]{6}/g;
+
+        if(re.test(value)) {
+
+            let hex = value.startsWith("#") ? value : ("#" + value)
+            
+            if (pin === "pin1") { setPin1(hex) }
+            if (pin === "pin2") { setPin2(hex) }
+            if (pin === "pin3") { setPin3(hex) }
+            if (pin === "pin4") { setPin4(hex) }
+            if (pin === "pin5") { setPin5(hex) }
+
+        }
+
+    }
+
     return (
         <ModalContainer>
             <SwatchContainer> {semantic} </SwatchContainer>
@@ -75,29 +95,29 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
                 <form id="contact-form" onSubmit={submitForm} method="POST">
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin1" value={pin1} onChange={(e) => setPin1(e.target.value)} />
+                        <input type="text" className="form-control" id="pin1" defaultValue={pin1}  onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin1)} />
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin2" value={pin2} onChange={(e) => setPin2(e.target.value)} />
+                        <input type="text" className="form-control" id="pin2" defaultValue={pin2} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin2)} />
 
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin3" value={pin3} onChange={(e) => setPin3(e.target.value)} />
+                        <input type="text" className="form-control" id="pin3" defaultValue={pin3} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin3)} />
 
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin4" value={pin3} onChange={(e) => setPin4(e.target.value)} />
+                        <input type="text" className="form-control" id="pin4" defaultValue={pin4} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin4)} />
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin5" value={pin3} onChange={(e) => setPin5(e.target.value)} />
+                        <input type="text" className="form-control" id="pin5" value={pin5} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin5)} />
                     </div>
                     <button type="submit" className="btn btn-primary">Cancel</button>
