@@ -72,13 +72,21 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
         if(re.test(value)) {
 
             let hex = value.startsWith("#") ? value : ("#" + value)
-            
+
             if (pin === "pin1") { setPin1(hex) }
             if (pin === "pin2") { setPin2(hex) }
             if (pin === "pin3") { setPin3(hex) }
             if (pin === "pin4") { setPin4(hex) }
             if (pin === "pin5") { setPin5(hex) }
 
+        } else {
+
+            if (pin === "pin1") { setPin1('') }
+            if (pin === "pin2") { setPin2('') }
+            if (pin === "pin3") { setPin3('') }
+            if (pin === "pin4") { setPin4('') }
+            if (pin === "pin5") { setPin5('') }
+            
         }
 
     }
