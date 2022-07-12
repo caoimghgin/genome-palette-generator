@@ -1,7 +1,7 @@
 import chroma from "chroma-js"
 import Spectro from './spectro'
-import { l_targets } from '../constants'
-import { SwatchModel } from '../models/SwatchModel'
+import { l_targets } from '../../constants'
+import { SwatchModel } from '../../models/SwatchModel'
 
 class Palettizer {
 

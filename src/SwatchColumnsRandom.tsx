@@ -1,7 +1,7 @@
 import React from 'react';
 import { SwatchColumn } from "./SwatchColumn";
 import { SwatchColumnLegend } from "./SwatchColumnLegend";
-import Spectro from "./utilities/palettizer-rfc-2/spectro"
+import Spectro from "./utilities/palettizer/spectro"
 
 interface Props { }
 

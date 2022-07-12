@@ -3,7 +3,7 @@ import { SwatchModel } from './models/SwatchModel'
 import { SwatchMapModel } from './models/SwatchMapModel';
 import { Options, weightedTargets } from "./constants/weightedTargets"
 import { Event, columns, l_targets } from "./constants"
-import Spectro from './utilities/palettizer-rfc-2/spectro'
+import Spectro from './utilities/palettizer/spectro'
 import Dropdown from 'react-dropdown';
 import logo from './logo.svg';
 import 'react-dropdown/style.css';

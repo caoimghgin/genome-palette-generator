@@ -1,4 +1,4 @@
-import Spectro from "../utilities/palettizer-rfc-2/spectro"
+import Spectro from "../utilities/palettizer/spectro"
 import { l_targets } from '../constants'
 
 export class SwatchModel {
