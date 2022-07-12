@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { SwatchModel } from './models/SwatchModel'
 import { ISwatchBase } from './models/SwatchBase'
 import { Swatch } from "./Swatch";
-import { SwatchesModelFactory } from './factories/NewSwatchesModelFactory'
+import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
 import { columns, Event } from './constants'
 import { debounce } from 'lodash';
 import styled from '@emotion/styled';
