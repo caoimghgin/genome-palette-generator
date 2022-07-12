@@ -14,8 +14,8 @@ ReactModal.setAppElement("#root");
 const customStyles = {
     overlay: {
         backgroundColor: "rgba(0, 0, 0, 0.4)"
-      },
-      content: {
+    },
+    content: {
         top: "50%",
         left: "50%",
         right: "auto",
@@ -23,8 +23,8 @@ const customStyles = {
         marginRight: "-50%",
         padding: "0",
         transform: "translate(-50%, -50%)"
-      }
-  };
+    }
+};
 
 interface ISwatchColumn {
     model: ISwatchBase;
@@ -40,14 +40,14 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     window.addEventListener(Event.EDITABLE, ((e: CustomEvent) => {
         let editable = e.detail
         setDisabled(editable)
-    //     var isUndefined = data.filter(function(x:any) {
-    //         return x === undefined;
-    //    });
-    //     // console.log("isUndefined = ", isUndefined.length)
-    //     setDisabled(isUndefined.length)
-    //    setModel(filtered)
+        //     var isUndefined = data.filter(function(x:any) {
+        //         return x === undefined;
+        //    });
+        //     // console.log("isUndefined = ", isUndefined.length)
+        //     setDisabled(isUndefined.length)
+        //    setModel(filtered)
 
-     }) as EventListener);
+    }) as EventListener);
 
     const [column, setColumn] = useState<string>('A');
     const [semantic, setSemantic] = useState<string>(model.semantic);
@@ -252,7 +252,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const debounceAndSave = useCallback(debounce((col, sem) => {
         localStorage.setItem(col, sem)
         setSemantic(sem)
-    }, 500), []);
+    }, 750), []);
 
 
     function semanticInputHandler(event: React.FormEvent<HTMLInputElement>) {
@@ -271,8 +271,11 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     function colorInputHandeler(event: React.FormEvent<HTMLInputElement>) {
         event.preventDefault(); // Preventing the page from reloading
         let value = event.currentTarget.value;
-        if (value.length === 7) {
-            setBaseColor(value)
+        var re = /[0-9A-Fa-f]{6}/g;
+
+        if(re.test(value)) {
+            let hex = value.startsWith("#") ? value : ("#" + value)
+            setBaseColor(hex)
         }
     }
 
@@ -321,7 +324,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
         padding-bottom: 4px;
     `
 
-const StyledButton = styled.button`
+    const StyledButton = styled.button`
 /* visibility: visible;
 display: inline-block; */
 width: 130px;
@@ -334,19 +337,37 @@ margin-bottom: 16px;
         <Wrapper>
 
             <ReactModal
-             isOpen={modalIsOpen} 
-             style={customStyles}
-             contentLabel="Minimal Modal Example">
+                isOpen={modalIsOpen}
+                style={customStyles}
+                contentLabel="Minimal Modal Example">
                 <SelectPinnedColorsView semantic={semantic}
-                                        userDefined={baseColor}
-                                        pinnedColors={pinnedColors} 
-                                        updatePinnedColors={setPinnedColors} />
+                    userDefined={baseColor}
+                    pinnedColors={pinnedColors}
+                    updatePinnedColors={setPinnedColors} />
             </ReactModal>
 
             <StyledField>
-                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px'}} type="text" id="semantic" defaultValue={semantic} disabled={disabled} onChange={(e) => semanticInputHandler(e)} required />
-                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px'}} type="text" id="color" defaultValue={baseColor} disabled={disabled} onChange={(e) => colorInputHandeler(e)} required />
-                <StyledButton onClick={insertPinnedColors} className="button" name="button 4" disabled={disabled}> {pinnedColorsButtonLabel()} </StyledButton>
+                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
+                    type="text"
+                    id="semantic"
+                    defaultValue={semantic}
+                    disabled={disabled}
+                    onChange={(e) => semanticInputHandler(e)} required />
+
+                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
+                    type="text"
+                    id="color"
+                    defaultValue={baseColor}
+                    disabled={disabled}
+                    onChange={(e) => colorInputHandeler(e)} required />
+
+                <StyledButton onClick={insertPinnedColors}
+                    className="button"
+                    name="button 4"
+                    disabled={disabled}>
+                    {pinnedColorsButtonLabel()}
+                </StyledButton>
+
             </StyledField>
 
             {filterVisibleSwatches().map(swatch => (
