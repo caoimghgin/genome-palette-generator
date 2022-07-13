@@ -1,14 +1,15 @@
 import React from 'react';
-import { SwatchModel } from './models/SwatchModel'
-import { SwatchMapModel } from './models/SwatchMapModel';
-import { Options, weightedTargets } from "./constants/weightedTargets"
-import { Event, columns, l_targets } from "./constants"
-import Spectro from './utilities/palettizer/spectro'
-import Dropdown from 'react-dropdown';
-import logo from './logo.svg';
-import 'react-dropdown/style.css';
 import styled from '@emotion/styled';
-import { Matrix } from "./modules/SwatchMatrix";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
+import { SwatchModel } from './../models/SwatchModel'
+import { SwatchMapModel } from './../models/SwatchMapModel';
+import { Options, weightedTargets } from "./../constants/weightedTargets"
+import { Event, columns, l_targets } from "./../constants"
+import Spectro from './../utilities/palettizer/spectro'
+import logo from './../logo.svg';
+import { Matrix } from "./../modules/SwatchMatrix";
 
 interface Props { }
 

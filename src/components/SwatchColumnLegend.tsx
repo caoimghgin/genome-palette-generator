@@ -1,5 +1,5 @@
 import React from 'react';
-import { rowHeight, columnWidth, l_targets, Event } from './constants'
+import { rowHeight, columnWidth, l_targets, Event } from './../constants'
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 

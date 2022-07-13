@@ -1,9 +1,9 @@
 import './App.css';
-import { NavBar } from "./NavBar"
-import { Footer }  from "./Footer"
-import { SwatchColumnsRandom }  from "./SwatchColumnsRandom";
+import { NavBar } from "./components/NavBar"
+import { Footer }  from "./components/Footer"
 import { SwatchColumn } from "./SwatchColumn";
-import { SwatchColumnLegend } from "./SwatchColumnLegend";
+import { SwatchColumnLegend } from "./components/SwatchColumnLegend";
+import { SwatchColumnsRandom }  from "./components/testing/SwatchColumnsRandom";
 
 function App() {
 
