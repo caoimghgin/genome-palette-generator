@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { SwatchModel } from './models/SwatchModel'
-import { rowHeight, fontSize, Event } from './constants';
 import styled from '@emotion/styled/macro';
+import { SwatchModel } from './../models/SwatchModel'
+import { rowHeight, fontSize, Event } from './../constants';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 

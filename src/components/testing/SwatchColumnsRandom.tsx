@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwatchColumn } from "./../../SwatchColumn";
+import { SwatchColumn } from "./../SwatchColumn";
 import { SwatchColumnLegend } from "../SwatchColumnLegend";
 import Spectro from "./../../utilities/palettizer/spectro"
 

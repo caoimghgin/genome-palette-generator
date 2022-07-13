@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { debounce } from 'lodash';
-import styled from '@emotion/styled';
-import { SwatchModel } from './models/SwatchModel'
-import { ISwatchBase } from './models/SwatchBase'
-import { Swatch } from "./Swatch";
-import { SwatchesModelFactory } from './factories/SwatchesModelFactory'
-import { columns, Event } from './constants'
-import ReactModal from 'react-modal';
+import React, { useState, useEffect, useCallback } from 'react'
+import ReactModal from 'react-modal'
+import styled from '@emotion/styled'
+import { debounce } from 'lodash'
+
 import SelectPinnedColorsView from './SelectPinnedColorsView'
+import Swatch from "./Swatch"
+import { columns, Event } from './../constants'
+import { ISwatchBase } from './../models/SwatchBase'
+import { SwatchModel } from './../models/SwatchModel'
+import { SwatchesModelFactory } from './../factories/SwatchesModelFactory'
 
 ReactModal.setAppElement("#root");
 

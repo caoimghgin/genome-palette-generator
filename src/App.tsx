@@ -1,8 +1,8 @@
 import './App.css';
 import { NavBar } from "./components/NavBar"
 import { Footer }  from "./components/Footer"
-import { SwatchColumn } from "./SwatchColumn";
 import { SwatchColumnLegend } from "./components/SwatchColumnLegend";
+import { SwatchColumn } from "./components/SwatchColumn";
 import { SwatchColumnsRandom }  from "./components/testing/SwatchColumnsRandom";
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#0A8200", semantic: "positive" }} />
             <SwatchColumn model={{ hexString: "#E10000", semantic: "negative" }} />
             <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
+            <SwatchColumn model={{ hexString: "#F57C13", semantic: "attention" }} />
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
             <SwatchColumn model={{ hexString: "#007AFF", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
