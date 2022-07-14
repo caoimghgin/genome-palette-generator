@@ -17,6 +17,8 @@ export const Options = [
     { value: '4', label: 'Accessible Palette' },
     { value: '5', label: 'ColorBox' },
     { value: '6', label: 'Genome' },
+    { value: '7', label: 'NewsKit' },
+
   ];
 
 enum WeightedTargetsOptions {
@@ -27,6 +29,7 @@ enum WeightedTargetsOptions {
     AccessiblePalette,
     ColorBox,
     Genome,
+    NewsKit,
 }
 
 export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsColumn => {
@@ -45,7 +48,9 @@ export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsC
         case WeightedTargetsOptions.ColorBox:
             return weightedTargets_colorbox        
         case WeightedTargetsOptions.Genome:
-            return weightedTargets_genome                                 
+            return weightedTargets_genome   
+        case WeightedTargetsOptions.NewsKit:
+            return weightedTargets_newskit                                            
         default:
             return weightedTargets_spectrum
     }
@@ -112,25 +117,25 @@ const weightedTargets_carbon: weightedTargetsColumn = {
 const weightedTargets_newskit: weightedTargetsColumn = {
     rows: [
         { target: 0, weight: undefined },
-        { target: 5, weight: undefined },
-        { target: 10, weight: "100" },
-        { target: 15, weight: "90" },
-        { target: 20, weight: undefined },
-        { target: 25, weight: "80" },
+        { target: 5, weight:  undefined  },
+        { target: 10, weight: "100"},
+        { target: 15, weight: undefined },
+        { target: 20, weight: "090" },
+        { target: 25, weight: "080" },
         { target: 30, weight: undefined },
-        { target: 35, weight: "70" },
-        { target: 40, weight: undefined },
-        { target: 45, weight: "60" },
-        { target: 50, weight: undefined },
+        { target: 35, weight: undefined },
+        { target: 40, weight: "070" },
+        { target: 45, weight: undefined },
+        { target: 50, weight: "060" },
         { target: 55, weight: undefined },
-        { target: 60, weight: "50" },
+        { target: 60, weight: "050" },
         { target: 65, weight: undefined },
-        { target: 70, weight: "40" },
-        { target: 75, weight: undefined },
-        { target: 80, weight: "30" },
+        { target: 70, weight: "040" },
+        { target: 75, weight: "030" },
+        { target: 80, weight: undefined },
         { target: 85, weight: undefined },
-        { target: 90, weight: "20" },
-        { target: 95, weight: "10" },
+        { target: 90, weight: "020" },
+        { target: 95, weight: "010" },
         { target: 97.5, weight: undefined },
         { target: 100, weight: undefined }
     ],

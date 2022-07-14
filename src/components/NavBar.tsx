@@ -28,18 +28,12 @@ export const NavBar: React.FC<Props> = (props) => {
         let mappedSwatches = mapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
-        // if (mapper.weights().includes(undefined)) {
-        //     dispatchEvent(new CustomEvent(Event.EDITABLE, { detail: true}));
-        // } else {
-        //     dispatchEvent(new CustomEvent(Event.EDITABLE, { detail: false}));
-        // }
-
-        // setTimeout(function() {
-        //     dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
-        //     dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
-        //   }, 50);
-
+        // console.log(mapper.displayDefinedTargets())
+        // console.log( mapper.newTargets(false))
+        mapper.newTargets(false)
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
+        dispatchEvent(new CustomEvent(Event.DISPLAY_TARGETS, { detail: mapper.displayDefinedTargets() }));
+
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
     }
 

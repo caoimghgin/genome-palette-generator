@@ -21,6 +21,7 @@ export const Event = {
     DISPLAY_SWATCHES: "displaySwatches",
     DISPLAY_SWATCHES_ID: "displaySwatchesId",
     DISPLAY_LEGEND: "displayLegend",
+    DISPLAY_TARGETS: "displayTargets",
     EDITABLE: "editable",
 };
 

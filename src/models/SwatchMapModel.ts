@@ -23,6 +23,8 @@ export class SwatchMapModel {
 
         if (isNeutral && (this._model.neutrals.length > 1)) {
             this.values = this._model.neutrals
+        } else {
+            this.values = this._model.rows
         }
 
         var result = this._values.map(function (x) { 
@@ -34,6 +36,13 @@ export class SwatchMapModel {
     public targets() {
         var result = this._values.map(function (x) { 
             return x.target
+        });
+        return result.reverse();
+    }
+
+    public displayDefinedTargets() {
+        var result = this._values.map(function (x) { 
+             if (x.weight !== undefined) { return "L*" + x.target }
         });
         return result.reverse();
     }
