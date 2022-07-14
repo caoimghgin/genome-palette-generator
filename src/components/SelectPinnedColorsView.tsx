@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled/macro'
+import { SwatchModel } from './../models/SwatchModel'
 
 interface IPinnedColors {
     semantic: string
-    userDefined: string;
+    userDefined: SwatchModel;
     pinnedColors: string[]
     updatePinnedColors: (arg: string[]) => void
 }
@@ -24,9 +25,10 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
     const SwatchContainer = styled.div(props => ({
         width: '100%',
         height: '120px',
-        backgroundColor: userDefined,
-        color: 'white',
-        padding: '24px'
+        backgroundColor: userDefined.hex,
+        color: (userDefined.WCAG2_W_30 || userDefined.WCAG2_W_45 ? '#FFFFFF' : '#000000'),
+        padding: '24px',
+
       }))
 
       const FormContainer = styled.div(props => ({
@@ -93,7 +95,7 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
 
     return (
         <ModalContainer>
-            <SwatchContainer> {semantic} </SwatchContainer>
+            <SwatchContainer> <h3>{semantic}</h3> </SwatchContainer>
 
             <FormContainer className="container">
             <h2> Add More Colors </h2>

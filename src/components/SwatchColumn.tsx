@@ -34,20 +34,7 @@ interface ISwatchColumn {
 export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) => {
 
     window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
-        // setIsVisible(e.detail.includes(model.id))
         setVisibleSwatches(e.detail)
-    }) as EventListener);
-
-    window.addEventListener(Event.EDITABLE, ((e: CustomEvent) => {
-        let editable = e.detail
-        setDisabled(editable)
-        //     var isUndefined = data.filter(function(x:any) {
-        //         return x === undefined;
-        //    });
-        //     // console.log("isUndefined = ", isUndefined.length)
-        //     setDisabled(isUndefined.length)
-        //    setModel(filtered)
-
     }) as EventListener);
 
     const [column, setColumn] = useState<string>('A');
@@ -56,7 +43,6 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     const [pinnedColors, setPinnedColors] = React.useState<Array<string>>([]);
     const [swatches, setSwatches] = React.useState<Array<SwatchModel>>([]);
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [disabled, setDisabled] = React.useState(false)
     const [visibleSwatches, setVisibleSwatches] = React.useState<Array<string>>([]);
 
     function openModal() {
@@ -306,6 +292,13 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     }
 
+    function getUserDefinedSwatch() {
+        let userDefinedSwatch = swatches.filter(swatch => {
+            return swatch.isUserDefined === true;
+        });
+        return userDefinedSwatch[0]
+    }
+
     const Wrapper = styled.div`
         visibility: visible;
         display: inline-block;
@@ -333,7 +326,6 @@ width: 130px;
 margin-bottom: 16px;
 
 `
-
     return (
         <Wrapper>
 
@@ -342,7 +334,7 @@ margin-bottom: 16px;
                 style={customStyles}
                 contentLabel="Minimal Modal Example">
                 <SelectPinnedColorsView semantic={semantic}
-                    userDefined={baseColor}
+                    userDefined={getUserDefinedSwatch()}
                     pinnedColors={pinnedColors}
                     updatePinnedColors={setPinnedColors} />
             </ReactModal>
@@ -352,20 +344,17 @@ margin-bottom: 16px;
                     type="text"
                     id="semantic"
                     defaultValue={semantic}
-                    disabled={disabled}
                     onChange={(e) => semanticInputHandler(e)} required />
 
                 <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
                     type="text"
                     id="color"
                     defaultValue={baseColor}
-                    disabled={disabled}
                     onChange={(e) => colorInputHandeler(e)} required />
 
                 <StyledButton onClick={insertPinnedColors}
                     className="button"
-                    name="button 4"
-                    disabled={disabled}>
+                    name="button 4">
                     {pinnedColorsButtonLabel()}
                 </StyledButton>
 
