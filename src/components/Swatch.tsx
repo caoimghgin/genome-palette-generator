@@ -8,39 +8,64 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [isVisible, setIsVisible] = React.useState(true)
     const [color, setColor] = React.useState("000000");
     const [height, setHeight] = React.useState(rowHeight);
+    const [fillColor, setFillColor] = React.useState(model.hex);
+    const [textColor, setTextColor] = React.useState((model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000'));
+    const [fontWeight, setFontWeight] = React.useState((model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400));
+    // const fontWeight = useState( () => fontWeightConstructor(model) );
+    const swatchLabel = useState( () => swatchLabelConstructor(model) );
+    const infoLabel = useState( () => infoLabelConstructor(model) );
+
+    function fontWeightConstructor(model: SwatchModel) {
+        if (model.WCAG2_W_30 && !model.WCAG2_W_45 ) return 700
+        return 400
+        // return (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)
+    }
+
+    function swatchLabelConstructor(model: SwatchModel) {
+        let result = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
+        if (model.isPinned) { result = "📍 " + result}
+        return result
+    }
+
+    function infoLabelConstructor(model: SwatchModel) {
+        let result = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
+        if (model.isPinned) { result = "📍 " + result}
+        return result
+    }
 
     //
     // This is a LOT of event listeners. I wonder if we can move logic back to the column
     // and have it re-render on update? Filtering out what should display directly. Should prevent 
     // any race conditions.
     //
-    // window.addEventListener(Event.DISPLAY_SWATCHES_ID, ((e: CustomEvent) => {
-    //     setIsVisible(e.detail.includes(model.id))
+
+    // window.addEventListener("keydown", ((e: CustomEvent) => {
+    //     // setIsVisible(e.detail.includes(model.id))
+    //     setColor('#000000')
+    // }) as EventListener);
+
+    // window.addEventListener("keyup", ((e: CustomEvent) => {
+    //     // setIsVisible(e.detail.includes(model.id))
+    //     setColor(model.hex)
     // }) as EventListener);
 
     useEffect(() => {
         setColor(model.LAB.L > 70 ? '#000000' : '#FFFFFF')
     }, []);
 
-    let label = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
-    let infoLabel = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
-    if (model.isPinned) { label = "📍 " + label}
-    if (model.isPinned) { infoLabel = "📍 " + infoLabel}
-
     useEffect(() => {
         localStorage.setItem(model.id, JSON.stringify(model))
     }, [color]);
-
 
     const WrapperInfo = styled.div`
             visibility: hidden;
             display: none;
             opacity:0;
 
-        color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
-        font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
+        color: ${textColor};
+        font-weight: ${fontWeight};
         font-size: 14pt;
-        background: ${props => model.hex};
+        background: ${fillColor};
         transition:visibility 0.3s linear,opacity 0.3s linear;
         text-align: center;
         vertical-align: middle;
@@ -57,9 +82,9 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         align-items: center;
         visibility: visible;
         height: ${props => height};
-        color: ${props => (model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')};
-        font-weight: ${props => (model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400)};
-        background: ${props => model.hex};
+        color: ${textColor};
+        font-weight: ${fontWeight};
+        background: ${fillColor};
         width: 100%;
         &:hover { 
             ${WrapperInfo} {
@@ -74,11 +99,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const onClick = (event: any) => {
         console.table(model)
     }
-
     return (
 
         <Wrapper key={model.id}>
-            {label}
+            {swatchLabel}
             <WrapperInfo onClick={onClick}> {infoLabel} </WrapperInfo>
         </Wrapper>
 
