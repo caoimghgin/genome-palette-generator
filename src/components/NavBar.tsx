@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -15,8 +15,42 @@ interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
+    const [focusedHex, setFocusedHex] = useState("#FFFFFF")
+    const [isControlDown, setIsControlDown] = useState(0)
+    const [optimization, setOptimization] = useState(Options[0])
+
+    useEffect(() => {
+
+        document.onkeydown = function(event){
+            if (event.repeat) return;
+            if (event.key === "3") { setIsControlDown(3)}
+            if (event.key === "4") { setIsControlDown(4.5)}
+            if (event.key === "7") { setIsControlDown(7)}
+        };
+
+        document.onkeyup = function(event){
+            if (event.repeat) return;
+            setIsControlDown(0)
+            dispatchEvent(new CustomEvent(Event.HIDE_CONTRAST, { detail: false }));
+        };
+
+        window.addEventListener(Event.FOCUSED_SWATCH, ((e: CustomEvent) => {
+            e.preventDefault();
+            setFocusedHex(e.detail)
+        }) as EventListener);
+
+    }, []);
+
+    useEffect(() => {
+            if (isControlDown) {
+                dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedHex, contrast: isControlDown } }));
+            }
+            console.log(focusedHex)
+    }, [focusedHex, isControlDown]);
+
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
+        setOptimization(Options[index])
         let selection = weightedTargets(index)
         let map = new SwatchMapModel(selection) // need to pass in the full weightedTargets, not just the rows..
         displaySwatches(map)
@@ -28,12 +62,9 @@ export const NavBar: React.FC<Props> = (props) => {
         let mappedSwatches = mapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
-        // console.log(mapper.displayDefinedTargets())
-        // console.log( mapper.newTargets(false))
         mapper.newTargets(false)
         dispatchEvent(new CustomEvent(Event.DISPLAY_LEGEND, { detail: mapper.weights() }));
         dispatchEvent(new CustomEvent(Event.DISPLAY_TARGETS, { detail: mapper.displayDefinedTargets() }));
-
         dispatchEvent(new CustomEvent(Event.DISPLAY_SWATCHES_ID, { detail: swatchIds }));
     }
 
@@ -325,7 +356,7 @@ export const NavBar: React.FC<Props> = (props) => {
                 <ContainerLeft>
                     <img src={logo} className="App-logo" alt="logo" />
                     <DropdownContainer>
-                        <Dropdown options={Options} onChange={onSelect} value={Options[0]} placeholder="Select an option" />
+                        <Dropdown options={Options} onChange={onSelect} value={optimization} placeholder="Select an option" />
                     </DropdownContainer>
                 </ContainerLeft>
 

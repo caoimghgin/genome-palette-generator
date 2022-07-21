@@ -1,20 +1,54 @@
 import './App.css';
+import React, { useState, useEffect } from 'react';
 import { NavBar } from "./components/NavBar"
-import { Footer }  from "./components/Footer"
+import { Footer } from "./components/Footer"
 import { SwatchColumnLegend } from "./components/SwatchColumnLegend";
 import { SwatchColumnWeights } from "./components/SwatchColumnWeights";
 import { SwatchColumn } from "./components/SwatchColumn";
-import { SwatchColumnsRandom }  from "./components/testing/SwatchColumnsRandom";
+import { SwatchColumnsRandom } from "./components/testing/SwatchColumnsRandom";
+
+
+import { SwatchModel } from './../src/models/SwatchModel'
 
 function App() {
 
-    // clear localStorage
+    const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel | undefined>(undefined)
+    const [focusedHex, setFocusedHex] = useState<string | undefined>(undefined)
+
     localStorage.clear();
     console.log("All localStorage cleared")
 
+    // const controlDown = (event: KeyboardEvent) => {
+    //     if (event.repeat) return;
+    //     event.preventDefault();
+    //     if (event.key === "3") {
+    //         console.log("I SEE THREE!!!")
+    //         dispatchEvent(new CustomEvent("SHOW31ContrastPass", { detail: focusedHex }));
+
+    //         // if (focusedSwatch !== undefined) {
+    //         //     dispatchEvent(new CustomEvent("SHOW31ContrastPass", { detail: focusedSwatch }));
+    //         // } else {
+    //         //     console.log("NOTHING THERE BOSS")
+    //         // }
+    //     }
+    // };
+
+    // const controlUp = (event: KeyboardEvent) => {
+    //     if (event.repeat) return;
+    //     event.preventDefault();
+    //     dispatchEvent(new CustomEvent("NORMAL", { detail: focusedSwatch }));
+    // };
+
+    // window.addEventListener('keydown', controlDown)
+    // window.addEventListener('keyup', controlUp)
+    // window.addEventListener("SETFOCUSEDSQWASKDF", ((e: CustomEvent) => {
+    //     setFocusedHex(e.detail)
+    //     e.preventDefault();
+    // }) as EventListener);
+
     return (
         <div className="App">
-            <NavBar/>
+            <NavBar />
             {/* <SwatchColumnsRandom/> */}
 
             <SwatchColumnLegend />
@@ -30,8 +64,8 @@ function App() {
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
             <SwatchColumn model={{ hexString: "#007AFF", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
-            
-            <SwatchColumnWeights/>
+
+            <SwatchColumnWeights />
 
             {/* Bootstrap
             <SwatchColumn model={{ hexString: "#007BFF", semantic: "primary" }} />
@@ -76,7 +110,7 @@ function App() {
             <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
             <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} />  */}
 
-            <Footer/>
+            <Footer />
         </div>
     );
 }
