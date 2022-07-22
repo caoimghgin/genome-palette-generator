@@ -15,7 +15,8 @@ interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
-    const [focusedHex, setFocusedHex] = useState("#FFFFFF")
+    // const [focusedHex, setFocusedHex] = useState("#FFFFFF")
+    const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel>()
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
 
@@ -36,17 +37,19 @@ export const NavBar: React.FC<Props> = (props) => {
 
         window.addEventListener(Event.FOCUSED_SWATCH, ((e: CustomEvent) => {
             e.preventDefault();
-            setFocusedHex(e.detail)
+            // setFocusedHex(e.detail)
+            dispatchEvent(new CustomEvent(Event.HIDE_CONTRAST, { detail: false }));
+            setFocusedSwatch(e.detail)
         }) as EventListener);
 
     }, []);
 
     useEffect(() => {
-            if (isControlDown) {
-                dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedHex, contrast: isControlDown } }));
+            if (isControlDown && focusedSwatch !== undefined) {
+                dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedSwatch.hex, contrast: isControlDown } }));
             }
-            console.log(focusedHex)
-    }, [focusedHex, isControlDown]);
+            // console.log(focusedHex)
+    }, [focusedSwatch, isControlDown]);
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)

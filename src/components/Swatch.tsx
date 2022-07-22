@@ -112,13 +112,8 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     const foo = (event: any) => {
         if (!isFocused) {
-            dispatchEvent(new CustomEvent(Event.FOCUSED_SWATCH, { detail: model.hex }));
-
-            // const myEvent = new CustomEvent("myevent", { detail: model.hex, bubbles: true, cancelable: true, composed: false});
-            // document.dispatchEvent(myEvent);
-
+            dispatchEvent(new CustomEvent(Event.FOCUSED_SWATCH, { detail: model }));
             setIsFocused(true)
-            // console.log("FOCUSED", model.id)
         }
 
     }
@@ -127,7 +122,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         setIsFocused(false)
         // console.log("NOT FOCUSED", model.id)
         // dispatchEvent(new CustomEvent("SETFOCUSEDSQWASKDF", { detail: undefined }));
-
     }
 
     return (
