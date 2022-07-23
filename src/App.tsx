@@ -6,8 +6,6 @@ import { SwatchColumnLegend } from "./components/SwatchColumnLegend";
 import { SwatchColumnWeights } from "./components/SwatchColumnWeights";
 import { SwatchColumn } from "./components/SwatchColumn";
 import { SwatchColumnsRandom } from "./components/testing/SwatchColumnsRandom";
-
-
 import { SwatchModel } from './../src/models/SwatchModel'
 
 function App() {

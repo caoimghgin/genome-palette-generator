@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
+import { Popover } from 'react-tiny-popover'
 import styled from '@emotion/styled';
 
 import { SwatchModel } from './../models/SwatchModel'
@@ -9,6 +10,7 @@ import { Event, columns, l_targets } from "./../constants"
 import Spectro from './../utilities/palettizer/spectro'
 import logo from './../logo.svg';
 import { Matrix } from "./../modules/SwatchMatrix";
+import { ResourcesView } from "./../components/ResourcesView"
 
 interface Props { }
 
@@ -19,16 +21,18 @@ export const NavBar: React.FC<Props> = (props) => {
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
 
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+
     useEffect(() => {
 
-        document.onkeydown = function(event){
+        document.onkeydown = function (event) {
             if (event.repeat) return;
-            if (event.key === "3") { setIsControlDown(3)}
-            if (event.key === "4") { setIsControlDown(4.5)}
-            if (event.key === "7") { setIsControlDown(7)}
+            if (event.key === "3") { setIsControlDown(3) }
+            if (event.key === "4") { setIsControlDown(4.5) }
+            if (event.key === "7") { setIsControlDown(7) }
         };
 
-        document.onkeyup = function(event){
+        document.onkeyup = function (event) {
             if (event.repeat) return;
             setIsControlDown(0)
             dispatchEvent(new CustomEvent(Event.HIDE_CONTRAST, { detail: false }));
@@ -44,10 +48,10 @@ export const NavBar: React.FC<Props> = (props) => {
     }, []);
 
     useEffect(() => {
-            if (isControlDown && focusedSwatch !== undefined) {
-                dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedSwatch.hex, contrast: isControlDown } }));
-            }
-            // console.log(focusedHex)
+        if (isControlDown && focusedSwatch !== undefined) {
+            dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedSwatch.hex, contrast: isControlDown } }));
+        }
+        // console.log(focusedHex)
     }, [focusedSwatch, isControlDown]);
 
     const onSelect = (event: any) => {
@@ -87,11 +91,13 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const tbd_resources = () => {
 
-        let map = new SwatchMapModel(weightedTargets(1)) // need to pass in the full weightedTargets, not just the rows..
-        let grid = xGetSwatchesFromlocalStorage()
-        let result = mapSwatchesToTarget(grid, map)
+        setIsPopoverOpen(!isPopoverOpen)
 
-        alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
+        // let map = new SwatchMapModel(weightedTargets(1)) // need to pass in the full weightedTargets, not just the rows..
+        // let grid = xGetSwatchesFromlocalStorage()
+        // let result = mapSwatchesToTarget(grid, map)
+
+        // alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
     }
 
     const tbd_import = () => {
@@ -366,14 +372,34 @@ export const NavBar: React.FC<Props> = (props) => {
                     </DropdownContainer>
                 </ContainerLeft>
 
-                <ContainerCenter> 
+                <ContainerCenter>
 
 
                 </ContainerCenter>
 
                 <ContainerRight>
 
-                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button>
+                    <Popover
+                        isOpen={isPopoverOpen}
+                        positions={['bottom', 'left']} // if you'd like, you can limit the positions
+                        padding={10} // adjust padding here!
+                        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
+                        onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
+                        content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
+                        <ResourcesView/>
+                            // <div style={{ backgroundColor: 'white'}} >
+                            //     <div>Hi! I'm popover content. Here's my current position: {position}.</div>
+                            //     <div>I'm {` ${nudgedLeft} `} pixels beyond my boundary horizontally!</div>
+                            //     <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
+                            // </div>
+                        )}
+                    >
+                        {/* <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>Click me!</div> */}
+                        <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsPopoverOpen(!isPopoverOpen)}> Resources </button>
+
+                    </Popover>
+
+                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button> */}
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button>
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button>
                     {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button> */}
