@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
 import styled from '@emotion/styled';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 
 import { SwatchModel } from './../models/SwatchModel'
 import { SwatchMapModel } from './../models/SwatchMapModel';
@@ -359,11 +358,18 @@ export const NavBar: React.FC<Props> = (props) => {
                 <ContainerLeft>
                     <img src={logo} className="App-logo" alt="logo" />
                     <DropdownContainer>
-                        <Dropdown options={Options} onChange={onSelect} value={optimization} placeholder="Select an option" />
+                        <Select
+                            value={optimization}
+                            onChange={onSelect}
+                            options={Options}
+                        />
                     </DropdownContainer>
                 </ContainerLeft>
 
-                <ContainerCenter> </ContainerCenter>
+                <ContainerCenter> 
+
+
+                </ContainerCenter>
 
                 <ContainerRight>
 
