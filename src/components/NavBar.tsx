@@ -11,6 +11,7 @@ import Spectro from './../utilities/palettizer/spectro'
 import logo from './../logo.svg';
 import { Matrix } from "./../modules/SwatchMatrix";
 import { ResourcesView } from "./../components/ResourcesView"
+import { ToolsView } from "./../components/ToolsView"
 
 interface Props { }
 
@@ -20,8 +21,8 @@ export const NavBar: React.FC<Props> = (props) => {
     const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel>()
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
-
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+    const [isResourcesPopoverOpen, setIsResourcesPopoverOpen] = useState(false)
+    const [isToolsPopoverOpen, setIsToolsPopoverOpen] = useState(false)
 
     useEffect(() => {
 
@@ -87,17 +88,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
         downloadSwatches(json)
         // alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
-    }
-
-    const tbd_resources = () => {
-
-        setIsPopoverOpen(!isPopoverOpen)
-
-        // let map = new SwatchMapModel(weightedTargets(1)) // need to pass in the full weightedTargets, not just the rows..
-        // let grid = xGetSwatchesFromlocalStorage()
-        // let result = mapSwatchesToTarget(grid, map)
-
-        // alert("-- A dropdown menu appears showing author of app 'Kevin Muldoon', and links to other resources such as 'QuickStart', 'GitHub', 'Plugins (Figma, Sketch, etc)', 'Contact information', ... --");
     }
 
     const tbd_import = () => {
@@ -380,27 +370,31 @@ export const NavBar: React.FC<Props> = (props) => {
                 <ContainerRight>
 
                     <Popover
-                        isOpen={isPopoverOpen}
+                        isOpen={isResourcesPopoverOpen}
                         positions={['bottom', 'left']} // if you'd like, you can limit the positions
                         padding={10} // adjust padding here!
                         reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
-                        onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
+                        onClickOutside={() => setIsResourcesPopoverOpen(false)} // handle click events outside of the popover/target here!
                         content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
                         <ResourcesView/>
-                            // <div style={{ backgroundColor: 'white'}} >
-                            //     <div>Hi! I'm popover content. Here's my current position: {position}.</div>
-                            //     <div>I'm {` ${nudgedLeft} `} pixels beyond my boundary horizontally!</div>
-                            //     <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
-                            // </div>
-                        )}
-                    >
-                        {/* <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>Click me!</div> */}
-                        <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsPopoverOpen(!isPopoverOpen)}> Resources </button>
+                        )}>
+                        <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsResourcesPopoverOpen(!isResourcesPopoverOpen)}> Resources </button>
+                    </Popover>
 
+                    <Popover
+                        isOpen={isToolsPopoverOpen}
+                        positions={['bottom', 'left']} // if you'd like, you can limit the positions
+                        padding={10} // adjust padding here!
+                        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
+                        onClickOutside={() => setIsToolsPopoverOpen(false)} // handle click events outside of the popover/target here!
+                        content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
+                        <ToolsView/>
+                        )}>
+                        <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsToolsPopoverOpen(!isToolsPopoverOpen)}> Tools </button>
                     </Popover>
 
                     {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button> */}
-                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button>
+                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button> */}
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button>
                     {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button> */}
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadJSON}> Export </button>
