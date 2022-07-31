@@ -7,6 +7,7 @@ import openSourceImage from './../resources/openSourceImage.png';
 import linkedInImage from './../resources/linkedInImage.png';
 import twitterLogoImage from './../resources/twitterLogoImage.png';
 import portfolioImage from './../resources/portfolioImage.png';
+import githubLogoImage from './../resources/githubLogoImage.png';
 
 export const ResourcesView: React.FC = () => {
 
@@ -24,7 +25,6 @@ export const ResourcesView: React.FC = () => {
         border-radius: 8px;
         padding: 4px 24px 24px 24px;
     `
-
 
     //     How should you name your colors in a Design System?
     // Definitive, Semantic, and Contextual naming conventions
@@ -54,7 +54,7 @@ export const ResourcesView: React.FC = () => {
 
             />            
 
-            <h3> Plugins </h3>
+            {/* <h3> Plugins </h3>
             <hr/>
             <ResourcesViewTabelCell 
                 title={"Import for Figma"}
@@ -74,19 +74,19 @@ export const ResourcesView: React.FC = () => {
                 icon={pluginImage}
                 disabled={true}
 
-            />
+            /> */}
 
             <h3> GitHub </h3> 
             <hr/>
             <ResourcesViewTabelCell 
-                title={"Genome App"}
+                title={"Genome Web"}
                 link={"https://github.com/caoimghgin/genome"}
-                icon={openSourceImage}
+                icon={githubLogoImage}
             />
             <ResourcesViewTabelCell 
-                title={"Genome Plugins"}
+                title={"Genome Figma Importer"}
                 link={"https://github.com/caoimghgin/genome-import-figma"}
-                icon={openSourceImage}
+                icon={githubLogoImage}
             />
 
             <h3> Contact </h3>
