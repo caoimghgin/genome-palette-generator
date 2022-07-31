@@ -50,7 +50,7 @@ export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
         flexDirection: 'column',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        width: columnWidth,
+        width: '30px',
         background: "#FFFFFF",
         height: rowHeight ,
         textAlign: 'right',

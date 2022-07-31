@@ -23,6 +23,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const [optimization, setOptimization] = useState(Options[0])
     const [isResourcesPopoverOpen, setIsResourcesPopoverOpen] = useState(false)
     const [isToolsPopoverOpen, setIsToolsPopoverOpen] = useState(false)
+    const [message, setMessage] = useState(Options[0].message)
 
     useEffect(() => {
 
@@ -41,7 +42,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
         window.addEventListener(Event.FOCUSED_SWATCH, ((e: CustomEvent) => {
             e.preventDefault();
-            // setFocusedHex(e.detail)
             dispatchEvent(new CustomEvent(Event.HIDE_CONTRAST, { detail: false }));
             setFocusedSwatch(e.detail)
         }) as EventListener);
@@ -58,6 +58,7 @@ export const NavBar: React.FC<Props> = (props) => {
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
         setOptimization(Options[index])
+        setMessage(Options[index].message)
         let selection = weightedTargets(index)
         let map = new SwatchMapModel(selection) // need to pass in the full weightedTargets, not just the rows..
         displaySwatches(map)
@@ -363,8 +364,7 @@ export const NavBar: React.FC<Props> = (props) => {
                 </ContainerLeft>
 
                 <ContainerCenter>
-
-
+                        {message}
                 </ContainerCenter>
 
                 <ContainerRight>
