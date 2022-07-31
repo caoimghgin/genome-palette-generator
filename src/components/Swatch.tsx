@@ -17,13 +17,19 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [infoTextColor, setInfoTextColor] = React.useState((model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000'));
 
     const [fontWeight, setFontWeight] = React.useState((model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400));
-    const swatchLabel = useState( () => swatchLabelConstructor(model) );
+    const [swatchLabel, setSwatchLabel] = useState( () => swatchLabelConstructor(model) );
     const infoLabel = useState( () => infoLabelConstructor(model));
     const [isFocused, setIsFocused] = React.useState(false)
 
 
     function swatchLabelConstructor(model: SwatchModel) {
         let result = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
+        if (model.isPinned) { result = "📍 " + result}
+        return result
+    }
+
+    function swatchLabelNonPassConstructor(model: SwatchModel) {
+        let result = (model.isUserDefined ? "⭐️ " + "–" : "–")
         if (model.isPinned) { result = "📍 " + result}
         return result
     }
@@ -45,10 +51,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         let contrast = chroma.contrast(model.hex, hex);
 
         if (contrast < parameter) {
-            setFillColor(fillColor+"40")
+            setFillColor(fillColor + "40")
             setTextColor(model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#00000033')
+            setSwatchLabel(swatchLabelNonPassConstructor(model))
         }
-
 
     }) as EventListener);
 
@@ -57,6 +63,8 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         let result = e.detail as SwatchModel
         setFillColor(model.hex)
         setTextColor(model.WCAG2_W_30 || model.WCAG2_W_45 ? '#FFFFFF' : '#000000')
+        setSwatchLabel(swatchLabelConstructor(model))
+
     }) as EventListener);
 
     useEffect(() => {
