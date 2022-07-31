@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled/macro';
-import { SwatchModel } from './../models/SwatchModel'
-import { rowHeight, fontSize, Event } from './../constants';
 import chroma from "chroma-js"
-
-        // Event.FOCUSED_SWATCH
-        // SETFOCUSEDSQWASKDF
+import { SwatchModel } from './../models/SwatchModel'
+import { rowHeight, Event } from './../constants';
 
 export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
@@ -20,7 +17,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     const [swatchLabel, setSwatchLabel] = useState( () => swatchLabelConstructor(model) );
     const infoLabel = useState( () => infoLabelConstructor(model));
     const [isFocused, setIsFocused] = React.useState(false)
-
 
     function swatchLabelConstructor(model: SwatchModel) {
         let result = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
@@ -41,8 +37,6 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     }
 
     window.addEventListener(Event.SHOW_CONTRAST, ((e: CustomEvent) => {
-        // setVisibleSwatches(e.detail)
-        // let result = e.detail as SwatchModel
 
         e.preventDefault()
 
@@ -118,7 +112,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
         console.table(model)
     }
 
-    const foo = (event: any) => {
+    const mouseEnterHandler = (event: any) => {
         if (!isFocused) {
             dispatchEvent(new CustomEvent(Event.FOCUSED_SWATCH, { detail: model }));
             setIsFocused(true)
@@ -126,15 +120,13 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     }
 
-    const bar = (event: any) => {
+    const mouseOutHandler = (event: any) => {
         setIsFocused(false)
-        // console.log("NOT FOCUSED", model.id)
-        // dispatchEvent(new CustomEvent("SETFOCUSEDSQWASKDF", { detail: undefined }));
     }
 
     return (
 
-        <Wrapper key={model.id} onMouseOut={bar} onMouseEnter={foo}>
+        <Wrapper key={model.id} onMouseOut={mouseOutHandler} onMouseEnter={mouseEnterHandler}>
             {swatchLabel}
             <WrapperInfo onClick={onClick}> {infoLabel} </WrapperInfo>
         </Wrapper>

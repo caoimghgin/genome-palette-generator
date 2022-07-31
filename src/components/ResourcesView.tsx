@@ -76,7 +76,7 @@ export const ResourcesView: React.FC = () => {
 
             />
 
-            <h3> Open Source </h3> 
+            <h3> GitHub </h3> 
             <hr/>
             <ResourcesViewTabelCell 
                 title={"Genome App"}
@@ -103,7 +103,7 @@ export const ResourcesView: React.FC = () => {
                 icon={twitterLogoImage}
             />
             <ResourcesViewTabelCell 
-                title={"Portfolio"}
+                title={"My Portfolio"}
                 link={"https://uxfol.io/kmuldoon"}
                 icon={portfolioImage}
 
