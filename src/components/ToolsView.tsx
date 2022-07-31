@@ -31,9 +31,9 @@ export const ToolsView: React.FC = () => {
             <h3> Tools </h3>
             <hr/>
             <ResourcesViewTabelCell 
-                title={"Closest color"} 
+                title={"Find Closest Color"} 
                 link={"https://www.google.com/"}
-                icon={logoUXCollectiveImage}
+                icon={openSourceImage}
                 disabled={true}
             />
 
