@@ -15,16 +15,20 @@ import { Matrix } from "./../modules/SwatchMatrix";
 import { ResourcesView } from "./../components/ResourcesView"
 import { ToolsView } from "./../components/ToolsView"
 
+import { useSnackbar } from 'react-simple-snackbar'
+
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
+
+    const [openSnackbar, closeSnackbar] = useSnackbar({position:'top-center'})
 
     const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel>()
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
     const [isResourcesPopoverOpen, setIsResourcesPopoverOpen] = useState(false)
     const [isToolsPopoverOpen, setIsToolsPopoverOpen] = useState(false)
-    const [message, setMessage] = useState(Options[0].message)
+    // const [message, setMessage] = useState(Options[0].message)
 
     useEffect(() => {
 
@@ -57,8 +61,11 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
+        let msg = (Options[index].message)
+        if (msg.length) openSnackbar(msg, 100000)
+
         setOptimization(Options[index])
-        setMessage(Options[index].message)
+        // setMessage(Options[index].message)
         let selection = weightedTargets(index)
         let map = new SwatchMapModel(selection) // need to pass in the full weightedTargets, not just the rows..
         displaySwatches(map)
@@ -288,7 +295,6 @@ export const NavBar: React.FC<Props> = (props) => {
                 </ContainerLeft>
 
                 <ContainerCenter>
-                        {message}
                 </ContainerCenter>
 
                 <ContainerRight>

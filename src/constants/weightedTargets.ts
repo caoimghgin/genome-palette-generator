@@ -15,7 +15,7 @@ const msgLightning = msgNonOpt
 const msgAnt = msgNonOpt
 const msgAccp = msgNonOpt
 const msgColorBox = msgNonOpt
-const msgGenome = msgNonOpt
+const msgGenome = "Genome is designed to be semantically named and meaningfully weighted for WCAG contrast. Swatches 100 and 200 pass on 3:1 (L*60, L*55). Swatches 300 and 400 pass on 4.5:1 (L*50, L*45). To switch modes, select even numbers for light-mode (200, 400) and odds for dark-mode (100, 300). Genome includes a light density 015 (L* 97.5) which is useful for paper whites. This Color System has a few more colors than most, but offers better flexability."
 const msgNK = msgNonOpt
 
 export const Options = [
