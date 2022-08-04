@@ -20,12 +20,12 @@ const msgNK = msgNonOpt
 
 export const Options = [
     { value: '0', label: 'Non-optimized', message: msgNonOpt},
-    { value: '1', label: 'IBM Carbon' , message: msgCarbon},
-    { value: '2', label: 'SalesForce Lightning' , message: msgLightning},
-    { value: '3', label: 'Ant' , message: msgAnt},
-    { value: '4', label: 'Accessible Palette' , message: msgAccp},
-    { value: '5', label: 'ColorBox' , message: msgColorBox},
-    { value: '6', label: 'Genome' , message: msgGenome},
+    { value: '1', label: 'Genome' , message: msgGenome},
+    { value: '2', label: 'IBM Carbon' , message: msgCarbon},
+    { value: '3', label: 'SalesForce Lightning' , message: msgLightning},
+    { value: '4', label: 'Ant' , message: msgAnt},
+    { value: '5', label: 'Accessible Palette' , message: msgAccp},
+    { value: '6', label: 'ColorBox' , message: msgColorBox},
     { value: '7', label: 'NewsKit' , message: msgNK},
 
   ];
@@ -33,12 +33,12 @@ export const Options = [
 
 enum WeightedTargetsOptions {
     Spectrum = 0,
+    Genome,
     Carbon,
     Lightning,
     Ant,
     AccessiblePalette,
     ColorBox,
-    Genome,
     NewsKit,
 }
 

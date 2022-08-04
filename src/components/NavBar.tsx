@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { Popover } from 'react-tiny-popover'
+import Spectro from './../utilities/palettizer/spectro'
 import styled from '@emotion/styled';
+
+import logo from './../logo.svg';
+import { Popover } from 'react-tiny-popover'
 
 import { SwatchModel } from './../models/SwatchModel'
 import { SwatchMapModel } from './../models/SwatchMapModel';
 import { Options, weightedTargets } from "./../constants/weightedTargets"
 import { Event, columns, l_targets } from "./../constants"
-import Spectro from './../utilities/palettizer/spectro'
-import logo from './../logo.svg';
+
 import { Matrix } from "./../modules/SwatchMatrix";
 import { ResourcesView } from "./../components/ResourcesView"
 import { ToolsView } from "./../components/ToolsView"
@@ -17,7 +19,6 @@ interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
-    // const [focusedHex, setFocusedHex] = useState("#FFFFFF")
     const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel>()
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
@@ -52,7 +53,6 @@ export const NavBar: React.FC<Props> = (props) => {
         if (isControlDown && focusedSwatch !== undefined) {
             dispatchEvent(new CustomEvent(Event.SHOW_CONTRAST, { detail: { focus: focusedSwatch.hex, contrast: isControlDown } }));
         }
-        // console.log(focusedHex)
     }, [focusedSwatch, isControlDown]);
 
     const onSelect = (event: any) => {
@@ -66,7 +66,7 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const displaySwatches = (mapper: SwatchMapModel) => {
 
-        let swatches = xGetSwatchesFromlocalStorage()
+        let swatches = getSwatchesFromlocalStorage()
         let mappedSwatches = mapSwatchesToTarget(swatches, mapper)
         let swatchIds = getSwatchIds(removeUndefinedWeightSwatches(mappedSwatches))
 
@@ -77,18 +77,9 @@ export const NavBar: React.FC<Props> = (props) => {
     }
 
     const downloadJSON = () => {
-        let swatches = xGetSwatchesFromlocalStorage()
+        let swatches = getSwatchesFromlocalStorage()
         let json = JSON.stringify(swatches, null, 4);
         downloadSwatches(json)
-    }
-
-    const downloadAsRootJSON = () => {
-
-        let swatches = getSwatchesFromlocalStorage()
-        let json = formatSwatchesToGenomeJSON(swatches)
-
-        downloadSwatches(json)
-        // alert("-- WORKING: A gcs.json file is downloaded (ALL swatches, a non-optimized file). User can import the gcs.json into Figma, Sketch, AdobeXD or any other app with the aid of a separate plugin. That plugin will allow user to 'optimize' values into any color system they prefer. --");
     }
 
     const tbd_import = () => {
@@ -97,11 +88,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
     const tbd_tools = () => {
         alert("-- A dropdown menu appears showing special tools. For instance, the ability to enter a hex value and find closest match in current color table for 'tweaking' --");
-    }
-
-    const logSwatches = () => {
-        let swatches = getSwatchesFromlocalStorage()
-        let result = findClosestSwatches(swatches, "#ffc107")
     }
 
     const findClosestSwatches = (swatches: SwatchModel[], hex: string) => {
@@ -120,39 +106,7 @@ export const NavBar: React.FC<Props> = (props) => {
         return result
     }
 
-    const formatSwatchesToGenomeJSON = (swatches: SwatchModel[]) => {
-
-        let result = {} as any
-
-        swatches.forEach(function (swatch, index) {
-
-            if (!result[swatch.column]) { result[swatch.column] = {} }
-            if (!result[swatch.column]["rows"]) { result[swatch.column]["rows"] = {} }
-
-            // find the name of the column here 
-            let columName = localStorage.getItem(swatch.column) as string
-            result[swatch.column]["semantic"] = columName
-
-            result[swatch.column]["rows"][swatch.row] = {
-                id: swatch.id,
-                value: swatch.hex,
-                lightness: swatch.lightness,
-                l_target: swatch.l_target,
-                userDefined: swatch.isUserDefined,
-                ccName: swatch.colorChecker.name,
-                WCAG2_W_30: swatch.WCAG2_W_30,
-                WCAG2_W_45: swatch.WCAG2_W_45,
-                WCAG2_K_30: swatch.WCAG2_K_30,
-                WCAG2_K_45: swatch.WCAG2_K_45,
-            }
-
-        });
-
-        return JSON.stringify(result, null, 4);
-
-    }
-
-    const xGetSwatchesFromlocalStorage = () => {
+    const getSwatchesFromlocalStorage = () => {
 
         let grid = new Matrix.Grid()
 
@@ -254,36 +208,6 @@ export const NavBar: React.FC<Props> = (props) => {
 
         return grid
 
-    }
-
-    const getSwatchesFromlocalStorage = () => {
-
-        let result = []
-
-        loopColumns:
-        for (let column = 0; column < columns.length; column++) {
-            loopRows:
-            for (let row = 0; row < l_targets.length; row++) {
-                let swatchId = columns[column] + row
-                let swatchData = window.localStorage.getItem(swatchId)
-                if (!swatchData) {
-                    break loopColumns
-                } else {
-                    try {
-                        let swatch = JSON.parse(swatchData) as SwatchModel
-                        let semantic = window.localStorage.getItem(columns[column]) as string
-                        swatch.semantic = semantic
-
-                        result.push(swatch)
-                    } catch (e) {
-                        alert(e); // get out of loop                       
-                    }
-                }
-
-            }
-
-        }
-        return result
     }
 
     const downloadSwatches = (res: string) => {

@@ -16,34 +16,6 @@ function App() {
     localStorage.clear();
     console.log("All localStorage cleared")
 
-    // const controlDown = (event: KeyboardEvent) => {
-    //     if (event.repeat) return;
-    //     event.preventDefault();
-    //     if (event.key === "3") {
-    //         console.log("I SEE THREE!!!")
-    //         dispatchEvent(new CustomEvent("SHOW31ContrastPass", { detail: focusedHex }));
-
-    //         // if (focusedSwatch !== undefined) {
-    //         //     dispatchEvent(new CustomEvent("SHOW31ContrastPass", { detail: focusedSwatch }));
-    //         // } else {
-    //         //     console.log("NOTHING THERE BOSS")
-    //         // }
-    //     }
-    // };
-
-    // const controlUp = (event: KeyboardEvent) => {
-    //     if (event.repeat) return;
-    //     event.preventDefault();
-    //     dispatchEvent(new CustomEvent("NORMAL", { detail: focusedSwatch }));
-    // };
-
-    // window.addEventListener('keydown', controlDown)
-    // window.addEventListener('keyup', controlUp)
-    // window.addEventListener("SETFOCUSEDSQWASKDF", ((e: CustomEvent) => {
-    //     setFocusedHex(e.detail)
-    //     e.preventDefault();
-    // }) as EventListener);
-
     return (
         <div className="App">
             <NavBar />
