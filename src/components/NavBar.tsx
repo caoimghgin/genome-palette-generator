@@ -62,8 +62,9 @@ export const NavBar: React.FC<Props> = (props) => {
     const onSelect = (event: any) => {
         let index = parseInt(event.value)
         let msg = (Options[index].message)
+        console.log("THIS IS MESSAGE", msg)
         if (msg.length) {
-            openSnackbar(msg, 100000)
+            openSnackbar(msg, 20000)
         } else {
              closeSnackbar()
         }

@@ -9,14 +9,14 @@ export type weightedTargetsColumn = {
     neutrals: weightedTargetsRow[]
 };
 
-const msgNonOpt = ""
-const msgCarbon = "Carbon Color System is DEFINITIVELY named and MEANINGFULLY WEIGHTED. For 3:1 on white, use 50. For 4.5:1, use 60. Genome Color Space is not assosicated with IBM in any way. Results may not be exact to IBM desired weights."
-const msgLightning = "Lightning Color System is DEFINITIVELY named and MEANINGFULLY WEIGHTED. For 3:1 on white, use 60. For 4.5:1, use 50. Unlike other systems, Lightning uses the L* value as target number which may seem non-intuitive. Genome Color Space is not assosicated with SalesForce and results may not exactly match their desired weights."
-const msgAnt = msgNonOpt
-const msgAccp = msgNonOpt
-const msgColorBox = msgNonOpt
-const msgGenome = "Genome Color System is SEMANTICALLY NAMED and MEANINGFULLY WEIGHTED. For 3:1 contrast on white, use wwatches 100 and 200 (L*60, L*55). Swatches 300 and 400 pass on 4.5:1 (L*50, L*45). To switch modes, select EVEN numbers for light-mode (200, 400) and ODD for dark-mode (100, 300). Genome includes a light density 015 (L* 97.5) which is useful for paper whites. This Color System has a few more colors than most, but offers better flexability."
-const msgNK = msgNonOpt
+const msgNonOpt = "Non-optimized is the basis of Genome Color Space. TIP: Hover over any swatch and press the '3', '4', or '7' keys to see which swatches pass for WCAG 3:1, 4.5:1, and 7:1 contrast ratios."
+const msgCarbon = "Carbon Color System is DEFINITIVELY NAMED, PRE-PACKAGED, and MEANINGFULLY WEIGHTED. For 3:1 on white, use 50. For 4.5:1, use 60. Genome Color Space is not assosicated with IBM in any way. Results may not be exact to IBM desired weights."
+const msgLightning = "Lightning Color System is DEFINITIVELY NAMED, PRE-PACKAGED, and MEANINGFULLY WEIGHTED. For 3:1 on white, use 60. For 4.5:1, use 50. Unlike other systems, Lightning uses the L* value as target number which may seem non-intuitive (lighter colors having larger numbers). Genome Color Space is not assosicated with SalesForce and results may not exactly match their desired weights."
+const msgAnt = "Explain and provide a link to ANT"
+const msgAccp = "Explain and provide a link to Accessible Color Palette"
+const msgColorBox = "Explain and provide a link to ColorBox"
+const msgGenome = "Genome Color System is SEMANTICALLY NAMED, and MEANINGFULLY WEIGHTED. For 3:1 contrast on white, use swatches 100 and 200 (L*60, L*55). Swatches 300 and 400 pass on 4.5:1 (L*50, L*45). To switch modes, select EVEN numbers for light-mode (200, 400) and ODD for dark-mode (100, 300). Genome includes a light density 015 (L* 97.5) which is useful for paper whites. This Color System has a few more colors than most, but offers better flexability."
+const msgNK = "NewsKit Color System is based on IBM Carbon, but the 090 and 100 are lighter by L*5. For 3:1 on white, use 50. For 4.5:1, use 60. Genome Color Space is not assosicated with NewsKit."
 
 export const Options = [
     { value: '0', label: 'Non-optimized', message: msgNonOpt},
