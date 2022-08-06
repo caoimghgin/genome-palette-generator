@@ -3,7 +3,8 @@ import Select from 'react-select';
 import Spectro from './../utilities/palettizer/spectro'
 import styled from '@emotion/styled';
 
-import logo from './../logo.svg';
+import logo from '../resources/logo-genome-hero.svg'
+
 import { Popover } from 'react-tiny-popover'
 
 import { SwatchModel } from './../models/SwatchModel'
