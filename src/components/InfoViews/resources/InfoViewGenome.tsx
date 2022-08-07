@@ -24,14 +24,19 @@ export const InfoViewGenome: React.FC = () => {
             <h3> Genome Color System </h3>
             <hr/>
 
-            <p>Genome Color Tool offers an optimization called the <b>Genome Color System </b> which I find  
-                more intuitive and better for dark-mode.</p>
+            <p> 
+                A <b><i>Meaningfully Weighted, Semantically Named, </i></b> and <b><i>Unlimited</i></b> Color System, 
+                designed for white-label and dark-mode support.          
+            </p>                
 
             <p><b>Numeric weights are based on typography,</b> where weight <b>400</b> represents 'normal' (a mid-tone value, approx L*45).
             Higher numbers are darker (bolder) and lower numbers are lighter (thinner). </p>
 
-            <p> Weights below <b>100</b> are <b><i>incidental</i></b> and typically used for backgrounds, borders, lines, and disabled controls 
-                in light-mode. Unlike hues, Neutral <b>600</b> thru <b>900</b> are darker by <b>L*5</b> to better meet pure black.</p>                
+            <p> Weights below <b>100</b> are <b><i>incidental colors,</i></b>  typically used for backgrounds, borders, lines, and disabled states 
+                in light-mode. Unlike hues, Neutral <b>600</b> thru <b>900</b> are darker by <b>L*5</b> to better meet pure black.</p>
+
+            <p>Practically speaking, there is little purpose in hues darker than L*10 (being so close to black), yet black is an important
+                 color and deserves special treatment. </p>                                 
 
         </ModalContainer>
     )

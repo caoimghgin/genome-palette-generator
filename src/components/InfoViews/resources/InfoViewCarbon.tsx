@@ -20,11 +20,24 @@ export const InfoViewCarbon: React.FC = () => {
 
     return (
         <ModalContainer>
-
+{/* https://carbondesignsystem.com/data-visualization/color-palettes/ */}
             <h3> IBM Carbon Color System </h3>
             <hr/>
-            <p> Here I can explain things about IBM Carbon and even provide a few hyperlinks!</p>
-            <p> Some interesing details you'd love to know!</p>
+            <p> 
+            A <b><i>Meaningfully Weighted, Definitively Named, </i></b> and <b><i>Packaged</i></b> Color System 
+                Solution, IBM Carbon is WCAG compliant with a wide variety of colors of tints/shades, 
+                but does not offer a color tool to create your own.           
+             </p>
+            <p> 
+                Base weight is <b>60 (L*45)</b> which passes for 4.5:1 ratio on white and weight <b>10</b>. Weight <b>50</b> passes for 3:1 on white.
+            </p>            
+            <p> 
+                
+            Learn more about IBM Carbon Color System at <b><a href="https://carbondesignsystem.com/data-visualization/color-palettes/" target="_blank"> 
+                 carbondesignsystem.com
+                </a></b>
+
+            </p>
 
         </ModalContainer>
     )
