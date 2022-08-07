@@ -18,16 +18,21 @@ import { ToolsView } from "./../components/ToolsView"
 
 import { useSnackbar } from 'react-simple-snackbar'
 
+import { InfoViewNonOpt } from './InfoViews/resources/InfoViewNonOpt'
+
+import { Factory as InfoFactory } from './InfoViews/Factory'
+
 interface Props { }
 
 export const NavBar: React.FC<Props> = (props) => {
 
     const [openSnackbar, closeSnackbar] = useSnackbar({position:'top-center'})
-
+    const [selectionIndex, setSelectionIndex] = useState(0)
     const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel>()
     const [isControlDown, setIsControlDown] = useState(0)
     const [optimization, setOptimization] = useState(Options[0])
     const [isResourcesPopoverOpen, setIsResourcesPopoverOpen] = useState(false)
+    const [isInfoPopoverOpen, setIsInfoPopoverOpen] = useState(false)
     const [isToolsPopoverOpen, setIsToolsPopoverOpen] = useState(false)
     // const [message, setMessage] = useState(Options[0].message)
 
@@ -61,15 +66,16 @@ export const NavBar: React.FC<Props> = (props) => {
     }, [focusedSwatch, isControlDown]);
 
     const onSelect = (event: any) => {
-        let index = parseInt(event.value)
-        let msg = (Options[index].message)
-        console.log("THIS IS MESSAGE", msg)
-        if (msg.length) {
-            openSnackbar(msg, 20000)
-        } else {
-             closeSnackbar()
-        }
 
+        let index = parseInt(event.value)
+        setSelectionIndex(index)
+
+        // let msg = (Options[index].message)
+        // if (msg.length) {
+        //     openSnackbar(msg, 20000)
+        // } else {
+        //      closeSnackbar()
+        // }
 
         setOptimization(Options[index])
         // setMessage(Options[index].message)
@@ -299,6 +305,20 @@ export const NavBar: React.FC<Props> = (props) => {
                             options={Options}
                         />
                     </DropdownContainer>
+
+                    <Popover
+                        isOpen={isInfoPopoverOpen}
+                        positions={['bottom', 'right']} // if you'd like, you can limit the positions
+                        padding={10} // adjust padding here!
+                        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
+                        onClickOutside={() => setIsInfoPopoverOpen(false)} // handle click events outside of the popover/target here!
+                        content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
+                        <InfoFactory selection={selectionIndex}/>
+                        )}>
+                        <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsInfoPopoverOpen(!isInfoPopoverOpen)}> ? </button>
+                    </Popover>
+
+                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> ? </button> */}
                 </ContainerLeft>
 
                 <ContainerCenter>

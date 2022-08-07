@@ -27,7 +27,6 @@ export const Options = [
     { value: '5', label: 'Accessible Palette' , message: msgAccp},
     { value: '6', label: 'ColorBox' , message: msgColorBox},
     { value: '7', label: 'NewsKit' , message: msgNK},
-
   ];
 
 
