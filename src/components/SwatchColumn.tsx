@@ -262,6 +262,9 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
         if(re.test(value)) {
             let hex = value.startsWith("#") ? value : ("#" + value)
+            if (hex.startsWith("##")) {
+                hex = hex.slice(hex.length - 7)
+            }
             setBaseColor(hex)
         }
     }
