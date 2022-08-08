@@ -24,9 +24,11 @@ export const Options = [
     { value: '2', label: 'IBM Carbon' , message: msgCarbon},
     { value: '3', label: 'SalesForce Lightning' , message: msgLightning},
     { value: '4', label: 'Ant' , message: msgAnt},
-    { value: '5', label: 'Accessible Palette' , message: msgAccp},
-    { value: '6', label: 'ColorBox' , message: msgColorBox},
-    { value: '7', label: 'NewsKit' , message: msgNK},
+    { value: '5', label: 'Material' , message: msgNK},
+    { value: '6', label: 'Accessible Palette' , message: msgAccp},
+    { value: '7', label: 'ColorBox' , message: msgColorBox},
+    { value: '8', label: 'NewsKit' , message: msgNK},
+
   ];
 
 
@@ -36,6 +38,7 @@ enum WeightedTargetsOptions {
     Carbon,
     Lightning,
     Ant,
+    Material,
     AccessiblePalette,
     ColorBox,
     NewsKit,
@@ -59,7 +62,9 @@ export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsC
         case WeightedTargetsOptions.Genome:
             return weightedTargets_genome   
         case WeightedTargetsOptions.NewsKit:
-            return weightedTargets_newskit                                            
+            return weightedTargets_newskit      
+        case WeightedTargetsOptions.Material:
+           return weightedTargets_material                                                      
         default:
             return weightedTargets_spectrum
     }
@@ -316,4 +321,55 @@ const weightedTargets_genome: weightedTargetsColumn = {
         { target: 97.5, weight: "015" },
         { target: 100, weight: undefined},
     ]
+}
+const weightedTargets_material: weightedTargetsColumn = {
+    rows: [
+        { target: 0, weight: undefined },
+        { target: 5, weight: undefined },
+        { target: 10, weight: undefined },
+        { target: 15, weight: undefined },
+        { target: 20, weight: "900" },
+        { target: 25, weight: "800" },
+        { target: 30, weight: "700" },
+        { target: 35, weight: "600" },
+        { target: 40, weight: "500" },
+        { target: 45, weight: undefined },
+        { target: 50, weight: "400" },
+        { target: 55, weight: "300" },
+        { target: 60, weight: undefined },
+        { target: 65, weight: undefined },
+        { target: 70, weight: "200" },
+        { target: 75, weight: undefined },
+        { target: 80, weight: undefined },
+        { target: 85, weight: "100" },
+        { target: 90, weight: undefined },
+        { target: 95, weight: "50" },
+        { target: 97.5, weight: undefined },
+        { target: 100, weight: undefined }
+    ],
+    neutrals:[
+        { target: 0, weight: undefined },
+        { target: 5, weight: undefined },
+        { target: 10, weight: undefined },
+        { target: 15, weight: "900" },
+        { target: 20, weight: undefined},
+        { target: 25, weight: "800" },
+        { target: 30, weight: "700" },
+        { target: 35, weight: undefined},
+        { target: 40, weight: "600" },
+        { target: 45, weight: "500" },
+        { target: 50, weight: "400" },
+        { target: 55, weight: undefined },
+        { target: 60, weight: "300" },
+        { target: 65, weight: undefined },
+        { target: 70, weight: undefined},
+        { target: 75, weight: "200" },
+        { target: 80, weight: undefined },
+        { target: 85, weight: "100" },
+        { target: 90, weight: undefined },
+        { target: 95, weight: "50" },
+        { target: 97.5, weight: undefined },
+        { target: 100, weight: undefined }
+    ]
+
 }

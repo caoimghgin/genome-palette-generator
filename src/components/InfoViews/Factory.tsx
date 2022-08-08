@@ -7,6 +7,7 @@ import { InfoViewAnt } from './resources/InfoViewAnt'
 import { InfoViewAccessible } from './resources/InfoViewAccessible'
 import { InfoViewColorBox } from './resources/InfoViewColorBox'
 import { InfoViewNewsKit } from './resources/InfoViewNewsKit'
+import { InfoViewMaterial } from './resources/infoViewMaterial'
 
 interface IFactory {
     selection: number
@@ -33,12 +34,15 @@ export const Factory: React.FC<IFactory> = ({selection} : IFactory) => {
                 return <InfoViewAnt/>
             }
             case 5: { 
-                return <InfoViewAccessible/>
+                return <InfoViewMaterial/>
             }
             case 6: { 
+                return <InfoViewAccessible/>
+            }
+            case 7: { 
                 return <InfoViewColorBox/>
             }                    
-            case 7: { 
+            case 8: { 
                 return <InfoViewNewsKit/>
             }             
             default: { 

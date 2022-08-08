@@ -25,7 +25,7 @@ export const InfoViewGenome: React.FC = () => {
             <hr/>
 
             <p> 
-                A <b><i>Meaningfully Weighted, Semantically Named, </i></b> and <b><i>Unlimited</i></b> Color System, 
+                A <b><i>Meaningfully Weighted, Semantically Named </i></b> Color System 
                 designed for white-label and dark-mode support.          
             </p>                
 

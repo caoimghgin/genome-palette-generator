@@ -24,9 +24,9 @@ export const InfoViewCarbon: React.FC = () => {
             <h3> IBM Carbon Color System </h3>
             <hr/>
             <p> 
-            A <b><i>Meaningfully Weighted, Definitively Named, </i></b> and <b><i>Packaged</i></b> Color System 
-                Solution, IBM Carbon is WCAG compliant with a wide variety of colors of tints/shades, 
-                but does not offer a color tool to create your own.           
+            A <b><i>Meaningfully Weighted, Definitively Named, </i></b> and <b><i>Packaged</i></b> Color System, 
+            IBM Carbon is WCAG compliant with a wide variety of colors of tints/shades, 
+                but does not offer a Color Tool to create your own.           
              </p>
             <p> 
                 Base weight is <b>60 (L*45)</b> which passes for 4.5:1 ratio on white and weight <b>10</b>. Weight <b>50</b> passes for 3:1 on white.

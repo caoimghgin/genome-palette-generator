@@ -29,7 +29,7 @@ export const InfoViewLightning: React.FC = () => {
                 but does not offer a Color Tool to create your own.           
              </p>
             <p>
-                Numeric weights directly adopt L* values from CIELAB so
+                Numeric weights directly adopt L* values from CIELAB, so
                 lighter values have higher numbers and darker values are lower. 
                 This can be counter-intuitive to users.
             </p>            

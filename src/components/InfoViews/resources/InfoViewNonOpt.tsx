@@ -37,7 +37,7 @@ export const InfoViewNonOpt: React.FC = () => {
             between <b>L*95</b> and <b>white </b>
                 (because it is a commonly used density in many designs.)</p>
 
-            <p>The scale includes 22 tints/shades (including black and white), which is <b><i> too many choices 
+            <p>The scale represents 22 tints/shades (including black and white), which is <b><i> too many choices 
             to be practically useful</i></b> for design  (i.e., Hicks Law).</p>
 
             <p>Therefore, <b><i> users should choose an 'optimization' </i></b> which 
