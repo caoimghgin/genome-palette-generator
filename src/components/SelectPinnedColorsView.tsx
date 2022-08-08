@@ -105,30 +105,30 @@ export const SelectPinnedColorsView: React.FC<IPinnedColors> = ({pinnedColors, u
                 <form id="contact-form" onSubmit={submitForm} method="POST">
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin1" defaultValue={pin1}  onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin1)} disabled/>
+                        <input type="text" className="form-control" id="pin1" defaultValue={pin1}  onChange={(e) => hexInputHandler(e)} />
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin2" defaultValue={pin2} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin2)} disabled/>
+                        <input type="text" className="form-control" id="pin2" defaultValue={pin2} onChange={(e) => hexInputHandler(e)} />
 
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin3" defaultValue={pin3} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin3)} disabled/>
+                        <input type="text" className="form-control" id="pin3" defaultValue={pin3} onChange={(e) => hexInputHandler(e)} />
 
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin4" defaultValue={pin4} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin4)} disabled/>
+                        <input type="text" className="form-control" id="pin4" defaultValue={pin4} onChange={(e) => hexInputHandler(e)} />
                     </div>
                     <div className="form-group">
                         {/* <label htmlFor="name">Name</label> */}
-                        <input type="text" className="form-control" id="pin5" value={pin5} onChange={(e) => hexInputHandler(e)} />
                         <input type="color" id="head" name="head" value={scrubColor(pin5)} disabled/>
+                        <input type="text" className="form-control" id="pin5" value={pin5} onChange={(e) => hexInputHandler(e)} />
                     </div>
                     <button type="submit" className="btn btn-primary">Cancel</button>
                     <button type="submit" className="btn btn-primary">Submit</button>
