@@ -289,7 +289,7 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
 
     function pinnedColorsButtonLabel() {
         if (pinnedColors.length) {
-            return "(" + pinnedColors.length + ")" + " +"
+            return "+" + pinnedColors.length
         }
         return "+"
 
@@ -322,11 +322,17 @@ export const SwatchColumn: React.FC<ISwatchColumn> = ({ model }: ISwatchColumn) 
     `
 
     const StyledButton = styled.button`
-/* visibility: visible;
-display: inline-block; */
-width: 130px;
+visibility: visible;
+/* display: inline; */
+width: 34px;
 /* padding-bottom: 24px; */
 margin-bottom: 16px;
+
+`
+
+const StyledColorInput = styled.div`
+  display: inline-block;
+
 
 `
     return (
@@ -342,14 +348,23 @@ margin-bottom: 16px;
                     updatePinnedColors={setPinnedColors} />
             </ReactModal>
 
-            <StyledField>
+            {/* <StyledField>
                 <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
                     type="text"
                     id="semantic"
                     defaultValue={semantic}
                     onChange={(e) => semanticInputHandler(e)} required />
 
-                <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
+            </StyledField> */}
+
+            <input style={{ textAlign: 'center', width: '120px', marginBottom: '8px' }}
+                    type="text"
+                    id="semantic"
+                    defaultValue={semantic}
+                    onChange={(e) => semanticInputHandler(e)} required />
+
+            <StyledColorInput>
+                <input style={{ textAlign: 'center', width: '84px', marginBottom: '8px'}}
                     type="text"
                     id="color"
                     defaultValue={baseColor}
@@ -360,8 +375,7 @@ margin-bottom: 16px;
                     name="button 4">
                     {pinnedColorsButtonLabel()}
                 </StyledButton>
-
-            </StyledField>
+                </StyledColorInput>
 
             {filterVisibleSwatches().map(swatch => (
                 <Swatch {...swatch as SwatchModel} />
