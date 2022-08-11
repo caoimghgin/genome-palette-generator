@@ -64,13 +64,13 @@ class Palettizer {
 
         }
 
-        let shades = this.renderShades(swatchA.hex, swatchB.hex, true, true)
+        let shades = this.tweenTintsAndShades(swatchA.hex, swatchB.hex, true, true)
 
         let stop = false;
         do {
             if (swatchB.hex === "#000000") stop = true
 
-            shades = this.renderShades(swatchA.hex, swatchB.hex, true, true)
+            shades = this.tweenTintsAndShades(swatchA.hex, swatchB.hex, true, true)
 
             for (var i = 0; i < shades.length; i++) {
                 let hex = shades[i]
@@ -110,29 +110,51 @@ class Palettizer {
 
     }
 
-    renderShades(base, end, clipBase, clipEnd) {
+    tweenTintsAndShades(base, end, clipBase, clipEnd) {
+
+        //
+        // The closer a color approaches white and black it will
+        // lose chroma which, results in a desaturated render of
+        // steps. Increasing the steps and selecting best match to 
+        // knownn L* targets preserves the chroma as it becomes
+        // darker and lighter.
+        //
+        //
+        // SpreadSteps is three times more (* 3) than the number of steps
+        // needed and places the results in 'candidateSwatches'.
+        // Looping through targetValuesArray with a reduce function 
+        // returns the best matches of the candidateSwatches.
+        //
 
         let startIndex = this.getIndex(base)
         let endIndex = this.getIndex(end)
         let steps = (endIndex - startIndex) + 1
+        const spreadSteps = steps * 3
 
-        let candidateSwatches = chroma.scale([base, end]).mode(this.colorModel).colors(steps * 3)
+        let candidateHexValues = chroma.scale([base, end]).mode(this.colorModel).colors(spreadSteps)
 
         let targetValuesArray = [...l_targets].splice(startIndex, steps)
         let candidateLightnessArray = []
         let rowArray = Array.apply(null, Array(steps)).map(function () { })
 
-        candidateSwatches.forEach(function (hex, index) {
-            let swatch = new SwatchModel(hex)
-            candidateLightnessArray.push(swatch.lightness)
+        //
+        // Loop candidateHexValues and populate candidateLightnessArray 
+        // with L* values
+        //
+        candidateHexValues.forEach(function (hex, index) {
+            candidateLightnessArray.push(new SwatchModel(hex).lightness)
         })
 
+        //
+        // Loop targetValuesArray and reduce to closes L* match. The index 
+        // of the result is the best cadidateHexValue created.
+        //
         targetValuesArray.forEach(function (target, index) {
             var target = candidateLightnessArray.reduce(function (prev, curr) {
                 return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
             });
             let r = candidateLightnessArray.indexOf(target)
-            rowArray[index] = candidateSwatches[r]
+            rowArray[index] = candidateHexValues[r]
         })
 
         if (clipBase) { rowArray.shift() }
