@@ -9,6 +9,6 @@ Open [Genome Color Space](https://www.genomecolor.space/) to view it in the brow
 
 ## How To Use
 
-Users enter hex codes of their brand(s), sorted for hue, and each entry is placed in the nearest L*5 slot available per column. Genome calculates the best possible tints/shades while preserving saturation. Then, users can download a JSON file and use a Figma Plugin to import all colors into their working libraries.
+Users enter hex codes of their brand(s), into semantically named columns. Each entry is placed in the nearest L*5 slot available per column. Genome calculates the best possible tints/shades while preserving saturation. Users can download a JSON file and use a Figma Plugin to import all colors into their working libraries.
 
 
