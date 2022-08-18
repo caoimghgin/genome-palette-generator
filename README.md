@@ -1,11 +1,11 @@
 # The Genome Color Tool
 ### A Universal Color Tool for Design Systems
 
-White-labeling Design Systems for multiple brands with WCAG Color Contrast is a tedious and manual task. Despite many Color Tools available, nothing quite seems to fit the bill. The Genome Color Tool was created to easily normalize multiple color systems in an organization to a single standard.
+White-labeling Design Systems for multiple brands with WCAG Color Contrast is a tedious and manual task. Despite many Color Tools available, nothing quite seems to fit the bill. The Genome Color Tool easily normalizes multiple color systems in an organization to a single standard.
 
 ## Get Started
 
-Open [Genome Color Space]https://www.genomecolor.space/) to view it in the browser.
+Open [Genome Color Space](https://www.genomecolor.space/) to view it in the browser.
 
 ### `yarn start`
 
