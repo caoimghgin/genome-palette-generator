@@ -282,7 +282,7 @@ export const NavBar: React.FC<Props> = (props) => {
         display: flex;
         justify-content: right;
         align-items: center;
-        padding-right: 44px;
+        padding-right: 124px;
 `;
 
     const DropdownContainer = styled.div`
@@ -350,10 +350,7 @@ export const NavBar: React.FC<Props> = (props) => {
                         <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsToolsPopoverOpen(!isToolsPopoverOpen)}> Tools </button>
                     </Popover>
 
-                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_resources}> Resources </button> */}
-                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_tools}> Tools </button> */}
-                    <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button>
-                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadAsRootJSON}> Export </button> */}
+                    {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button> */}
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadJSON}> Export </button>
 
 
