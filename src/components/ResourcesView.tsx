@@ -36,9 +36,8 @@ export const ResourcesView: React.FC = () => {
             <hr/>
             <ResourcesViewTabelCell 
                 title={"The Genome Color Tool (2022)"} 
-                link={"https://www.google.com/"}
+                link={"https://uxdesign.cc/the-genome-color-tool-28ce73b20768"}
                 icon={logoUXCollectiveImage}
-                disabled={true}
             />
 
             <ResourcesViewTabelCell 
