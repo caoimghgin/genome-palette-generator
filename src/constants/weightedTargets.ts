@@ -27,8 +27,6 @@ export const Options = [
     { value: '5', label: 'Material' , message: msgNK},
     { value: '6', label: 'Accessible Palette' , message: msgAccp},
     { value: '7', label: 'ColorBox' , message: msgColorBox},
-    { value: '8', label: 'NewsKit' , message: msgNK},
-
   ];
 
 
@@ -41,7 +39,6 @@ enum WeightedTargetsOptions {
     Material,
     AccessiblePalette,
     ColorBox,
-    NewsKit,
 }
 
 export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsColumn => {
@@ -60,9 +57,7 @@ export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsC
         case WeightedTargetsOptions.ColorBox:
             return weightedTargets_colorbox        
         case WeightedTargetsOptions.Genome:
-            return weightedTargets_genome   
-        case WeightedTargetsOptions.NewsKit:
-            return weightedTargets_newskit      
+            return weightedTargets_genome      
         case WeightedTargetsOptions.Material:
            return weightedTargets_material                                                      
         default:
