@@ -28,16 +28,16 @@ function App() {
                 <SwatchColumnLegend />
 
                 {/* WSJ  */}
-                <SwatchColumn model={{ hexString: "#0274B6", semantic: "primary" }} />
-                <SwatchColumn model={{ hexString: "#8856CB", semantic: "secondary" }} />
-                <SwatchColumn model={{ hexString: "#816D4D", semantic: "tertiary" }} />
-                <SwatchColumn model={{ hexString: "#0A8200", semantic: "positive" }} />
-                <SwatchColumn model={{ hexString: "#E10000", semantic: "negative" }} />
+                <SwatchColumn model={{ hexString: "#0071b2", semantic: "primary" }} />
+                <SwatchColumn model={{ hexString: "#8352c6", semantic: "secondary" }} />
+                <SwatchColumn model={{ hexString: "#7b6747", semantic: "tertiary" }} />
+                <SwatchColumn model={{ hexString: "#007c00", semantic: "positive" }} />
+                <SwatchColumn model={{ hexString: "#d80000", semantic: "negative" }} />
                 <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
                 <SwatchColumn model={{ hexString: "#F57C13", semantic: "attention" }} />
-                <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
-                <SwatchColumn model={{ hexString: "#007AFF", semantic: "system" }} />
-                <SwatchColumn model={{ hexString: "#6F6F6F", semantic: "neutral" }} />
+                <SwatchColumn model={{ hexString: "#035ef9", semantic: "info" }} />
+                <SwatchColumn model={{ hexString: "#0A66D8", semantic: "system" }} />
+                <SwatchColumn model={{ hexString: "#6a6a6a", semantic: "neutral" }} />
 
                 <SwatchColumnWeights />
 
