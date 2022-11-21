@@ -8,6 +8,7 @@ import { InfoViewAccessible } from './resources/InfoViewAccessible'
 import { InfoViewColorBox } from './resources/InfoViewColorBox'
 import { InfoViewNewsKit } from './resources/InfoViewNewsKit'
 import { InfoViewMaterial } from './resources/infoViewMaterial'
+import { InfoViewAdobe } from './resources/InfoViewAdobe'
 
 interface IFactory {
     selection: number
@@ -31,18 +32,21 @@ export const Factory: React.FC<IFactory> = ({selection} : IFactory) => {
                 return <InfoViewLightning/>
             } 
             case 4: { 
-                return <InfoViewAnt/>
+                return <InfoViewAdobe/>
             }
             case 5: { 
-                return <InfoViewMaterial/>
+                return <InfoViewAnt/>
             }
             case 6: { 
-                return <InfoViewAccessible/>
+                return <InfoViewMaterial/>
             }
             case 7: { 
+                return <InfoViewAccessible/>
+            }
+            case 8: { 
                 return <InfoViewColorBox/>
             }                    
-            case 8: { 
+            case 9: { 
                 return <InfoViewNewsKit/>
             }             
             default: { 
