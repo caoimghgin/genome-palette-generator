@@ -322,6 +322,7 @@ export const NavBar: React.FC<Props> = (props) => {
                 </ContainerLeft>
 
                 <ContainerCenter>
+                    <b><a href="https://www.youtube.com/watch?v=iDmdVCPY9xs">NEW: QUICK START VIDEO</a></b>
                 </ContainerCenter>
 
                 <ContainerRight>
@@ -338,7 +339,7 @@ export const NavBar: React.FC<Props> = (props) => {
                         <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsResourcesPopoverOpen(!isResourcesPopoverOpen)}> Resources </button>
                     </Popover>
 
-                    <Popover
+                    {/* <Popover
                         isOpen={isToolsPopoverOpen}
                         positions={['bottom', 'left']} // if you'd like, you can limit the positions
                         padding={10} // adjust padding here!
@@ -348,7 +349,7 @@ export const NavBar: React.FC<Props> = (props) => {
                         <ToolsView/>
                         )}>
                         <button style={{ marginLeft: '12px', padding: '12px' }} onClick={() => setIsToolsPopoverOpen(!isToolsPopoverOpen)}> Tools </button>
-                    </Popover>
+                    </Popover> */}
 
                     {/* <button style={{ marginLeft: '12px', padding: '12px' }} onClick={tbd_import}> Import </button> */}
                     <button style={{ marginLeft: '12px', padding: '12px' }} onClick={downloadJSON}> Export </button>
