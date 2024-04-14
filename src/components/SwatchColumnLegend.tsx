@@ -1,10 +1,11 @@
 import React from 'react';
-import { rowHeight, columnWidth, l_targets, Event } from './../constants'
+import { rowHeight, Event } from './../constants'
+import { weightedTargets_univers } from '../constants/weightedTargets';
 
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
-    const [model, setModel] = React.useState(l_targets)
-
+    const [model, setModel] = React.useState(weightedTargets_univers.rows.map(item => item.weight).reverse())
+    
     window.addEventListener(Event.DISPLAY_LEGEND, ((e: CustomEvent) => {
 
         let data = e.detail
@@ -27,6 +28,7 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
         <div style={wrapper}>
 
             {model.map(row => (
+                // @ts-ignore
                 <Swatch label={row.toString()}/>
             ))} 
 {/* 
