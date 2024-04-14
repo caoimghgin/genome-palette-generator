@@ -9,7 +9,7 @@ export type weightedTargetsColumn = {
     neutrals: weightedTargetsRow[]
 };
 
-const msgNonOpt = "Non-optimized is the basis of Genome Color Space. TIP: Hover over any swatch and press the '3', '4', or '7' keys to see which swatches pass for WCAG 3:1, 4.5:1, and 7:1 contrast ratios."
+const msgUnivers = "Univers is the basis of Genome Color Space. TIP: Hover over any swatch and press the '3', '4', or '7' keys to see which swatches pass for WCAG 3:1, 4.5:1, and 7:1 contrast ratios."
 const msgCarbon = "Carbon Color System is DEFINITIVELY NAMED, PRE-PACKAGED, and MEANINGFULLY WEIGHTED. For 3:1 on white, use 50. For 4.5:1, use 60. Genome Color Space is not assosicated with IBM in any way. Results may not be exact to IBM desired weights."
 const msgLightning = "Lightning Color System is DEFINITIVELY NAMED, PRE-PACKAGED, and MEANINGFULLY WEIGHTED. For 3:1 on white, use 60. For 4.5:1, use 50. Unlike other systems, Lightning uses the L* value as target number which may seem non-intuitive (lighter colors having larger numbers). Genome Color Space is not assosicated with SalesForce and results may not exactly match their desired weights."
 const msgAnt = "Explain and provide a link to ANT"
@@ -20,7 +20,7 @@ const msgNK = "NewsKit Color System is based on IBM Carbon, but the 090 and 100 
 const msgAdobeSpectrum = "Genome Color Space is not assosicated with Adobe Spectrum. Results may not exactly match specified weights."
 
 export const Options = [
-    { value: '0', label: 'Non-optimized', message: msgNonOpt},
+    { value: '0', label: 'Univers', message: msgUnivers},
     { value: '1', label: 'Genome' , message: msgGenome},
     { value: '2', label: 'IBM Carbon' , message: msgCarbon},
     { value: '3', label: 'SalesForce Lightning' , message: msgLightning},
@@ -33,7 +33,7 @@ export const Options = [
 
 
 enum WeightedTargetsOptions {
-    Spectrum = 0,
+    Univers = 0,
     Genome,
     Carbon,
     Lightning,
@@ -47,8 +47,8 @@ enum WeightedTargetsOptions {
 export const weightedTargets = (index: WeightedTargetsOptions): weightedTargetsColumn => {
 
     switch (index) {
-        case WeightedTargetsOptions.Spectrum:
-            return weightedTargets_spectrum
+        case WeightedTargetsOptions.Univers:
+            return weightedTargets_univers
         case WeightedTargetsOptions.Carbon:
             return weightedTargets_carbon
         case WeightedTargetsOptions.Lightning:
@@ -95,6 +95,34 @@ const weightedTargets_adobe: weightedTargetsColumn = {
         { target: 95, weight: "100" },
         { target: 97.5, weight: undefined },
         { target: 100, weight: undefined},
+    ],
+    neutrals:[]
+}
+
+export const weightedTargets_univers: weightedTargetsColumn = {
+    rows: [
+        { target: 0, weight: "999" },
+        { target: 5, weight: "950" },
+        { target: 10, weight: "900" },
+        { target: 15, weight: "850" },
+        { target: 20, weight: "800" },
+        { target: 25, weight: "750" },
+        { target: 30, weight: "700" },
+        { target: 35, weight: "650" },
+        { target: 40, weight: "600" },
+        { target: 45, weight: "550" },
+        { target: 50, weight: "500" },
+        { target: 55, weight: "450" },
+        { target: 60, weight: "400" },
+        { target: 65, weight: "350" },
+        { target: 70, weight: "300" },
+        { target: 75, weight: "250" },
+        { target: 80, weight: "200" },
+        { target: 85, weight: "150" },
+        { target: 90, weight: "100" },
+        { target: 95, weight: "050" },
+        { target: 97.5, weight: "025" },
+        { target: 100, weight: "000" }, // 999
     ],
     neutrals:[]
 }
