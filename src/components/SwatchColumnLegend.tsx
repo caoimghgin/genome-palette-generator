@@ -5,21 +5,21 @@ import { weightedTargets_univers } from '../constants/weightedTargets';
 export const SwatchColumnLegend: React.FC<{}> = props => {
 
     const [model, setModel] = React.useState(weightedTargets_univers.rows.map(item => item.weight).reverse())
-    
+
     window.addEventListener(Event.DISPLAY_LEGEND, ((e: CustomEvent) => {
 
         let data = e.detail
 
-        var filtered = data.filter(function(x:any) {
+        var filtered = data.filter(function (x: any) {
             return x !== undefined;
-       });
+        });
 
-       setModel(filtered)
+        setModel(filtered)
 
-     }) as EventListener);
+    }) as EventListener);
 
-  
-    const wrapper = { 
+
+    const wrapper = {
         display: 'inline-block',
         paddingTop: '44px'
     }
@@ -28,13 +28,8 @@ export const SwatchColumnLegend: React.FC<{}> = props => {
         <div style={wrapper}>
 
             {model.map(row => (
-                // @ts-ignore
-                <Swatch label={row.toString()}/>
-            ))} 
-{/* 
-            {weights.map(row => (
-                <Swatch label={row.toString()}/>
-            ))} */}
+                <Swatch label={row!.toString()} />
+            ))}
 
         </div>
     )
@@ -54,7 +49,7 @@ export const Swatch: React.FC<ILabel> = (model): JSX.Element => {
         justifyContent: 'center',
         width: '30px',
         background: "#FFFFFF",
-        height: rowHeight ,
+        height: rowHeight,
         textAlign: 'right',
         paddingRight: '20px'
     };
