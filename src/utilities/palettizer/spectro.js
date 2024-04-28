@@ -1,9 +1,9 @@
 import convert from 'color-convert'
 import deltaE from "delta-e"
 import tinycolor from 'tinycolor2'
-import { sRGBtoY, APCAcontrast } from  './apca'
+import { sRGBtoY, APCAcontrast } from './apca'
 import chroma from "chroma-js"
-import { colorNames, colorCheckerValuesLab } from '../../constants'
+import { colorModels, colorNames, colorCheckerValuesLab } from '../../constants'
 
 class Spectro {
 
@@ -21,9 +21,9 @@ class Spectro {
                 let j = this.getClosestColorCheckerName(color.toHexString());
                 ccName = j.name
 
-              } while (x !== ccName);
+            } while (x !== ccName);
 
-              return color
+            return color
         }
     }
 
@@ -31,15 +31,15 @@ class Spectro {
         var color = null
         var ccName
 
-            do {
-                color = tinycolor.random();
-                let j = this.getClosestColorCheckerName(color.toHexString());
-                ccName = j.name
+        do {
+            color = tinycolor.random();
+            let j = this.getClosestColorCheckerName(color.toHexString());
+            ccName = j.name
 
-              } while (x !== ccName);
+        } while (x !== ccName);
 
-              return color
-        
+        return color
+
     }
 
     getWCAGBools(color) {
@@ -48,10 +48,10 @@ class Spectro {
         let onWhite = chroma.contrast(color, "#FFFFFF");
         let onBlack = chroma.contrast(color, "#000000");
 
-        result.push( ( onWhite >= 3 ) ? true : false)
-        result.push( ( onWhite >= 4.5 ) ? true : false)
-        result.push( ( onBlack >= 3 ) ? true : false)
-        result.push( ( onBlack >= 4.5 ) ? true : false)
+        result.push((onWhite >= 3) ? true : false)
+        result.push((onWhite >= 4.5) ? true : false)
+        result.push((onBlack >= 3) ? true : false)
+        result.push((onBlack >= 4.5) ? true : false)
 
         return result
     }
@@ -74,6 +74,13 @@ class Spectro {
         return result
     }
 
+    getColorModel(value) {
+        return Object.keys(colorModels).filter(key => {
+            if (value.startsWith(colorModels[key])) return key
+        })[0]
+        return undefined
+    }
+
     createColorObject(input) {
         let result = undefined
         let color = tinycolor(input)
@@ -88,15 +95,16 @@ class Spectro {
 
         result = {
             color: color,
-            name: colorChecker.name, 
-            type: colorType,             
-            hex: color.toHexString(), 
-            hue: Math.round(hue), 
-            saturation: Math.round(saturation), 
-            value: Math.round(colorValue), 
-            lightness: lightness, 
+            name: colorChecker.name,
+            type: colorType,
+            hex: color.toHexString(),
+            hue: Math.round(hue),
+            saturation: Math.round(saturation),
+            value: Math.round(colorValue),
+            lightness: lightness,
             ccDE: colorChecker.dE,
-            chroma: chroma}
+            chroma: chroma
+        }
         return result
     }
 
@@ -114,15 +122,16 @@ class Spectro {
         if (this.isNeutral(color)) { colorType = colorNames[colorNames.length - 1] }
         result = {
             color: color,
-            name: colorChecker.name, 
-            type: colorType,             
-            hex: color.toHexString(), 
-            hue: Math.round(hue), 
-            saturation: Math.round(saturation), 
-            value: Math.round(colorValue), 
-            lightness: lightness, 
+            name: colorChecker.name,
+            type: colorType,
+            hex: color.toHexString(),
+            hue: Math.round(hue),
+            saturation: Math.round(saturation),
+            value: Math.round(colorValue),
+            lightness: lightness,
             ccDE: colorChecker.dE,
-            chroma: chroma}
+            chroma: chroma
+        }
         return result
     }
 
@@ -163,26 +172,26 @@ class Spectro {
         return ((value > 12) ? false : true)
     }
 
-     lowestValueAndKey(obj) {
-        var [lowestItems] = Object.entries(obj).sort(([ ,v1], [ ,v2]) => v1 - v2);
-        return {key: lowestItems[0], value: lowestItems[1] }
-      }
+    lowestValueAndKey(obj) {
+        var [lowestItems] = Object.entries(obj).sort(([, v1], [, v2]) => v1 - v2);
+        return { key: lowestItems[0], value: lowestItems[1] }
+    }
 
-      getDeltaE(hex_a, hex_b) {
+    getDeltaE(hex_a, hex_b) {
         let result = chroma.deltaE(hex_a, hex_b);
         return result
-      }
+    }
 
     getClosestColorCheckerName(color) {
         let dict = {}
-        let lab =  convert.hex.lab(color)
-        var base = {L: lab[0], A: lab[1], B: lab[2]};
+        let lab = convert.hex.lab(color)
+        var base = { L: lab[0], A: lab[1], B: lab[2] };
         for (const [key, value] of Object.entries(colorCheckerValuesLab)) {
             let dE = deltaE.getDeltaE00(base, value);
             dict[key] = dE;
         }
         let result = this.lowestValueAndKey(dict);
-        return {["name"]:result.key, ["dE"]:Math.round(result.value * 100) / 100}  
+        return { ["name"]: result.key, ["dE"]: Math.round(result.value * 100) / 100 }
     }
 
     lighten(color) {
