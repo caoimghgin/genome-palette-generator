@@ -7,7 +7,7 @@ export class SwatchModel {
     row!: number
     hex!: string
     value!: string
-    model!: string
+    model!: string | undefined
     semantic!: string
     lightness!: number
     LAB!: LAB
@@ -26,15 +26,9 @@ export class SwatchModel {
     WCAG2_K_45!: boolean
 
     constructor( value: string, column: string, semantic: string ) {
-        this.value = value
-        this.model = Object.keys(colorModels).filter(key => {
-            // @ts-ignore
-            if (value.startsWith(colorModels[key])) return key
-          })[0]
-
-
         var spectro = new Spectro()
-
+        this.value = value
+        this.model = spectro.getColorModel(value)
         this.LAB = new LAB(spectro.getLabValue(value))
         this.LCH = new LCH(spectro.getLchValue(value))
         this.HSV = new HSV(spectro.getHsvValue(value))
@@ -45,33 +39,17 @@ export class SwatchModel {
         this.isUserDefined = false
         this.isPinned = false
         this.isNeutral = false
-
         this.hex = value.toUpperCase()
-
         this.column = column
         this.semantic = semantic
         this.row = getRow(this.lightness)
         this.l_target = getTarget(this.row)
-
         let wcag:any = spectro.getWCAGBools(value)
         this.WCAG2_W_30 = wcag[0]
         this.WCAG2_W_45 = wcag[1]
         this.WCAG2_K_30 = wcag[2]
         this.WCAG2_K_45 = wcag[3]
-
     }
-
-    //  parseColorModel() {
-
-    //     let result = objArray.map(a => a.foo);
-
-        
-    //     colorModels.filter((model: string) => this.value.startsWith(model))
-    //     if (this.value.startsWith("#")) return "hex"
-    //     if (this.value.startsWith("lch")) return "lch"
-    //     if (this.value.startsWith("lab")) return "lch"
-    // }
- 
 
 }
 
