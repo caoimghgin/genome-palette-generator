@@ -322,7 +322,7 @@ export const NavBar: React.FC<Props> = (props) => {
                 </ContainerLeft>
 
                 <ContainerCenter>
-                    <b><a href="https://www.youtube.com/watch?v=iDmdVCPY9xs">NEW: QUICK START VIDEO</a></b>
+                    <b><a href="https://www.youtube.com/watch?v=iDmdVCPY9xs">QUICK START VIDEO</a></b>
                 </ContainerCenter>
 
                 <ContainerRight>

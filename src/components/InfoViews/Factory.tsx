@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { InfoViewNonOpt } from './resources/InfoViewNonOpt'
 import { InfoViewGenome } from './resources/InfoViewGenome'
 import { InfoViewCarbon } from './resources/InfoViewCarbon'
@@ -54,8 +54,6 @@ export const Factory: React.FC<IFactory> = ({selection} : IFactory) => {
 
             } 
          } 
-
-        return <InfoViewGenome/>
     }
 
     return (

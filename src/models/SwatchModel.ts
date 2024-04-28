@@ -1,11 +1,13 @@
 import Spectro from "../utilities/palettizer/spectro"
-import { l_targets } from '../constants'
+import { l_targets, colorModels } from '../constants'
 
 export class SwatchModel {
     id!: string
     column!: string
     row!: number
     hex!: string
+    value!: string
+    model!: string
     semantic!: string
     lightness!: number
     LAB!: LAB
@@ -23,33 +25,53 @@ export class SwatchModel {
     WCAG2_K_30!: boolean
     WCAG2_K_45!: boolean
 
-    constructor( hex: string, column: string, semantic: string ) {
+    constructor( value: string, column: string, semantic: string ) {
+        this.value = value
+        this.model = Object.keys(colorModels).filter(key => {
+            // @ts-ignore
+            if (value.startsWith(colorModels[key])) return key
+          })[0]
+
+
         var spectro = new Spectro()
 
-        this.LAB = new LAB(spectro.getLabValue(hex))
-        this.LCH = new LCH(spectro.getLchValue(hex))
-        this.HSV = new HSV(spectro.getHsvValue(hex))
-        this.colorChecker = spectro.getClosestColorCheckerName(hex)
+        this.LAB = new LAB(spectro.getLabValue(value))
+        this.LCH = new LCH(spectro.getLchValue(value))
+        this.HSV = new HSV(spectro.getHsvValue(value))
+        this.colorChecker = spectro.getClosestColorCheckerName(value)
         this.lightness = this.LAB.L
-        this.WCAG2 = spectro.getWCAG(hex)
-        this.WCAG3 = spectro.getAPCA(hex)
+        this.WCAG2 = spectro.getWCAG(value)
+        this.WCAG3 = spectro.getAPCA(value)
         this.isUserDefined = false
         this.isPinned = false
         this.isNeutral = false
 
-        this.hex = hex.toUpperCase()
+        this.hex = value.toUpperCase()
+
         this.column = column
         this.semantic = semantic
         this.row = getRow(this.lightness)
         this.l_target = getTarget(this.row)
 
-        let wcag:any = spectro.getWCAGBools(hex)
+        let wcag:any = spectro.getWCAGBools(value)
         this.WCAG2_W_30 = wcag[0]
         this.WCAG2_W_45 = wcag[1]
         this.WCAG2_K_30 = wcag[2]
         this.WCAG2_K_45 = wcag[3]
 
     }
+
+    //  parseColorModel() {
+
+    //     let result = objArray.map(a => a.foo);
+
+        
+    //     colorModels.filter((model: string) => this.value.startsWith(model))
+    //     if (this.value.startsWith("#")) return "hex"
+    //     if (this.value.startsWith("lch")) return "lch"
+    //     if (this.value.startsWith("lab")) return "lch"
+    // }
+ 
 
 }
 

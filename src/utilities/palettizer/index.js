@@ -24,7 +24,7 @@ class Palettizer {
 
     insertPinnedColors() {
         this.hexValues.forEach((hexValue, index) => {
-            if (index == 0) {
+            if (index === 0) {
                 this.swatch = new SwatchModel(hexValue, this.column, this.semantic)
                 this.swatch.isUserDefined = true
                 this.swatch.isNeutral = this.spectro.isNeutral(this.swatch.LCH.C)
@@ -130,9 +130,7 @@ class Palettizer {
         let endIndex = this.getIndex(end)
         let steps = (endIndex - startIndex) + 1
         const spreadSteps = steps * 3
-
         let candidateHexValues = chroma.scale([base, end]).mode(this.colorModel).colors(spreadSteps)
-
         let targetValuesArray = [...l_targets].splice(startIndex, steps)
         let candidateLightnessArray = []
         let rowArray = Array.apply(null, Array(steps)).map(function () { })

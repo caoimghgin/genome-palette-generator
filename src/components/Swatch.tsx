@@ -15,8 +15,16 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
 
     const [fontWeight, setFontWeight] = React.useState((model.WCAG2_W_30 && !model.WCAG2_W_45 ? 700 : 400));
     const [swatchLabel, setSwatchLabel] = useState( () => swatchLabelConstructor(model) );
-    const infoLabel = useState( () => infoLabelConstructor(model));
+    // const infoLabel = useState( () => infoLabelConstructor(model));
     const [isFocused, setIsFocused] = React.useState(false)
+
+    const data = model
+
+    function infoLabel() {
+        let result = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
+        if (model.isPinned) { result = "📍 " + result}
+        return result
+    }
 
     function swatchLabelConstructor(model: SwatchModel) {
         let result = (model.isUserDefined ? "⭐️ " + model.hex : model.hex)
@@ -33,7 +41,7 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     function infoLabelConstructor(model: SwatchModel) {
         let result = (model.isUserDefined ? "⭐️ " + "L*" + model.LAB.L.toString() + " / " + model.hex : "L*" + model.LAB.L.toString() + " / " + model.hex)
         if (model.isPinned) { result = "📍 " + result}
-        return result
+        // return <div>{result}</div>
     }
 
     window.addEventListener(Event.SHOW_CONTRAST, ((e: CustomEvent) => {
@@ -125,12 +133,10 @@ export const Swatch: React.FC<SwatchModel> = (model: SwatchModel) => {
     }
 
     return (
-
         <Wrapper key={model.id} onMouseOut={mouseOutHandler} onMouseEnter={mouseEnterHandler}>
             {swatchLabel}
-            <WrapperInfo onClick={onClick}> {infoLabel} </WrapperInfo>
+            <WrapperInfo onClick={onClick}> {infoLabel()} </WrapperInfo>
         </Wrapper>
-
     )
 
 }
