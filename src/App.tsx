@@ -1,93 +1,34 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
 import SnackbarProvider from 'react-simple-snackbar'
-
 import { NavBar } from "./components/NavBar"
 import { Footer } from "./components/Footer"
 import { SwatchColumnLegend } from "./components/SwatchColumnLegend";
 import { SwatchColumnWeights } from "./components/SwatchColumnWeights";
 import { SwatchColumn } from "./components/SwatchColumn";
 import { SwatchColumnsRandom } from "./components/testing/SwatchColumnsRandom";
-import { SwatchModel } from './../src/models/SwatchModel'
 
 function App() {
-
-    const [focusedSwatch, setFocusedSwatch] = useState<SwatchModel | undefined>(undefined)
-    const [focusedHex, setFocusedHex] = useState<string | undefined>(undefined)
-
     localStorage.clear();
-    console.log("All localStorage cleared")
-
     return (
-
         <SnackbarProvider>
             <div className="App">
                 <NavBar />
                 {/* <SwatchColumnsRandom/> */}
-
                 <SwatchColumnLegend />
-
-                {/* WSJ  */}
-                <SwatchColumn model={{ hexString: "#0071b2", semantic: "primary" }} />
-                <SwatchColumn model={{ hexString: "#8352c6", semantic: "secondary" }} />
-                <SwatchColumn model={{ hexString: "#7b6747", semantic: "tertiary" }} />
-                <SwatchColumn model={{ hexString: "#007c00", semantic: "positive" }} />
-                <SwatchColumn model={{ hexString: "#d80000", semantic: "negative" }} />
-                <SwatchColumn model={{ hexString: "#FFCF3D", semantic: "highlight" }} />
-                <SwatchColumn model={{ hexString: "#F57C13", semantic: "attention" }} />
-                <SwatchColumn model={{ hexString: "#035ef9", semantic: "info" }} />
-                <SwatchColumn model={{ hexString: "#0A66D8", semantic: "system" }} />
-                <SwatchColumn model={{ hexString: "#6a6a6a", semantic: "neutral" }} />
-
+                <SwatchColumn model={{ hexString: "#0071b2", value: "lch(44.99% 43.58 259.01)", semantic: "primary" }} />
+                <SwatchColumn model={{ hexString: "#8352c6", value: "lch(44.97% 66.56 305.96)", semantic: "secondary" }} />
+                <SwatchColumn model={{ hexString: "#7b6747", value: "lch(44.96% 21.72 77.44)", semantic: "tertiary" }} />
+                <SwatchColumn model={{ hexString: "#007c00", value: "lch(42.9% 66.44812602165082 134.38385832883824)", semantic: "positive" }} />
+                <SwatchColumn model={{ hexString: "#d80000", value: "lch(46.01% 94.25586437890576 40.85766878213079)", semantic: "negative" }} />
+                <SwatchColumn model={{ hexString: "#FFCF3D", value: "lch(85.64% 74.13689308703813 84.0990647485831)", semantic: "highlight" }} />
+                <SwatchColumn model={{ hexString: "#F57C13", value: "lch(65.6% 82.22 57.93)", semantic: "attention" }} />
+                <SwatchColumn model={{ hexString: "#035ef9", value: "lch(43.93% 89.04 287.62)", semantic: "info" }} />
+                <SwatchColumn model={{ hexString: "#0A66D8", value: "lch(43.88% 67.32 279.62)", semantic: "system" }} />
+                <SwatchColumn model={{ hexString: "#6a6a6a", value: "lch(44.82% 0 0)", semantic: "neutral" }} />
                 <SwatchColumnWeights />
-
-                {/* Bootstrap
-            <SwatchColumn model={{ hexString: "#007BFF", semantic: "primary" }} />
-            <SwatchColumn model={{ hexString: "#6C757D", semantic: "secondary" }} />
-            <SwatchColumn model={{ hexString: "#6C757D", semantic: "tertiary" }} />
-            <SwatchColumn model={{ hexString: "#28A745", semantic: "positive" }} />
-            <SwatchColumn model={{ hexString: "#DC3545", semantic: "negative" }} />
-            <SwatchColumn model={{ hexString: "#FFC107", semantic: "highlight" }} />
-            <SwatchColumn model={{ hexString: "#17A2B8", semantic: "info" }} />
-            <SwatchColumn model={{ hexString: "#007BFF", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#343A40", semantic: "neutral" }} /> */}
-
-                {/* IBM Carbon
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "primary" }} />
-            <SwatchColumn model={{ hexString: "#8a3ffc", semantic: "secondary" }} />
-            <SwatchColumn model={{ hexString: "#0072c3", semantic: "tertiary" }} />
-            <SwatchColumn model={{ hexString: "#198038", semantic: "positive" }} />
-            <SwatchColumn model={{ hexString: "#da1e28", semantic: "negative" }} />
-            <SwatchColumn model={{ hexString: "#f1c21b", semantic: "highlight" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#343A40", semantic: "neutral" }} /> */}
-
-                {/* Salesforce Lightning */}
-                {/* <SwatchColumn model={{ hexString: "#0176d3", semantic: "primary" }} />
-            <SwatchColumn model={{ hexString: "#0176d3", semantic: "secondary" }} />
-            <SwatchColumn model={{ hexString: "#0176d3", semantic: "tertiary" }} />
-            <SwatchColumn model={{ hexString: "#2e844a", semantic: "positive" }} /> 
-            <SwatchColumn model={{ hexString: "#ea001e", semantic: "negative" }} /> 
-            <SwatchColumn model={{ hexString: "#fe9339", semantic: "highlight" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} /> */}
-
-                {/* <SwatchColumn model={{ hexString: "#0176d3", semantic: "primary" }} />
-            <SwatchColumn model={{ hexString: "#0176d3", semantic: "secondary" }} />
-            <SwatchColumn model={{ hexString: "#0176d3", semantic: "tertiary" }} />
-            <SwatchColumn model={{ hexString: "#2e844a", semantic: "positive" }} />
-            <SwatchColumn model={{ hexString: "#ea001e", semantic: "negative" }} />
-            <SwatchColumn model={{ hexString: "#fe9339", semantic: "highlight" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "info" }} />
-            <SwatchColumn model={{ hexString: "#0f62fe", semantic: "system" }} />
-            <SwatchColumn model={{ hexString: "#747474", semantic: "neutral" }} />  */}
-
-                <Footer/>
+                <Footer />
             </div>
         </SnackbarProvider>
-
     );
 }
 

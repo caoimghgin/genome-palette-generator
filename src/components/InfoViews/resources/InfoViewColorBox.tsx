@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled'
 
 export const InfoViewColorBox: React.FC = () => {
-
-    const handleOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
-       let value = event.currentTarget.value
-        event.preventDefault();
-        window.open(value);
-    }
 
     const ModalContainer = styled.div`
         width: 360px;

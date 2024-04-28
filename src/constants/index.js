@@ -140,6 +140,14 @@ export function getKeyValues() {
 
 }
 
+export const colorModels = Object.freeze({
+    HEX: "#",
+    LCH: "lch",
+    LAB: "lab",
+    OKLCH: "oklch",
+    OKLAB: "oklab"
+});
+
 export const l_targets = [
     100,
     97.5,

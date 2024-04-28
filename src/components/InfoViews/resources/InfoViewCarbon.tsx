@@ -3,12 +3,6 @@ import styled from '@emotion/styled'
 
 export const InfoViewCarbon: React.FC = () => {
 
-    const handleOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
-       let value = event.currentTarget.value
-        event.preventDefault();
-        window.open(value);
-    }
-
     const ModalContainer = styled.div`
         width: 360px;
         background-color: #ffffff;
